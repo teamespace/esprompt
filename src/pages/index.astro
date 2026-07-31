@@ -286,6 +286,7 @@ const showcaseItems = showcaseSlugs
   .pv-btn{font-family:var(--sans);font-weight:600;font-size:12.5px;padding:9px 18px;border-radius:999px;cursor:pointer;border:none;
     background:#fff;color:#0d0c14;display:inline-flex;align-items:center;gap:7px;justify-content:center;min-width:158px;
     box-shadow:0 10px 24px -10px rgba(0,0,0,.5)}
+  .pv-btn.ghost{background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.28)}
   .showcase-cta{margin-top:36px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:14px}
   .showcase-cta .lockline{font-family:var(--mono);font-size:12.5px;color:var(--dim);display:inline-flex;align-items:center;gap:6px}
 
@@ -606,8 +607,8 @@ const showcaseItems = showcaseSlugs
         <div class="cc">
           <div class="pv" style={`background-image:url('/assets/showcase/${item.thumbnail}')`}>
             <div class="pv-overlay">
-              <button class="pv-btn copy"><svg class="lucide" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span data-alt="Daftar buat copy">Sign Up to Copy</span></button>
-              <button class="pv-btn view" data-slug={item.slug}><svg class="lucide" viewBox="0 0 24 24"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg><span data-alt="Live preview">Live Preview</span></button>
+              <button class="pv-btn copy" data-prompt={item.prompt} data-slug={item.slug}><svg class="lucide pv-copy-icon" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span>Copy Prompt</span></button>
+              <button class="pv-btn ghost view" data-slug={item.slug}><svg class="lucide" viewBox="0 0 24 24"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg><span>View Detail</span></button>
             </div>
           </div>
         </div>
@@ -956,8 +957,17 @@ const showcaseItems = showcaseSlugs
     if(e.key==='ArrowRight') stepModal(1);
   });
   document.querySelector('#tier .showcase-grid')?.addEventListener('click',(e)=>{
-    const btn=e.target.closest('.pv-btn.view');
-    if(btn?.dataset.slug) openDetailModal(btn.dataset.slug);
+    const copyBtn=e.target.closest('.pv-btn.copy');
+    if(copyBtn){
+      navigator.clipboard?.writeText(copyBtn.dataset.prompt||'');
+      const label=copyBtn.querySelector('span');
+      const original=label.textContent;
+      label.textContent='Copied!';
+      setTimeout(()=>{label.textContent=original;},1500);
+      return;
+    }
+    const viewBtn=e.target.closest('.pv-btn.view');
+    if(viewBtn?.dataset.slug) openDetailModal(viewBtn.dataset.slug);
   });
 
   /* Tab switching, copy, share, and asset downloads inside the cloned modal
