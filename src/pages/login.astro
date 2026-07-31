@@ -86,7 +86,7 @@
       <p>Complete these steps and you'll be shipping pages today.</p>
       <div class="auth-steps">
         <div class="auth-step active"><span class="as-num">1</span>Create your account</div>
-        <div class="auth-step"><span class="as-num">2</span>Browse the catalog</div>
+        <div class="auth-step"><span class="as-num">2</span>Browse the library</div>
         <div class="auth-step"><span class="as-num">3</span>Copy your first prompt</div>
       </div>
     </div>
@@ -129,10 +129,10 @@
           </button>
           <span class="auth-hint" id="authPwHint">Must be at least 8 characters.</span>
         </div>
-        <button class="btn primary auth-submit" type="submit" id="authSubmitBtn">Sign up</button>
+        <button class="btn primary auth-submit" type="submit" id="authSubmitBtn">Sign Up</button>
       </form>
 
-      <p class="auth-switch" id="authSwitch">Already have an account? <a onclick="setMode('login')">Log in</a></p>
+      <p class="auth-switch" id="authSwitch">Already have an account? <a onclick="setMode('login')">Log In</a></p>
     </div>
   </div>
 </div>
@@ -154,13 +154,13 @@
     const isLogin=mode==='login';
     document.getElementById('nameRow').style.display=isLogin?'none':'grid';
     document.getElementById('authDemoHint').hidden=!isLogin;
-    document.getElementById('authTitle').textContent=isLogin?'Welcome back':'Create your account';
+    document.getElementById('authTitle').textContent=isLogin?'Welcome Back':'Create your account';
     document.getElementById('authSub').textContent=isLogin?'Log in to your esprompt account.':'Enter your details to get started.';
-    document.getElementById('authSubmitBtn').textContent=isLogin?'Log in':'Sign up';
+    document.getElementById('authSubmitBtn').textContent=isLogin?'Log In':'Sign Up';
     document.getElementById('authPwHint').style.display=isLogin?'none':'block';
     document.getElementById('authSwitch').innerHTML=isLogin
-      ?'Don’t have an account? <a onclick="setMode(\'signup\')">Sign up</a>'
-      :'Already have an account? <a onclick="setMode(\'login\')">Log in</a>';
+      ?'Don’t have an account? <a onclick="setMode(\'signup\')">Sign Up</a>'
+      :'Already have an account? <a onclick="setMode(\'login\')">Log In</a>';
     history.replaceState(null,'',mode==='login'?'?mode=login':'/login');
   }
   const params=new URLSearchParams(location.search);

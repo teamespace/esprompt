@@ -203,51 +203,69 @@ footer{border-top:1px solid var(--line);padding:64px 0 32px;margin-top:60px}
 .hp-copy-code{display:block;font-family:var(--mono);font-size:12px;color:var(--mut);line-height:1.7;white-space:pre-wrap}
 
 /* ===== small copy/download buttons, reused verbatim from homepage's
-   Hero asset card and repurposed for the detail-view caret dropdown ===== */
+   Hero asset card and repurposed for the detail-view Assets tab ===== */
 .ac-row-actions{display:flex;align-items:center;gap:7px}
-.ac-copy,.ac-dl{font-family:var(--sans);font-weight:600;font-size:10.5px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:#fff;border-radius:999px;padding:5px 11px;position:relative;cursor:pointer;white-space:nowrap}
-.ac-dl{padding-left:20px}
-.ac-dl::before{content:"";position:absolute;left:9px;top:50%;transform:translateY(-50%);width:6px;height:6px;border-radius:50%;background:var(--v);animation:pulse 1.8s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:.4;transform:translateY(-50%) scale(.8)}50%{opacity:1;transform:translateY(-50%) scale(1.15)}}
+.ac-copy,.ac-dl{font-family:var(--sans);font-weight:600;font-size:10.5px;border:1px solid rgba(255,255,255,.18);
+  background:rgba(255,255,255,.06);color:#fff;border-radius:999px;padding:5px 11px;cursor:pointer;white-space:nowrap;
+  display:inline-flex;align-items:center;gap:5px}
+.ac-copy .lucide,.ac-dl .lucide{width:12px;height:12px}
+.ac-copy .lucide.spin,.ac-dl .lucide.spin{animation:pd-spin .7s linear infinite}
 
-/* ===== prompt detail (page + modal share this): big edge-to-edge preview
-   stage on top, a floating toolbar bar below it, land-book-lightbox style ===== */
-.prompt-detail{display:flex;flex-direction:column;gap:14px}
-.pd-stage{position:relative;border-radius:20px;overflow:hidden;background:#0a0a0f;border:1px solid var(--line)}
-.pd-preview-lg{aspect-ratio:16/9;background-size:cover;background-position:center;background-color:#0a0a0f;width:100%}
+/* ===== prompt detail (page + modal share this): a slim topbar (title +
+   share/view/close icons) floats above a single card. Tabs and the Copy
+   Prompt button live inside that card's own bottom edge, 21st.dev style. ===== */
+.prompt-detail{display:flex;flex-direction:column;gap:12px}
+
+.pd-topbar{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.pd-topbar-info{display:flex;align-items:center;gap:12px;min-width:0}
+.pd-title{font-size:26px;font-weight:700;color:#fff;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:420px}
+.pd-meta{font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--mut);
+  white-space:nowrap;padding:2px 9px;border:1px solid var(--line2);border-radius:999px}
+.pd-topbar-actions{display:flex;align-items:center;gap:8px;flex:0 0 auto}
+.pd-icon-btn{position:relative;width:34px;height:34px;border-radius:50%;border:1px solid var(--line2);
+  background:var(--panel);color:var(--mut);display:grid;place-items:center;cursor:pointer;transition:.15s}
+.pd-icon-btn:hover{color:#fff;border-color:var(--v)}
+.pd-icon-btn .lucide{width:15px;height:15px}
+.pd-icon-btn.copied::after{content:"Copied!";position:absolute;top:calc(100% + 8px);right:0;background:var(--panel);
+  border:1px solid var(--line2);border-radius:6px;padding:3px 9px;font-size:10.5px;color:#fff;white-space:nowrap;z-index:5}
+
+.pd-card{position:relative;border:1px solid var(--line2);border-radius:20px;overflow:hidden;background:#0a0a0f}
+.pd-card-body{padding:8px}
+.pd-preview-lg{aspect-ratio:16/9;border-radius:14px;background-size:cover;background-position:center;background-color:#0a0a0f;width:100%}
 .pd-tabpanel[hidden]{display:none}
-.pd-prompt-panel{aspect-ratio:16/9;overflow-y:auto;padding:22px 24px}
+.pd-prompt-panel{aspect-ratio:16/9;overflow-y:auto;padding:22px 24px;background:var(--panel);border:1px solid var(--line);border-radius:14px}
 .pd-code{padding:0;background:none;border:none;font-size:13px}
 
-.pd-toolbar{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
-  background:var(--panel);border:1px solid var(--line2);border-radius:16px;padding:10px 14px}
-.pd-toolbar-left{display:flex;align-items:center;gap:14px;flex-wrap:wrap;min-width:0}
-.pd-title{font-size:14px;font-weight:700;color:#fff;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:220px}
-.pd-meta{font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--dim);white-space:nowrap}
-.pd-toolbar-tabs.hpc-tabs{display:flex;gap:4px;padding:3px;border-bottom:none;background:rgba(255,255,255,.05);border-radius:999px}
-.pd-toolbar-tabs .hpc-tab{padding:7px 14px;font-size:11px;border-radius:999px;border-bottom:none}
-.pd-toolbar-tabs .hpc-tab.active{background:#fff;color:#0d0c14}
-.pd-toolbar-right{position:relative;display:flex;align-items:center;gap:10px;flex:0 0 auto}
-.pd-view-btn{font-family:var(--sans);font-weight:600;font-size:12px;padding:9px 14px;border-radius:999px;border:1px solid var(--line2);color:#fff;white-space:nowrap;transition:border-color .15s}
-.pd-view-btn:hover{border-color:var(--v)}
+/* Assets tab: stacked rows (not side-by-side columns) so a future item with
+   4-5 assets scrolls cleanly inside the fixed-height panel instead of
+   squeezing into ever-narrower columns. */
+.pd-assets-panel{aspect-ratio:16/9;overflow-y:auto;display:flex;flex-direction:column;gap:10px;padding-right:2px}
+.pd-asset-card{background:var(--panel);border:1px solid var(--line2);border-radius:12px;padding:12px 14px;flex:0 0 auto}
+.pd-asset-card-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.pd-asset-card-title{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;color:#fff;white-space:nowrap}
+.pd-asset-card-title .lucide{width:15px;height:15px;color:var(--dim)}
+.pd-asset-card-actions{display:flex;align-items:center;gap:6px}
+.pd-asset-card-preview{font-family:var(--mono);font-size:11px;color:var(--dim);line-height:1.6;margin:8px 0 0;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 
-.pd-copy-wrap{position:relative;display:flex}
-.pd-copy-btn{font-family:var(--sans);font-weight:600;font-size:12.5px;padding:9px 16px;border-radius:999px;border:none;background:var(--v);color:#fff;cursor:pointer;white-space:nowrap}
-.pd-copy-wrap.has-caret .pd-copy-btn{border-radius:999px 0 0 999px}
-.pd-copy-caret{display:flex;align-items:center;padding:9px 10px;border-radius:0 999px 999px 0;border:none;border-left:1px solid rgba(255,255,255,.25);background:var(--v);color:#fff;cursor:pointer}
-.pd-copy-menu{position:absolute;top:calc(100% + 8px);right:0;min-width:260px;background:var(--panel);
-  border:1px solid var(--line2);border-radius:14px;padding:8px;box-shadow:0 24px 60px -20px rgba(0,0,0,.6);z-index:30}
-.pd-copy-menu-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px}
-.pd-copy-menu-row+.pd-copy-menu-row{border-top:1px solid rgba(255,255,255,.07)}
-.pd-copy-menu-row span{font-size:12px;color:var(--mut)}
+.pd-card-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 16px;border-top:1px solid var(--line2)}
+.pd-card-tabs.hpc-tabs{display:flex;gap:4px;padding:3px;border-bottom:none;background:rgba(255,255,255,.05);border-radius:999px}
+.pd-card-tabs .hpc-tab{padding:7px 14px;font-size:11px;border-radius:999px;border-bottom:none}
+.pd-card-tabs .hpc-tab.active{background:#fff;color:#0d0c14}
+.pd-copy-btn{font-family:var(--sans);font-weight:600;font-size:12.5px;padding:9px 18px;border-radius:999px;border:none;
+  background:var(--v);color:#fff;cursor:pointer;white-space:nowrap;display:inline-flex;align-items:center;gap:6px}
+.pd-copy-btn .lucide{width:14px;height:14px}
+.pd-copy-btn .lucide.spin{animation:pd-spin .7s linear infinite}
+@keyframes pd-spin{to{transform:rotate(360deg)}}
 
-/* prev/next arrows in the quick-preview modal */
-.pd-arrow{position:fixed;top:50%;transform:translateY(-50%);z-index:999;width:44px;height:44px;border-radius:50%;
+/* prev/next arrows in the quick-preview modal, anchored to the card itself
+   (not the viewport) so they sit a fixed 24px off its edges at any width */
+.pd-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:999;width:44px;height:44px;border-radius:50%;
   border:1px solid var(--line2);background:rgba(10,9,16,.8);backdrop-filter:blur(6px);color:#fff;display:grid;
   place-items:center;cursor:pointer;transition:.18s}
 .pd-arrow:hover{background:rgba(255,255,255,.1)}
-.pd-arrow-prev{left:24px}
-.pd-arrow-next{right:24px}
+.pd-arrow-prev{right:calc(100% + 24px)}
+.pd-arrow-next{left:calc(100% + 24px)}
 
 .pd-related{margin-top:56px}
 .pd-related h3{font-size:20px;font-weight:600;color:#fff;margin-bottom:20px}
@@ -259,7 +277,10 @@ footer{border-top:1px solid var(--line);padding:64px 0 32px;margin-top:60px}
 .pd-siblings a:hover{color:#fff}
 @media(max-width:760px){
   .pd-arrow{display:none}
-  .pd-toolbar-right{width:100%;justify-content:space-between}
+  .pd-title{max-width:180px}
+  .pd-card-bar{flex-wrap:wrap}
+  .pd-asset-card-actions{width:100%}
+  .pd-asset-card-actions button{flex:1}
 }
 
 /* ===== pricing tier card, reused verbatim from homepage (CSS existed there
@@ -281,9 +302,6 @@ footer{border-top:1px solid var(--line);padding:64px 0 32px;margin-top:60px}
   display:none;align-items:center;justify-content:center;padding:24px;overflow-y:auto}
 .detail-overlay.open{display:flex}
 .detail-modal{position:relative;width:100%;max-width:960px;margin:auto}
-.detail-modal-close{position:absolute;top:14px;right:14px;z-index:2;width:34px;height:34px;border-radius:50%;border:1px solid var(--line2);
-  background:rgba(10,9,16,.75);backdrop-filter:blur(6px);color:#fff;display:grid;place-items:center;cursor:pointer;transition:.18s}
-.detail-modal-close:hover{background:rgba(255,255,255,.12)}
 
 @media(max-width:900px){
   .navlinks,.navcta .btn,.nav-searchbox,.nav-upgrade{display:none} .burger{display:grid;place-items:center}

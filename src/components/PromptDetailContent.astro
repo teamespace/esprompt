@@ -1,7 +1,7 @@
 ---
 // Pure content — no page chrome. Rendered two ways: full page
-// (src/pages/catalog/[slug].astro) and cloned into the modal overlay on
-// /catalog. Both read from the same markup so they can't drift apart.
+// (src/pages/library/[slug].astro) and cloned into the modal overlay on
+// /library. Both read from the same markup so they can't drift apart.
 import type { PromptItem } from '../data/prompts';
 
 interface Props {
@@ -12,62 +12,106 @@ const { item, variant = 'page' } = Astro.props;
 const isHero = item.tier === 'Hero';
 ---
 <div class="prompt-detail" data-slug={item.slug}>
-  <div class="pd-stage">
-    <div class="pd-tabpanel" data-tabpanel="preview">
-      <div class="pd-preview-lg" style={`background-image:url('/assets/showcase/${item.thumbnail}')`}></div>
-    </div>
-    <div class="pd-tabpanel" data-tabpanel="prompt" hidden>
-      <div class="pd-prompt-panel">
-        <code class="hp-copy-code pd-code">{item.prompt}</code>
-      </div>
-    </div>
-  </div>
-
-  <div class="pd-toolbar">
-    <div class="pd-toolbar-left">
+  <div class="pd-topbar">
+    <div class="pd-topbar-info">
       {variant === 'page'
         ? <h1 class="pd-title">{item.title}</h1>
         : <h2 class="pd-title">{item.title}</h2>}
       <span class="pd-meta">{item.tier} &middot; {item.category}</span>
-      <div class="hpc-tabs pd-toolbar-tabs" data-tabs>
-        <span class="hpc-tab active" data-tab="preview">Live Preview</span>
-        <span class="hpc-tab" data-tab="prompt">The Prompt</span>
-      </div>
     </div>
-    <div class="pd-toolbar-right">
-      {variant === 'modal' && <a class="pd-view-btn" href={`/catalog/${item.slug}`}>View full page &nearr;</a>}
-      <div class={`pd-copy-wrap${isHero ? ' has-caret' : ''}`}>
-        <button class="pd-copy-btn detail-copy-btn" data-prompt={item.prompt} data-slug={item.slug}>Copy prompt</button>
-        {isHero && (
-          <button class="pd-copy-caret" data-caret-toggle aria-haspopup="true" aria-expanded="false" aria-label="Asset prompts">
-            <svg class="lucide" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
-        )}
-        {isHero && (
-          <div class="pd-copy-menu" data-caret-menu hidden>
-            <div class="pd-copy-menu-row">
-              <span>Image asset</span>
-              <div class="ac-row-actions">
-                <button class="ac-copy detail-copy-btn" data-prompt={item.imagePrompt} data-slug={item.slug}>Copy prompt</button>
-                <button class="ac-dl detail-dl-btn" data-asset={`${item.slug}-image`}>Download</button>
+    <div class="pd-topbar-actions">
+      <button class="pd-icon-btn detail-share-btn" data-slug={item.slug} aria-label="Copy link" title="Copy link">
+        <svg class="lucide" viewBox="0 0 24 24"><path d="M9 17H7A5 5 0 0 1 7 7h2"/><path d="M15 7h2a5 5 0 1 1 0 10h-2"/><line x1="8" x2="16" y1="12" y2="12"/></svg>
+      </button>
+      {variant === 'modal' && (
+        <button class="pd-icon-btn" data-close-modal aria-label="Close" title="Close">
+          <svg class="lucide" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+      )}
+    </div>
+  </div>
+
+  <div class="pd-card">
+    <div class="pd-card-body">
+      <div class="pd-tabpanel" data-tabpanel="preview">
+        <div class="pd-preview-lg" style={`background-image:url('/assets/showcase/${item.thumbnail}')`}></div>
+      </div>
+      <div class="pd-tabpanel" data-tabpanel="prompt" hidden>
+        <div class="pd-prompt-panel">
+          <code class="hp-copy-code pd-code">{item.prompt}</code>
+        </div>
+      </div>
+      {isHero && (
+        <div class="pd-tabpanel" data-tabpanel="assets" hidden>
+          <!-- Stacked rows (not side-by-side) so a future 4-5 asset item
+               scrolls cleanly inside the fixed-height panel instead of
+               squeezing columns. -->
+          <div class="pd-assets-panel">
+            <div class="pd-asset-card">
+              <div class="pd-asset-card-head">
+                <span class="pd-asset-card-title">
+                  <svg class="lucide" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+                  Image asset
+                </span>
+                <div class="pd-asset-card-actions">
+                  <button class="ac-copy detail-copy-btn" data-prompt={item.imagePrompt} data-slug={item.slug}>
+                    <svg class="lucide" viewBox="0 0 24 24"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                    <span>Copy Prompt</span>
+                  </button>
+                  <button class="ac-dl detail-dl-btn" data-asset={`${item.slug}-image`}>
+                    <svg class="lucide" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+                    <span>Download</span>
+                  </button>
+                </div>
               </div>
+              <p class="pd-asset-card-preview">{item.imagePrompt}</p>
             </div>
-            <div class="pd-copy-menu-row">
-              <span>Video asset</span>
-              <div class="ac-row-actions">
-                <button class="ac-copy detail-copy-btn" data-prompt={item.videoPrompt} data-slug={item.slug}>Copy prompt</button>
-                <button class="ac-dl detail-dl-btn" data-asset={`${item.slug}-video`}>Download</button>
+            <div class="pd-asset-card">
+              <div class="pd-asset-card-head">
+                <span class="pd-asset-card-title">
+                  <svg class="lucide" viewBox="0 0 24 24"><path d="m22 8-6 4 6 4V8Z"/><rect width="14" height="12" x="2" y="6" rx="2" ry="2"/></svg>
+                  Video asset
+                </span>
+                <div class="pd-asset-card-actions">
+                  <button class="ac-copy detail-copy-btn" data-prompt={item.videoPrompt} data-slug={item.slug}>
+                    <svg class="lucide" viewBox="0 0 24 24"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                    <span>Copy Prompt</span>
+                  </button>
+                  <button class="ac-dl detail-dl-btn" data-asset={`${item.slug}-video`}>
+                    <svg class="lucide" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+                    <span>Download</span>
+                  </button>
+                </div>
               </div>
+              <p class="pd-asset-card-preview">{item.videoPrompt}</p>
             </div>
           </div>
-        )}
+        </div>
+      )}
+    </div>
+
+    <div class="pd-card-bar">
+      <div class="hpc-tabs pd-card-tabs" data-tabs>
+        <span class="hpc-tab active" data-tab="preview">Live Preview</span>
+        <span class="hpc-tab" data-tab="prompt">The Prompt</span>
+        {isHero && <span class="hpc-tab" data-tab="assets">Assets</span>}
       </div>
+      <button class="pd-copy-btn detail-copy-btn" data-prompt={item.prompt} data-slug={item.slug}>
+        <svg class="lucide" viewBox="0 0 24 24"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/></svg>
+        <span>Copy Prompt</span>
+      </button>
+      {isHero && (
+        <button class="pd-copy-btn detail-dlall-btn" data-slug={item.slug} hidden>
+          <svg class="lucide" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+          <span>Download All Assets</span>
+        </button>
+      )}
     </div>
   </div>
 </div>
 
-<!-- Tab switching, copy, download, and the caret dropdown are handled by a
-     single delegated listener in AppLayout.astro, not here. A <script>
-     inside a <template> (the modal case, see catalog.astro) never executes
-     even after cloning, so per-instance scripts would silently do nothing
-     for the modal and register duplicate listeners for the page. -->
+<!-- Tab switching, copy, download, share, and close are handled by a single
+     delegated listener in AppLayout.astro, not here. A <script> inside a
+     <template> (the modal case, see catalog.astro) never executes even
+     after cloning, so per-instance scripts would silently do nothing for
+     the modal and register duplicate listeners for the page. -->

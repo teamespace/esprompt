@@ -4,6 +4,18 @@
 // a different product. Swap this for a real API/CMS later — every consumer
 // just imports `prompts` and reads these fields.
 
+// Full-fidelity Full LP prompts supplied via new-prompts/full-landing — each is
+// the exact implementation-rules-and-scaffold prompt meant to be copy/pasted
+// into an AI coding tool, not a short blurb. Loaded raw so prompts.ts doesn't
+// need to escape thousands of lines of embedded backticks/code fences.
+import serenityPrompt from './full-prompts/serenity.md?raw';
+import elanPrompt from './full-prompts/elan.md?raw';
+import kiltPrompt from './full-prompts/kilt.md?raw';
+import auraPrompt from './full-prompts/aura.md?raw';
+import arloPrompt from './full-prompts/arlo.md?raw';
+import lumaPrompt from './full-prompts/luma.md?raw';
+import recallPrompt from './full-prompts/recall.md?raw';
+
 export type Tier = 'Hero' | 'Section' | 'Full LP';
 
 export interface PromptItem {
@@ -67,7 +79,7 @@ export const prompts: PromptItem[] = [
   { slug: 'vellum-legal', title: 'Vellum', tier: 'Full LP', category: 'SaaS', thumbnail: 'placeholder-portfolio.png',
     prompt: 'Create a legal-tech landing page for contract review: a redlined document preview, risk-flag callouts, and a benchmarking stat strip.' },
   { slug: 'recall-edtech', title: 'Recall', tier: 'Full LP', category: 'SaaS', thumbnail: 'placeholder-portfolio.png',
-    prompt: 'Build an edtech landing page that turns notes into flashcards: an upload-to-quiz demo, an exam-mode toggle, and a weak-spot radar chart.' },
+    prompt: recallPrompt },
   { slug: 'wayfare-trip', title: 'Wayfare', tier: 'Full LP', category: 'Travel', thumbnail: 'placeholder-portfolio.png',
     prompt: 'Design an AI trip-planner hero with a day-by-day itinerary preview, map pins clustered by neighborhood, and a single "where are you going" input.' },
   { slug: 'candor-hrtech', title: 'Candor', tier: 'Full LP', category: 'SaaS', thumbnail: 'candor.png',
@@ -75,9 +87,9 @@ export const prompts: PromptItem[] = [
   { slug: 'stillwave-meditation', title: 'Stillwave', tier: 'Full LP', category: 'Wellness', thumbnail: 'stillwave.png',
     prompt: 'Design a meditation-app landing page with a daily-session player mockup, a breath-paced waveform animation, and a calming gradient hero.' },
   { slug: 'aura-apparel', title: 'Aura', tier: 'Full LP', category: 'Ecom', thumbnail: 'aura.png',
-    prompt: 'Build an editorial apparel storefront: a full-bleed lookbook hero, a clean product grid, and a moody neutral palette.' },
+    prompt: auraPrompt },
   { slug: 'serenity-health-ed', title: 'Serenity', tier: 'Full LP', category: 'Health', thumbnail: 'placeholder-portfolio.png',
-    prompt: 'Design a health-education landing page for a certification program: a curriculum timeline, faculty bios, and outcome stats.' },
+    prompt: serenityPrompt },
   { slug: 'apex-sportswear', title: 'Apex', tier: 'Full LP', category: 'Ecom', thumbnail: 'apex.png',
     prompt: 'Build a performance-apparel storefront with athlete hero photography, a free-shipping threshold banner, and scannable product cards.' },
   { slug: 'aethera-studio', title: 'Aethera', tier: 'Full LP', category: 'Studio', thumbnail: 'aethera.png',
@@ -85,15 +97,15 @@ export const prompts: PromptItem[] = [
   { slug: 'altr-watches', title: 'ALTR', tier: 'Full LP', category: 'Ecom', thumbnail: 'altr.png',
     prompt: 'Build a watch-brand storefront with low-lit product photography, a vertical side-nav, and a "Daylight to Nightfall" collection edit.' },
   { slug: 'arlo-editorial', title: 'Arlo', tier: 'Full LP', category: 'Ecom', thumbnail: 'arlo.png',
-    prompt: 'Design a quiet editorial apparel site: a full-bleed lookbook carousel, hairline typography, and near-silent whitespace-driven layout.' },
+    prompt: arloPrompt },
   { slug: 'vox-streetwear', title: 'VOX', tier: 'Full LP', category: 'Ecom', thumbnail: 'vox.png',
     prompt: 'Build a streetwear drop page with marquee tape graphics, street photography, and a limited-run countdown timer.' },
   { slug: 'luma-lifestyle', title: 'LUMA', tier: 'Full LP', category: 'Ecom', thumbnail: 'luma.png',
-    prompt: 'Design an Italian-lifestyle storefront: sun-washed villa photography, an ivory-and-clay knit edit, and lifestyle-first copy.' },
+    prompt: lumaPrompt },
   { slug: 'kilt-techwear', title: 'KILT', tier: 'Full LP', category: 'Ecom', thumbnail: 'kilt.png',
-    prompt: 'Build a brutalist techwear storefront with monospaced type, a split-wordmark hero, and acid-accent details.' },
+    prompt: kiltPrompt },
   { slug: 'elan-football', title: 'Élan', tier: 'Full LP', category: 'Ecom', thumbnail: 'elan.png',
-    prompt: 'Design a retro-jersey storefront styled like a team portrait: a group hero shot, a moody grade, and a "Legends Collection" badge.' },
+    prompt: elanPrompt },
   { slug: 'modex-infra', title: 'Modex', tier: 'Full LP', category: 'Dev', thumbnail: 'modex.png',
     prompt: 'Build a dev-infra landing page for running open models anywhere: a monolith hero, a live terminal demo, and a GPU telemetry table.' },
   { slug: 'pylon-ai', title: 'Pylon', tier: 'Full LP', category: 'Dev', thumbnail: 'pylon.png',

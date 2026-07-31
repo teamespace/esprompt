@@ -22,12 +22,12 @@ const CHECK = 'M20 6 9 17l-5-5';
         <div class="plan-price">$0<span>/mo</span></div>
         <p class="plan-caption">Free, forever</p>
       </div>
-      <p class="plan-desc">Best for trying esprompt: browse the whole catalog and copy every Section &amp; Full LP prompt.</p>
-      <a class="btn ghost plan-cta" href="/catalog">Browse catalog</a>
+      <p class="plan-desc">Best for trying esprompt: browse the whole library and copy every Section &amp; Full LP prompt.</p>
+      <a class="btn ghost plan-cta" href="/library">Browse Library</a>
       <div class="plan-list">
         <span class="plan-list-label">Included</span>
         <ul>
-          <li><svg class="lucide" viewBox="0 0 24 24"><path d={CHECK}/></svg>Browse and search the whole catalog</li>
+          <li><svg class="lucide" viewBox="0 0 24 24"><path d={CHECK}/></svg>Browse and search the whole library</li>
           <li><svg class="lucide" viewBox="0 0 24 24"><path d={CHECK}/></svg>Copy Section &amp; Full LP prompts</li>
           <li><svg class="lucide" viewBox="0 0 24 24"><path d={CHECK}/></svg>Community support</li>
         </ul>
@@ -35,14 +35,13 @@ const CHECK = 'M20 6 9 17l-5-5';
     </div>
 
     <div class="plan-card accent">
-      <span class="plan-badge">Coming soon</span>
       <div class="plan-top">
         <h3>Hero</h3>
         <div class="plan-price">Coming soon</div>
         <p class="plan-caption">Pricing to be announced</p>
       </div>
       <p class="plan-desc">For teams and power users who want Hero image &amp; video assets and priority support.</p>
-      <button class="btn primary plan-cta" id="notifyBtn" type="button">Notify me</button>
+      <button class="btn primary plan-cta" id="notifyBtn" type="button">Notify Me</button>
       <div class="plan-list">
         <span class="plan-list-label">Everything in Free, plus</span>
         <ul>
@@ -62,7 +61,7 @@ const CHECK = 'M20 6 9 17l-5-5';
   <div class="faq reveal">
     <details class="q" open>
       <summary><span>Is esprompt really free to use?</span><span class="plus">+</span></summary>
-      <p>Yes. Browsing the catalog and copying Section &amp; Full LP prompts is free, no card required.</p>
+      <p>Yes. Browsing the library and copying Section &amp; Full LP prompts is free, no card required.</p>
     </details>
     <details class="q">
       <summary><span>What do I get with the paid plan?</span><span class="plus">+</span></summary>
@@ -115,8 +114,6 @@ const CHECK = 'M20 6 9 17l-5-5';
     -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;
     animation:planCtaBorder 5s linear infinite}
   @keyframes planCtaBorder{to{--bangle:360deg}}
-  .plan-badge{position:absolute;top:-12px;right:24px;background:#fff;color:#0d0c14;
-    font-size:11px;font-weight:600;padding:5px 13px;border-radius:999px;font-family:var(--mono)}
   .plan-top h3{font-size:18px;font-weight:600;color:#fff;margin-bottom:10px}
   .plan-price{font-size:38px;font-weight:600;letter-spacing:-.02em;color:#fff;line-height:1}
   .plan-price span{font-size:16px;font-weight:500;color:var(--mut)}

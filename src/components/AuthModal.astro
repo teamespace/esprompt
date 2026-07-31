@@ -49,9 +49,9 @@
             </button>
             <span class="auth-hint" id="amPwHint">Must be at least 8 characters.</span>
           </div>
-          <button class="btn primary auth-submit" type="submit" id="amSubmitBtn">Sign up</button>
+          <button class="btn primary auth-submit" type="submit" id="amSubmitBtn">Sign Up</button>
         </form>
-        <p class="auth-switch" id="amSwitch">Already have an account? <a onclick="setAuthMode('login')">Log in</a></p>
+        <p class="auth-switch" id="amSwitch">Already have an account? <a onclick="setAuthMode('login')">Log In</a></p>
       </div>
     </div>
   </div>
@@ -118,12 +118,12 @@
     document.getElementById('amNameRow').style.display = isLogin ? 'none' : 'grid';
     document.getElementById('amPwHint').style.display = isLogin ? 'none' : 'block';
     document.getElementById('amDemoHint').hidden = !isLogin;
-    document.getElementById('amTitle').textContent = isLogin ? 'Welcome back' : 'Create your account';
+    document.getElementById('amTitle').textContent = isLogin ? 'Welcome Back' : 'Create your account';
     document.getElementById('amSub').textContent = isLogin ? 'Log in to your esprompt account.' : 'Enter your details to get started.';
-    document.getElementById('amSubmitBtn').textContent = isLogin ? 'Log in' : 'Sign up';
+    document.getElementById('amSubmitBtn').textContent = isLogin ? 'Log In' : 'Sign Up';
     document.getElementById('amSwitch').innerHTML = isLogin
-      ? 'Don’t have an account? <a onclick="setAuthMode(\'signup\')">Sign up</a>'
-      : 'Already have an account? <a onclick="setAuthMode(\'login\')">Log in</a>';
+      ? 'Don’t have an account? <a onclick="setAuthMode(\'signup\')">Sign Up</a>'
+      : 'Already have an account? <a onclick="setAuthMode(\'login\')">Log In</a>';
   }
 
   document.getElementById('amForm').addEventListener('submit', (e) => {

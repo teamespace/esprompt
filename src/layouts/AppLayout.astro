@@ -22,11 +22,11 @@ const { title } = Astro.props;
 <div class="topbar-gradient"></div>
 <nav>
   <div class="wrap nav">
-    <a class="logo" href="/">esprompt</a>
+    <a class="logo" href="/library?tier=Full%20LP">esprompt</a>
     <div class="navlinks" id="navTierLinks">
-      <a href="/catalog?tier=Full%20LP" data-tier="Full LP">Landing</a>
-      <a href="/catalog?tier=Hero" data-tier="Hero">Hero</a>
-      <a href="/catalog?tier=Section" data-tier="Section">Section</a>
+      <a href="/library?tier=Full%20LP" data-tier="Full LP">Landing</a>
+      <a href="/library?tier=Hero" data-tier="Hero">Hero</a>
+      <a href="/library?tier=Section" data-tier="Section">Section</a>
     </div>
     <div class="navcta" id="navCta">
       <form class="nav-searchbox" id="navSearchForm" role="search">
@@ -34,8 +34,8 @@ const { title } = Astro.props;
         <input type="text" id="navSearchInput" placeholder="Search" autocomplete="off">
         <kbd>/</kbd>
       </form>
-      <a class="login" onclick="openAuthModal('login')">Log in</a>
-      <a class="btn primary" onclick="openAuthModal('signup')">Sign up</a>
+      <a class="login" onclick="openAuthModal('login')">Log In</a>
+      <a class="btn primary" onclick="openAuthModal('signup')">Sign Up</a>
     </div>
     <button class="burger" aria-label="Menu">≡</button>
   </div>
@@ -53,7 +53,7 @@ const { title } = Astro.props;
       </div>
       <div class="foot-col">
         <h5>Product</h5>
-        <a href="/catalog">Catalog</a>
+        <a href="/library">Library</a>
         <a href="/#harga">Pricing</a>
       </div>
       <div class="foot-col">
@@ -84,7 +84,7 @@ const { title } = Astro.props;
   // Highlight Hero/Landing/Section based on the current ?tier=. Can't be
   // done server-side since this is a static build (no query string at
   // render time), so it's a client-side match against the live URL.
-  if (location.pathname === '/catalog') {
+  if (location.pathname === '/library') {
     const currentTier = new URLSearchParams(location.search).get('tier');
     document.querySelectorAll('#navTierLinks a').forEach(a => {
       a.classList.toggle('active', a.dataset.tier === currentTier);
@@ -106,7 +106,7 @@ const { title } = Astro.props;
     <kbd>/</kbd>
   </form>`;
 
-  // Nav search: submits to /catalog?q=… (catalog.astro reads it on load, same
+  // Nav search: submits to /library?q=… (library.astro reads it on load, same
   // pattern as ?tier=). Always a fresh navigation, simplest thing that works
   // across pages, no cross-page JS state to keep in sync.
   function bindNavSearch(){
@@ -115,7 +115,7 @@ const { title } = Astro.props;
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       const q = document.getElementById('navSearchInput').value.trim();
-      window.location.href = q ? `/catalog?q=${encodeURIComponent(q)}` : '/catalog';
+      window.location.href = q ? `/library?q=${encodeURIComponent(q)}` : '/library';
     });
   }
   document.addEventListener('keydown', (e) => {
@@ -139,10 +139,10 @@ const { title } = Astro.props;
         <div class="nav-account" id="navAccount">
           <button class="nav-avatar" id="navAvatarBtn" aria-haspopup="true" aria-expanded="false" aria-label="Account menu">${initial}</button>
           <div class="nav-dropdown" id="navDropdown" hidden>
-            <a href="/library">Library</a>
+            <a href="/bookmarks">Bookmarks</a>
             <a href="/account">Account</a>
             <a href="/billing">Upgrade</a>
-            <button type="button" id="navLogoutBtn">Log out</button>
+            <button type="button" id="navLogoutBtn">Log Out</button>
           </div>
         </div>`;
       const avatarBtn = document.getElementById('navAvatarBtn');
@@ -159,7 +159,7 @@ const { title } = Astro.props;
         window.location.href = '/';
       });
     } else {
-      cta.innerHTML = `${SEARCH_BOX}<a class="login" onclick="openAuthModal('login')">Log in</a><a class="btn primary" onclick="openAuthModal('signup')">Sign up</a>`;
+      cta.innerHTML = `${SEARCH_BOX}<a class="login" onclick="openAuthModal('login')">Log In</a><a class="btn primary" onclick="openAuthModal('signup')">Sign Up</a>`;
     }
     bindNavSearch();
   }
@@ -193,13 +193,25 @@ const { title } = Astro.props;
 
   // Prompt detail interactions: delegated on document.body so this works
   // for PromptDetailContent rendered directly on a page AND cloned into the
-  // /catalog quick-preview modal (a <script> inside the source <template>
-  // never runs, even after cloning, see catalog.astro).
-  function flashLabel(btn, text, ms = 1500){
-    const label = btn.querySelector('span') || btn;
-    const original = label.textContent;
-    label.textContent = text;
-    setTimeout(() => { label.textContent = original; }, ms);
+  // /library quick-preview modal (a <script> inside the source <template>
+  // never runs, even after cloning, see library.astro).
+  const ESP_ICON_SPIN = '<svg class="lucide spin" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>';
+  const ESP_ICON_CHECK = '<svg class="lucide" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>';
+  // Swaps a button's whole contents to a spinner+label, then a check+label,
+  // then restores the original markup, so copy/download buttons show real
+  // "in progress" feedback instead of an instant label flip.
+  function flashAction(btn, loadingLabel, doneLabel){
+    if (btn.dataset.busy) return;
+    btn.dataset.busy = '1';
+    const original = btn.innerHTML;
+    btn.innerHTML = `${ESP_ICON_SPIN}<span>${loadingLabel}</span>`;
+    setTimeout(() => {
+      btn.innerHTML = `${ESP_ICON_CHECK}<span>${doneLabel}</span>`;
+      setTimeout(() => {
+        btn.innerHTML = original;
+        delete btn.dataset.busy;
+      }, 1200);
+    }, 450);
   }
 
   document.body.addEventListener('click', (e) => {
@@ -212,22 +224,28 @@ const { title } = Astro.props;
       tabs.querySelectorAll('.hpc-tab').forEach(t => t.classList.remove('active'));
       tab.classList.add('active');
       container.querySelectorAll('.pd-tabpanel').forEach(p => { p.hidden = p.dataset.tabpanel !== tab.dataset.tab; });
+      // The Assets tab swaps "Copy Prompt" for "Download All Assets" in the
+      // card-bar, since copying a single prompt doesn't apply there.
+      const onAssets = tab.dataset.tab === 'assets';
+      container.querySelectorAll('.pd-copy-btn:not(.detail-dlall-btn)').forEach(b => { b.hidden = onAssets; });
+      container.querySelectorAll('.detail-dlall-btn').forEach(b => { b.hidden = !onAssets; });
       return;
     }
 
-    // Hero-only dropdown: image/video asset copy+download, off the Copy
-    // prompt split button's caret.
-    const caret = e.target.closest('[data-caret-toggle]');
-    if (caret) {
-      const menu = caret.parentElement.querySelector('[data-caret-menu]');
-      const willOpen = menu.hidden;
-      document.querySelectorAll('[data-caret-menu]').forEach(m => { m.hidden = true; });
-      menu.hidden = !willOpen;
-      caret.setAttribute('aria-expanded', String(willOpen));
+    // Topbar close (modal variant only, see library.astro's openDetailModal).
+    const closeBtn = e.target.closest('[data-close-modal]');
+    if (closeBtn) {
+      window.closeDetailModal?.();
       return;
     }
-    if (!e.target.closest('[data-caret-menu]')) {
-      document.querySelectorAll('[data-caret-menu]').forEach(m => { m.hidden = true; });
+
+    // Topbar share: copies the item's full-page URL, not the prompt text.
+    const shareBtn = e.target.closest('.detail-share-btn');
+    if (shareBtn) {
+      navigator.clipboard?.writeText(`${location.origin}/library/${shareBtn.dataset.slug}`);
+      shareBtn.classList.add('copied');
+      setTimeout(() => shareBtn.classList.remove('copied'), 1500);
+      return;
     }
 
     const copyBtn = e.target.closest('.detail-copy-btn');
@@ -235,17 +253,25 @@ const { title } = Astro.props;
       const doCopy = () => {
         navigator.clipboard?.writeText(copyBtn.dataset.prompt || '');
         espAddToLibrary(copyBtn.dataset.slug);
-        flashLabel(copyBtn, 'Copied!');
+        flashAction(copyBtn, 'Copying…', 'Copied');
       };
       if (window.espHasSession && window.espHasSession()) doCopy();
       else window.openAuthModal('signup', doCopy);
       return;
     }
 
+    const dlAllBtn = e.target.closest('.detail-dlall-btn');
+    if (dlAllBtn) {
+      // No real asset files yet (mock data phase), this just proves the gate.
+      const doDownloadAll = () => flashAction(dlAllBtn, 'Downloading…', 'Downloaded');
+      if (window.espHasSession && window.espHasSession()) doDownloadAll();
+      else window.openAuthModal('signup', doDownloadAll);
+      return;
+    }
+
     const dlBtn = e.target.closest('.detail-dl-btn');
     if (dlBtn) {
-      // No real asset files yet (mock data phase), this just proves the gate.
-      const doDownload = () => flashLabel(dlBtn, 'Downloading…');
+      const doDownload = () => flashAction(dlBtn, 'Downloading…', 'Downloaded');
       if (window.espHasSession && window.espHasSession()) doDownload();
       else window.openAuthModal('signup', doDownload);
     }
