@@ -959,11 +959,15 @@ const showcaseItems = showcaseSlugs
   document.querySelector('#tier .showcase-grid')?.addEventListener('click',(e)=>{
     const copyBtn=e.target.closest('.pv-btn.copy');
     if(copyBtn){
-      navigator.clipboard?.writeText(copyBtn.dataset.prompt||'');
-      const label=copyBtn.querySelector('span');
-      const original=label.textContent;
-      label.textContent='Copied!';
-      setTimeout(()=>{label.textContent=original;},1500);
+      const doCopy=()=>{
+        navigator.clipboard?.writeText(copyBtn.dataset.prompt||'');
+        const label=copyBtn.querySelector('span');
+        const original=label.textContent;
+        label.textContent='Copied!';
+        setTimeout(()=>{label.textContent=original;},1500);
+      };
+      if(espHasSession()) doCopy();
+      else openAuthModal('signup',doCopy);
       return;
     }
     const viewBtn=e.target.closest('.pv-btn.view');
@@ -1020,22 +1024,34 @@ const showcaseItems = showcaseSlugs
     }
     const copyBtn=e.target.closest('.detail-copy-btn');
     if(copyBtn){
-      navigator.clipboard?.writeText(copyBtn.dataset.prompt||'');
-      flashAction(copyBtn,'Copying…','Copied');
+      const doCopy=()=>{
+        navigator.clipboard?.writeText(copyBtn.dataset.prompt||'');
+        flashAction(copyBtn,'Copying…','Copied');
+      };
+      if(espHasSession()) doCopy();
+      else openAuthModal('signup',doCopy);
       return;
     }
     const dlAllBtn=e.target.closest('.detail-dlall-btn');
     if(dlAllBtn){
-      flashAction(dlAllBtn,'Downloading…','Downloaded');
-      let urls=[];
-      try{urls=JSON.parse(dlAllBtn.dataset.urls||'[]');}catch{}
-      urls.forEach((url,i)=>setTimeout(()=>triggerDownload(url),i*300));
+      const doDownloadAll=()=>{
+        flashAction(dlAllBtn,'Downloading…','Downloaded');
+        let urls=[];
+        try{urls=JSON.parse(dlAllBtn.dataset.urls||'[]');}catch{}
+        urls.forEach((url,i)=>setTimeout(()=>triggerDownload(url),i*300));
+      };
+      if(espHasSession()) doDownloadAll();
+      else openAuthModal('signup',doDownloadAll);
       return;
     }
     const dlBtn=e.target.closest('.detail-dl-btn');
     if(dlBtn){
-      flashAction(dlBtn,'Downloading…','Downloaded');
-      if(dlBtn.dataset.url) triggerDownload(dlBtn.dataset.url,dlBtn.dataset.filename);
+      const doDownload=()=>{
+        flashAction(dlBtn,'Downloading…','Downloaded');
+        if(dlBtn.dataset.url) triggerDownload(dlBtn.dataset.url,dlBtn.dataset.filename);
+      };
+      if(espHasSession()) doDownload();
+      else openAuthModal('signup',doDownload);
     }
   });
 
@@ -1253,16 +1269,35 @@ const showcaseItems = showcaseSlugs
     document.querySelectorAll('.lang-switch').forEach(l=>l.classList.toggle('alt',ALT));
     document.documentElement.lang=ALT?'id':'en';}
 
-  function openAuthModal(mode){
+  /* fake session, same UI-only pattern as AuthModal.astro (no backend):
+     any submit "succeeds", so gated actions (like Copy Prompt) just need
+     the visitor to get through the sign-up form once. */
+  const ESP_SESSION_KEY='esprompt_session';
+  let amPendingAction=null;
+  function espHasSession(){ return localStorage.getItem(ESP_SESSION_KEY)==='1'; }
+  function espSetSession(){ localStorage.setItem(ESP_SESSION_KEY,'1'); }
+
+  function openAuthModal(mode,onSuccess){
+    amPendingAction=typeof onSuccess==='function'?onSuccess:null;
     setAuthMode(mode||'signup');
     document.getElementById('authOverlay').classList.add('open');
     document.body.style.overflow='hidden';
   }
   function closeAuthModal(){
     document.getElementById('authOverlay').classList.remove('open');
-    document.body.style.overflow='';
+    // Don't drop the scroll lock if the quick-preview modal is still open
+    // underneath (e.g. sign-up was triggered from its Copy Prompt button).
+    if(!document.getElementById('detailOverlay')?.classList.contains('open')){
+      document.body.style.overflow='';
+    }
   }
   document.addEventListener('keydown',e=>{if(e.key==='Escape')closeAuthModal();});
+  document.getElementById('amForm')?.addEventListener('submit',(e)=>{
+    e.preventDefault();
+    espSetSession();
+    closeAuthModal();
+    if(amPendingAction){amPendingAction();amPendingAction=null;}
+  });
 
   function toggleAmPw(){
     const pw=document.getElementById('amPw');
