@@ -20,6 +20,24 @@ import beyondHorizonPrompt from './full-prompts/beyond-horizon.md?raw';
 import trainfoldPrompt from './full-prompts/trainfold.md?raw';
 import modexPrompt from './full-prompts/modex.md?raw';
 import pylonPrompt from './full-prompts/pylon.md?raw';
+import relayPrompt from './full-prompts/relay.md?raw';
+
+// Hero-tier prompts — the hero-section-only excerpt lifted verbatim from each
+// matching full-landing prompt above (see new-prompts/hero/<slug>/prompt.md).
+// One entry per file in new-prompts/full-landing — keep this set 1:1 with
+// that folder's contents.
+import serenityHeroPrompt from './hero-prompts/serenity.md?raw';
+import elanHeroPrompt from './hero-prompts/elan.md?raw';
+import kiltHeroPrompt from './hero-prompts/kilt.md?raw';
+import auraHeroPrompt from './hero-prompts/aura.md?raw';
+import arloHeroPrompt from './hero-prompts/arlo.md?raw';
+import lumaHeroPrompt from './hero-prompts/luma.md?raw';
+import recallHeroPrompt from './hero-prompts/recall.md?raw';
+import modexHeroPrompt from './hero-prompts/modex.md?raw';
+import pylonHeroPrompt from './hero-prompts/pylon.md?raw';
+import trainfoldHeroPrompt from './hero-prompts/trainfold.md?raw';
+import veloHeroPrompt from './hero-prompts/velo.md?raw';
+import beyondHorizonHeroPrompt from './hero-prompts/beyond-horizon.md?raw';
 
 export type Tier = 'Hero' | 'Section' | 'Full LP';
 
@@ -35,38 +53,38 @@ export interface PromptItem {
 }
 
 export const prompts: PromptItem[] = [
-  { slug: 'aurora-hero', title: 'Aurora Hero', tier: 'Hero', category: 'Hero', thumbnail: 'candor.png',
-    prompt: 'Create a modern hero section with a soft aurora gradient, bold two-line headline, two CTA buttons, and subtle animated blobs in the background.',
-    imagePrompt: 'A soft aurora-gradient background image, purple to teal blend, subtle grain, 1920x1080, ready for a website hero section.',
-    videoPrompt: 'A 6-second seamless looping video of a soft aurora gradient shifting slowly, purple to teal, subtle grain, 1920x1080.' },
-  { slug: 'pricing-pro', title: 'Pricing Pro', tier: 'Section', category: 'Pricing', thumbnail: 'wellspring.png',
-    prompt: 'Build a 3-column pricing table with a highlighted middle plan, feature checklists, and a monthly/annual toggle.' },
-  { slug: 'fintech-hero', title: 'Fintech Hero', tier: 'Hero', category: 'Hero', thumbnail: 'pylon.png',
-    prompt: 'Create a fintech hero with a dashboard mockup floating on the right, trust badges below the fold, and a single primary CTA.',
-    imagePrompt: 'A fintech dashboard mockup screenshot showing charts and balances, dark UI, floating at an angle, transparent background.',
-    videoPrompt: 'A 5-second seamless looping video of a fintech dashboard UI animating in, charts drawing, dark theme, subtle motion.' },
-  { slug: 'bento-feat', title: 'Bento Feat', tier: 'Section', category: 'Features', thumbnail: 'modex.png',
-    prompt: 'Build a bento-grid feature section with 5 asymmetric cards, each with an icon, short title, and one-line description.' },
-  { slug: 'cta-glow', title: 'CTA Glow', tier: 'Section', category: 'CTA', thumbnail: 'vox.png',
-    prompt: 'Build a closing CTA section with an animated glowing border, centered headline, and one primary button.' },
-  { slug: 'minimal-saas', title: 'Minimal SaaS', tier: 'Hero', category: 'Hero', thumbnail: 'proxim.png',
-    prompt: 'Create a minimal SaaS hero with a plain background, large centered headline, and a product screenshot below.',
-    imagePrompt: 'A clean product UI screenshot mockup in a browser frame, light theme, centered composition, soft shadow.',
-    videoPrompt: 'A 6-second seamless looping video of a SaaS product UI being scrolled through smoothly, light theme, subtle cursor movement.' },
-  { slug: 'glass-pricing', title: 'Glass Pricing', tier: 'Section', category: 'Pricing', thumbnail: 'luma.png',
-    prompt: 'Build a glassmorphism pricing section with frosted cards over a gradient background.' },
-  { slug: 'newsletter-cta', title: 'Newsletter CTA', tier: 'Section', category: 'CTA', thumbnail: 'stillwave.png',
-    prompt: 'Build a newsletter signup section with an inline email field, subtle illustration, and social proof line.' },
-  { slug: 'startup-hero', title: 'Startup Hero', tier: 'Hero', category: 'Hero', thumbnail: 'apex.png',
-    prompt: 'Create a startup hero with an announcement badge, bold headline, and two stacked CTAs for mobile.',
-    imagePrompt: 'An announcement badge graphic with a bold two-line headline overlay, soft gradient background, startup aesthetic.',
-    videoPrompt: 'A 5-second seamless looping video of a subtle gradient background shifting behind bold startup headline text.' },
-  { slug: 'product-launch', title: 'Product Launch', tier: 'Section', category: 'Announcement', thumbnail: 'aura.png',
-    prompt: 'Build a product launch section with a countdown timer, product render, and an early-access form.' },
-  { slug: 'testimonial-wall', title: 'Testimonial Wall', tier: 'Hero', category: 'Testimonial', thumbnail: 'elan.png',
-    prompt: 'Create a testimonial wall with a masonry layout of quote cards, avatars, and star ratings.',
-    imagePrompt: 'A masonry grid of testimonial quote cards with avatars and star ratings, clean light background.',
-    videoPrompt: 'A 6-second seamless looping video of testimonial cards gently fading and shifting position in a masonry grid.' },
+  // ---- Section tier: intentionally empty for now (real prompts pending).
+
+  // ---- Hero tier, batch 2: 12 entries, one per file in
+  // new-prompts/full-landing — just the hero-section excerpt of each real
+  // Full LP build (see the matching Full LP entry below for the whole page).
+  // Thumbnails reuse the Full LP counterpart's real screenshot. No
+  // imagePrompt/videoPrompt yet (asset download is blocked in this sandbox —
+  // see conversation; URLs are documented inside each prompt's Assets table).
+  { slug: 'serenity-hero', title: 'Serenity', tier: 'Hero', category: 'Health', thumbnail: 'serenity.jpg',
+    prompt: serenityHeroPrompt },
+  { slug: 'elan-hero', title: 'Élan', tier: 'Hero', category: 'Ecom', thumbnail: 'elan.png',
+    prompt: elanHeroPrompt },
+  { slug: 'kilt-hero', title: 'KILT', tier: 'Hero', category: 'Ecom', thumbnail: 'kilt.png',
+    prompt: kiltHeroPrompt },
+  { slug: 'aura-hero', title: 'Aura', tier: 'Hero', category: 'Ecom', thumbnail: 'aura.png',
+    prompt: auraHeroPrompt },
+  { slug: 'arlo-hero', title: 'Arlo', tier: 'Hero', category: 'Ecom', thumbnail: 'arlo.png',
+    prompt: arloHeroPrompt },
+  { slug: 'luma-hero', title: 'LUMA', tier: 'Hero', category: 'Ecom', thumbnail: 'luma.png',
+    prompt: lumaHeroPrompt },
+  { slug: 'recall-hero', title: 'Recall', tier: 'Hero', category: 'SaaS', thumbnail: 'recall.jpg',
+    prompt: recallHeroPrompt },
+  { slug: 'modex-hero', title: 'Modex', tier: 'Hero', category: 'Dev', thumbnail: 'modex.png',
+    prompt: modexHeroPrompt },
+  { slug: 'pylon-hero', title: 'Pylon', tier: 'Hero', category: 'Dev', thumbnail: 'pylon.png',
+    prompt: pylonHeroPrompt },
+  { slug: 'trainfold-hero', title: 'Trainfold', tier: 'Hero', category: 'Dev', thumbnail: 'trainfold.jpg',
+    prompt: trainfoldHeroPrompt },
+  { slug: 'velo-hero', title: 'VELO', tier: 'Hero', category: 'Product', thumbnail: 'velo.jpg',
+    prompt: veloHeroPrompt },
+  { slug: 'beyond-horizon-hero', title: 'Beyond Horizon', tier: 'Hero', category: 'Travel', thumbnail: 'yacht.jpg',
+    prompt: beyondHorizonHeroPrompt },
 
   // ---- Full LP tier: 35 entries, one per real Elux Space portfolio build
   // (https://elux-vibe-portfolio.ahrasya.workers.dev/), minus the 2 internal
@@ -140,7 +158,7 @@ export const prompts: PromptItem[] = [
   { slug: 'warebotics-robotics', title: 'Warebotics', tier: 'Full LP', category: 'Product', thumbnail: 'warebotics.jpg',
     prompt: 'Design a warehouse-robotics landing page with a boot-sequence loading screen, live efficiency counters, and industrial-grade visuals.' },
   { slug: 'relay-backend', title: 'Relay', tier: 'Full LP', category: 'Dev', thumbnail: 'relay.jpg',
-    prompt: 'Build a realtime-backend landing page: a data-sync diagram, a function/presence feature grid, and a retro CRT-terminal hero.' },
+    prompt: relayPrompt },
   { slug: 'edgehaul-carry', title: 'Edgehaul', tier: 'Full LP', category: 'Ecom', thumbnail: 'edgehaul.jpg',
     prompt: 'Design a tactical-carry storefront with spec-sheet product cards (capacity, weight, material) and a field-test-proof tone.' },
   { slug: 'lunea-skincare', title: 'Lunéa', tier: 'Full LP', category: 'Ecom', thumbnail: 'lunea.jpg',
