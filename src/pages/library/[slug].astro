@@ -46,7 +46,7 @@ const related = prompts
             <div class="cc">
               <div class="pv" style={`background-image:url('/assets/showcase/${r.thumbnail}')`}></div>
             </div>
-            <div class="ccap"><span class="name">{r.title}</span><span class="count">{r.tier}</span></div>
+            <div class="ccap"><span class="name">{r.title}</span><span class="count">{r.tier === r.category ? r.tier : `${r.tier} - ${r.category}`}</span></div>
           </a>
         ))}
       </div>

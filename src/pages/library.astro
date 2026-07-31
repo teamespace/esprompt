@@ -51,7 +51,7 @@ import { prompts, categories } from '../data/prompts';
             </div>
           </div>
         </div>
-        <div class="ccap"><span class="name">{p.title}</span><span class="count">{p.tier}</span></div>
+        <div class="ccap"><span class="name">{p.title}</span><span class="count">{p.tier === p.category ? p.tier : `${p.tier} - ${p.category}`}</span></div>
       </div>
     ))}
   </div>

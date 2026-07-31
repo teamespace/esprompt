@@ -15,6 +15,9 @@ import auraPrompt from './full-prompts/aura.md?raw';
 import arloPrompt from './full-prompts/arlo.md?raw';
 import lumaPrompt from './full-prompts/luma.md?raw';
 import recallPrompt from './full-prompts/recall.md?raw';
+import veloPrompt from './full-prompts/velo.md?raw';
+import beyondHorizonPrompt from './full-prompts/beyond-horizon.md?raw';
+import trainfoldPrompt from './full-prompts/trainfold.md?raw';
 
 export type Tier = 'Hero' | 'Section' | 'Full LP';
 
@@ -66,21 +69,21 @@ export const prompts: PromptItem[] = [
   // ---- Full LP tier: 35 entries, one per real Elux Space portfolio build
   // (https://elux-vibe-portfolio.ahrasya.workers.dev/), minus the 2 internal
   // dashboard apps (not landing pages). Prompts are original descriptions of
-  // each site's structure, not copied marketing copy. 15 already have a real
-  // screenshot in /assets/showcase; the other 20 use a shared placeholder
-  // tile until real thumbnails are supplied (network fetch to that domain is
-  // blocked in this sandbox — see conversation).
-  { slug: 'quorum-ai', title: 'Quorum', tier: 'Full LP', category: 'SaaS', thumbnail: 'placeholder-portfolio.png',
+  // each site's structure, not copied marketing copy. Every entry now has a
+  // real screenshot in /assets/showcase (the 20 that used to point at
+  // placeholder-portfolio.png were backfilled from the portfolio site's own
+  // /thumbs/*.jpg — see the download command in conversation).
+  { slug: 'quorum-ai', title: 'Quorum', tier: 'Full LP', category: 'SaaS', thumbnail: 'quorum.jpg',
     prompt: 'Design an AI meeting-assistant landing page: dashboard preview of live transcription, integration logos row (Slack, Linear, Asana), and a three-step "how it works" flow.' },
-  { slug: 'curalink-telehealth', title: 'Curalink', tier: 'Full LP', category: 'Health', thumbnail: 'placeholder-portfolio.png',
+  { slug: 'curalink-telehealth', title: 'Curalink', tier: 'Full LP', category: 'Health', thumbnail: 'curalink.jpg',
     prompt: 'Build a telehealth landing page with a same-day-visit CTA, an AI symptom-intake mockup, and licensed-physician trust badges.' },
-  { slug: 'curalink-medic-ai', title: 'Curalink - Medic AI', tier: 'Full LP', category: 'Health', thumbnail: 'placeholder-portfolio.png',
+  { slug: 'curalink-medic-ai', title: 'Curalink - Medic AI', tier: 'Full LP', category: 'Health', thumbnail: 'curalink-medic-ai.jpg',
     prompt: 'Design an alternate telehealth hero with a warm photographic banner and a split-screen chat demo showing AI triage handing off to a doctor.' },
-  { slug: 'vellum-legal', title: 'Vellum', tier: 'Full LP', category: 'SaaS', thumbnail: 'placeholder-portfolio.png',
+  { slug: 'vellum-legal', title: 'Vellum', tier: 'Full LP', category: 'SaaS', thumbnail: 'vellum.jpg',
     prompt: 'Create a legal-tech landing page for contract review: a redlined document preview, risk-flag callouts, and a benchmarking stat strip.' },
-  { slug: 'recall-edtech', title: 'Recall', tier: 'Full LP', category: 'SaaS', thumbnail: 'placeholder-portfolio.png',
+  { slug: 'recall-edtech', title: 'Recall', tier: 'Full LP', category: 'SaaS', thumbnail: 'recall.jpg',
     prompt: recallPrompt },
-  { slug: 'wayfare-trip', title: 'Wayfare', tier: 'Full LP', category: 'Travel', thumbnail: 'placeholder-portfolio.png',
+  { slug: 'wayfare-trip', title: 'Wayfare', tier: 'Full LP', category: 'Travel', thumbnail: 'wayfare.jpg',
     prompt: 'Design an AI trip-planner hero with a day-by-day itinerary preview, map pins clustered by neighborhood, and a single "where are you going" input.' },
   { slug: 'candor-hrtech', title: 'Candor', tier: 'Full LP', category: 'SaaS', thumbnail: 'candor.png',
     prompt: 'Build a recruitment-intelligence landing page: candidate scorecards, ATS integration logos, and a pipeline-bottleneck chart.' },
@@ -88,7 +91,7 @@ export const prompts: PromptItem[] = [
     prompt: 'Design a meditation-app landing page with a daily-session player mockup, a breath-paced waveform animation, and a calming gradient hero.' },
   { slug: 'aura-apparel', title: 'Aura', tier: 'Full LP', category: 'Ecom', thumbnail: 'aura.png',
     prompt: auraPrompt },
-  { slug: 'serenity-health-ed', title: 'Serenity', tier: 'Full LP', category: 'Health', thumbnail: 'placeholder-portfolio.png',
+  { slug: 'serenity-health-ed', title: 'Serenity', tier: 'Full LP', category: 'Health', thumbnail: 'serenity.jpg',
     prompt: serenityPrompt },
   { slug: 'apex-sportswear', title: 'Apex', tier: 'Full LP', category: 'Ecom', thumbnail: 'apex.png',
     prompt: 'Build a performance-apparel storefront with athlete hero photography, a free-shipping threshold banner, and scannable product cards.' },
@@ -112,33 +115,33 @@ export const prompts: PromptItem[] = [
     prompt: 'Design a self-hosted AI platform page: a one-interface-for-every-LLM diagram, a RAG/RBAC feature grid, and an oil-painting-style hero.' },
   { slug: 'proxim-router', title: 'Proxim', tier: 'Full LP', category: 'Dev', thumbnail: 'proxim.png',
     prompt: 'Build an AI-router landing page: a provider-logo grid, an auto-fallback diagram, and a painterly landscape hero contrasted with hard routing lines.' },
-  { slug: 'trainfold-ml', title: 'Trainfold', tier: 'Full LP', category: 'Dev', thumbnail: 'placeholder-portfolio.png',
-    prompt: 'Design an ML-observability landing page: a live loss-curve chart, GPU utilization meters, and a luminous hero glow.' },
+  { slug: 'trainfold-ml', title: 'Trainfold', tier: 'Full LP', category: 'Dev', thumbnail: 'trainfold.jpg',
+    prompt: trainfoldPrompt },
   { slug: 'vris-suv', title: 'VRIS R1', tier: 'Full LP', category: 'Product', thumbnail: 'vris-r1.png',
     prompt: 'Build an EV reveal page with an x-ray cutaway hero, a spec ticker (range, 0-60, charge time), and a neon night-street backdrop.' },
-  { slug: 'velo-moto', title: 'VELO', tier: 'Full LP', category: 'Product', thumbnail: 'placeholder-portfolio.png',
-    prompt: 'Design an electric-motorcycle landing page with a drag-to-rotate 3D model, a live speedometer readout, and full-bleed motion footage.' },
-  { slug: 'figureworld-collectibles', title: 'FigureWorld', tier: 'Full LP', category: 'Ecom', thumbnail: 'placeholder-portfolio.png',
+  { slug: 'velo-moto', title: 'VELO', tier: 'Full LP', category: 'Product', thumbnail: 'velo.jpg',
+    prompt: veloPrompt },
+  { slug: 'figureworld-collectibles', title: 'FigureWorld', tier: 'Full LP', category: 'Ecom', thumbnail: 'figureworld.jpg',
     prompt: 'Build a collectibles storefront staged in a neon skyline, with oversized display type and limited-drop urgency badges.' },
-  { slug: 'thecity-residences', title: 'The City', tier: 'Full LP', category: 'Property', thumbnail: 'placeholder-portfolio.png',
+  { slug: 'thecity-residences', title: 'The City', tier: 'Full LP', category: 'Property', thumbnail: 'thecity.jpg',
     prompt: 'Design a residential-development landing page: a cinematic curtain intro, a day/night skyline toggle, and a from-price unit grid.' },
-  { slug: 'beyond-horizon-yacht', title: 'Beyond Horizon', tier: 'Full LP', category: 'Travel', thumbnail: 'placeholder-portfolio.png',
-    prompt: 'Build a yacht-charter landing page with aerial golden-hour footage, a light/dark atmosphere toggle, and signature-journey story cards.' },
-  { slug: 'saha-medical-clinic', title: 'Saha Medical', tier: 'Full LP', category: 'Health', thumbnail: 'placeholder-portfolio.png',
+  { slug: 'beyond-horizon-yacht', title: 'Beyond Horizon', tier: 'Full LP', category: 'Travel', thumbnail: 'yacht.jpg',
+    prompt: beyondHorizonPrompt },
+  { slug: 'saha-medical-clinic', title: 'Saha Medical', tier: 'Full LP', category: 'Health', thumbnail: 'saha-medical.jpg',
     prompt: 'Design a concierge-clinic landing page: a cinematic video hero, service pillars (longevity, genomics, aesthetics), and a resort-grade tone.' },
-  { slug: 'zenith-ops', title: 'Zenith', tier: 'Full LP', category: 'SaaS', thumbnail: 'placeholder-portfolio.png',
+  { slug: 'zenith-ops', title: 'Zenith', tier: 'Full LP', category: 'SaaS', thumbnail: 'zenith.jpg',
     prompt: 'Build an ops-automation landing page for an AI agent team: a dark aurora-lit hero, a task-handling feature grid, and a YC-style launch CTA.' },
-  { slug: 'storefront-v1-skincare', title: 'StoreFront - V1', tier: 'Full LP', category: 'Ecom', thumbnail: 'placeholder-portfolio.png',
+  { slug: 'storefront-v1-skincare', title: 'StoreFront - V1', tier: 'Full LP', category: 'Ecom', thumbnail: 'storefront-v1.jpg',
     prompt: 'Design a ready-to-brand skincare storefront: a warm terracotta palette, a bestseller grid, and a natural-ingredients pitch.' },
-  { slug: 'storefront-v2-wellness', title: 'StoreFront - V2', tier: 'Full LP', category: 'Ecom', thumbnail: 'placeholder-portfolio.png',
+  { slug: 'storefront-v2-wellness', title: 'StoreFront - V2', tier: 'Full LP', category: 'Ecom', thumbnail: 'storefront-v2.jpg',
     prompt: 'Build a wellness-supplement storefront: a soft neutral palette, a hand-holding-serum hero, and a bestseller carousel.' },
-  { slug: 'warebotics-robotics', title: 'Warebotics', tier: 'Full LP', category: 'Product', thumbnail: 'placeholder-portfolio.png',
+  { slug: 'warebotics-robotics', title: 'Warebotics', tier: 'Full LP', category: 'Product', thumbnail: 'warebotics.jpg',
     prompt: 'Design a warehouse-robotics landing page with a boot-sequence loading screen, live efficiency counters, and industrial-grade visuals.' },
-  { slug: 'relay-backend', title: 'Relay', tier: 'Full LP', category: 'Dev', thumbnail: 'placeholder-portfolio.png',
+  { slug: 'relay-backend', title: 'Relay', tier: 'Full LP', category: 'Dev', thumbnail: 'relay.jpg',
     prompt: 'Build a realtime-backend landing page: a data-sync diagram, a function/presence feature grid, and a retro CRT-terminal hero.' },
-  { slug: 'edgehaul-carry', title: 'Edgehaul', tier: 'Full LP', category: 'Ecom', thumbnail: 'placeholder-portfolio.png',
+  { slug: 'edgehaul-carry', title: 'Edgehaul', tier: 'Full LP', category: 'Ecom', thumbnail: 'edgehaul.jpg',
     prompt: 'Design a tactical-carry storefront with spec-sheet product cards (capacity, weight, material) and a field-test-proof tone.' },
-  { slug: 'lunea-skincare', title: 'Lunéa', tier: 'Full LP', category: 'Ecom', thumbnail: 'placeholder-portfolio.png',
+  { slug: 'lunea-skincare', title: 'Lunéa', tier: 'Full LP', category: 'Ecom', thumbnail: 'lunea.jpg',
     prompt: 'Build a skincare storefront staged in chiaroscuro lighting, with an ingredient explorer and a full face/body range grid.' },
 ];
 
