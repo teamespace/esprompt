@@ -1,21 +1,5 @@
 ---
-// Personal saved-prompts feature isn't built yet — stub page so the nav
-// dropdown link has somewhere to go. Swap for the real grid (see git
-// history on library.astro) once it ships.
-import AppLayout from '../layouts/AppLayout.astro';
+// Bookmarks feature removed. Kept as a redirect (rather than deleted — no
+// file-delete permission in this sandbox) so no link or bookmark 404s.
+return Astro.redirect('/library', 301);
 ---
-<AppLayout title="Bookmarks">
-  <div class="shead reveal">
-    <span class="eyebrow">Bookmarks</span>
-    <h1>Bookmarks are coming soon.</h1>
-    <p>Save prompts as you browse and find them all here. We're still building this, check back soon.</p>
-  </div>
-
-  <div class="empty-state">
-    <a class="btn primary" href="/library">Browse the Library</a>
-  </div>
-</AppLayout>
-
-<style>
-  .empty-state{text-align:center;padding:0 20px 60px;display:flex;flex-direction:column;align-items:center;gap:18px}
-</style>

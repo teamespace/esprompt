@@ -237,7 +237,6 @@ import { prompts, categories } from '../data/prompts';
     if (copyBtn) {
       const doCopy = () => {
         navigator.clipboard?.writeText(copyBtn.dataset.prompt || '');
-        window.espAddToLibrary?.(copyBtn.dataset.slug);
         const label = copyBtn.querySelector('span');
         const original = label.textContent;
         label.textContent = 'Copied!';

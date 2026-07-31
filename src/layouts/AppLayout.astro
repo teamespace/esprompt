@@ -139,7 +139,6 @@ const { title } = Astro.props;
         <div class="nav-account" id="navAccount">
           <button class="nav-avatar" id="navAvatarBtn" aria-haspopup="true" aria-expanded="false" aria-label="Account menu">${initial}</button>
           <div class="nav-dropdown" id="navDropdown" hidden>
-            <a href="/bookmarks">Bookmarks</a>
             <a href="/account">Account</a>
             <a href="/billing">Upgrade</a>
             <button type="button" id="navLogoutBtn">Log Out</button>
@@ -170,26 +169,6 @@ const { title } = Astro.props;
   });
   window.addEventListener('esprompt:session-change', renderNavSession);
   renderNavSession();
-
-  // Library: items the user has copied. Stored as an array of slugs; UI-only
-  // phase so this is localStorage, not a backend. "Copy" doubles as "Save"
-  // for now, there's no separate save action anywhere in the product yet.
-  const ESP_LIBRARY_KEY = 'esprompt_library';
-  function espGetLibrary(){
-    try { return JSON.parse(localStorage.getItem(ESP_LIBRARY_KEY)) || []; }
-    catch { return []; }
-  }
-  function espAddToLibrary(slug){
-    if (!slug) return;
-    const lib = espGetLibrary();
-    if (!lib.includes(slug)) {
-      lib.push(slug);
-      localStorage.setItem(ESP_LIBRARY_KEY, JSON.stringify(lib));
-      window.dispatchEvent(new CustomEvent('esprompt:library-change'));
-    }
-  }
-  window.espGetLibrary = espGetLibrary;
-  window.espAddToLibrary = espAddToLibrary;
 
   // Prompt detail interactions: delegated on document.body so this works
   // for PromptDetailContent rendered directly on a page AND cloned into the
@@ -252,7 +231,6 @@ const { title } = Astro.props;
     if (copyBtn) {
       const doCopy = () => {
         navigator.clipboard?.writeText(copyBtn.dataset.prompt || '');
-        espAddToLibrary(copyBtn.dataset.slug);
         flashAction(copyBtn, 'Copying…', 'Copied');
       };
       if (window.espHasSession && window.espHasSession()) doCopy();

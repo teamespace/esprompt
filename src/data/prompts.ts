@@ -18,6 +18,8 @@ import recallPrompt from './full-prompts/recall.md?raw';
 import veloPrompt from './full-prompts/velo.md?raw';
 import beyondHorizonPrompt from './full-prompts/beyond-horizon.md?raw';
 import trainfoldPrompt from './full-prompts/trainfold.md?raw';
+import modexPrompt from './full-prompts/modex.md?raw';
+import pylonPrompt from './full-prompts/pylon.md?raw';
 
 export type Tier = 'Hero' | 'Section' | 'Full LP';
 
@@ -110,9 +112,9 @@ export const prompts: PromptItem[] = [
   { slug: 'elan-football', title: 'Élan', tier: 'Full LP', category: 'Ecom', thumbnail: 'elan.png',
     prompt: elanPrompt },
   { slug: 'modex-infra', title: 'Modex', tier: 'Full LP', category: 'Dev', thumbnail: 'modex.png',
-    prompt: 'Build a dev-infra landing page for running open models anywhere: a monolith hero, a live terminal demo, and a GPU telemetry table.' },
+    prompt: modexPrompt },
   { slug: 'pylon-ai', title: 'Pylon', tier: 'Full LP', category: 'Dev', thumbnail: 'pylon.png',
-    prompt: 'Design a self-hosted AI platform page: a one-interface-for-every-LLM diagram, a RAG/RBAC feature grid, and an oil-painting-style hero.' },
+    prompt: pylonPrompt },
   { slug: 'proxim-router', title: 'Proxim', tier: 'Full LP', category: 'Dev', thumbnail: 'proxim.png',
     prompt: 'Build an AI-router landing page: a provider-logo grid, an auto-fallback diagram, and a painterly landscape hero contrasted with hard routing lines.' },
   { slug: 'trainfold-ml', title: 'Trainfold', tier: 'Full LP', category: 'Dev', thumbnail: 'trainfold.jpg',
