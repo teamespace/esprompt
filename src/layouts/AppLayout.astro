@@ -192,6 +192,16 @@ const { title } = Astro.props;
       }, 1200);
     }, 450);
   }
+  // Triggers a real browser download for a static asset URL via a throwaway
+  // anchor — same-origin files under /public download instead of navigating.
+  function triggerDownload(url, filename){
+    const a = document.createElement('a');
+    a.href = url;
+    if (filename) a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  }
 
   document.body.addEventListener('click', (e) => {
     const tab = e.target.closest('.hpc-tab');
@@ -240,8 +250,13 @@ const { title } = Astro.props;
 
     const dlAllBtn = e.target.closest('.detail-dlall-btn');
     if (dlAllBtn) {
-      // No real asset files yet (mock data phase), this just proves the gate.
-      const doDownloadAll = () => flashAction(dlAllBtn, 'Downloading…', 'Downloaded');
+      const doDownloadAll = () => {
+        flashAction(dlAllBtn, 'Downloading…', 'Downloaded');
+        let urls = [];
+        try { urls = JSON.parse(dlAllBtn.dataset.urls || '[]'); } catch {}
+        // Stagger so the browser doesn't drop downloads fired in the same tick.
+        urls.forEach((url, i) => setTimeout(() => triggerDownload(url), i * 300));
+      };
       if (window.espHasSession && window.espHasSession()) doDownloadAll();
       else window.openAuthModal('signup', doDownloadAll);
       return;
@@ -249,7 +264,10 @@ const { title } = Astro.props;
 
     const dlBtn = e.target.closest('.detail-dl-btn');
     if (dlBtn) {
-      const doDownload = () => flashAction(dlBtn, 'Downloading…', 'Downloaded');
+      const doDownload = () => {
+        flashAction(dlBtn, 'Downloading…', 'Downloaded');
+        if (dlBtn.dataset.url) triggerDownload(dlBtn.dataset.url, dlBtn.dataset.filename);
+      };
       if (window.espHasSession && window.espHasSession()) doDownload();
       else window.openAuthModal('signup', doDownload);
     }
