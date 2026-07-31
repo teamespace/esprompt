@@ -1,0 +1,146 @@
+---
+import AppLayout from '../layouts/AppLayout.astro';
+// Modeled on 21st.dev/settings: sidebar nav + row-style profile card,
+// trimmed to the sections that actually have real content in esprompt
+// (no Usage/Security/Preferences/Notifications yet, those are TBD).
+---
+<AppLayout title="Account">
+  <div class="settings-layout reveal" id="accountSignedIn" hidden>
+    <aside class="settings-nav">
+      <span class="settings-nav-title">Account</span>
+      <nav>
+        <a class="settings-nav-item active" href="/account">
+          <svg class="lucide" viewBox="0 0 24 24"><path d="M20 21a8 8 0 0 0-16 0"/><circle cx="12" cy="7" r="4"/></svg>
+          Profile
+        </a>
+        <a class="settings-nav-item" href="/billing">
+          <svg class="lucide" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+          Billing
+        </a>
+      </nav>
+    </aside>
+
+    <div class="settings-content">
+      <h1 class="settings-title">Profile</h1>
+
+      <section class="settings-section">
+        <h2>Your profile</h2>
+        <p class="settings-sub">How your name and email appear across esprompt.</p>
+        <div class="settings-card">
+          <div class="settings-row">
+            <span class="settings-row-label">Avatar</span>
+            <div class="settings-avatar" id="acctAvatar"></div>
+          </div>
+          <div class="settings-row">
+            <span class="settings-row-label">Full name</span>
+            <input type="text" id="acctName" class="settings-input">
+          </div>
+          <div class="settings-row">
+            <span class="settings-row-label">Email</span>
+            <input type="email" id="acctEmail" class="settings-input">
+          </div>
+        </div>
+        <div class="settings-actions">
+          <button class="btn primary" id="acctSave">Save changes</button>
+          <span class="account-saved" id="acctSaved" hidden>Saved.</span>
+        </div>
+      </section>
+
+      <section class="settings-section">
+        <h2>Manage account</h2>
+        <div class="settings-card">
+          <div class="settings-row settings-row-action">
+            <div>
+              <span class="settings-row-label">Log out</span>
+              <p class="settings-row-desc">Sign out of your esprompt account on this device.</p>
+            </div>
+            <button class="btn ghost" id="acctLogout">Log out</button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <div class="empty-state" id="accountSignedOut">
+    <p>You're not signed in.</p>
+    <a class="btn primary" onclick="openAuthModal('login')">Log in</a>
+  </div>
+</AppLayout>
+
+<style>
+  .settings-layout{display:grid;grid-template-columns:220px 1fr;gap:48px;align-items:start}
+
+  .settings-nav{position:sticky;top:100px;display:flex;flex-direction:column;gap:14px}
+  .settings-nav-title{font-size:12.5px;font-weight:700;color:var(--dim);text-transform:uppercase;letter-spacing:.04em;padding:0 4px}
+  .settings-nav nav{display:flex;flex-direction:column;gap:2px}
+  .settings-nav-item{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:10px;font-size:13.5px;color:var(--mut);transition:.15s}
+  .settings-nav-item .lucide{width:16px;height:16px;flex:0 0 auto}
+  .settings-nav-item:hover{color:#fff;background:rgba(255,255,255,.04)}
+  .settings-nav-item.active{color:#fff;background:var(--panel2)}
+
+  .settings-content{max-width:560px}
+  .settings-title{font-size:28px;font-weight:600;letter-spacing:-.02em;color:#fff;margin-bottom:32px}
+  .settings-section{margin-bottom:32px}
+  .settings-section h2{font-size:15px;font-weight:600;color:#fff;margin-bottom:4px}
+  .settings-sub{font-size:13px;color:var(--dim);margin-bottom:16px}
+
+  .settings-card{border:1px solid var(--line2);border-radius:14px;overflow:hidden}
+  .settings-row{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 16px;background:var(--panel)}
+  .settings-row+.settings-row{border-top:1px solid var(--line2)}
+  .settings-row:nth-child(even){background:var(--bg2)}
+  .settings-row-label{font-size:13.5px;color:var(--mut)}
+  .settings-row-desc{font-size:12px;color:var(--dim);margin-top:2px}
+  .settings-input{width:220px;max-width:60%;background:transparent;border:none;color:#fff;font-size:13.5px;
+    font-family:var(--sans);text-align:right;padding:4px 0}
+  .settings-input:focus{outline:none}
+  .settings-avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--v2),var(--p));
+    display:grid;place-items:center;font-size:12px;font-weight:700;color:#fff}
+  .settings-row-action{align-items:center}
+
+  .settings-actions{display:flex;align-items:center;gap:14px;margin-top:14px}
+  .account-saved{font-family:var(--mono);font-size:12.5px;color:var(--v)}
+
+  .empty-state{text-align:center;color:var(--mut);padding:60px 20px;font-size:15px;display:flex;flex-direction:column;align-items:center;gap:18px}
+
+  @media(max-width:760px){
+    .settings-layout{grid-template-columns:1fr;gap:24px}
+    .settings-nav{position:static;flex-direction:row;overflow-x:auto}
+    .settings-nav-title{display:none}
+    .settings-nav nav{flex-direction:row}
+  }
+</style>
+
+<script is:inline>
+  function initials(name){
+    return (name || 'You').trim().split(/\s+/).slice(0,2).map(w => w[0]?.toUpperCase() || '').join('') || 'Y';
+  }
+  function renderAccount(){
+    const signedIn = window.espHasSession && window.espHasSession();
+    document.getElementById('accountSignedIn').hidden = !signedIn;
+    document.getElementById('accountSignedOut').hidden = signedIn;
+    if (signedIn && window.espGetUser) {
+      const user = window.espGetUser();
+      document.getElementById('acctName').value = user.name || '';
+      document.getElementById('acctEmail').value = user.email || '';
+      document.getElementById('acctAvatar').textContent = initials(user.name);
+    }
+  }
+  renderAccount();
+  window.addEventListener('esprompt:session-change', renderAccount);
+
+  document.getElementById('acctSave').addEventListener('click', () => {
+    const name = document.getElementById('acctName').value.trim();
+    const email = document.getElementById('acctEmail').value.trim();
+    localStorage.setItem('esprompt_user', JSON.stringify({ name, email }));
+    const saved = document.getElementById('acctSaved');
+    saved.hidden = false;
+    setTimeout(() => { saved.hidden = true; }, 1500);
+    window.dispatchEvent(new CustomEvent('esprompt:session-change'));
+  });
+
+  document.getElementById('acctLogout').addEventListener('click', () => {
+    localStorage.removeItem('esprompt_session');
+    window.dispatchEvent(new CustomEvent('esprompt:session-change'));
+    window.location.href = '/';
+  });
+</script>

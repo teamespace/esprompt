@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>esprompt · Sign up</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style is:global>
+  :root{
+    --bg:#050409; --bg2:#0b0a13; --panel:#100f19; --panel2:#16152340;
+    --line:#1d1c2a; --line2:#2a2839;
+    --ink:#f4f4fa; --mut:#a0a2b6; --dim:#63647c;
+    --v:#a855f7; --v2:#9333ea; --p:#7c3aed; --b:#c084fc;
+    --sans:'Inter Tight',system-ui,sans-serif; --mono:'JetBrains Mono',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:500;line-height:1.5;-webkit-font-smoothing:antialiased;letter-spacing:-.015em}
+  a{color:inherit;text-decoration:none}
+  .lucide{width:16px;height:16px;flex:0 0 auto;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:600;font-size:15px;border-radius:999px;padding:12px 22px;transition:.18s;cursor:pointer;border:1px solid transparent}
+  .btn.primary{background:#fff;color:#0d0c14;box-shadow:0 10px 30px -12px rgba(255,255,255,.3)}
+  .btn.primary:hover{transform:translateY(-2px);box-shadow:0 14px 36px -12px rgba(255,255,255,.45)}
+
+  .auth-page{display:flex;min-height:100vh}
+
+  .auth-visual{flex:0 0 44%;position:relative;display:flex;flex-direction:column;justify-content:space-between;padding:44px;overflow:hidden;
+    background:radial-gradient(ellipse 120% 65% at 50% -6%,var(--b) 0%,var(--v) 26%,var(--p) 50%,#170c28 74%,var(--bg) 100%)}
+  .auth-visual::before{content:"";position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.08) 1px,transparent 1px);background-size:22px 22px;opacity:.5;pointer-events:none}
+  .auth-brand{position:relative;z-index:1;font-weight:700;font-size:15px;text-transform:uppercase;letter-spacing:.05em;color:#fff}
+  .auth-visual-content{position:relative;z-index:1}
+  .auth-visual-content h2{font-size:32px;font-weight:600;letter-spacing:-.02em;color:#fff;margin-bottom:10px;line-height:1.15}
+  .auth-visual-content p{color:rgba(255,255,255,.75);font-size:14.5px;margin-bottom:26px;max-width:320px;line-height:1.6}
+  .auth-steps{display:flex;flex-direction:column;gap:10px}
+  .auth-step{display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:12px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.8);font-size:13.5px;font-weight:500;transition:background .2s,color .2s}
+  .auth-step.active{background:#fff;color:#0d0c14;font-weight:600}
+  .as-num{width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.18);display:grid;place-items:center;font-size:11px;flex:0 0 auto;font-family:var(--mono)}
+  .auth-step.active .as-num{background:#0d0c14;color:#fff}
+
+  .auth-form-side{flex:1;display:flex;flex-direction:column;padding:40px 48px}
+  .auth-back{align-self:flex-start;display:inline-flex;align-items:center;gap:6px;color:var(--mut);font-size:13px;transition:color .2s}
+  .auth-back:hover{color:#fff}
+  .auth-form-wrap{max-width:380px;margin:auto;width:100%}
+  .auth-form-wrap h1{font-size:27px;font-weight:600;letter-spacing:-.02em;margin-bottom:8px}
+  .auth-form-wrap>p{color:var(--mut);font-size:14px;margin-bottom:26px}
+  .auth-oauth{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
+  .auth-oauth-btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:11px;border:1px solid var(--line2);border-radius:12px;background:transparent;color:#fff;font-weight:600;font-size:13.5px;cursor:pointer;font-family:var(--sans)}
+  .auth-oauth-btn:hover{background:rgba(255,255,255,.05)}
+  .auth-divider{display:flex;align-items:center;gap:12px;margin-bottom:20px;color:var(--dim);font-size:12px;font-family:var(--mono)}
+  .auth-divider::before,.auth-divider::after{content:"";flex:1;height:1px;background:var(--line)}
+  .auth-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .auth-field{margin-bottom:16px}
+  .auth-field label{display:block;font-size:12.5px;font-weight:600;color:var(--mut);margin-bottom:7px}
+  .auth-field input{width:100%;padding:11px 14px;border-radius:10px;border:1px solid var(--line2);background:var(--panel2);color:#fff;font-family:var(--sans);font-size:14px}
+  .auth-field input::placeholder{color:var(--dim)}
+  .auth-field input:focus{outline:none;border-color:var(--v)}
+  .auth-field-pw{position:relative}
+  .auth-pw-toggle{position:absolute;right:12px;top:36px;background:none;border:none;color:var(--dim);cursor:pointer;display:flex;padding:2px}
+  .auth-pw-toggle:hover{color:#fff}
+  .auth-hint{display:block;margin-top:6px;font-size:11.5px;color:var(--dim)}
+  .auth-demo-hint{display:flex;flex-wrap:wrap;align-items:center;gap:6px;width:100%;text-align:left;font-family:var(--mono);font-size:11.5px;color:var(--mut);
+    background:rgba(168,85,247,.08);border:1px solid rgba(168,85,247,.28);border-radius:10px;padding:10px 12px;margin-bottom:20px;cursor:pointer;transition:.15s}
+  .auth-demo-hint:hover{background:rgba(168,85,247,.14);border-color:var(--v)}
+  .auth-demo-hint b{color:#fff;font-weight:600}
+  .auth-demo-hint span{margin-left:auto;color:var(--v);font-weight:600;white-space:nowrap}
+  .auth-submit{width:100%}
+  .auth-switch{text-align:center;margin-top:22px;font-size:13.5px;color:var(--mut)}
+  .auth-switch a{color:#fff;font-weight:600;cursor:pointer}
+
+  @media(max-width:860px){
+    .auth-page{flex-direction:column}
+    .auth-visual{flex:0 0 auto;min-height:260px}
+    .auth-visual-content h2{font-size:26px}
+    .auth-form-side{padding:32px 22px}
+  }
+</style>
+</head>
+<body>
+
+<div class="auth-page">
+  <div class="auth-visual">
+    <span class="auth-brand">ESPROMPT</span>
+    <div class="auth-visual-content">
+      <h2>Get started with esprompt</h2>
+      <p>Complete these steps and you'll be shipping pages today.</p>
+      <div class="auth-steps">
+        <div class="auth-step active"><span class="as-num">1</span>Create your account</div>
+        <div class="auth-step"><span class="as-num">2</span>Browse the catalog</div>
+        <div class="auth-step"><span class="as-num">3</span>Copy your first prompt</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="auth-form-side">
+    <a class="auth-back" href="/"><svg class="lucide" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>Back to home</a>
+
+    <div class="auth-form-wrap">
+      <h1 id="authTitle">Create your account</h1>
+      <p id="authSub">Enter your details to get started.</p>
+      <button type="button" class="auth-demo-hint" id="authDemoHint" hidden onclick="fillDemoAccount()">
+        Demo account: <b>demo@esprompt.com</b> / <b>demo1234</b><span>Click to fill</span>
+      </button>
+
+      <div class="auth-oauth">
+        <button class="auth-oauth-btn" type="button">
+          <svg viewBox="0 0 48 48" width="17" height="17"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.9-2.26 5.36-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+          Google
+        </button>
+        <button class="auth-oauth-btn" type="button">
+          <svg class="lucide" viewBox="0 0 24 24"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+          GitHub
+        </button>
+      </div>
+
+      <div class="auth-divider"><span>OR</span></div>
+
+      <form id="authForm" onsubmit="return false">
+        <div class="auth-row" id="nameRow">
+          <div class="auth-field"><label>First name</label><input type="text" placeholder="e.g. John"></div>
+          <div class="auth-field"><label>Last name</label><input type="text" placeholder="e.g. Doe"></div>
+        </div>
+        <div class="auth-field"><label>Email</label><input type="email" id="authEmail" placeholder="you@email.com"></div>
+        <div class="auth-field auth-field-pw">
+          <label>Password</label>
+          <input type="password" id="authPw" placeholder="Enter your password">
+          <button type="button" class="auth-pw-toggle" onclick="togglePw()" aria-label="Show password">
+            <svg class="lucide" id="pwIcon" viewBox="0 0 24 24"><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/><path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/><line x1="2" x2="22" y1="2" y2="22"/></svg>
+          </button>
+          <span class="auth-hint" id="authPwHint">Must be at least 8 characters.</span>
+        </div>
+        <button class="btn primary auth-submit" type="submit" id="authSubmitBtn">Sign up</button>
+      </form>
+
+      <p class="auth-switch" id="authSwitch">Already have an account? <a onclick="setMode('login')">Log in</a></p>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  function togglePw(){
+    const pw=document.getElementById('authPw');
+    const isPw=pw.type==='password';
+    pw.type=isPw?'text':'password';
+    document.getElementById('pwIcon').innerHTML=isPw
+      ?'<path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/>'
+      :'<path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/><path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/><line x1="2" x2="22" y1="2" y2="22"/>';
+  }
+  function fillDemoAccount(){
+    document.getElementById('authEmail').value='demo@esprompt.com';
+    document.getElementById('authPw').value='demo1234';
+  }
+  function setMode(mode){
+    const isLogin=mode==='login';
+    document.getElementById('nameRow').style.display=isLogin?'none':'grid';
+    document.getElementById('authDemoHint').hidden=!isLogin;
+    document.getElementById('authTitle').textContent=isLogin?'Welcome back':'Create your account';
+    document.getElementById('authSub').textContent=isLogin?'Log in to your esprompt account.':'Enter your details to get started.';
+    document.getElementById('authSubmitBtn').textContent=isLogin?'Log in':'Sign up';
+    document.getElementById('authPwHint').style.display=isLogin?'none':'block';
+    document.getElementById('authSwitch').innerHTML=isLogin
+      ?'Don’t have an account? <a onclick="setMode(\'signup\')">Sign up</a>'
+      :'Already have an account? <a onclick="setMode(\'login\')">Log in</a>';
+    history.replaceState(null,'',mode==='login'?'?mode=login':'/login');
+  }
+  const params=new URLSearchParams(location.search);
+  if(params.get('mode')==='login')setMode('login');
+</script>
+
+</body>
+</html>

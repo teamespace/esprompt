@@ -1,0 +1,255 @@
+---
+import '../styles/tokens.css';
+import AuthModal from '../components/AuthModal.astro';
+
+interface Props {
+  title: string;
+}
+const { title } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{title} · esprompt</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="topbar-gradient"></div>
+<nav>
+  <div class="wrap nav">
+    <a class="logo" href="/">esprompt</a>
+    <div class="navlinks" id="navTierLinks">
+      <a href="/catalog?tier=Full%20LP" data-tier="Full LP">Landing</a>
+      <a href="/catalog?tier=Hero" data-tier="Hero">Hero</a>
+      <a href="/catalog?tier=Section" data-tier="Section">Section</a>
+    </div>
+    <div class="navcta" id="navCta">
+      <form class="nav-searchbox" id="navSearchForm" role="search">
+        <svg class="lucide" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <input type="text" id="navSearchInput" placeholder="Search" autocomplete="off">
+        <kbd>/</kbd>
+      </form>
+      <a class="login" onclick="openAuthModal('login')">Log in</a>
+      <a class="btn primary" onclick="openAuthModal('signup')">Sign up</a>
+    </div>
+    <button class="burger" aria-label="Menu">≡</button>
+  </div>
+</nav>
+
+<main class="app-main wrap">
+  <slot />
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <div class="logo">esprompt</div>
+      </div>
+      <div class="foot-col">
+        <h5>Product</h5>
+        <a href="/catalog">Catalog</a>
+        <a href="/#harga">Pricing</a>
+      </div>
+      <div class="foot-col">
+        <h5>Learn</h5>
+        <a href="/#how">How it works</a>
+        <a href="/#faq">FAQ</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span class="copy">© 2026 esprompt · by Elux Space</span>
+      <div class="foot-social">
+        <a href="#" aria-label="Instagram"><svg class="lucide" viewBox="0 0 24 24"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
+        <a href="#" aria-label="X (Twitter)"><svg class="lucide" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></a>
+        <a href="#" aria-label="LinkedIn"><svg class="lucide" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<AuthModal />
+
+<script is:inline>
+  const navEl = document.querySelector('nav');
+  function onScroll(){ navEl.classList.toggle('scrolled', window.scrollY > 24); }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // Highlight Hero/Landing/Section based on the current ?tier=. Can't be
+  // done server-side since this is a static build (no query string at
+  // render time), so it's a client-side match against the live URL.
+  if (location.pathname === '/catalog') {
+    const currentTier = new URLSearchParams(location.search).get('tier');
+    document.querySelectorAll('#navTierLinks a').forEach(a => {
+      a.classList.toggle('active', a.dataset.tier === currentTier);
+    });
+  }
+
+  // scroll reveal for any element marked .reveal
+  const revealEls = [...document.querySelectorAll('.reveal')];
+  const revealIO = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) { entry.target.classList.add('in'); revealIO.unobserve(entry.target); }
+    });
+  }, { threshold: .12, rootMargin: '0px 0px -40px 0px' });
+  revealEls.forEach(el => revealIO.observe(el));
+
+  const SEARCH_BOX = `<form class="nav-searchbox" id="navSearchForm" role="search">
+    <svg class="lucide" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+    <input type="text" id="navSearchInput" placeholder="Search" autocomplete="off">
+    <kbd>/</kbd>
+  </form>`;
+
+  // Nav search: submits to /catalog?q=… (catalog.astro reads it on load, same
+  // pattern as ?tier=). Always a fresh navigation, simplest thing that works
+  // across pages, no cross-page JS state to keep in sync.
+  function bindNavSearch(){
+    const form = document.getElementById('navSearchForm');
+    if (!form) return;
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const q = document.getElementById('navSearchInput').value.trim();
+      window.location.href = q ? `/catalog?q=${encodeURIComponent(q)}` : '/catalog';
+    });
+  }
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== '/') return;
+    const tag = document.activeElement?.tagName;
+    if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+    const input = document.getElementById('navSearchInput');
+    if (input) { e.preventDefault(); input.focus(); }
+  });
+
+  // fake-session nav state: swap Log in/Sign up for an avatar+dropdown once
+  // "logged in". Library lives inside the dropdown, not as a top-level link.
+  function renderNavSession(){
+    const cta = document.getElementById('navCta');
+    if (!cta) return;
+    if (window.espHasSession && window.espHasSession()) {
+      const user = window.espGetUser ? window.espGetUser() : { name: 'You' };
+      const initial = (user.name || 'U').trim().charAt(0).toUpperCase() || 'U';
+      cta.innerHTML = `${SEARCH_BOX}
+        <a class="btn ghost nav-upgrade" href="/billing">Become Pro</a>
+        <div class="nav-account" id="navAccount">
+          <button class="nav-avatar" id="navAvatarBtn" aria-haspopup="true" aria-expanded="false" aria-label="Account menu">${initial}</button>
+          <div class="nav-dropdown" id="navDropdown" hidden>
+            <a href="/library">Library</a>
+            <a href="/account">Account</a>
+            <a href="/billing">Upgrade</a>
+            <button type="button" id="navLogoutBtn">Log out</button>
+          </div>
+        </div>`;
+      const avatarBtn = document.getElementById('navAvatarBtn');
+      const dropdown = document.getElementById('navDropdown');
+      avatarBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const open = dropdown.hidden;
+        dropdown.hidden = !open;
+        avatarBtn.setAttribute('aria-expanded', String(open));
+      });
+      document.getElementById('navLogoutBtn').addEventListener('click', () => {
+        localStorage.removeItem('esprompt_session');
+        window.dispatchEvent(new CustomEvent('esprompt:session-change'));
+        window.location.href = '/';
+      });
+    } else {
+      cta.innerHTML = `${SEARCH_BOX}<a class="login" onclick="openAuthModal('login')">Log in</a><a class="btn primary" onclick="openAuthModal('signup')">Sign up</a>`;
+    }
+    bindNavSearch();
+  }
+  document.addEventListener('click', () => {
+    const dropdown = document.getElementById('navDropdown');
+    const avatarBtn = document.getElementById('navAvatarBtn');
+    if (dropdown && !dropdown.hidden) { dropdown.hidden = true; avatarBtn?.setAttribute('aria-expanded', 'false'); }
+  });
+  window.addEventListener('esprompt:session-change', renderNavSession);
+  renderNavSession();
+
+  // Library: items the user has copied. Stored as an array of slugs; UI-only
+  // phase so this is localStorage, not a backend. "Copy" doubles as "Save"
+  // for now, there's no separate save action anywhere in the product yet.
+  const ESP_LIBRARY_KEY = 'esprompt_library';
+  function espGetLibrary(){
+    try { return JSON.parse(localStorage.getItem(ESP_LIBRARY_KEY)) || []; }
+    catch { return []; }
+  }
+  function espAddToLibrary(slug){
+    if (!slug) return;
+    const lib = espGetLibrary();
+    if (!lib.includes(slug)) {
+      lib.push(slug);
+      localStorage.setItem(ESP_LIBRARY_KEY, JSON.stringify(lib));
+      window.dispatchEvent(new CustomEvent('esprompt:library-change'));
+    }
+  }
+  window.espGetLibrary = espGetLibrary;
+  window.espAddToLibrary = espAddToLibrary;
+
+  // Prompt detail interactions: delegated on document.body so this works
+  // for PromptDetailContent rendered directly on a page AND cloned into the
+  // /catalog quick-preview modal (a <script> inside the source <template>
+  // never runs, even after cloning, see catalog.astro).
+  function flashLabel(btn, text, ms = 1500){
+    const label = btn.querySelector('span') || btn;
+    const original = label.textContent;
+    label.textContent = text;
+    setTimeout(() => { label.textContent = original; }, ms);
+  }
+
+  document.body.addEventListener('click', (e) => {
+    const tab = e.target.closest('.hpc-tab');
+    if (tab) {
+      const tabs = tab.closest('[data-tabs]');
+      // Look up to the whole detail block (not just the tab strip's direct
+      // parent) since the tabs live in a separate toolbar from the panels.
+      const container = tabs.closest('.prompt-detail') || tabs.parentElement;
+      tabs.querySelectorAll('.hpc-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      container.querySelectorAll('.pd-tabpanel').forEach(p => { p.hidden = p.dataset.tabpanel !== tab.dataset.tab; });
+      return;
+    }
+
+    // Hero-only dropdown: image/video asset copy+download, off the Copy
+    // prompt split button's caret.
+    const caret = e.target.closest('[data-caret-toggle]');
+    if (caret) {
+      const menu = caret.parentElement.querySelector('[data-caret-menu]');
+      const willOpen = menu.hidden;
+      document.querySelectorAll('[data-caret-menu]').forEach(m => { m.hidden = true; });
+      menu.hidden = !willOpen;
+      caret.setAttribute('aria-expanded', String(willOpen));
+      return;
+    }
+    if (!e.target.closest('[data-caret-menu]')) {
+      document.querySelectorAll('[data-caret-menu]').forEach(m => { m.hidden = true; });
+    }
+
+    const copyBtn = e.target.closest('.detail-copy-btn');
+    if (copyBtn) {
+      const doCopy = () => {
+        navigator.clipboard?.writeText(copyBtn.dataset.prompt || '');
+        espAddToLibrary(copyBtn.dataset.slug);
+        flashLabel(copyBtn, 'Copied!');
+      };
+      if (window.espHasSession && window.espHasSession()) doCopy();
+      else window.openAuthModal('signup', doCopy);
+      return;
+    }
+
+    const dlBtn = e.target.closest('.detail-dl-btn');
+    if (dlBtn) {
+      // No real asset files yet (mock data phase), this just proves the gate.
+      const doDownload = () => flashLabel(dlBtn, 'Downloading…');
+      if (window.espHasSession && window.espHasSession()) doDownload();
+      else window.openAuthModal('signup', doDownload);
+    }
+  });
+</script>
+</body>
+</html>

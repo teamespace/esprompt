@@ -1,0 +1,55 @@
+---
+import AppLayout from '../../layouts/AppLayout.astro';
+import PromptDetailContent from '../../components/PromptDetailContent.astro';
+import { prompts } from '../../data/prompts';
+
+export function getStaticPaths() {
+  return prompts.map((item) => ({
+    params: { slug: item.slug },
+    props: { item },
+  }));
+}
+
+const { item } = Astro.props;
+
+const idx = prompts.findIndex((p) => p.slug === item.slug);
+const prevItem = prompts[(idx - 1 + prompts.length) % prompts.length];
+const nextItem = prompts[(idx + 1) % prompts.length];
+
+const related = prompts
+  .filter((p) => p.slug !== item.slug && p.category === item.category)
+  .concat(prompts.filter((p) => p.slug !== item.slug && p.category !== item.category))
+  .slice(0, 3);
+---
+<AppLayout title={item.title}>
+  <div class="pd-back-row reveal">
+    <a class="pd-back" href="/catalog">
+      <svg class="lucide" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+      Back to catalog
+    </a>
+    <div class="pd-siblings">
+      <a href={`/catalog/${prevItem.slug}`}><svg class="lucide" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg> Prev</a>
+      <a href={`/catalog/${nextItem.slug}`}>Next <svg class="lucide" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></a>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <PromptDetailContent item={item} variant="page" />
+  </div>
+
+  {related.length > 0 && (
+    <div class="pd-related reveal">
+      <h3>Related prompts</h3>
+      <div class="showcase-grid">
+        {related.map((r) => (
+          <a class="citem" href={`/catalog/${r.slug}`}>
+            <div class="cc">
+              <div class="pv" style={`background-image:url('/assets/showcase/${r.thumbnail}')`}></div>
+            </div>
+            <div class="ccap"><span class="name">{r.title}</span><span class="count">{r.tier}</span></div>
+          </a>
+        ))}
+      </div>
+    </div>
+  )}
+</AppLayout>

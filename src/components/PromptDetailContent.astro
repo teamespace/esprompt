@@ -1,0 +1,73 @@
+---
+// Pure content — no page chrome. Rendered two ways: full page
+// (src/pages/catalog/[slug].astro) and cloned into the modal overlay on
+// /catalog. Both read from the same markup so they can't drift apart.
+import type { PromptItem } from '../data/prompts';
+
+interface Props {
+  item: PromptItem;
+  variant?: 'page' | 'modal';
+}
+const { item, variant = 'page' } = Astro.props;
+const isHero = item.tier === 'Hero';
+---
+<div class="prompt-detail" data-slug={item.slug}>
+  <div class="pd-stage">
+    <div class="pd-tabpanel" data-tabpanel="preview">
+      <div class="pd-preview-lg" style={`background-image:url('/assets/showcase/${item.thumbnail}')`}></div>
+    </div>
+    <div class="pd-tabpanel" data-tabpanel="prompt" hidden>
+      <div class="pd-prompt-panel">
+        <code class="hp-copy-code pd-code">{item.prompt}</code>
+      </div>
+    </div>
+  </div>
+
+  <div class="pd-toolbar">
+    <div class="pd-toolbar-left">
+      {variant === 'page'
+        ? <h1 class="pd-title">{item.title}</h1>
+        : <h2 class="pd-title">{item.title}</h2>}
+      <span class="pd-meta">{item.tier} &middot; {item.category}</span>
+      <div class="hpc-tabs pd-toolbar-tabs" data-tabs>
+        <span class="hpc-tab active" data-tab="preview">Live Preview</span>
+        <span class="hpc-tab" data-tab="prompt">The Prompt</span>
+      </div>
+    </div>
+    <div class="pd-toolbar-right">
+      {variant === 'modal' && <a class="pd-view-btn" href={`/catalog/${item.slug}`}>View full page &nearr;</a>}
+      <div class={`pd-copy-wrap${isHero ? ' has-caret' : ''}`}>
+        <button class="pd-copy-btn detail-copy-btn" data-prompt={item.prompt} data-slug={item.slug}>Copy prompt</button>
+        {isHero && (
+          <button class="pd-copy-caret" data-caret-toggle aria-haspopup="true" aria-expanded="false" aria-label="Asset prompts">
+            <svg class="lucide" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+        )}
+        {isHero && (
+          <div class="pd-copy-menu" data-caret-menu hidden>
+            <div class="pd-copy-menu-row">
+              <span>Image asset</span>
+              <div class="ac-row-actions">
+                <button class="ac-copy detail-copy-btn" data-prompt={item.imagePrompt} data-slug={item.slug}>Copy prompt</button>
+                <button class="ac-dl detail-dl-btn" data-asset={`${item.slug}-image`}>Download</button>
+              </div>
+            </div>
+            <div class="pd-copy-menu-row">
+              <span>Video asset</span>
+              <div class="ac-row-actions">
+                <button class="ac-copy detail-copy-btn" data-prompt={item.videoPrompt} data-slug={item.slug}>Copy prompt</button>
+                <button class="ac-dl detail-dl-btn" data-asset={`${item.slug}-video`}>Download</button>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Tab switching, copy, download, and the caret dropdown are handled by a
+     single delegated listener in AppLayout.astro, not here. A <script>
+     inside a <template> (the modal case, see catalog.astro) never executes
+     even after cloning, so per-instance scripts would silently do nothing
+     for the modal and register duplicate listeners for the page. -->

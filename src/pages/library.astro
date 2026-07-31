@@ -1,0 +1,56 @@
+---
+// Library reads from localStorage (client-only), so the grid can't be
+// server-rendered from real data — instead we ship the full catalog as a
+// JSON blob once and let a client script pick out whichever slugs the user
+// has copied. No separate "save" action exists yet: copying a prompt is
+// what adds it here (see AppLayout's detail-copy-btn / catalog.astro's
+// pv-btn.copy handlers).
+import AppLayout from '../layouts/AppLayout.astro';
+import { prompts } from '../data/prompts';
+---
+<AppLayout title="Library">
+  <div class="shead reveal">
+    <span class="eyebrow">Library</span>
+    <h1>Your library.</h1>
+    <p>Prompts you've copied land here automatically.</p>
+  </div>
+
+  <div class="showcase-grid" id="libraryGrid" hidden></div>
+
+  <div class="empty-state" id="libraryEmpty">
+    <p>Nothing here yet. Copy a prompt from the catalog and it'll show up in your library.</p>
+    <a class="btn primary" href="/catalog">Browse the catalog</a>
+  </div>
+
+  <script type="application/json" id="allPrompts" set:html={JSON.stringify(prompts)} />
+</AppLayout>
+
+<style>
+  .empty-state{text-align:center;color:var(--mut);padding:60px 20px;font-size:15px;display:flex;flex-direction:column;align-items:center;gap:18px}
+</style>
+
+<script is:inline>
+  function renderLibrary(){
+    const grid = document.getElementById('libraryGrid');
+    const empty = document.getElementById('libraryEmpty');
+    const all = JSON.parse(document.getElementById('allPrompts').textContent);
+    const savedSlugs = window.espGetLibrary ? window.espGetLibrary() : [];
+    const items = all.filter(p => savedSlugs.includes(p.slug));
+
+    if (items.length === 0) {
+      grid.hidden = true;
+      empty.hidden = false;
+      return;
+    }
+    grid.hidden = false;
+    empty.hidden = true;
+    grid.innerHTML = items.map(p => `
+      <a class="citem" href="/catalog/${p.slug}">
+        <div class="cc"><div class="pv" style="background-image:url('/assets/showcase/${p.thumbnail}')"></div></div>
+        <div class="ccap"><span class="name">${p.title}</span><span class="count">${p.tier}</span></div>
+      </a>
+    `).join('');
+  }
+  renderLibrary();
+  window.addEventListener('esprompt:library-change', renderLibrary);
+</script>

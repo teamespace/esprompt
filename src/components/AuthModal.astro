@@ -1,0 +1,143 @@
+---
+// Reusable login/signup modal — extracted from home-c-gradient.html's inline
+// auth modal. English-only (the app has no language toggle). Ported as a
+// standalone component so any app page can call window.openAuthModal('login'
+// | 'signup') to gate an action, per the "browse free, gate on action" flow.
+// Auth is UI-only for this phase: submitting just flips a localStorage flag
+// so the nav can show a logged-in state, and the pending action can proceed.
+// No real backend is wired up yet.
+---
+<div class="auth-overlay" id="authOverlay">
+  <div class="auth-modal">
+    <button class="auth-close" onclick="closeAuthModal()" aria-label="Close">
+      <svg class="lucide" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+    </button>
+    <div class="auth-visual">
+      <div class="auth-visual-inner">
+        <span class="auth-brand">ESPROMPT</span>
+        <div class="auth-visual-content">
+          <h2>Get started with esprompt</h2>
+          <p>Complete these steps and you'll be shipping pages today.</p>
+        </div>
+      </div>
+    </div>
+    <div class="auth-form-side">
+      <div class="auth-form-wrap">
+        <h1 id="amTitle">Create your account</h1>
+        <p id="amSub">Enter your details to get started.</p>
+        <button type="button" class="auth-demo-hint" id="amDemoHint" hidden onclick="fillDemoAccount()">
+          Demo account: <b>demo@esprompt.com</b> / <b>demo1234</b><span>Click to fill</span>
+        </button>
+        <div class="auth-oauth">
+          <button class="auth-oauth-btn" type="button">
+            <svg viewBox="0 0 48 48" width="17" height="17"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.9-2.26 5.36-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+            Google
+          </button>
+        </div>
+        <div class="auth-divider"><span>OR</span></div>
+        <form id="amForm" onsubmit="return false">
+          <div class="auth-row" id="amNameRow">
+            <div class="auth-field"><label>First name</label><input type="text" id="amFirstName" placeholder="e.g. John"></div>
+            <div class="auth-field"><label>Last name</label><input type="text" id="amLastName" placeholder="e.g. Doe"></div>
+          </div>
+          <div class="auth-field"><label>Email</label><input type="email" id="amEmail" placeholder="you@email.com"></div>
+          <div class="auth-field auth-field-pw">
+            <label>Password</label>
+            <input type="password" id="amPw" placeholder="Enter your password">
+            <button type="button" class="auth-pw-toggle" onclick="toggleAmPw()" aria-label="Show password">
+              <svg class="lucide" id="amPwIcon" viewBox="0 0 24 24"><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/><path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/><line x1="2" x2="22" y1="2" y2="22"/></svg>
+            </button>
+            <span class="auth-hint" id="amPwHint">Must be at least 8 characters.</span>
+          </div>
+          <button class="btn primary auth-submit" type="submit" id="amSubmitBtn">Sign up</button>
+        </form>
+        <p class="auth-switch" id="amSwitch">Already have an account? <a onclick="setAuthMode('login')">Log in</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  const ESP_SESSION_KEY = 'esprompt_session';
+  const ESP_USER_KEY = 'esprompt_user';
+  const DEMO_ACCOUNT = { name: 'Demo User', email: 'demo@esprompt.com', password: 'demo1234' };
+  let amMode = 'signup';
+  let amPendingAction = null; // optional callback to run once "auth" succeeds
+
+  function espHasSession(){ return localStorage.getItem(ESP_SESSION_KEY) === '1'; }
+  function espGetUser(){
+    try { return JSON.parse(localStorage.getItem(ESP_USER_KEY)) || { name: 'You', email: 'you@example.com' }; }
+    catch { return { name: 'You', email: 'you@example.com' }; }
+  }
+  function espSetSession(){
+    localStorage.setItem(ESP_SESSION_KEY, '1');
+    // Fake signup/login: capture whatever was typed, fall back to sensible
+    // defaults since the form has no real validation in this UI-only phase.
+    const first = document.getElementById('amFirstName').value.trim();
+    const last = document.getElementById('amLastName').value.trim();
+    const email = document.getElementById('amEmail').value.trim();
+    const existing = espGetUser();
+    const name = [first, last].filter(Boolean).join(' ') || existing.name || 'You';
+    localStorage.setItem(ESP_USER_KEY, JSON.stringify({ name, email: email || existing.email || 'you@example.com' }));
+    window.dispatchEvent(new CustomEvent('esprompt:session-change'));
+  }
+
+  function openAuthModal(mode, onSuccess){
+    amMode = mode || 'signup';
+    amPendingAction = typeof onSuccess === 'function' ? onSuccess : null;
+    setAuthMode(amMode);
+    document.getElementById('authOverlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeAuthModal(){
+    document.getElementById('authOverlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeAuthModal(); });
+  document.getElementById('authOverlay').addEventListener('click', e => {
+    if (e.target.id === 'authOverlay') closeAuthModal();
+  });
+
+  function toggleAmPw(){
+    const pw = document.getElementById('amPw');
+    const isPw = pw.type === 'password';
+    pw.type = isPw ? 'text' : 'password';
+    document.getElementById('amPwIcon').innerHTML = isPw
+      ? '<path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/>'
+      : '<path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/><path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/><line x1="2" x2="22" y1="2" y2="22"/>';
+  }
+
+  function fillDemoAccount(){
+    document.getElementById('amEmail').value = DEMO_ACCOUNT.email;
+    document.getElementById('amPw').value = DEMO_ACCOUNT.password;
+  }
+
+  function setAuthMode(mode){
+    amMode = mode;
+    const isLogin = mode === 'login';
+    document.getElementById('amNameRow').style.display = isLogin ? 'none' : 'grid';
+    document.getElementById('amPwHint').style.display = isLogin ? 'none' : 'block';
+    document.getElementById('amDemoHint').hidden = !isLogin;
+    document.getElementById('amTitle').textContent = isLogin ? 'Welcome back' : 'Create your account';
+    document.getElementById('amSub').textContent = isLogin ? 'Log in to your esprompt account.' : 'Enter your details to get started.';
+    document.getElementById('amSubmitBtn').textContent = isLogin ? 'Log in' : 'Sign up';
+    document.getElementById('amSwitch').innerHTML = isLogin
+      ? 'Don’t have an account? <a onclick="setAuthMode(\'signup\')">Sign up</a>'
+      : 'Already have an account? <a onclick="setAuthMode(\'login\')">Log in</a>';
+  }
+
+  document.getElementById('amForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    // UI-only phase: no backend call, just mark a fake session and close.
+    espSetSession();
+    closeAuthModal();
+    if (amPendingAction) { amPendingAction(); amPendingAction = null; }
+  });
+
+  window.openAuthModal = openAuthModal;
+  window.closeAuthModal = closeAuthModal;
+  window.toggleAmPw = toggleAmPw;
+  window.setAuthMode = setAuthMode;
+  window.espHasSession = espHasSession;
+  window.espGetUser = espGetUser;
+</script>
