@@ -1,3 +1,19 @@
+---
+import PromptDetailContent from '../components/PromptDetailContent.astro';
+import { prompts } from '../data/prompts';
+
+// Showcase grid below: 9 real catalog entries (not placeholders), one per
+// distinct thumbnail already used on this page. "View Detail" opens the
+// exact same quick-preview modal as /library (see the <template> + modal
+// shell rendered further down, and the shared click-delegation script).
+const showcaseSlugs = [
+  'proxim-router', 'luma-hero', 'arlo-editorial', 'stillwave-meditation',
+  'apex-sportswear', 'altr-watches', 'aura-hero', 'elan-hero', 'vris-suv',
+];
+const showcaseItems = showcaseSlugs
+  .map((slug) => prompts.find((p) => p.slug === slug))
+  .filter((p) => p !== undefined);
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -273,6 +289,67 @@
   .showcase-cta{margin-top:36px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:14px}
   .showcase-cta .lockline{font-family:var(--mono);font-size:12.5px;color:var(--dim);display:inline-flex;align-items:center;gap:6px}
 
+  /* ===== prompt detail modal — ported verbatim from tokens.css so the
+     showcase grid's "View Detail" opens the same card as /library ===== */
+  .prompt-detail{display:flex;flex-direction:column;gap:12px}
+  .pd-topbar{display:flex;align-items:center;justify-content:space-between;gap:16px}
+  .pd-topbar-info{display:flex;align-items:center;gap:12px;min-width:0}
+  .pd-title{font-size:26px;font-weight:700;color:#fff;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:420px}
+  .pd-meta{font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--mut);
+    white-space:nowrap;padding:2px 9px;border:1px solid var(--line2);border-radius:999px}
+  .pd-topbar-actions{display:flex;align-items:center;gap:8px;flex:0 0 auto}
+  .pd-icon-btn{position:relative;width:34px;height:34px;border-radius:50%;border:1px solid var(--line2);
+    background:var(--panel);color:var(--mut);display:grid;place-items:center;cursor:pointer;transition:.15s}
+  .pd-icon-btn:hover{color:#fff;border-color:var(--v)}
+  .pd-icon-btn .lucide{width:15px;height:15px}
+  .pd-icon-btn.copied::after{content:"Copied!";position:absolute;top:calc(100% + 8px);right:0;background:var(--panel);
+    border:1px solid var(--line2);border-radius:6px;padding:3px 9px;font-size:10.5px;color:#fff;white-space:nowrap;z-index:5}
+  .pd-card{position:relative;border:1px solid var(--line2);border-radius:20px;overflow:hidden;background:#0a0a0f}
+  .pd-card-body{padding:8px}
+  .pd-preview-lg{aspect-ratio:16/9;border-radius:14px;background-size:cover;background-position:center;background-color:#0a0a0f;width:100%}
+  .pd-tabpanel[hidden]{display:none}
+  .pd-prompt-panel{aspect-ratio:16/9;overflow-y:auto;padding:22px 24px;background:var(--panel);border:1px solid var(--line);border-radius:14px}
+  .pd-code{padding:0;background:none;border:none;font-size:13px}
+  .pd-assets-panel{aspect-ratio:16/9;overflow-y:auto;display:flex;flex-direction:column;gap:10px;padding-right:2px}
+  .pd-asset-card{background:var(--panel);border:1px solid var(--line2);border-radius:12px;padding:12px 14px;flex:0 0 auto}
+  .pd-asset-card-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  .pd-asset-card-title{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;color:#fff;white-space:nowrap}
+  .pd-asset-card-title .lucide{width:15px;height:15px;color:var(--dim)}
+  .pd-asset-card-actions{display:flex;align-items:center;gap:6px}
+  .pd-asset-card-actions .ac-copy,.pd-asset-card-actions .ac-dl{display:inline-flex;align-items:center;gap:5px;padding:5px 11px}
+  .pd-asset-card-actions .ac-dl::before{display:none}
+  .pd-asset-card-actions .ac-copy .lucide,.pd-asset-card-actions .ac-dl .lucide{width:12px;height:12px}
+  .pd-asset-card-actions .ac-copy .lucide.spin,.pd-asset-card-actions .ac-dl .lucide.spin{animation:pd-spin .7s linear infinite}
+  .pd-asset-card-preview{font-family:var(--mono);font-size:11px;color:var(--dim);line-height:1.6;margin:8px 0 0;
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .pd-asset-card-thumb{width:100%;max-height:140px;object-fit:cover;border-radius:8px;margin-top:10px;display:block;background:var(--bg2)}
+  .pd-card-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 16px;border-top:1px solid var(--line2)}
+  .pd-card-tabs.hpc-tabs{display:flex;gap:4px;padding:3px;border-bottom:none;background:rgba(255,255,255,.05);border-radius:999px}
+  .pd-card-tabs .hpc-tab{padding:7px 14px;font-size:11px;border-radius:999px;border-bottom:none;cursor:pointer}
+  .pd-card-tabs .hpc-tab.active{background:#fff;color:#0d0c14}
+  .pd-copy-btn{font-family:var(--sans);font-weight:600;font-size:12.5px;padding:9px 18px;border-radius:999px;border:none;
+    background:var(--v);color:#fff;cursor:pointer;white-space:nowrap;display:inline-flex;align-items:center;gap:6px}
+  .pd-copy-btn .lucide{width:14px;height:14px}
+  .pd-copy-btn .lucide.spin{animation:pd-spin .7s linear infinite}
+  @keyframes pd-spin{to{transform:rotate(360deg)}}
+  .pd-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:999;width:44px;height:44px;border-radius:50%;
+    border:1px solid var(--line2);background:rgba(10,9,16,.8);backdrop-filter:blur(6px);color:#fff;display:grid;
+    place-items:center;cursor:pointer;transition:.18s}
+  .pd-arrow:hover{background:rgba(255,255,255,.1)}
+  .pd-arrow-prev{right:calc(100% + 24px)}
+  .pd-arrow-next{left:calc(100% + 24px)}
+  .detail-overlay{position:fixed;inset:0;z-index:998;background:rgba(5,4,9,.72);backdrop-filter:blur(6px);
+    display:none;align-items:center;justify-content:center;padding:24px;overflow-y:auto}
+  .detail-overlay.open{display:flex}
+  .detail-modal{position:relative;width:100%;max-width:960px;margin:auto}
+  @media(max-width:760px){
+    .pd-arrow{display:none}
+    .pd-title{max-width:180px}
+    .pd-card-bar{flex-wrap:wrap}
+    .pd-asset-card-actions{width:100%}
+    .pd-asset-card-actions button{flex:1}
+  }
+
   /* ===== WHY CHOOSE US — capacity.so style: sticky left, icon-above-title rows ===== */
   .whygrid{display:grid;grid-template-columns:.9fr 1.1fr;gap:60px;align-items:start}
   .why-left{position:sticky;top:96px;align-self:start;padding:20px 0}
@@ -524,19 +601,38 @@
 <section id="tier" class="sec wrap">
   <div class="shead"><span class="eyebrow" data-alt="Showcase">Showcase</span><h2 data-alt="Sekilas isi katalognya.">A peek into the library.</h2><p data-alt="Sampel dari yang ada di dalam. Daftar buat buka seluruh library.">A sample of what's inside. Sign up to unlock the full library.</p></div>
   <div class="showcase-grid">
-    <div class="citem scard"><div class="cc"><div class="pv" style="background-image:url('/assets/showcase/proxim.png')"><div class="pv-overlay"><button class="pv-btn copy"><svg class="lucide" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span data-alt="Daftar buat copy">Sign Up to Copy</span></button><button class="pv-btn view" data-slug="proxim-router"><svg class="lucide" viewBox="0 0 24 24"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg><span data-alt="Live preview">Live Preview</span></button></div></div></div><div class="ccap"><span class="name">Proxim</span><span class="count">Full LP - Dev</span></div></div>
-    <div class="citem scard"><div class="cc"><div class="pv" style="background-image:url('/assets/showcase/luma.png')"><div class="pv-overlay"><button class="pv-btn copy"><svg class="lucide" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span data-alt="Daftar buat copy">Sign Up to Copy</span></button><button class="pv-btn view" data-slug="luma-hero"><svg class="lucide" viewBox="0 0 24 24"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg><span data-alt="Live preview">Live Preview</span></button></div></div></div><div class="ccap"><span class="name">LUMA</span><span class="count">Hero - Ecom</span></div></div>
-    <div class="citem scard"><div class="cc"><div class="pv" style="background-image:url('/assets/showcase/arlo.png')"><div class="pv-overlay"><button class="pv-btn copy"><svg class="lucide" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span data-alt="Daftar buat copy">Sign Up to Copy</span></button><button class="pv-btn view" data-slug="arlo-editorial"><svg class="lucide" viewBox="0 0 24 24"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg><span data-alt="Live preview">Live Preview</span></button></div></div></div><div class="ccap"><span class="name">Arlo</span><span class="count">Full LP - Ecom</span></div></div>
-    <div class="citem scard"><div class="cc"><div class="pv" style="background-image:url('/assets/showcase/stillwave.png')"><div class="pv-overlay"><button class="pv-btn copy"><svg class="lucide" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span data-alt="Daftar buat copy">Sign Up to Copy</span></button><button class="pv-btn view" data-slug="stillwave-meditation"><svg class="lucide" viewBox="0 0 24 24"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg><span data-alt="Live preview">Live Preview</span></button></div></div></div><div class="ccap"><span class="name">Stillwave</span><span class="count">Full LP - Wellness</span></div></div>
-    <div class="citem scard"><div class="cc"><div class="pv" style="background-image:url('/assets/showcase/apex.png')"><div class="pv-overlay"><button class="pv-btn copy"><svg class="lucide" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span data-alt="Daftar buat copy">Sign Up to Copy</span></button><button class="pv-btn view" data-slug="apex-sportswear"><svg class="lucide" viewBox="0 0 24 24"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg><span data-alt="Live preview">Live Preview</span></button></div></div></div><div class="ccap"><span class="name">Apex</span><span class="count">Full LP - Ecom</span></div></div>
-    <div class="citem scard"><div class="cc"><div class="pv" style="background-image:url('/assets/showcase/altr.png')"><div class="pv-overlay"><button class="pv-btn copy"><svg class="lucide" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span data-alt="Daftar buat copy">Sign Up to Copy</span></button><button class="pv-btn view" data-slug="altr-watches"><svg class="lucide" viewBox="0 0 24 24"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg><span data-alt="Live preview">Live Preview</span></button></div></div></div><div class="ccap"><span class="name">ALTR</span><span class="count">Full LP - Ecom</span></div></div>
-    <div class="citem scard"><div class="cc"><div class="pv" style="background-image:url('/assets/showcase/aura.png')"><div class="pv-overlay"><button class="pv-btn copy"><svg class="lucide" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span data-alt="Daftar buat copy">Sign Up to Copy</span></button><button class="pv-btn view" data-slug="aura-hero"><svg class="lucide" viewBox="0 0 24 24"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg><span data-alt="Live preview">Live Preview</span></button></div></div></div><div class="ccap"><span class="name">Aura</span><span class="count">Hero - Ecom</span></div></div>
-    <div class="citem scard"><div class="cc"><div class="pv" style="background-image:url('/assets/showcase/elan.png')"><div class="pv-overlay"><button class="pv-btn copy"><svg class="lucide" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span data-alt="Daftar buat copy">Sign Up to Copy</span></button><button class="pv-btn view" data-slug="elan-hero"><svg class="lucide" viewBox="0 0 24 24"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg><span data-alt="Live preview">Live Preview</span></button></div></div></div><div class="ccap"><span class="name">Élan</span><span class="count">Hero - Ecom</span></div></div>
-    <div class="citem scard"><div class="cc"><div class="pv" style="background-image:url('/assets/showcase/vris-r1.png')"><div class="pv-overlay"><button class="pv-btn copy"><svg class="lucide" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span data-alt="Daftar buat copy">Sign Up to Copy</span></button><button class="pv-btn view" data-slug="vris-suv"><svg class="lucide" viewBox="0 0 24 24"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg><span data-alt="Live preview">Live Preview</span></button></div></div></div><div class="ccap"><span class="name">VRIS R1</span><span class="count">Full LP - Product</span></div></div>
+    {showcaseItems.map((item) => (
+      <div class="citem scard">
+        <div class="cc">
+          <div class="pv" style={`background-image:url('/assets/showcase/${item.thumbnail}')`}>
+            <div class="pv-overlay">
+              <button class="pv-btn copy"><svg class="lucide" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span data-alt="Daftar buat copy">Sign Up to Copy</span></button>
+              <button class="pv-btn view" data-slug={item.slug}><svg class="lucide" viewBox="0 0 24 24"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg><span data-alt="Live preview">Live Preview</span></button>
+            </div>
+          </div>
+        </div>
+        <div class="ccap"><span class="name">{item.title}</span><span class="count">{item.tier} - {item.category}</span></div>
+      </div>
+    ))}
   </div>
   <div class="showcase-cta">
     <span class="lockline"><svg class="lucide" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span data-alt="+30 prompt lainnya nunggu di dalam">+30 more prompts waiting inside</span></span>
     <a class="btn primary" href="/library" data-alt="Buka semua prompt">Unlock More Prompts</a>
+  </div>
+
+  {/* Hidden per-item detail markup, cloned into the modal below on click —
+      same pattern as /library so the homepage opens an identical preview. */}
+  {showcaseItems.map((item) => (
+    <template id={`tpl-${item.slug}`}>
+      <PromptDetailContent item={item} variant="modal" />
+    </template>
+  ))}
+  <div class="detail-overlay" id="detailOverlay">
+    <div class="detail-modal">
+      <button class="pd-arrow pd-arrow-prev" id="detailPrev" aria-label="Previous"><svg class="lucide" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button>
+      <button class="pd-arrow pd-arrow-next" id="detailNext" aria-label="Next"><svg class="lucide" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button>
+      <div id="detailModalBody"></div>
+    </div>
   </div>
 </section>
 
@@ -821,10 +917,116 @@
   const track=document.getElementById('track');
   track.innerHTML+=track.innerHTML;
 
-  /* showcase grid: "Live Preview" opens the real library detail page, same as /library */
+  /* showcase grid: "Live Preview" opens the same quick-preview modal used on
+     /library — clones the matching <template>, ported verbatim from
+     library.astro's openDetailModal/closeDetailModal/stepModal. */
+  const SHOWCASE_SLUGS=[...document.querySelectorAll('#tier .showcase-grid .pv-btn.view')].map(b=>b.dataset.slug);
+  const detailOverlay=document.getElementById('detailOverlay');
+  const detailBody=document.getElementById('detailModalBody');
+  let scModalSlug=null;
+  function openDetailModal(slug){
+    const tpl=document.getElementById(`tpl-${slug}`);
+    if(!tpl||!detailOverlay||!detailBody) return;
+    scModalSlug=slug;
+    detailBody.innerHTML='';
+    detailBody.appendChild(tpl.content.cloneNode(true));
+    detailOverlay.classList.add('open');
+    document.body.style.overflow='hidden';
+  }
+  function closeDetailModal(){
+    if(!detailOverlay||!detailBody) return;
+    detailOverlay.classList.remove('open');
+    document.body.style.overflow='';
+    detailBody.innerHTML='';
+    scModalSlug=null;
+  }
+  function stepModal(dir){
+    if(!scModalSlug) return;
+    const i=SHOWCASE_SLUGS.indexOf(scModalSlug);
+    openDetailModal(SHOWCASE_SLUGS[(i+dir+SHOWCASE_SLUGS.length)%SHOWCASE_SLUGS.length]);
+  }
+  window.closeDetailModal=closeDetailModal;
+  document.getElementById('detailPrev')?.addEventListener('click',()=>stepModal(-1));
+  document.getElementById('detailNext')?.addEventListener('click',()=>stepModal(1));
+  detailOverlay?.addEventListener('click',(e)=>{if(e.target===detailOverlay) closeDetailModal();});
+  document.addEventListener('keydown',(e)=>{
+    if(!detailOverlay?.classList.contains('open')) return;
+    if(e.key==='Escape') closeDetailModal();
+    if(e.key==='ArrowLeft') stepModal(-1);
+    if(e.key==='ArrowRight') stepModal(1);
+  });
   document.querySelector('#tier .showcase-grid')?.addEventListener('click',(e)=>{
     const btn=e.target.closest('.pv-btn.view');
-    if(btn?.dataset.slug) location.href=`/library/${btn.dataset.slug}`;
+    if(btn?.dataset.slug) openDetailModal(btn.dataset.slug);
+  });
+
+  /* Tab switching, copy, share, and asset downloads inside the cloned modal
+     content — ported verbatim from AppLayout.astro's delegated listener
+     (a <script> inside a <template> never runs, even after cloning). The
+     homepage has no real session system, so unlike the library page this
+     always copies/downloads directly instead of gating behind sign-up. */
+  const ESP_ICON_SPIN='<svg class="lucide spin" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>';
+  const ESP_ICON_CHECK='<svg class="lucide" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>';
+  function flashAction(btn,loadingLabel,doneLabel){
+    if(btn.dataset.busy) return;
+    btn.dataset.busy='1';
+    const original=btn.innerHTML;
+    btn.innerHTML=`${ESP_ICON_SPIN}<span>${loadingLabel}</span>`;
+    setTimeout(()=>{
+      btn.innerHTML=`${ESP_ICON_CHECK}<span>${doneLabel}</span>`;
+      setTimeout(()=>{btn.innerHTML=original;delete btn.dataset.busy;},1200);
+    },450);
+  }
+  function triggerDownload(url,filename){
+    const a=document.createElement('a');
+    a.href=url;
+    if(filename) a.download=filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  }
+  document.body.addEventListener('click',(e)=>{
+    const tab=e.target.closest('.hpc-tab');
+    if(tab){
+      const tabs=tab.closest('[data-tabs]');
+      if(!tabs) return;
+      const container=tabs.closest('.prompt-detail')||tabs.parentElement;
+      tabs.querySelectorAll('.hpc-tab').forEach(t=>t.classList.remove('active'));
+      tab.classList.add('active');
+      container.querySelectorAll('.pd-tabpanel').forEach(p=>{p.hidden=p.dataset.tabpanel!==tab.dataset.tab;});
+      const onAssets=tab.dataset.tab==='assets';
+      container.querySelectorAll('.pd-copy-btn:not(.detail-dlall-btn)').forEach(b=>{b.hidden=onAssets;});
+      container.querySelectorAll('.detail-dlall-btn').forEach(b=>{b.hidden=!onAssets;});
+      return;
+    }
+    const closeBtn=e.target.closest('[data-close-modal]');
+    if(closeBtn){closeDetailModal();return;}
+    const shareBtn=e.target.closest('.detail-share-btn');
+    if(shareBtn){
+      navigator.clipboard?.writeText(`${location.origin}/library/${shareBtn.dataset.slug}`);
+      shareBtn.classList.add('copied');
+      setTimeout(()=>shareBtn.classList.remove('copied'),1500);
+      return;
+    }
+    const copyBtn=e.target.closest('.detail-copy-btn');
+    if(copyBtn){
+      navigator.clipboard?.writeText(copyBtn.dataset.prompt||'');
+      flashAction(copyBtn,'Copying…','Copied');
+      return;
+    }
+    const dlAllBtn=e.target.closest('.detail-dlall-btn');
+    if(dlAllBtn){
+      flashAction(dlAllBtn,'Downloading…','Downloaded');
+      let urls=[];
+      try{urls=JSON.parse(dlAllBtn.dataset.urls||'[]');}catch{}
+      urls.forEach((url,i)=>setTimeout(()=>triggerDownload(url),i*300));
+      return;
+    }
+    const dlBtn=e.target.closest('.detail-dl-btn');
+    if(dlBtn){
+      flashAction(dlBtn,'Downloading…','Downloaded');
+      if(dlBtn.dataset.url) triggerDownload(dlBtn.dataset.url,dlBtn.dataset.filename);
+    }
   });
 
   /* ===== features section: coverflow of component screenshots ===== */
