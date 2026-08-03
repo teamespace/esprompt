@@ -1,7 +1,7 @@
 ---
 import AppLayout from '../../layouts/AppLayout.astro';
 import PromptDetailContent from '../../components/PromptDetailContent.astro';
-import { prompts } from '../../data/prompts';
+import { prompts, thumbUrl, isVideoThumb } from '../../data/prompts';
 
 export function getStaticPaths() {
   return prompts.map((item) => ({
@@ -21,7 +21,7 @@ const related = prompts
   .concat(prompts.filter((p) => p.slug !== item.slug && p.category !== item.category))
   .slice(0, 3);
 ---
-<AppLayout title={item.title}>
+<AppLayout title={item.title} activeTier={item.tier}>
   <div class="pd-back-row reveal">
     <a class="pd-back" href="/library">
       <svg class="lucide" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
@@ -44,7 +44,9 @@ const related = prompts
         {related.map((r) => (
           <a class="citem" href={`/library/${r.slug}`}>
             <div class="cc">
-              <div class="pv" style={`background-image:url('/assets/showcase/${r.thumbnail}')`}></div>
+              {isVideoThumb(r.thumbnail)
+                ? <div class="pv"><video class="pv-video" src={thumbUrl(r.thumbnail)} muted loop playsinline autoplay></video></div>
+                : <div class="pv" style={`background-image:url('${thumbUrl(r.thumbnail)}')`}></div>}
             </div>
             <div class="ccap"><span class="name">{r.title}</span><span class="count">{r.tier === r.category ? r.tier : `${r.tier} - ${r.category}`}</span></div>
           </a>

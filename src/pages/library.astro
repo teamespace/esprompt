@@ -1,7 +1,26 @@
 ---
 import AppLayout from '../layouts/AppLayout.astro';
 import PromptDetailContent from '../components/PromptDetailContent.astro';
-import { prompts, categories } from '../data/prompts';
+import { prompts, categories, thumbUrl, isVideoThumb } from '../data/prompts';
+
+// Masonry rhythm: cycle each card through short/medium/tall so the grid reads
+// like motionsites.ai instead of a flat row of equal-height cards. Plain
+// modulo (no per-slug hash) — good enough variety, zero extra bookkeeping.
+const SIZE_CLASSES = ['pv-m', 'pv-l', 'pv-s', 'pv-m', 'pv-s', 'pv-l'];
+// Animated-GIF covers are recordings of the real landing page and only read
+// correctly at 16:9 — cropping one into a square or portrait slot would cut
+// the video off. They opt out of the s/m/l cycle instead of consuming a slot
+// in it, so every other card keeps the exact size it already had.
+const isGifCover = (p) => thumbUrl(p.thumbnail).toLowerCase().endsWith('.gif') || isVideoThumb(p.thumbnail);
+// These screenshots are full-width hero shots — forcing them into a square
+// or 3:4 slot meant either cropping the nav/headline off the sides or, on
+// pages with a lot of scroll, stretching the crop tall enough to swallow
+// the section *after* the hero too. Both looked broken, so they get the
+// same 16:9 opt-out as the GIF covers instead of fighting the s/m/l cycle.
+const FORCE_16_9 = new Set([
+  'velo-moto', 'storefront-v1-skincare', 'storefront-v2-wellness', 'warebotics-robotics', 'lunea-skincare',
+]);
+const sizeClass = (p, i) => (isGifCover(p) || FORCE_16_9.has(p.slug)) ? 'pv-16-9' : SIZE_CLASSES[i % SIZE_CLASSES.length];
 ---
 <AppLayout title="Library">
   <div class="shead reveal">
@@ -35,23 +54,45 @@ import { prompts, categories } from '../data/prompts';
   </div>
 
   <div class="showcase-grid" id="catalogGrid">
-    {prompts.map(p => (
-      <div class="citem scard" data-tier={p.tier} data-category={p.category} data-title={p.title.toLowerCase()}>
+    {prompts.map((p, i) => (
+      <div class="citem scard" data-tier={p.tier} data-category={p.category} data-title={p.title.toLowerCase()} data-free={p.free ? 'true' : 'false'}>
         <div class="cc">
-          <div class="pv" style={`background-image:url('/assets/showcase/${p.thumbnail}')`}>
-            <div class="pv-overlay">
-              <button class="pv-btn copy" data-prompt={p.prompt} data-slug={p.slug}>
-                <svg class="lucide pv-copy-icon" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                <span>Copy Prompt</span>
-              </button>
-              <button class="pv-btn ghost view" data-slug={p.slug}>
-                <svg class="lucide" viewBox="0 0 24 24"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
-                <span>View Detail</span>
-              </button>
+          {isVideoThumb(p.thumbnail) ? (
+            <div class={`pv ${sizeClass(p, i)}`}>
+              <video class="pv-video" data-src={thumbUrl(p.thumbnail)} muted loop playsinline preload="none"></video>
+              <div class="pv-overlay">
+                <button class="pv-btn copy" data-slug={p.slug}>
+                  <svg class="lucide pv-copy-icon" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                  <span>Copy Prompt</span>
+                </button>
+                <button class="pv-btn ghost view" data-slug={p.slug}>
+                  <svg class="lucide" viewBox="0 0 24 24"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+                  <span>View Detail</span>
+                </button>
+              </div>
             </div>
-          </div>
+          ) : (
+            <div class={`pv ${sizeClass(p, i)}`} data-bg={thumbUrl(p.thumbnail)}>
+              <div class="pv-overlay">
+                <button class="pv-btn copy" data-slug={p.slug}>
+                  <svg class="lucide pv-copy-icon" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                  <span>Copy Prompt</span>
+                </button>
+                <button class="pv-btn ghost view" data-slug={p.slug}>
+                  <svg class="lucide" viewBox="0 0 24 24"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+                  <span>View Detail</span>
+                </button>
+              </div>
+            </div>
+          )}
         </div>
-        <div class="ccap"><span class="name">{p.title}</span><span class="count">{p.tier === p.category ? p.tier : `${p.tier} - ${p.category}`}</span></div>
+        <div class="ccap">
+          <span class="name">{p.title}</span>
+          <span class="ccap-meta">
+            <span class={`plan-badge ${p.free ? 'free' : 'premium'}`}>{p.free ? 'Free' : 'Premium'}</span>
+            <span class="count">{p.tier === p.category ? p.tier : `${p.tier} - ${p.category}`}</span>
+          </span>
+        </div>
       </div>
     ))}
   </div>
@@ -119,26 +160,123 @@ import { prompts, categories } from '../data/prompts';
   .empty-state-progress a{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
   .empty-state-progress a:hover{color:var(--accent,#7c5cff)}
   .citem[hidden]{display:none}
+
+  /* Masonry: CSS Grid with a 1px row unit + JS-computed `grid-row-end: span`
+     per card (the standard no-library masonry technique), not CSS
+     multi-column. Multi-column balances by *estimated total height / column
+     count*, which routinely leaves the last column short — a visible dead
+     gap on the right, exactly what this replaces. Grid dense-packs each
+     item into its row span instead, so every column runs flush to the
+     bottom. */
+  .showcase-grid.masonry{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:1px;grid-auto-flow:dense;gap:20px;align-items:start}
+  @media(max-width:900px){ .showcase-grid.masonry{grid-template-columns:repeat(2,1fr)} }
+  @media(max-width:560px){ .showcase-grid.masonry{grid-template-columns:1fr} }
+  /* .cc .pv.pv-x (not just .pv-x) so this outweighs tokens.css's
+     `.showcase-grid .cc .pv{aspect-ratio:16/9}` — a same-specificity tier
+     collided with that rule here before and silently lost, collapsing
+     every card to ~0 height. */
+  .showcase-grid.masonry .cc .pv.pv-s{aspect-ratio:1/1}
+  .showcase-grid.masonry .cc .pv.pv-m{aspect-ratio:4/3}
+  .showcase-grid.masonry .cc .pv.pv-l{aspect-ratio:3/4}
+  /* Animated-GIF/video covers stay 16:9 — they're recordings, not crops. */
+  .showcase-grid.masonry .cc .pv.pv-16-9{aspect-ratio:16/9}
 </style>
 
 <script is:inline>
+  /* The prompt text is stored once, in the .pd-code block of each item's detail
+     markup. Reading it back from there keeps a 1,700-word prompt out of a
+     duplicate data-prompt attribute — that duplication was most of the page weight. */
+  function espPromptText(btn){
+    const open=btn.closest('.prompt-detail')?.querySelector('.pd-code');
+    if(open) return open.textContent||'';
+    const tpl=document.getElementById('tpl-'+(btn.dataset.slug||''));
+    return tpl?.content.querySelector('.pd-code')?.textContent||'';
+  }
   const grid = document.getElementById('catalogGrid');
   const items = [...grid.querySelectorAll('.citem')];
+
+  // Thumbnails only start loading (and, for the animated GIF covers, only
+  // start decoding/playing) once a card scrolls near the viewport. Filtering
+  // to a tier still shows a dozen+ cards, and setting every GIF's
+  // background-image up front on page load makes them all decode at once —
+  // that simultaneous-decode contention is what reads as "patah-patah"
+  // (stuttery) playback, especially since they're hotlinked from a single
+  // non-CDN host. Static images benefit too (fewer requests up front).
+  const bgIO = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      el.style.backgroundImage = `url('${el.dataset.bg}')`;
+      bgIO.unobserve(el);
+    });
+  }, { rootMargin: '200px 0px' });
+  grid.querySelectorAll('.pv[data-bg]').forEach(el => bgIO.observe(el));
+
+  // .webm covers (real <video> elements, can't use background-image) get the
+  // same lazy-start treatment: src stays unset until the card nears the
+  // viewport, then it loads and plays. Paused (not removed) once it scrolls
+  // back out, so re-entering the viewport resumes instantly without a re-fetch.
+  const videoIO = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const el = entry.target;
+      if (entry.isIntersecting) {
+        if (!el.src && el.dataset.src) el.src = el.dataset.src;
+        el.play?.().catch(() => {});
+      } else {
+        el.pause?.();
+      }
+    });
+  }, { rootMargin: '200px 0px' });
+  grid.querySelectorAll('.pv-video[data-src]').forEach(el => videoIO.observe(el));
   const empty = document.getElementById('catalogEmpty');
   const state = { tier: 'all', category: 'all', q: '' };
 
   // Copy button shows a lock while signed out (gated action) and a plain
-  // clipboard once signed in, since the action isn't actually gated anymore.
+  // clipboard once signed in, or for free items regardless of session
+  // (nothing to gate there — copy just works).
   const ICON_LOCKED = '<rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>';
   const ICON_UNLOCKED = '<rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>';
   function updateCopyIcons(){
     const signedIn = window.espHasSession && window.espHasSession();
     document.querySelectorAll('.pv-copy-icon').forEach(svg => {
-      svg.innerHTML = signedIn ? ICON_UNLOCKED : ICON_LOCKED;
+      const isFree = svg.closest('.citem')?.dataset.free === 'true';
+      svg.innerHTML = (signedIn || isFree) ? ICON_UNLOCKED : ICON_LOCKED;
     });
   }
   updateCopyIcons();
   window.addEventListener('esprompt:session-change', updateCopyIcons);
+
+  // Grid-based masonry (see the .masonry CSS above): each card gets a
+  // `grid-row-end: span N` sized to its own rendered height, in 1px row
+  // units, so `grid-auto-flow: dense` can pack shorter neighbors into the
+  // gap a taller card leaves — that's what keeps every column running flush
+  // to the bottom instead of one trailing off early.
+  function layoutMasonry(){
+    if (!grid.classList.contains('masonry')) return;
+    const styles = getComputedStyle(grid);
+    const rowH = parseFloat(styles.gridAutoRows) || 1;
+    const gap = parseFloat(styles.rowGap) || 0;
+    items.forEach(item => {
+      if (item.hidden) return;
+      const span = Math.ceil((item.getBoundingClientRect().height + gap) / (rowH + gap));
+      item.style.gridRowEnd = `span ${span}`;
+    });
+  }
+  let masonryRAF = null;
+  function scheduleMasonryLayout(){
+    if (masonryRAF) return;
+    masonryRAF = requestAnimationFrame(() => { masonryRAF = null; layoutMasonry(); });
+  }
+  window.addEventListener('resize', scheduleMasonryLayout);
+  // The very first layoutMasonry() call (below, inside applyFilters) runs
+  // synchronously at parse time — before the title font finishes swapping
+  // in. When it swaps, captions can reflow to a different height, so a card
+  // ends up taller than the span it was given and visually spills into
+  // whatever's below it in that column (this is what showed up as the hover
+  // overlay bleeding into the next card). Recompute once fonts and the rest
+  // of the page have actually settled.
+  document.fonts?.ready.then(scheduleMasonryLayout);
+  window.addEventListener('load', scheduleMasonryLayout);
 
   function applyFilters(){
     let visible = 0;
@@ -153,6 +291,7 @@ import { prompts, categories } from '../data/prompts';
     // Section's "no results" state is handled by applySectionInProgress
     // instead (dedicated in-progress notice, not the generic empty-state).
     if (state.tier !== 'Section') empty.hidden = visible > 0;
+    layoutMasonry();
   }
 
   function setFilter(type, value){
@@ -251,6 +390,9 @@ import { prompts, categories } from '../data/prompts';
   const tierParam = params.get('tier');
   const activeTier = tierParam && HEADER_CONTENT[tierParam] ? tierParam : 'all';
   state.tier = activeTier;
+  // Masonry is a Landing (Full LP)-only treatment — Hero and Section keep
+  // the plain even-height grid.
+  grid.classList.toggle('masonry', activeTier === 'Full LP');
   updateHeader(activeTier);
   applySectionInProgress(activeTier);
   renderCategoryPills(activeTier);
@@ -263,13 +405,14 @@ import { prompts, categories } from '../data/prompts';
     const copyBtn = e.target.closest('.pv-btn.copy');
     if (copyBtn) {
       const doCopy = () => {
-        navigator.clipboard?.writeText(copyBtn.dataset.prompt || '');
+        navigator.clipboard?.writeText(espPromptText(copyBtn));
         const label = copyBtn.querySelector('span');
         const original = label.textContent;
         label.textContent = 'Copied!';
         setTimeout(() => { label.textContent = original; }, 1500);
       };
-      if (window.espHasSession && window.espHasSession()) {
+      const isFree = copyBtn.closest('.citem')?.dataset.free === 'true';
+      if (isFree || (window.espHasSession && window.espHasSession())) {
         doCopy();
       } else {
         window.openAuthModal('signup', doCopy);

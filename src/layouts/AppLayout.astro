@@ -4,8 +4,13 @@ import AuthModal from '../components/AuthModal.astro';
 
 interface Props {
   title: string;
+  // Set by pages that map to a fixed tier (e.g. library/[slug].astro passing
+  // item.tier) so the matching nav link is active on first render, no client
+  // JS needed. The /library page itself still self-highlights client-side
+  // below, since its tier comes from a query string a static build can't see.
+  activeTier?: 'Hero' | 'Section' | 'Full LP';
 }
-const { title } = Astro.props;
+const { title, activeTier } = Astro.props;
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -22,11 +27,11 @@ const { title } = Astro.props;
 <div class="topbar-gradient"></div>
 <nav>
   <div class="wrap nav">
-    <a class="logo" href="/library?tier=Full%20LP">esprompt</a>
+    <a class="logo" href="/">esprompt</a>
     <div class="navlinks" id="navTierLinks">
-      <a href="/library?tier=Full%20LP" data-tier="Full LP">Landing</a>
-      <a href="/library?tier=Hero" data-tier="Hero">Hero</a>
-      <a href="/library?tier=Section" data-tier="Section">Section</a>
+      <a href="/library?tier=Full%20LP" data-tier="Full LP" class:list={{ active: activeTier === 'Full LP' }}>Landing</a>
+      <a href="/library?tier=Hero" data-tier="Hero" class:list={{ active: activeTier === 'Hero' }}>Hero</a>
+      <a href="/library?tier=Section" data-tier="Section" class:list={{ active: activeTier === 'Section' }}>Section</a>
     </div>
     <div class="navcta" id="navCta">
       <form class="nav-searchbox" id="navSearchForm" role="search">
@@ -76,6 +81,15 @@ const { title } = Astro.props;
 <AuthModal />
 
 <script is:inline>
+  /* The prompt text is stored once, in the .pd-code block of each item's detail
+     markup. Reading it back from there keeps a 1,700-word prompt out of a
+     duplicate data-prompt attribute — that duplication was most of the page weight. */
+  function espPromptText(btn){
+    const open=btn.closest('.prompt-detail')?.querySelector('.pd-code');
+    if(open) return open.textContent||'';
+    const tpl=document.getElementById('tpl-'+(btn.dataset.slug||''));
+    return tpl?.content.querySelector('.pd-code')?.textContent||'';
+  }
   const navEl = document.querySelector('nav');
   function onScroll(){ navEl.classList.toggle('scrolled', window.scrollY > 24); }
   window.addEventListener('scroll', onScroll, { passive: true });
@@ -240,7 +254,7 @@ const { title } = Astro.props;
     const copyBtn = e.target.closest('.detail-copy-btn');
     if (copyBtn) {
       const doCopy = () => {
-        navigator.clipboard?.writeText(copyBtn.dataset.prompt || '');
+        navigator.clipboard?.writeText(espPromptText(copyBtn));
         flashAction(copyBtn, 'Copying…', 'Copied');
       };
       if (window.espHasSession && window.espHasSession()) doCopy();

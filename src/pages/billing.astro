@@ -1,9 +1,13 @@
 ---
-// Pricing itself is still TBD per the homepage FAQ ("Paid tier details are
-// still being finalized and will be announced before launch") — so this
-// screen deliberately doesn't invent a price for Hero. This is the "choose
-// a plan" screen, not a billing-management screen: actual billing/payment
-// details live on /account, not here (per explicit product decision).
+// Two paid tiers only, no free plan: Yearly (subscription) and Lifetime
+// NOTE: prices and plan copy here are mirrored on the homepage pricing
+// section (src/pages/index.astro, #harga). Change one, change the other.
+// (one-time, discounted launch price, marked Most Popular). Pricing is set
+// for esprompt's actual audience — non-technical founders, students,
+// vibe coders/indie hackers, marketers — a price-sensitive, prosumer group,
+// not enterprise buyers. This is the "choose a plan" screen, not a
+// billing-management screen: actual billing/payment details live on
+// /account, not here (per explicit product decision).
 import AppLayout from '../layouts/AppLayout.astro';
 
 const CHECK = 'M20 6 9 17l-5-5';
@@ -12,42 +16,45 @@ const CHECK = 'M20 6 9 17l-5-5';
   <div class="shead reveal">
     <span class="eyebrow">Upgrade</span>
     <h1>Upgrade your plan.</h1>
-    <p>You're on the Free plan today. This page is just for picking a plan; billing and subscription details live in your <a href="/account">Account</a> page.</p>
+    <p>Browsing the library is free. Pick a plan below to unlock copying every Hero &amp; Full LP prompt; billing and subscription details live in your <a href="/account">Account</a> page.</p>
   </div>
 
   <div class="plan-grid reveal">
     <div class="plan-card">
       <div class="plan-top">
-        <h3>Free</h3>
-        <div class="plan-price">$0<span>/mo</span></div>
-        <p class="plan-caption">Free, forever</p>
+        <h3>Yearly Access</h3>
+        <p class="plan-caption plan-caption-top">Unlimited prompt access, billed annually</p>
+        <div class="plan-price">$49<span>/yr</span></div>
+        <p class="plan-caption">Per year, cancel anytime</p>
       </div>
-      <p class="plan-desc">Best for trying esprompt: browse the whole library and copy every Section &amp; Full LP prompt.</p>
-      <a class="btn ghost plan-cta" href="/library">Browse Library</a>
+      <button class="btn primary plan-cta" id="yearlyBtn" type="button">Subscribe Yearly</button>
       <div class="plan-list">
         <span class="plan-list-label">Included</span>
         <ul>
-          <li><svg class="lucide" viewBox="0 0 24 24"><path d={CHECK}/></svg>Browse and search the whole library</li>
-          <li><svg class="lucide" viewBox="0 0 24 24"><path d={CHECK}/></svg>Copy Section &amp; Full LP prompts</li>
+          <li><svg class="lucide" viewBox="0 0 24 24"><path d={CHECK}/></svg>Unlimited Hero &amp; Full LP prompts</li>
+          <li><svg class="lucide" viewBox="0 0 24 24"><path d={CHECK}/></svg>Hero image &amp; video assets</li>
+          <li><svg class="lucide" viewBox="0 0 24 24"><path d={CHECK}/></svg>Instant access to the full library</li>
+          <li><svg class="lucide" viewBox="0 0 24 24"><path d={CHECK}/></svg>New prompts added monthly</li>
           <li><svg class="lucide" viewBox="0 0 24 24"><path d={CHECK}/></svg>Community support</li>
+          <li><svg class="lucide" viewBox="0 0 24 24"><path d={CHECK}/></svg>Priority support</li>
         </ul>
       </div>
     </div>
 
     <div class="plan-card accent">
       <div class="plan-top">
-        <h3>Hero</h3>
-        <div class="plan-price">Coming soon</div>
-        <p class="plan-caption">Pricing to be announced</p>
+        <h3>Lifetime Access <span class="badge-pop">Most Popular</span></h3>
+        <p class="plan-caption plan-caption-top">Unlimited prompt access, forever</p>
+        <div class="plan-price"><span class="was">$199</span> $89</div>
+        <p class="plan-caption">One-time payment, lifetime access</p>
       </div>
-      <p class="plan-desc">For teams and power users who want Hero image &amp; video assets and priority support.</p>
-      <button class="btn primary plan-cta" id="notifyBtn" type="button">Notify Me</button>
+      <button class="btn primary plan-cta grad-cta" id="lifetimeBtn" type="button">Pay Once, Access Forever</button>
       <div class="plan-list">
-        <span class="plan-list-label">Everything in Free, plus</span>
+        <span class="plan-list-label">Everything in Yearly, plus</span>
         <ul>
-          <li><svg class="lucide" viewBox="0 0 24 24"><path d={CHECK}/></svg>Image &amp; video assets for Hero items</li>
-          <li><svg class="lucide" viewBox="0 0 24 24"><path d={CHECK}/></svg>Priority support</li>
-          <li><svg class="lucide" viewBox="0 0 24 24"><path d={CHECK}/></svg>Early access to new tiers</li>
+          <li><svg class="lucide" viewBox="0 0 24 24"><path d={CHECK}/></svg>Lifetime updates, no renewals</li>
+          <li><svg class="lucide" viewBox="0 0 24 24"><path d={CHECK}/></svg>Early access to new prompts &amp; features</li>
+          <li><svg class="lucide" viewBox="0 0 24 24"><path d={CHECK}/></svg>Locked-in launch price</li>
         </ul>
       </div>
     </div>
@@ -60,20 +67,20 @@ const CHECK = 'M20 6 9 17l-5-5';
 
   <div class="faq reveal">
     <details class="q" open>
-      <summary><span>Is esprompt really free to use?</span><span class="plus">+</span></summary>
-      <p>Yes. Browsing the library and copying Section &amp; Full LP prompts is free, no card required.</p>
+      <summary><span>Is esprompt free to use?</span><span class="plus">+</span></summary>
+      <p>Browsing and searching the library is free, no card required. Copying Hero &amp; Full LP prompts needs a Yearly or Lifetime plan.</p>
     </details>
     <details class="q">
-      <summary><span>What do I get with the paid plan?</span><span class="plus">+</span></summary>
-      <p>Hero-tier prompts ship with downloadable image &amp; video assets, plus priority support once pricing is live.</p>
+      <summary><span>What's the difference between Yearly and Lifetime?</span><span class="plus">+</span></summary>
+      <p>Both unlock the full library and Hero image &amp; video assets. Yearly renews annually; Lifetime is a single one-time payment for permanent access at today's launch price.</p>
     </details>
     <details class="q">
-      <summary><span>When will paid pricing be announced?</span><span class="plus">+</span></summary>
-      <p>We're still finalizing it. Hit "Notify me" above and you'll be the first to know when it's live.</p>
+      <summary><span>Should I pick Yearly or Lifetime?</span><span class="plus">+</span></summary>
+      <p>If you'll use esprompt for more than about two years, Lifetime pays for itself. If you just want it for one project, Yearly is the lighter commitment.</p>
     </details>
     <details class="q">
       <summary><span>Will I be charged automatically?</span><span class="plus">+</span></summary>
-      <p>No surprise charges. Once paid plans launch, you'll confirm a plan and payment method before anything is billed.</p>
+      <p>No surprise charges. You'll confirm your plan and payment method before anything is billed.</p>
     </details>
     <details class="q">
       <summary><span>What payment methods will you accept?</span><span class="plus">+</span></summary>
@@ -114,12 +121,17 @@ const CHECK = 'M20 6 9 17l-5-5';
     -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;
     animation:planCtaBorder 5s linear infinite}
   @keyframes planCtaBorder{to{--bangle:360deg}}
-  .plan-top h3{font-size:18px;font-weight:600;color:#fff;margin-bottom:10px}
+  .plan-top h3{font-size:18px;font-weight:600;color:#fff;margin-bottom:10px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .badge-pop{font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.03em;color:#fff;
+    background:linear-gradient(100deg,var(--v),var(--p) 48%,var(--b));border-radius:999px;padding:4px 10px;line-height:1}
+  .plan-caption-top{margin:0 0 18px}
   .plan-price{font-size:38px;font-weight:600;letter-spacing:-.02em;color:#fff;line-height:1}
   .plan-price span{font-size:16px;font-weight:500;color:var(--mut)}
+  .plan-price .was{font-size:22px;font-weight:500;color:var(--dim);text-decoration:line-through;margin-right:8px}
   .plan-caption{font-size:13px;color:var(--dim);margin-top:8px}
-  .plan-desc{color:var(--mut);font-size:14.5px;line-height:1.6;margin:20px 0 22px}
-  .plan-cta{width:100%;justify-content:center;margin-bottom:26px}
+  .plan-cta{width:100%;justify-content:center;margin-top:26px;margin-bottom:26px}
+  .grad-cta{background:linear-gradient(100deg,var(--v),var(--p) 48%,var(--b));color:#fff;box-shadow:0 10px 30px -12px rgba(168,85,247,.5)}
+  .grad-cta:hover{transform:translateY(-2px);box-shadow:0 14px 36px -12px rgba(168,85,247,.65)}
   .plan-list{border-top:1px solid var(--line);padding-top:20px;margin-top:auto}
   .plan-list-label{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);display:block;margin-bottom:14px}
   .plan-list ul{list-style:none;display:grid;gap:11px}
@@ -140,8 +152,12 @@ const CHECK = 'M20 6 9 17l-5-5';
 </style>
 
 <script is:inline>
-  document.getElementById('notifyBtn').addEventListener('click', (e) => {
-    e.target.textContent = "You're on the list!";
+  document.getElementById('yearlyBtn').addEventListener('click', (e) => {
+    e.target.textContent = "You're subscribed!";
+    e.target.disabled = true;
+  });
+  document.getElementById('lifetimeBtn').addEventListener('click', (e) => {
+    e.target.textContent = "You're in, for life!";
     e.target.disabled = true;
   });
 </script>

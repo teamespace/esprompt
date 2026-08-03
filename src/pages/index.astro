@@ -1,25 +1,57 @@
 ---
 import PromptDetailContent from '../components/PromptDetailContent.astro';
-import { prompts } from '../data/prompts';
+import { prompts, thumbUrl, isVideoThumb } from '../data/prompts';
 
-// Showcase grid below: 9 real catalog entries (not placeholders), one per
-// distinct thumbnail already used on this page. "View Detail" opens the
-// exact same quick-preview modal as /library (see the <template> + modal
+// Showcase grid below: 6 real catalog entries (not placeholders), one per
+// distinct thumbnail already used on this page — a clean 2 rows of 3, no
+// dangling partial row above the "+N more" lock note. "View Detail" opens
+// the exact same quick-preview modal as /library (see the <template> + modal
 // shell rendered further down, and the shared click-delegation script).
+// Animated-GIF-cover entries only (picked for category spread) — FigureWorld
+// is required to be in this set; it's Hero-only now (its Full LP entry was
+// removed as a duplicate of the same single-viewport page).
 const showcaseSlugs = [
-  'proxim-router', 'luma-hero', 'arlo-editorial', 'stillwave-meditation',
-  'apex-sportswear', 'altr-watches', 'aura-hero', 'elan-hero', 'vris-suv',
+  'figureworld-hero', 'quorum-ai', 'curalink-telehealth',
+  'thecity-residences', 'stillwave-meditation', 'pylon-ai',
 ];
 const showcaseItems = showcaseSlugs
   .map((slug) => prompts.find((p) => p.slug === slug))
   .filter((p) => p !== undefined);
+
+// Canonical origin — og:image and og:url must be absolute, so they can't be
+// root-relative paths. Swap this one line when the production domain changes.
+const SITE = 'https://esprompt.ahrasya.workers.dev';
+const OG_TITLE = 'esprompt — Prompts into UI, in a single copy.';
+const OG_DESC = 'Curated hero and full landing page prompts for Cursor, v0, Lovable and Claude. Copy one, paste it into your AI tool, and get a finished page in minutes.';
+
+const CHECK = 'M20 6 9 17l-5-5';
+
 ---
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>esprompt · Prompts into UI (Version C · Gradient / Reactbits-style)</title>
+<title>{OG_TITLE}</title>
+<meta name="description" content={OG_DESC}>
+<link rel="canonical" href={SITE + '/'}>
+<meta name="theme-color" content="#050409">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="esprompt">
+<meta property="og:url" content={SITE + '/'}>
+<meta property="og:title" content={OG_TITLE}>
+<meta property="og:description" content={OG_DESC}>
+<meta property="og:image" content={SITE + '/assets/og-image.jpg'}>
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="esprompt — prompts into UI, in a single copy.">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content={OG_TITLE}>
+<meta name="twitter:description" content={OG_DESC}>
+<meta name="twitter:image" content={SITE + '/assets/og-image.jpg'}>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -63,7 +95,19 @@ const showcaseItems = showcaseSlugs
   .navcta a.login:hover{color:var(--ink)}
   .navcta .btn.primary{padding:7px 16px;font-size:13px;border-radius:999px}
   .lang:hover{color:var(--ink)}
-  .burger{display:none;font-size:22px;background:none;border:1px solid var(--line2);border-radius:9px;width:38px;height:38px;color:var(--ink)}
+  .burger{display:none;font-size:22px;background:none;border:1px solid var(--line2);border-radius:9px;width:38px;height:38px;color:var(--ink);cursor:pointer}
+
+  /* mobile nav drawer — shown only under 900px, see the burger rule in that media query */
+  .mobnav{position:fixed;inset:58px 0 0;z-index:49;display:none;flex-direction:column;gap:4px;
+    padding:22px 28px calc(28px + env(safe-area-inset-bottom));overflow-y:auto;
+    background:rgba(5,4,9,.94);backdrop-filter:blur(16px);border-top:1px solid var(--line)}
+  .mobnav.open{display:flex}
+  .mobnav a{font-size:19px;font-weight:500;color:var(--ink);padding:15px 0;border-bottom:1px solid var(--line)}
+  .mobnav .mobnav-cta{display:flex;flex-direction:column;gap:12px;margin-top:24px}
+  .mobnav .mobnav-cta a{border:none;padding:0}
+  .mobnav .btn{justify-content:center;padding:14px 22px;font-size:15.5px}
+  .mobnav .login{color:var(--mut);text-align:center;cursor:pointer}
+  body.navlock{overflow:hidden}
 
   /* ===== HERO — custom aurora background asset, centered, 100vh ===== */
   .hero{position:relative;text-align:center;overflow:hidden;isolation:isolate;
@@ -78,35 +122,40 @@ const showcaseItems = showcaseSlugs
   .heroctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
   .subtrust{margin-top:26px;font-family:var(--mono);font-size:12.5px;color:var(--dim)}
 
-  /* tools-fly — icons orbiting a sticky, scroll-swapped headline (flowbase arcana-integration-03 style) */
-  .tools-fly{position:relative;height:500vh}
-  .tf-sticky{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;align-items:center;justify-content:center}
-  .tf-field{position:absolute;inset:0;max-width:1080px;margin:0 auto;--dur:24s;--r:340px}
-  .tf-center{position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;text-align:center}
-  .tf-eyebrow{position:absolute;top:50%;left:50%;transform:translate(-50%,-92px);z-index:3}
-  .tf-msg{position:absolute;font-size:40px;font-weight:500;letter-spacing:-.025em;line-height:1.2;color:#fff;max-width:560px;
-    opacity:0;transform:translateY(10px);transition:opacity .5s ease,transform .5s ease;pointer-events:none}
-  .tf-msg.active{opacity:1;transform:translateY(0)}
-  .tf-orbit{position:absolute;top:50%;left:50%;width:0;height:0;animation:tfSpin var(--dur) linear infinite;animation-delay:var(--delay,0s)}
-  .tf-icon{position:absolute;top:calc(-1 * var(--r));left:-28px;width:56px;height:56px;border-radius:50%;
-    background:#0b0a13;border:1px solid rgba(255,255,255,.12);display:grid;place-items:center;color:#fff;
-    font-family:var(--mono);font-weight:700;font-size:22px;line-height:1;
-    box-shadow:0 14px 30px -14px rgba(0,0,0,.6);animation:tfSpinRev var(--dur) linear infinite;animation-delay:var(--delay,0s)}
-  .tf-icon img{width:100%;height:100%;object-fit:cover;border-radius:50%}
-  @keyframes tfSpin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
-  @keyframes tfSpinRev{from{transform:rotate(0)}to{transform:rotate(-360deg)}}
+  /* proof bar — replaces the full-viewport orbiting-logo section. Same logos,
+     three seconds under the fold instead of a screen of scroll further down.
+     No borders or panel background: it reads as part of the page, not a strip. */
+  .proofbar{padding:96px 0 40px;text-align:center}
+  .pb-title{font-size:28px;font-weight:600;letter-spacing:-.025em;line-height:1.25;color:#fff;margin:0 auto;max-width:620px}
+  .pb-marquee{overflow:hidden;margin:34px 0 0;
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);
+    mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+  .pb-track{display:flex;align-items:center;gap:var(--pbgap);width:max-content;--pbgap:64px;
+    animation:pbScroll 32s linear infinite}
+  /* the track holds two copies, so one loop is half its width plus one gap */
+  @keyframes pbScroll{from{transform:translateX(0)}to{transform:translateX(calc(-50% - var(--pbgap) / 2))}}
+  .pb-marquee:hover .pb-track{animation-play-state:paused}
+  @media(prefers-reduced-motion:reduce){.pb-track{animation:none}}
+  .pb-logo{display:inline-flex;align-items:center;gap:11px;font-size:16px;font-weight:500;
+    color:var(--mut);white-space:nowrap}
+  .pb-logo img{width:30px;height:30px;border-radius:8px;object-fit:cover;opacity:.9}
+  @media(max-width:900px){
+    .proofbar{padding:72px 0 32px}
+    .pb-title{font-size:22px}
+    .pb-track{--pbgap:44px}
+  }
 
-  /* ===== CAROUSEL — sits inside hero, below CTA. Hover-focus style ===== */
-  .carwrap{width:100%}
-  .carousel{overflow:hidden;padding:10px 0 6px;
-    -webkit-mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent);
-    mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent)}
-  .track{display:flex;gap:22px;width:max-content;animation:scroll 44s linear infinite;padding:14px 0}
-  .carousel:hover .track{animation-play-state:paused}
-  @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(calc(-50% - 11px))}}
+  /* ===== HERO VIDEO PLAYER — single framed autoplay demo, replaces the old
+     multi-card auto-scroll carousel. One big card floating over the hero
+     background instead of a strip of small ones. */
+  .hero-player-wrap{width:100%;max-width:880px;margin:0 auto}
+  .hero-player{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:16/9;
+    border:1px solid var(--line2);background:var(--panel);
+    box-shadow:0 50px 120px -30px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.04)}
+  .hero-player-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+  @media(max-width:900px){.hero-player{border-radius:14px}}
+
   .citem{flex:0 0 auto;width:430px;transition:transform .35s cubic-bezier(.22,.9,.32,1),opacity .35s,filter .35s;cursor:pointer}
-  .citem:hover{transform:scale(1.08) translateY(-10px);z-index:5}
-  .track:has(.citem:hover) .citem:not(:hover){transform:scale(.9);opacity:.5;filter:blur(1px)}
   .cc{border-radius:12px;overflow:hidden;background:var(--panel);box-shadow:0 20px 50px -24px rgba(0,0,0,.6)}
   .cc .pv{height:220px;display:grid;place-items:center;color:#fff;font-weight:600;font-size:15px;position:relative;background-size:cover;background-position:center}
   .cc .pv::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent,rgba(0,0,0,.32))}
@@ -177,7 +226,7 @@ const showcaseItems = showcaseSlugs
   .rr-tag{font-family:var(--mono);font-size:10px;color:var(--dim);background:rgba(255,255,255,.05);border:1px solid var(--line);padding:2px 8px;border-radius:999px}
 
   /* ===== HOW IT WORKS — auto-advancing tabs ===== */
-  .howgrid{display:grid;grid-template-columns:.85fr 1.15fr;gap:64px;align-items:center}
+  .howgrid{display:grid;grid-template-columns:.85fr 1.15fr;gap:110px;align-items:center}
   .how-left h2{font-size:38px;font-weight:600;letter-spacing:-.03em;margin:14px 0 12px;color:#fff;line-height:1.15;text-align:left}
   .how-left p.hlead{color:var(--mut);font-size:16px;line-height:1.6;max-width:420px}
   .how-steps{margin-top:38px;display:flex;flex-direction:column}
@@ -277,6 +326,12 @@ const showcaseItems = showcaseSlugs
   .showcase-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px 20px}
   .showcase-grid .citem{width:auto}
   .showcase-grid .cc .pv{height:200px;padding:14px;background-color:#0a0a0f;background-origin:content-box;background-clip:content-box}
+  /* .webm covers render as a real <video>, not a background-image — without
+     an explicit size, a video's native pixel dimensions become its min-content
+     size, which blows out the grid track (this is what broke the showcase
+     grid: one huge card instead of 3 columns). object-fit:cover + 100%/100%
+     pins it to the same box the background-image covers already sit in. */
+  .pv-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
   #tier.wrap{padding-left:20px;padding-right:20px}
   .showcase-grid .citem:hover{transform:none;opacity:1;filter:none}
   .scard .cc{position:relative}
@@ -307,7 +362,7 @@ const showcaseItems = showcaseSlugs
     border:1px solid var(--line2);border-radius:6px;padding:3px 9px;font-size:10.5px;color:#fff;white-space:nowrap;z-index:5}
   .pd-card{position:relative;border:1px solid var(--line2);border-radius:20px;overflow:hidden;background:#0a0a0f}
   .pd-card-body{padding:8px}
-  .pd-preview-lg{aspect-ratio:16/9;border-radius:14px;background-size:cover;background-position:center;background-color:#0a0a0f;width:100%}
+  .pd-preview-lg{aspect-ratio:16/9;border-radius:14px;background-size:cover;background-position:center;background-color:#0a0a0f;width:100%;object-fit:cover;display:block}
   .pd-tabpanel[hidden]{display:none}
   .pd-prompt-panel{aspect-ratio:16/9;overflow-y:auto;padding:22px 24px;background:var(--panel);border:1px solid var(--line);border-radius:14px}
   .pd-code{padding:0;background:none;border:none;font-size:13px}
@@ -359,7 +414,7 @@ const showcaseItems = showcaseSlugs
     -webkit-mask-image:radial-gradient(ellipse 70% 70% at 20% 50%,#000 20%,transparent 75%);
     mask-image:radial-gradient(ellipse 70% 70% at 20% 50%,#000 20%,transparent 75%)}
   .why-left .eyebrow{position:relative;z-index:1;display:block;margin-bottom:14px}
-  .why-left h2{position:relative;z-index:1;font-size:46px;font-weight:600;letter-spacing:-.03em;line-height:1.15;color:#fff;text-align:left}
+  .why-left h2{position:relative;z-index:1;font-size:46px;font-weight:600;letter-spacing:-.03em;line-height:1.15;color:#fff;text-align:left;max-width:460px;text-wrap:balance}
   .why-right{display:flex;flex-direction:column}
   .why-row{display:flex;flex-direction:column;align-items:flex-start;gap:10px;padding:34px 16px;
     border-bottom:1px solid var(--line);transition:background .25s;border-radius:0}
@@ -374,7 +429,7 @@ const showcaseItems = showcaseSlugs
 
   section.sec{padding:130px 0}
   .shead{text-align:center;max-width:660px;margin:0 auto 60px}
-  .shead h2{font-size:46px;font-weight:600;letter-spacing:-.03em;margin:14px 0 14px;line-height:1.1}
+  .shead h2{font-size:46px;font-weight:600;letter-spacing:-.03em;margin:14px 0 14px;line-height:1.1;text-wrap:balance}
   .shead p{font-size:18px;color:var(--mut)}
   .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
   .step{border:1px solid var(--line);border-radius:16px;padding:32px;background:var(--panel);transition:.2s;position:relative;overflow:hidden}
@@ -400,6 +455,103 @@ const showcaseItems = showcaseSlugs
   .q summary .plus{color:var(--dim);font-weight:300;font-size:22px;line-height:1;transition:transform .25s;flex:0 0 auto}
   .q[open] summary .plus{transform:rotate(45deg)}
   .q p{padding:0 4px 28px;color:var(--mut);font-size:15.5px;line-height:1.7;max-width:640px}
+  /* ===== objections — the three ways someone gets a landing page ===== */
+  .cmp{border:1px solid var(--line);border-radius:20px;overflow:hidden;background:var(--panel)}
+  .cmp-row{display:grid;grid-template-columns:1.1fr 1fr 1fr 1.15fr;align-items:stretch}
+  .cmp-row+.cmp-row{border-top:1px solid var(--line)}
+  .cmp-cell{padding:20px 22px;font-size:14.5px;color:var(--mut);line-height:1.5;min-width:0}
+  .cmp-cell+.cmp-cell{border-left:1px solid var(--line)}
+  .cmp-cell.us{background:linear-gradient(180deg,rgba(168,85,247,.09),transparent);color:var(--ink)}
+  .cmp-row.head .cmp-cell{padding:22px;font-family:var(--mono);font-size:11px;letter-spacing:.07em;
+    text-transform:uppercase;color:var(--dim);background:var(--panel2)}
+  .cmp-row.head .cmp-cell.us{color:var(--b);background:rgba(168,85,247,.12)}
+  .cmp-what{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--dim)}
+  .cmp-cell b{color:#fff;font-weight:600}
+  .cmp-mob{display:none}
+  @media(max-width:900px){
+    /* four columns can't survive a phone; stack one metric per card instead */
+    .cmp{border:none;background:none}
+    .cmp-row,.cmp-row.head{display:none}
+    .cmp-mob{display:grid;gap:14px}
+    .cmp-card{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--panel)}
+    .cmp-card>.cmp-what{display:block;padding:14px 18px;background:var(--panel2);border-bottom:1px solid var(--line)}
+    .cmp-line{display:flex;justify-content:space-between;gap:14px;padding:13px 18px;font-size:14px;color:var(--mut)}
+    .cmp-line+.cmp-line{border-top:1px solid var(--line)}
+    .cmp-line.us{background:rgba(168,85,247,.09);color:var(--ink)}
+    .cmp-line span:first-child{font-family:var(--mono);font-size:11px;letter-spacing:.06em;
+      text-transform:uppercase;color:var(--dim);flex:0 0 auto;padding-top:2px}
+    .cmp-line.us span:first-child{color:var(--b)}
+    .cmp-line span:last-child{text-align:right}
+  }
+
+  /* ===== the problem — persona pain points in a bordered card, then the shared enemy ===== */
+  .problem-head{text-align:center;max-width:640px;margin:0 auto 48px}
+  .problem-head h2{font-size:40px;font-weight:600;letter-spacing:-.03em;line-height:1.2;margin:14px 0 16px}
+  .problem-head h2 em{font-style:normal;color:#fff;font-weight:600}
+  .problem-head p{font-size:16.5px;color:var(--mut)}
+  .problem-card{border:1px solid var(--line);border-radius:20px;overflow:hidden;background:var(--panel)}
+  .problem-grid{display:grid;grid-template-columns:repeat(3,1fr)}
+  .problem-col{padding:30px 28px}
+  .problem-col+.problem-col{border-left:1px solid var(--line)}
+  .problem-badge{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;
+    padding:6px 13px;border-radius:999px;margin-bottom:22px;
+    color:#fb7185;background:rgba(251,113,133,.12);border:1px solid rgba(251,113,133,.25)}
+  .problem-badge svg{width:13px;height:13px;flex:0 0 auto}
+  .problem-stat{font-size:19px;font-weight:600;color:#fff;letter-spacing:-.01em;line-height:1.3;margin-bottom:14px}
+  .problem-note{font-size:14.5px;color:var(--mut);line-height:1.6}
+  .problem-note b{color:var(--ink);font-weight:600}
+  .problem-foot{display:flex;align-items:center;justify-content:center;gap:9px;text-align:center;padding:20px 28px;
+    background:var(--panel2);border-top:1px solid var(--line);font-size:14px;color:var(--mut)}
+  .problem-foot svg{width:17px;height:17px;color:#f43f5e;flex:0 0 auto}
+
+  /* ===== prompt-gap — big statement, pinned while its words reveal on scroll ===== */
+  .promptgap{position:relative;height:220vh}
+  .promptgap-sticky{position:sticky;top:0;height:100vh;display:flex;align-items:center;justify-content:center;padding:0 28px}
+  .promptgap-text{max-width:920px;text-align:center;font-size:44px;font-weight:600;letter-spacing:-.03em;line-height:1.35}
+  .pg-word{display:inline-block;color:#fff;opacity:0;filter:blur(8px);transform:translateY(6px);
+    transition:opacity .5s ease,filter .5s ease,transform .5s ease}
+  .pg-word.on{opacity:1;filter:blur(0);transform:translateY(0)}
+  @media(prefers-reduced-motion:reduce){.pg-word{transition:none}}
+  @media(max-width:900px){
+    .problem-head h2{font-size:27px}
+    .problem-grid{grid-template-columns:1fr}
+    .problem-col+.problem-col{border-left:none;border-top:1px solid var(--line)}
+    .promptgap{height:180vh}
+    .promptgap-text{font-size:26px;max-width:100%}
+  }
+
+  /* pricing cards — mirrored verbatim from billing.astro so the homepage and the
+     upgrade screen can never drift apart. Change one, change the other. */
+  @property --bangle{syntax:'<angle>';inherits:false;initial-value:0deg}
+  .plan-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;max-width:820px;margin:0 auto}
+  .plan-card{border:1px solid var(--line2);border-radius:20px;padding:32px;background:var(--panel);position:relative;display:flex;flex-direction:column;text-align:left}
+  .plan-card.accent{border-color:transparent;background:linear-gradient(160deg,rgba(168,85,247,.18),var(--panel) 60%);box-shadow:0 34px 80px -36px var(--v)}
+  .plan-card.accent::before{content:"";position:absolute;inset:0;border-radius:20px;padding:1.5px;pointer-events:none;
+    background:conic-gradient(from var(--bangle,0deg),transparent 0deg,transparent 265deg,var(--b) 300deg,var(--v2) 328deg,transparent 355deg);
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;
+    animation:planCtaBorder 5s linear infinite}
+  @keyframes planCtaBorder{to{--bangle:360deg}}
+  @media(prefers-reduced-motion:reduce){.plan-card.accent::before{animation:none}}
+  .plan-top h3{font-size:18px;font-weight:600;color:#fff;margin-bottom:10px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .badge-pop{font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.03em;color:#fff;
+    background:linear-gradient(100deg,var(--v),var(--p) 48%,var(--b));border-radius:999px;padding:4px 10px;line-height:1}
+  .plan-caption-top{margin:0 0 18px}
+  .plan-price{font-size:38px;font-weight:600;letter-spacing:-.02em;color:#fff;line-height:1}
+  .plan-price span{font-size:16px;font-weight:500;color:var(--mut)}
+  .plan-price .was{font-size:22px;font-weight:500;color:var(--dim);text-decoration:line-through;margin-right:8px}
+  .plan-caption{font-size:13px;color:var(--dim);margin-top:8px}
+  .plan-cta{width:100%;justify-content:center;margin-top:26px;margin-bottom:26px}
+  .grad-cta{background:linear-gradient(100deg,var(--v),var(--p) 48%,var(--b));color:#fff;box-shadow:0 10px 30px -12px rgba(168,85,247,.5)}
+  .grad-cta:hover{transform:translateY(-2px);box-shadow:0 14px 36px -12px rgba(168,85,247,.65)}
+  .plan-list{border-top:1px solid var(--line);padding-top:20px;margin-top:auto}
+  .plan-list-label{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);display:block;margin-bottom:14px}
+  .plan-list ul{list-style:none;display:grid;gap:11px}
+  .plan-list li{display:flex;align-items:flex-start;gap:10px;color:var(--mut);font-size:14.5px;line-height:1.4}
+  .plan-list li .lucide{width:15px;height:15px;color:var(--v);flex:0 0 auto;margin-top:2px}
+  .plan-foot{text-align:center;color:var(--dim);font-size:13.5px;margin-top:26px}
+  .plan-foot b{color:var(--mut);font-weight:500}
+  @media(max-width:760px){.plan-grid{grid-template-columns:1fr}.plan-card{padding:26px}}
+
   .bigcta{border-radius:26px;padding:90px 30px 130px;text-align:center;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.08);
     background:url('/assets/cta.png');background-size:cover;background-position:center bottom 44px}
   @property --bangle{syntax:'<angle>';inherits:false;initial-value:0deg}
@@ -444,6 +596,7 @@ const showcaseItems = showcaseSlugs
     .foot-brand{grid-column:1 / -1}
     .fh-demo{flex-direction:column;border-left:0;border-top:1px solid var(--line)}
     .howgrid,.whygrid{grid-template-columns:1fr}
+    .howgrid{gap:48px}
     .how-right{min-height:340px}
     .how-left h2,.why-left h2{font-size:30px;text-align:center}
     .how-left p.hlead{margin:0 auto;text-align:center}
@@ -451,11 +604,6 @@ const showcaseItems = showcaseSlugs
     .why-row{align-items:center;text-align:center}
     .showcase-grid{grid-template-columns:1fr}
     .showcase-grid .cc .pv{height:220px}
-    .tools-fly{height:380vh}
-    .tf-msg{font-size:26px}
-    .tf-eyebrow{transform:translate(-50%,-64px)}
-    .tf-field{--r:170px}
-    .tf-icon{width:38px;height:38px;left:-19px;font-size:14px}
     .navlinks,.navcta .btn{display:none} .burger{display:grid;place-items:center}
     .shead h2{font-size:30px}.bigcta h2{font-size:30px} section.sec{padding:88px 0}
     .carhead h2{font-size:26px}
@@ -515,55 +663,113 @@ const showcaseItems = showcaseSlugs
 
 <nav>
   <div class="wrap nav">
-    <div class="logo">esprompt</div>
-    <div class="navlinks"><a href="#features" data-alt="Fitur">Features</a><a href="#tier" data-alt="Showcase">Showcase</a><a href="#how" data-alt="Cara Kerja">How it works</a><a href="#tools" data-alt="Integrasi">Integrations</a><a href="#why" data-alt="Kenapa esprompt">Why esprompt</a><a href="#faq">FAQ</a></div>
+    <a class="logo" href="/">esprompt</a>
+    <div class="navlinks"><a href="#features" data-alt="Fitur">Features</a><a href="#tier" data-alt="Showcase">Showcase</a><a href="#how" data-alt="Cara Kerja">How it works</a><a href="#faq">FAQ</a></div>
     <div class="navcta"><a class="login" onclick="openAuthModal('login')" data-alt="Masuk">Log In</a><a class="btn primary" href="/library?tier=Full%20LP" data-alt="Buka Library">Go to Library</a></div>
-    <button class="burger" onclick="alert('Mobile menu')">≡</button>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobnav" onclick="toggleMobNav()">≡</button>
   </div>
 </nav>
+
+<div class="mobnav" id="mobnav">
+  <a href="#features" data-alt="Fitur">Features</a>
+  <a href="#tier" data-alt="Showcase">Showcase</a>
+  <a href="#how" data-alt="Cara Kerja">How it works</a>
+  <a href="#faq">FAQ</a>
+  <div class="mobnav-cta">
+    <a class="login" onclick="closeMobNav();openAuthModal('login')" data-alt="Masuk">Log In</a>
+    <a class="btn primary" href="/library?tier=Full%20LP" data-alt="Buka Library">Go to Library</a>
+  </div>
+</div>
 
 <header class="hero">
   <div class="wrap hcontent">
     <span class="eyebrow" data-alt="Baru &middot; katalog prompt buat pemula &rarr;">New &middot; prompt library for beginners &rarr;</span>
     <h1 data-alt='Prompt jadi UI,<br>dalam sekali copy.'>Prompts into UI,<br>in a single copy.</h1>
-    <p class="lead" data-alt="Ribuan prompt hero, section, &amp; full landing page yang sudah dikurasi. Copy, tempel ke Cursor / v0 / Lovable, dan biarkan AI yang bekerja.">Thousands of curated hero, section &amp; full landing page prompts. Copy, paste into Cursor / v0 / Lovable, and let the AI do the work.</p>
+    <p class="lead" data-alt="50 prompt hero &amp; full landing page yang sudah dikurasi. Copy, tempel ke Cursor / v0 / Lovable, dan biarkan AI yang bekerja.">50 curated hero and full landing page prompts. Copy, paste into Cursor / v0 / Lovable, and let the AI do the work.</p>
     <div class="heroctas">
       <a class="btn primary" href="/library" data-alt="Jelajahi katalog">Browse the Library</a>
       <a class="btn ghost" href="#how" data-alt="Lihat cara kerja →">See How It Works →</a>
     </div>
   </div>
 
-  <div class="carwrap">
-    <div class="carousel">
-      <div class="track" id="track">
-        <div class="citem"><div class="cc"><div class="pv" style="background-image:url('/assets/showcase/candor.png')"></div></div><div class="ccap"><span class="name">Aurora Hero</span><span class="count">Hero</span></div></div>
-        <div class="citem"><div class="cc"><div class="pv" style="background-image:url('/assets/showcase/wellspring.png')"></div></div><div class="ccap"><span class="name">Pricing Pro</span><span class="count">Section</span></div></div>
-        <div class="citem"><div class="cc"><div class="pv" style="background-image:url('/assets/showcase/aethera.png')"></div></div><div class="ccap"><span class="name">Studio Full</span><span class="count">Full LP</span></div></div>
-        <div class="citem"><div class="cc"><div class="pv" style="background-image:url('/assets/showcase/pylon.png')"></div></div><div class="ccap"><span class="name">Fintech Hero</span><span class="count">Hero</span></div></div>
-        <div class="citem"><div class="cc"><div class="pv" style="background-image:url('/assets/showcase/modex.png')"></div></div><div class="ccap"><span class="name">Bento Feat</span><span class="count">Section</span></div></div>
-        <div class="citem"><div class="cc"><div class="pv" style="background-image:url('/assets/showcase/kilt.png')"></div></div><div class="ccap"><span class="name">Folio Dark</span><span class="count">Full LP</span></div></div>
-        <div class="citem"><div class="cc"><div class="pv" style="background-image:url('/assets/showcase/vris-r1.png')"></div></div><div class="ccap"><span class="name">Web3 Neon</span><span class="count">Hero</span></div></div>
-        <div class="citem"><div class="cc"><div class="pv" style="background-image:url('/assets/showcase/vox.png')"></div></div><div class="ccap"><span class="name">CTA Glow</span><span class="count">Section</span></div></div>
-      </div>
+  <div class="hero-player-wrap">
+    <div class="hero-player">
+      <video class="hero-player-video" src="/assets/herooo.mp4" autoplay muted loop playsinline></video>
     </div>
   </div>
 </header>
 
+<section class="proofbar" id="tools">
+  <div class="wrap">
+    <h2 class="pb-title" data-alt="Tempel ke tool AI yang sudah kamu pakai">Paste into the AI tool you already use</h2>
+  </div>
+  <div class="pb-marquee">
+    <div class="pb-track" id="pbTrack">
+      <span class="pb-logo"><img src="/assets/cursor.png" alt="Cursor" width="30" height="30"><span aria-hidden="true">Cursor</span></span>
+      <span class="pb-logo"><img src="/assets/v0.png" alt="v0" width="30" height="30"><span aria-hidden="true">v0</span></span>
+      <span class="pb-logo"><img src="/assets/lovable.png" alt="Lovable" width="30" height="30"><span aria-hidden="true">Lovable</span></span>
+      <span class="pb-logo"><img src="/assets/claude.png" alt="Claude" width="30" height="30"><span aria-hidden="true">Claude</span></span>
+      <span class="pb-logo"><img src="/assets/bolt.png" alt="Bolt" width="30" height="30"><span aria-hidden="true">Bolt</span></span>
+      <span class="pb-logo"><img src="/assets/windsurf.svg" alt="Windsurf" width="30" height="30"><span aria-hidden="true">Windsurf</span></span>
+      <span class="pb-logo"><img src="/assets/openai.png" alt="OpenAI" width="30" height="30"><span aria-hidden="true">OpenAI</span></span>
+      <span class="pb-logo"><img src="/assets/vercel.png" alt="Vercel" width="30" height="30"><span aria-hidden="true">Vercel</span></span>
+    </div>
+  </div>
+
+</section>
+
+<section id="problem" class="sec wrap">
+  <div class="problem-head">
+    <span class="eyebrow" data-alt="Masalahnya">The problem</span>
+    <h2 data-alt="Setiap AI builder ngira prompt kamu udah bilang <em>semua yang perlu dia tahu</em>.">Every AI builder assumes your prompt already says <em>everything it needs to know</em>.</h2>
+    <p data-alt="Nggak. Itu masalahnya.">It doesn't. That's the entire problem.</p>
+  </div>
+
+  <div class="problem-card">
+    <div class="problem-grid">
+      <div class="problem-col">
+        <span class="problem-badge"><svg class="lucide" viewBox="0 0 24 24"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg><span data-alt="Marketer">Marketer</span></span>
+        <p class="problem-stat" data-alt="Lima varian, due minggu ini.">Five variants, due this week.</p>
+        <p class="problem-note" data-alt="Kamu butuh lima varian landing page minggu ini. Yang datang satu, minggu depan. <b>Brief-nya lebih cepat dari prompt satu kalimat.</b>">You need five landing page variants this week. You get one, next week. <b>The brief moves faster than a one-line prompt ever could.</b></p>
+      </div>
+      <div class="problem-col">
+        <span class="problem-badge"><svg class="lucide" viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg><span data-alt="Founder">Founder</span></span>
+        <p class="problem-stat" data-alt="Umurnya tiga bulan. Masih belum punya halaman.">Three months old. Still no page.</p>
+        <p class="problem-note" data-alt="Ide kamu umurnya udah tiga bulan. Sampai sekarang belum punya halaman. <b>Setiap revisi mulai lagi dari prompt kosong.</b>">Your idea is three months old. It still doesn't have a page. <b>Every rewrite starts from a blank prompt.</b></p>
+      </div>
+      <div class="problem-col">
+        <span class="problem-badge"><svg class="lucide" viewBox="0 0 24 24"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 22C6.5 22 2 17.5 2 12S6.5 2 12 2s10 3.9 10 8.5c0 2.5-2 4.5-4.5 4.5H15c-.5 0-1 .5-1 1 0 .3.1.5.3.7.5.6.7 1.2.7 1.8 0 1.2-1 2-2 2Z"/></svg><span data-alt="Desainer">Designer</span></span>
+        <p class="problem-stat" data-alt="Revisi kesembilan. Fee-nya tetap segitu.">Revision nine. Same fee.</p>
+        <p class="problem-note" data-alt="Kamu lagi di revisi kesembilan. Fee-nya tetap segitu. <b>Prompt satu kalimat makan waktu sama kayak nggak ada prompt sama sekali.</b>">You're on revision nine. Same fee. <b>One-line prompts cost as much time as no prompt at all.</b></p>
+      </div>
+    </div>
+    <div class="problem-foot">
+      <svg class="lucide" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+      <span data-alt="Salah satu dari tiga ini mungkin familiar buat kamu.">One of these three probably sounds familiar.</span>
+    </div>
+  </div>
+</section>
+
+<section id="prompt-gap" class="promptgap">
+  <div class="promptgap-sticky">
+    <h2 class="promptgap-text">AI builders don't fail because the AI is dumb. They fail because your prompt is one sentence.</h2>
+  </div>
+</section>
 
 <section id="features" class="sec wrap">
-  <div class="shead"><span class="eyebrow" data-alt="Fitur">Features</span><h2 data-alt="Semua yang kamu butuh, dalam satu alur.">Everything you need, in one flow.</h2><p data-alt="Dari nemuin prompt yang pas, sampai generate hasil jadi, tanpa loncat-loncat tool.">From finding the right prompt to a finished result, without hopping between tools.</p></div>
+  <div class="shead"><span class="eyebrow" data-alt="Isinya">What's inside</span><h2 data-alt="Jadi versi panjangnya kami yang tulis.">So we wrote the long version for you.</h2><p data-alt="50 prompt, masing-masing sepanjang brief desain. Tinggal pilih, copy, tempel.">50 prompts, each one as long as a design brief. Pick one, copy it, paste it.</p></div>
 
   <div class="fgrid">
    <div class="frow frow-1">
     <div class="fcard fcard-hero">
       <div class="fh-text">
-        <h3 data-alt="Library 120+ komponen, siap copy">A 120+ component library, ready to copy</h3>
+        <h3 data-alt="50 prompt terkurasi, siap copy">50 curated prompts, ready to copy</h3>
         <p data-alt="Jelajahi hero section, pricing table, dashboard, dan banyak lagi. Semua komponen siap prompt: tinggal pilih, copy, langsung pakai di AI tool kamu.">Browse hero sections, pricing tables, dashboards, and more. Every component is prompt-ready: pick one, copy it, and drop it straight into your AI tool.</p>
       </div>
 
       <div class="fh-demo">
         <div class="fh-flow" id="fhFlow"></div>
-        <span class="fh-badge" data-alt="120+ komponen">120+ components</span>
+        <span class="fh-badge" data-alt="50 prompt">50 prompts</span>
       </div>
     </div>
    </div>
@@ -589,14 +795,15 @@ const showcaseItems = showcaseSlugs
       <div class="fcard-visual">
         <div class="searchbar"><span class="sb-ic">⌕</span><span id="searchType" class="sb-type"></span><span class="sb-cursor">|</span></div>
         <div class="resrows" id="resrows">
-          <div class="rrow"><span class="rr-ic" style="background:rgba(255,255,255,.08)"><svg class="lucide" viewBox="0 0 24 24"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 22C6.5 22 2 17.5 2 12S6.5 2 12 2s10 3.9 10 8.5c0 2.5-2 4.5-4.5 4.5H15c-.5 0-1 .5-1 1 0 .3.1.5.3.7.5.6.7 1.2.7 1.8 0 1.2-1 2-2 2Z"/></svg></span><span class="rr-name">Aurora Hero</span><span class="rr-tag">Hero</span></div>
-          <div class="rrow"><span class="rr-ic" style="background:rgba(255,255,255,.08)"><svg class="lucide" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg></span><span class="rr-name">Pricing Pro</span><span class="rr-tag">Section</span></div>
-          <div class="rrow"><span class="rr-ic" style="background:rgba(255,255,255,.08)"><svg class="lucide" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg></span><span class="rr-name">Studio Full</span><span class="rr-tag">Full LP</span></div>
+          <div class="rrow"><span class="rr-ic" style="background:rgba(255,255,255,.08)"><svg class="lucide" viewBox="0 0 24 24"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 22C6.5 22 2 17.5 2 12S6.5 2 12 2s10 3.9 10 8.5c0 2.5-2 4.5-4.5 4.5H15c-.5 0-1 .5-1 1 0 .3.1.5.3.7.5.6.7 1.2.7 1.8 0 1.2-1 2-2 2Z"/></svg></span><span class="rr-name">Candor</span><span class="rr-tag">Full LP</span></div>
+          <div class="rrow"><span class="rr-ic" style="background:rgba(255,255,255,.08)"><svg class="lucide" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg></span><span class="rr-name">Pylon</span><span class="rr-tag">Hero</span></div>
+          <div class="rrow"><span class="rr-ic" style="background:rgba(255,255,255,.08)"><svg class="lucide" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg></span><span class="rr-name">Aethera</span><span class="rr-tag">Full LP</span></div>
         </div>
       </div>
     </div>
    </div>
   </div>
+
 </section>
 
 <section id="tier" class="sec wrap">
@@ -605,12 +812,22 @@ const showcaseItems = showcaseSlugs
     {showcaseItems.map((item) => (
       <div class="citem scard">
         <div class="cc">
-          <div class="pv" style={`background-image:url('/assets/showcase/${item.thumbnail}')`}>
-            <div class="pv-overlay">
-              <button class="pv-btn copy" data-prompt={item.prompt} data-slug={item.slug}><svg class="lucide pv-copy-icon" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span>Copy Prompt</span></button>
-              <button class="pv-btn ghost view" data-slug={item.slug}><svg class="lucide" viewBox="0 0 24 24"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg><span>View Detail</span></button>
+          {isVideoThumb(item.thumbnail) ? (
+            <div class="pv">
+              <video class="pv-video" src={thumbUrl(item.thumbnail)} muted loop playsinline autoplay></video>
+              <div class="pv-overlay">
+                <button class="pv-btn copy" data-slug={item.slug}><svg class="lucide pv-copy-icon" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span>Copy Prompt</span></button>
+                <button class="pv-btn ghost view" data-slug={item.slug}><svg class="lucide" viewBox="0 0 24 24"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg><span>View Detail</span></button>
+              </div>
             </div>
-          </div>
+          ) : (
+            <div class="pv" style={`background-image:url('${thumbUrl(item.thumbnail)}')`}>
+              <div class="pv-overlay">
+                <button class="pv-btn copy" data-slug={item.slug}><svg class="lucide pv-copy-icon" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span>Copy Prompt</span></button>
+                <button class="pv-btn ghost view" data-slug={item.slug}><svg class="lucide" viewBox="0 0 24 24"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg><span>View Detail</span></button>
+              </div>
+            </div>
+          )}
         </div>
         <div class="ccap"><span class="name">{item.title}</span><span class="count">{item.tier} - {item.category}</span></div>
       </div>
@@ -642,13 +859,13 @@ const showcaseItems = showcaseSlugs
     <div class="how-left">
       <span class="eyebrow" data-alt="Cara Kerja">How it works</span>
       <h2 data-alt="Dari prompt ke halaman jadi.">From prompt to finished page.</h2>
-      <p class="hlead" data-alt="Nggak perlu ngerti kode. Kalau bisa copy-paste, kamu bisa pakai esprompt.">No coding required. If you can copy-paste, you can use esprompt.</p>
+      <p class="hlead" data-alt="Nggak perlu ngerti kode. Kalau bisa copy-paste, kamu bisa pakai esprompt. Rata-rata satu prompt panjangnya <b>1.700 kata</b> &mdash; bagian yang biasanya makan waktu semalaman kalau kamu tulis sendiri.">No coding required. If you can copy-paste, you can use esprompt. The prompts average <b>1,700 words</b> &mdash; the part that would otherwise cost you an evening.</p>
       <div class="how-steps" id="howSteps">
         <div class="how-step active" data-panel="howPanel0">
           <div class="how-bar"><span class="how-fill"></span></div>
           <div class="how-step-text">
             <h4 data-alt="Pilih prompt">Pick a prompt</h4>
-            <p data-alt="Browse katalog hero, section, atau full landing page. Filter sesuai gaya visual yang kamu incar.">Browse hero, section, or full landing page prompts. Filter by the visual style you want.</p>
+            <p data-alt="Browse katalog hero atau full landing page. Filter sesuai gaya visual yang kamu incar.">Browse hero or full landing page prompts. Filter by the visual style you want.</p>
           </div>
         </div>
         <div class="how-step" data-panel="howPanel1">
@@ -719,30 +936,6 @@ const showcaseItems = showcaseSlugs
   </div>
 </section>
 
-<section class="tools-fly" id="tools">
-  <div class="tf-sticky">
-    <div class="tf-field">
-      <div class="tf-orbit" style="--delay:0s"><span class="tf-icon"><img src="/assets/cursor.png" alt="Cursor"></span></div>
-      <div class="tf-orbit" style="--delay:-2.4s"><span class="tf-icon"><img src="/assets/v0.png" alt="v0"></span></div>
-      <div class="tf-orbit" style="--delay:-4.8s"><span class="tf-icon"><img src="/assets/lovable.png" alt="Lovable"></span></div>
-      <div class="tf-orbit" style="--delay:-7.2s"><span class="tf-icon"><img src="/assets/claude.png" alt="Claude"></span></div>
-      <div class="tf-orbit" style="--delay:-9.6s"><span class="tf-icon"><img src="/assets/bolt.png" alt="Bolt"></span></div>
-      <div class="tf-orbit" style="--delay:-12s"><span class="tf-icon"><img src="/assets/openai.png" alt="OpenAI"></span></div>
-      <div class="tf-orbit" style="--delay:-14.4s"><span class="tf-icon"><img src="/assets/opencode.png" alt="OpenCode"></span></div>
-      <div class="tf-orbit" style="--delay:-16.8s"><span class="tf-icon"><img src="/assets/vercel.png" alt="Vercel"></span></div>
-      <div class="tf-orbit" style="--delay:-19.2s"><span class="tf-icon"><img src="/assets/cursor.png" alt="Cursor"></span></div>
-      <div class="tf-orbit" style="--delay:-21.6s"><span class="tf-icon"><img src="/assets/claude.png" alt="Claude"></span></div>
-    </div>
-    <div class="tf-center">
-      <span class="eyebrow tf-eyebrow" data-alt="Integrasi">Integrations</span>
-      <h2 class="tf-msg active" data-msg="a" data-alt="Gampang banget dipakai.<br>Nggak perlu bisa coding.">Easy to use.<br>No coding needed.</h2>
-      <h2 class="tf-msg" data-msg="b" data-alt="Copy prompt-nya. Tempel ke AI tool kamu.">Copy a prompt.<br>Paste it in your AI tool.</h2>
-      <h2 class="tf-msg" data-msg="c" data-alt="Jalan mulus di tool AI favoritmu.">Works with your<br>favorite AI tools.</h2>
-      <h2 class="tf-msg" data-msg="d" data-alt="Dari ide ke halaman jadi, dalam hitungan menit.">From idea to shipped page,<br>in minutes.</h2>
-    </div>
-  </div>
-</section>
-
 <section id="why" class="sec wrap">
   <div class="whygrid">
     <div class="why-left">
@@ -752,27 +945,146 @@ const showcaseItems = showcaseSlugs
     </div>
     <div class="why-right">
       <div class="why-row">
-        <span class="why-icon"><svg class="lucide" viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg></span>
-        <h4 data-alt="Founder non-teknis">Non-technical founders</h4>
-        <p data-alt="Punya ide tapi nggak ada tim dev? Copy prompt, tempel ke AI tool kamu, dan landing page-mu jadi hari ini juga.">Got an idea but no dev team? Copy a prompt, paste it into your AI tool, and your landing page ships today.</p>
+        <span class="why-icon"><svg class="lucide" viewBox="0 0 24 24"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 22C6.5 22 2 17.5 2 12S6.5 2 12 2s10 3.9 10 8.5c0 2.5-2 4.5-4.5 4.5H15c-.5 0-1 .5-1 1 0 .3.1.5.3.7.5.6.7 1.2.7 1.8 0 1.2-1 2-2 2Z"/></svg></span>
+        <h4 data-alt="Desainer">Designers</h4>
+        <p data-alt="Tunjukkan tiga arah ke klien di hari yang sama, bukan tiga minggu. Revisi kesembilan jadi revisi kedua.">Show the client three directions the same day, not in three weeks. Revision nine becomes revision two.</p>
       </div>
       <div class="why-row">
-        <span class="why-icon"><svg class="lucide" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></span>
-        <h4 data-alt="Pelajar &amp; self-taught learner">Students &amp; self-taught learners</h4>
-        <p data-alt="Masih belajar coding? Skip halaman kosong dan lihat gimana UI beneran dibangun, tinggal utak-atik sesuai maumu.">Still learning to code? Skip the blank page and see how a real, working UI is built, then tweak it your way.</p>
+        <span class="why-icon"><svg class="lucide" viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg></span>
+        <h4 data-alt="Founder non-teknis">Non-technical founders</h4>
+        <p data-alt="Ide yang umurnya tiga bulan itu punya halaman sore ini &mdash; tanpa tim dev, tanpa nunggu siapa pun.">That three-month-old idea has a page by this afternoon. No dev team, no waiting on anyone.</p>
       </div>
       <div class="why-row">
         <span class="why-icon"><svg class="lucide" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></span>
         <h4 data-alt="Vibe coder &amp; indie hacker">Vibe coders &amp; indie hackers</h4>
-        <p data-alt="Lagi bangun side project pake Cursor atau v0? Mulai lebih cepat dengan prompt yang udah teruji dan rapi.">Building side projects with Cursor or v0? Get a head start with prompts that are already tested and polished.</p>
+        <p data-alt="Berhenti membuang sore buat berdebat sama AI soal padding. Kirim side project-mu akhir pekan ini, bukan akhir bulan.">Stop losing an evening arguing with the AI about padding. Ship the side project this weekend, not this quarter.</p>
       </div>
       <div class="why-row">
         <span class="why-icon"><svg class="lucide" viewBox="0 0 24 24"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg></span>
         <h4 data-alt="Marketer &amp; creator">Marketers &amp; creators</h4>
-        <p data-alt="Butuh landing page buat launching atau campaign, cepat? Nggak perlu nunggu desainer. Copy, tempel, selesai.">Need a landing page for a launch or campaign, fast? No need to wait on a designer. Copy, paste, done.</p>
+        <p data-alt="Lima varian buat lima channel, semuanya hari ini. Uji mana yang menang sebelum campaign-nya jalan.">Five variants for five channels, all today. Test which one wins before the campaign goes live.</p>
       </div>
     </div>
   </div>
+</section>
+
+<section id="objections" class="sec wrap">
+  <div class="shead">
+    <span class="eyebrow" data-alt="Kenapa nggak yang lain">Why not the alternatives</span>
+    <h2 data-alt="Kenapa nggak pakai template gratis aja?">Why not just use a free template?</h2>
+    <p data-alt="Tiga cara buat dapat landing page. Ini bedanya, tanpa dibagusin.">There are three ways to get a landing page. Here's the difference, unvarnished.</p>
+  </div>
+
+  <div class="cmp">
+    <div class="cmp-row head">
+      <div class="cmp-cell"></div>
+      <div class="cmp-cell" data-alt="Template gratis">Free template</div>
+      <div class="cmp-cell" data-alt="Hire desainer">Hire a designer</div>
+      <div class="cmp-cell us">esprompt</div>
+    </div>
+    <div class="cmp-row">
+      <div class="cmp-cell"><span class="cmp-what" data-alt="Waktu sampai halaman jadi">Time to a live page</span></div>
+      <div class="cmp-cell" data-alt="Semalaman berantem sama theme">An afternoon fighting a theme</div>
+      <div class="cmp-cell" data-alt="<b>2&ndash;6 minggu</b>"><b>2&ndash;6 weeks</b></div>
+      <div class="cmp-cell us" data-alt="<b>Hitungan menit</b>, sejak di-paste"><b>Minutes</b>, from paste</div>
+    </div>
+    <div class="cmp-row">
+      <div class="cmp-cell"><span class="cmp-what" data-alt="Biaya">Cost</span></div>
+      <div class="cmp-cell" data-alt="$0&ndash;$60 per theme">$0&ndash;$60 per theme</div>
+      <div class="cmp-cell" data-alt="<b>$800&ndash;$3.000</b> per halaman"><b>$800&ndash;$3,000</b> per page</div>
+      <div class="cmp-cell us" data-alt="<b>$89 sekali</b>, buat 50 prompt"><b>$89 once</b>, all 50 prompts</div>
+    </div>
+    <div class="cmp-row">
+      <div class="cmp-cell"><span class="cmp-what" data-alt="Kontrol">Control</span></div>
+      <div class="cmp-cell" data-alt="Cuma sebatas yang theme izinkan">Only what the theme allows</div>
+      <div class="cmp-cell" data-alt="Lewat kalender orang lain">Through someone else's calendar</div>
+      <div class="cmp-cell us" data-alt="<b>Kodenya punya kamu.</b> Ubah apa pun"><b>It's your code.</b> Edit anything</div>
+    </div>
+    <div class="cmp-row">
+      <div class="cmp-cell"><span class="cmp-what" data-alt="Orisinalitas">Originality</span></div>
+      <div class="cmp-cell" data-alt="Dipakai bareng semua pembelinya">Shared with everyone who bought it</div>
+      <div class="cmp-cell" data-alt="Tinggi &mdash; kalau ketemu orang yang pas">High &mdash; if you find the right person</div>
+      <div class="cmp-cell us" data-alt="<b>Beda tiap generate</b>, spec-nya sama"><b>Different every run</b>, same spec</div>
+    </div>
+  </div>
+
+  <div class="cmp-mob">
+    <div class="cmp-card">
+      <span class="cmp-what" data-alt="Waktu sampai halaman jadi">Time to a live page</span>
+      <div class="cmp-line"><span data-alt="Template gratis">Free template</span><span data-alt="Semalaman berantem sama theme">An afternoon fighting a theme</span></div>
+      <div class="cmp-line"><span data-alt="Hire desainer">Hire a designer</span><span data-alt="<b>2&ndash;6 minggu</b>"><b>2&ndash;6 weeks</b></span></div>
+      <div class="cmp-line us"><span>esprompt</span><span data-alt="<b>Hitungan menit</b>, sejak di-paste"><b>Minutes</b>, from paste</span></div>
+    </div>
+    <div class="cmp-card">
+      <span class="cmp-what" data-alt="Biaya">Cost</span>
+      <div class="cmp-line"><span data-alt="Template gratis">Free template</span><span data-alt="$0&ndash;$60 per theme">$0&ndash;$60 per theme</span></div>
+      <div class="cmp-line"><span data-alt="Hire desainer">Hire a designer</span><span data-alt="<b>$800&ndash;$3.000</b> per halaman"><b>$800&ndash;$3,000</b> per page</span></div>
+      <div class="cmp-line us"><span>esprompt</span><span data-alt="<b>$89 sekali</b>, buat 50 prompt"><b>$89 once</b>, all 50 prompts</span></div>
+    </div>
+    <div class="cmp-card">
+      <span class="cmp-what" data-alt="Kontrol">Control</span>
+      <div class="cmp-line"><span data-alt="Template gratis">Free template</span><span data-alt="Cuma sebatas yang theme izinkan">Only what the theme allows</span></div>
+      <div class="cmp-line"><span data-alt="Hire desainer">Hire a designer</span><span data-alt="Lewat kalender orang lain">Through someone else's calendar</span></div>
+      <div class="cmp-line us"><span>esprompt</span><span data-alt="<b>Kodenya punya kamu.</b> Ubah apa pun"><b>It's your code.</b> Edit anything</span></div>
+    </div>
+    <div class="cmp-card">
+      <span class="cmp-what" data-alt="Orisinalitas">Originality</span>
+      <div class="cmp-line"><span data-alt="Template gratis">Free template</span><span data-alt="Dipakai bareng semua pembelinya">Shared with everyone who bought it</span></div>
+      <div class="cmp-line"><span data-alt="Hire desainer">Hire a designer</span><span data-alt="Tinggi &mdash; kalau ketemu orang yang pas">High &mdash; if you find the right person</span></div>
+      <div class="cmp-line us"><span>esprompt</span><span data-alt="<b>Beda tiap generate</b>, spec-nya sama"><b>Different every run</b>, same spec</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="harga" class="sec wrap">
+  <div class="shead">
+    <span class="eyebrow" data-alt="Harga">Pricing</span>
+    <h2 data-alt="Satu library. Dua cara memilikinya.">One library. Two ways to own it.</h2>
+    <p data-alt="Browsing dan mencari gratis, tanpa kartu. Bayar hanya kalau kamu mau copy prompt-nya.">Browsing and searching is free, no card required. You only pay when you want to copy the prompts.</p>
+  </div>
+
+  <div class="plan-grid">
+    <div class="plan-card">
+      <div class="plan-top">
+        <h3 data-alt="Yearly Access">Yearly Access</h3>
+        <p class="plan-caption plan-caption-top" data-alt="Akses prompt tanpa batas, ditagih tahunan">Unlimited prompt access, billed annually</p>
+        <div class="plan-price">$49<span>/yr</span></div>
+        <p class="plan-caption" data-alt="Per tahun, bisa berhenti kapan saja">Per year, cancel anytime</p>
+      </div>
+      <a class="btn primary plan-cta" href="/billing" data-alt="Langganan Tahunan">Subscribe Yearly</a>
+      <div class="plan-list">
+        <span class="plan-list-label" data-alt="Termasuk">Included</span>
+        <ul>
+          <li><svg class="lucide" viewBox="0 0 24 24"><path d={CHECK}/></svg><span data-alt="Prompt Hero &amp; Full LP tanpa batas">Unlimited Hero &amp; Full LP prompts</span></li>
+          <li><svg class="lucide" viewBox="0 0 24 24"><path d={CHECK}/></svg><span data-alt="Aset image &amp; video Hero">Hero image &amp; video assets</span></li>
+          <li><svg class="lucide" viewBox="0 0 24 24"><path d={CHECK}/></svg><span data-alt="Akses instan ke seluruh library">Instant access to the full library</span></li>
+          <li><svg class="lucide" viewBox="0 0 24 24"><path d={CHECK}/></svg><span data-alt="Prompt baru tiap bulan">New prompts added monthly</span></li>
+          <li><svg class="lucide" viewBox="0 0 24 24"><path d={CHECK}/></svg><span data-alt="Dukungan komunitas">Community support</span></li>
+          <li><svg class="lucide" viewBox="0 0 24 24"><path d={CHECK}/></svg><span data-alt="Dukungan prioritas">Priority support</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="plan-card accent">
+      <div class="plan-top">
+        <h3 data-alt="Lifetime Access <span class=&quot;badge-pop&quot;>Paling Populer</span>">Lifetime Access <span class="badge-pop">Most Popular</span></h3>
+        <p class="plan-caption plan-caption-top" data-alt="Akses prompt tanpa batas, selamanya">Unlimited prompt access, forever</p>
+        <div class="plan-price"><span class="was">$199</span> $89</div>
+        <p class="plan-caption" data-alt="Sekali bayar, akses selamanya">One-time payment, lifetime access</p>
+      </div>
+      <a class="btn primary plan-cta grad-cta" href="/billing" data-alt="Bayar Sekali, Akses Selamanya">Pay Once, Access Forever</a>
+      <div class="plan-list">
+        <span class="plan-list-label" data-alt="Semua isi Yearly, plus">Everything in Yearly, plus</span>
+        <ul>
+          <li><svg class="lucide" viewBox="0 0 24 24"><path d={CHECK}/></svg><span data-alt="Update selamanya, tanpa perpanjangan">Lifetime updates, no renewals</span></li>
+          <li><svg class="lucide" viewBox="0 0 24 24"><path d={CHECK}/></svg><span data-alt="Akses awal ke prompt &amp; fitur baru">Early access to new prompts &amp; features</span></li>
+          <li><svg class="lucide" viewBox="0 0 24 24"><path d={CHECK}/></svg><span data-alt="Harga launch terkunci">Locked-in launch price</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <p class="plan-foot" data-alt="Lifetime <b>$89</b> kira-kira setara satu jam kerja freelancer — untuk 46 halaman lainnya juga.">Lifetime at <b>$89</b> is about one hour of freelance design — for all 46 of the other pages too.</p>
 </section>
 
 <section id="faq" class="sec wrap">
@@ -781,20 +1093,19 @@ const showcaseItems = showcaseSlugs
     <details class="q" open><summary><span data-alt="esprompt itu apa?">What is esprompt?</span><span class="plus">+</span></summary><p data-alt="Katalog prompt untuk membuat UI. Pilih prompt hero/section/landing page, copy, tempel ke AI tool, hasilnya langsung jadi. Yang dijual adalah prompt-nya. Kamu yang generate.">A library of prompts for building UI. Pick a hero, section, or full landing page prompt, copy it, paste into an AI tool, and the result appears. We sell the prompts. You generate.</p></details>
     <details class="q"><summary><span data-alt="Perlu pengalaman coding?">Do I need coding experience?</span><span class="plus">+</span></summary><p data-alt="Nggak. Kalau bisa copy-paste, kamu bisa pakai esprompt. Nggak perlu paham React, HTML, atau istilah teknis lainnya.">No. If you can copy-paste, you can use esprompt. No need to understand React, HTML, or any technical jargon.</p></details>
     <details class="q"><summary><span data-alt="Tool apa saja yang didukung?">Which AI tools does it work with?</span><span class="plus">+</span></summary><p data-alt="Semua AI coding tool populer: Cursor, v0, Lovable, Claude, Bolt, Windsurf, dan lainnya. Prompt-nya universal, nggak terikat satu tool.">All popular AI coding tools: Cursor, v0, Lovable, Claude, Bolt, Windsurf, and more. The prompts are tool-agnostic.</p></details>
-    <details class="q"><summary><span data-alt="Apa bedanya Hero, Section, dan Full Landing Page?">What's the difference between Hero, Section, and Full Landing Page?</span><span class="plus">+</span></summary><p data-alt="Hero: satu section pembuka lengkap dengan aset image &amp; video. Section: satu bagian spesifik (pricing, testimonial, dll). Full Landing Page: prompt utuh untuk seluruh halaman sekaligus.">Hero: a single opening section, bundled with image &amp; video assets. Section: one specific block (pricing, testimonials, etc). Full Landing Page: one prompt that builds the entire page at once.</p></details>
+    <details class="q"><summary><span data-alt="Apa bedanya Hero dan Full Landing Page?">What's the difference between Hero and Full Landing Page?</span><span class="plus">+</span></summary><p data-alt="Hero: satu section pembuka saja, lengkap dengan aset image &amp; video siap pakai. Full Landing Page: satu prompt yang membangun seluruh halaman sekaligus, dari nav sampai footer.">Hero: the opening section only, bundled with ready-to-use image &amp; video assets. Full Landing Page: one prompt that builds the entire page at once, from nav to footer.</p></details>
     <details class="q"><summary><span data-alt="Aset image &amp; video-nya gimana?">Do Hero prompts include images and videos?</span><span class="plus">+</span></summary><p data-alt="Ya. Khusus item Hero, tersedia aset image &amp; video siap download, plus prompt aset-nya bila kamu ingin generate versi sendiri.">Yes. Hero items ship with downloadable image &amp; video assets, plus their asset prompts if you'd rather generate your own version.</p></details>
-    <details class="q"><summary><span data-alt="Bagaimana skema harganya?">How does pricing work?</span><span class="plus">+</span></summary><p data-alt="Kamu bisa mulai gratis buat coba-coba katalognya. Detail tier berbayar lagi difinalisasi dan akan diumumkan sebelum peluncuran.">You can start for free to try the library. Paid tier details are still being finalized and will be announced before launch.</p></details>
+    <details class="q"><summary><span data-alt="Bagaimana skema harganya?">How does pricing work?</span><span class="plus">+</span></summary><p data-alt="Browsing dan mencari seluruh katalog gratis, tanpa kartu. Buat copy prompt-nya, pilih salah satu: <b>Yearly $49/tahun</b> atau <b>Lifetime $89</b> sekali bayar (harga launch, normalnya $199). Keduanya membuka seluruh library plus aset image &amp; video Hero.">Browsing and searching the whole library is free, no card required. To copy the prompts, pick one: <b>Yearly at $49/year</b> or <b>Lifetime at $89</b> one-time (launch price, normally $199). Both unlock the entire library plus Hero image &amp; video assets.</p></details>
   </div>
 </section>
 
-<section id="harga" class="sec wrap">
+<section id="cta" class="sec wrap">
   <div class="bigcta">
     <span class="eyebrow" data-alt="Mulai">Get started</span>
-    <h2 data-alt="Berhenti browsing.<br>Mulai bikin.">Stop browsing.<br>Start building.</h2>
-    <p data-alt="Gratis buat mulai. Upgrade kapan pun kamu siap.">Free to start. Upgrade whenever you are ready.</p>
+    <h2 data-alt="Idemu masih nunggu<br>halamannya.">Your idea is still<br>waiting for its page.</h2>
+    <p data-alt="Prompt Pylon di atas gratis. Sisanya 46 lagi ada di dalam.">The Pylon prompt above is free. The other 46 are inside.</p>
     <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;position:relative">
-      <a class="btn primary" href="/library" data-alt="Mulai gratis">Start Free</a>
-      <a class="btn ghost" href="#tier" data-alt="Lihat showcase">View Showcase</a>
+      <a class="btn primary" href="/library" data-alt="Jelajahi katalog">Browse the Library</a>
     </div>
   </div>
 </section>
@@ -820,6 +1131,7 @@ const showcaseItems = showcaseSlugs
         <h5 data-alt="Pelajari">Learn</h5>
         <a href="#how" data-alt="Cara kerja">How it works</a>
         <a href="#tools" data-alt="Tools yang didukung">Compatible tools</a>
+        <a href="#why" data-alt="Kenapa esprompt">Why esprompt</a>
         <a href="#faq">FAQ</a>
       </div>
     </div>
@@ -885,15 +1197,27 @@ const showcaseItems = showcaseSlugs
 </div>
 
 <script is:inline>
+  /* The prompt text is stored once, in the .pd-code block of each item's detail
+     markup. Reading it back from there keeps a 1,700-word prompt out of a
+     duplicate data-prompt attribute — that duplication was most of the page weight. */
+  function espPromptText(btn){
+    const open=btn.closest('.prompt-detail')?.querySelector('.pd-code');
+    if(open) return open.textContent||'';
+    const tpl=document.getElementById('tpl-'+(btn.dataset.slug||''));
+    return tpl?.content.querySelector('.pd-code')?.textContent||'';
+  }
   /* scroll reveal: fade+rise elements in as each section enters view */
   const revealEls=[...document.querySelectorAll([
     '.hero .eyebrow','.hero h1','.hero .lead','.hero .heroctas',
+    '#problem .problem-head','#problem .problem-col','#problem .problem-foot',
     '#features .shead','#features .fcard',
     '#tier .shead','#tier .citem.scard','#tier .showcase-cta',
     '#how .how-left > *','#how .how-right',
     '#why .why-left','#why .why-row',
+    '#objections .shead','#objections .cmp','#objections .cmp-card',
     '#faq .shead','#faq .q',
-    '#harga .bigcta',
+    '#harga .shead','#harga .plan-card','#harga .plan-foot',
+    '#cta .bigcta',
     'footer .foot-brand','footer .foot-col','footer .foot-bottom'
   ].join(','))];
   const revealSet=new Set(revealEls);
@@ -909,14 +1233,81 @@ const showcaseItems = showcaseSlugs
   },{threshold:.12,rootMargin:'0px 0px -40px 0px'});
   revealEls.forEach(el=>revealIO.observe(el));
 
+  /* prompt-gap: the section is pinned (position:sticky) while the user scrolls through
+     its extra-tall wrapper; each word lights up in step with scroll progress instead of
+     the whole line fading in at once. Text lives here (not in data-alt) since toggleLang
+     swaps innerHTML wholesale and would blow away the per-word <span> wrapping. */
+  const PG_EN="AI builders don't fail because the AI is dumb. They fail because your prompt is one sentence.";
+  const PG_ID="AI builder gagal bukan karena AI-nya bodoh. Gagal karena prompt kamu cuma satu kalimat.";
+  function pgRender(){
+    const el=document.querySelector('.promptgap-text');
+    if(!el)return;
+    const words=(document.documentElement.lang==='id'?PG_ID:PG_EN).split(' ');
+    el.innerHTML=words.map(w=>`<span class="pg-word">${w}</span>`).join(' ');
+    pgUpdate();
+  }
+  function pgUpdate(){
+    const sec=document.querySelector('.promptgap');
+    if(!sec)return;
+    const rect=sec.getBoundingClientRect();
+    const scrollable=rect.height-window.innerHeight;
+    const progress=scrollable>0?Math.min(1,Math.max(0,-rect.top/scrollable)):0;
+    const words=document.querySelectorAll('.pg-word');
+    const activeCount=Math.round(progress*words.length);
+    words.forEach((w,i)=>w.classList.toggle('on',i<activeCount));
+  }
+  pgRender();
+  window.addEventListener('scroll',()=>requestAnimationFrame(pgUpdate),{passive:true});
+  window.addEventListener('resize',pgUpdate);
+
+  /* Jumping straight to an anchor lands past the observer's trigger window, so the
+     target section stays at opacity 0 — a blank screen. Reveal it immediately and
+     skip the stagger, since there is nothing to stagger into view. */
+  function revealSection(target){
+    if(!target)return;
+    revealEls.filter(el=>target.contains(el)).forEach(el=>{
+      el.style.transitionDelay='0ms';el.classList.add('in');revealIO.unobserve(el);
+    });
+  }
+  document.addEventListener('click',(e)=>{
+    const a=e.target.closest('a[href^="#"]');
+    if(!a)return;
+    const id=a.getAttribute('href').slice(1);
+    if(id)revealSection(document.getElementById(id));
+  });
+  window.addEventListener('hashchange',()=>revealSection(document.getElementById(location.hash.slice(1))));
+  if(location.hash)revealSection(document.getElementById(location.hash.slice(1)));
+
+  /* mobile nav drawer */
+  const mobnavEl=document.getElementById('mobnav');
+  const burgerEl=document.getElementById('burger');
+  function setMobNav(open){
+    mobnavEl.classList.toggle('open',open);
+    document.body.classList.toggle('navlock',open);
+    burgerEl.setAttribute('aria-expanded',String(open));
+    burgerEl.setAttribute('aria-label',open?'Close menu':'Open menu');
+    burgerEl.textContent=open?'×':'≡';
+  }
+  window.toggleMobNav=()=>setMobNav(!mobnavEl.classList.contains('open'));
+  window.closeMobNav=()=>setMobNav(false);
+  mobnavEl.querySelectorAll('a[href]').forEach(a=>a.addEventListener('click',()=>setMobNav(false)));
+  document.addEventListener('keydown',(e)=>{if(e.key==='Escape'&&mobnavEl.classList.contains('open'))setMobNav(false)});
+  /* resizing past the breakpoint hides the drawer but would leave the body scroll-locked */
+  window.addEventListener('resize',()=>{if(window.innerWidth>900&&mobnavEl.classList.contains('open'))setMobNav(false)});
+
   /* nav: transparent over hero, solid once scrolled */
   const navEl=document.querySelector('nav');
   function onScroll(){navEl.classList.toggle('scrolled',window.scrollY>24)}
   window.addEventListener('scroll',onScroll,{passive:true});
   onScroll();
-  /* seamless carousel: duplicate the track content once */
-  const track=document.getElementById('track');
-  track.innerHTML+=track.innerHTML;
+  /* proof-bar marquee: duplicate the logo row so the -50% loop is seamless.
+     Copies are decorative, so hide them from screen readers. */
+  const pbTrack=document.getElementById('pbTrack');
+  if(pbTrack){
+    const copy=pbTrack.cloneNode(true);
+    copy.querySelectorAll('img').forEach(img=>{img.alt='';img.setAttribute('aria-hidden','true')});
+    pbTrack.insertAdjacentHTML('beforeend',copy.innerHTML);
+  }
 
   /* showcase grid: "Live Preview" opens the same quick-preview modal used on
      /library — clones the matching <template>, ported verbatim from
@@ -960,7 +1351,7 @@ const showcaseItems = showcaseSlugs
     const copyBtn=e.target.closest('.pv-btn.copy');
     if(copyBtn){
       const doCopy=()=>{
-        navigator.clipboard?.writeText(copyBtn.dataset.prompt||'');
+        navigator.clipboard?.writeText(espPromptText(copyBtn));
         const label=copyBtn.querySelector('span');
         const original=label.textContent;
         label.textContent='Copied!';
@@ -1025,7 +1416,7 @@ const showcaseItems = showcaseSlugs
     const copyBtn=e.target.closest('.detail-copy-btn');
     if(copyBtn){
       const doCopy=()=>{
-        navigator.clipboard?.writeText(copyBtn.dataset.prompt||'');
+        navigator.clipboard?.writeText(espPromptText(copyBtn));
         flashAction(copyBtn,'Copying…','Copied');
       };
       if(espHasSession()) doCopy();
@@ -1058,8 +1449,8 @@ const showcaseItems = showcaseSlugs
   /* ===== features section: coverflow of component screenshots ===== */
   const fhFlow=document.getElementById('fhFlow');
   if(fhFlow){
-    const fhImgs=['proxim','luma','arlo','stillwave','apex','altr','aura','elan','vris-r1','vox'];
-    fhFlow.innerHTML=fhImgs.map(n=>`<div class="fh-slide" style="background-image:url('/assets/showcase/${n}.png')"></div>`).join('');
+    const fhImgs=['quorum.jpg','aura.png','modex.png','figureworld.jpg','velo.jpg'];
+    fhFlow.innerHTML=fhImgs.map(n=>`<div class="fh-slide" style="background-image:url('/assets/showcase/${n}')"></div>`).join('');
     const fhSlides=[...fhFlow.children];
     let fhActive=0;
     function fhRender(){
@@ -1079,7 +1470,7 @@ const showcaseItems = showcaseSlugs
   }
   const searchEl=document.getElementById('searchType');
   if(searchEl){
-    const queries=['aurora hero','pricing section','web3 landing page','fintech hero'];
+    const queries=['aurora hero','saas landing page','ecommerce full lp','fintech hero'];
     let qi=0;
     function typeQuery(){
       const q=queries[qi%queries.length];let j=0;
@@ -1246,28 +1637,14 @@ const showcaseItems = showcaseSlugs
     howRightEl.addEventListener('mouseleave',()=>howCycle());
   }
 
-  /* tools-fly: swap sticky headline as the user scrolls through the pinned section */
-  const toolsSection=document.querySelector('.tools-fly');
-  if(toolsSection){
-    const tfMsgs=[...toolsSection.querySelectorAll('.tf-msg')];
-    function onToolsScroll(){
-      const rect=toolsSection.getBoundingClientRect();
-      const runway=rect.height-window.innerHeight;
-      const progress=runway>0?Math.min(1,Math.max(0,-rect.top/runway)):0;
-      const idx=Math.min(tfMsgs.length-1,Math.floor(progress*tfMsgs.length));
-      tfMsgs.forEach((m,i)=>m.classList.toggle('active',i===idx));
-    }
-    window.addEventListener('scroll',onToolsScroll,{passive:true});
-    onToolsScroll();
-  }
-
   /* language */
   let ALT=false;
   const nodes=[...document.querySelectorAll('[data-alt]')];
   nodes.forEach(n=>n.dataset.en=n.innerHTML);
   function toggleLang(){ALT=!ALT;nodes.forEach(n=>n.innerHTML=ALT?n.dataset.alt:n.dataset.en);
     document.querySelectorAll('.lang-switch').forEach(l=>l.classList.toggle('alt',ALT));
-    document.documentElement.lang=ALT?'id':'en';}
+    document.documentElement.lang=ALT?'id':'en';
+    pgRender();}
 
   /* fake session, same UI-only pattern as AuthModal.astro (no backend):
      any submit "succeeds", so gated actions (like Copy Prompt) just need

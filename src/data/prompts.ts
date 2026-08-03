@@ -29,7 +29,6 @@ import proximPrompt from './full-prompts/proxim.md?raw';
 // synthesized from live DOM capture (get_page_text + accessibility tree +
 // computed-style probes), not short blurbs. arlo/vox share the same
 // generator family (ecommerce-landing.pages.dev) as the existing arlo entry.
-import vrisPrompt from './full-prompts/vris.md?raw';
 import thecityPrompt from './full-prompts/thecity.md?raw';
 import sahaMedicalPrompt from './full-prompts/saha-medical.md?raw';
 import edgehaulPrompt from './full-prompts/edgehaul.md?raw';
@@ -52,7 +51,6 @@ import vellumPrompt from './full-prompts/vellum.md?raw';
 import wayfarePrompt from './full-prompts/wayfare.md?raw';
 import candorPrompt from './full-prompts/candor.md?raw';
 import stillwavePrompt from './full-prompts/stillwave.md?raw';
-import figureworldPrompt from './full-prompts/figureworld.md?raw';
 
 // Hero-tier prompts — the hero-section-only excerpt lifted verbatim from each
 // matching full-landing prompt above (see new-prompts/hero/<slug>/prompt.md).
@@ -71,6 +69,31 @@ import trainfoldHeroPrompt from './hero-prompts/trainfold.md?raw';
 import veloHeroPrompt from './hero-prompts/velo.md?raw';
 import beyondHorizonHeroPrompt from './hero-prompts/beyond-horizon.md?raw';
 
+// Batch 5 — 6 more Hero-tier excerpts, same "lifted verbatim from the
+// matching Full LP prompt" rule as above, this time sourced from the batch
+// 3/4 MotionSites-style prompts (curalink/quorum/stillwave/figureworld/
+// thecity) or the long-form proxim brief. altr-watches and a from-scratch
+// "zenith" brand were left out of this batch — neither has an identifiable
+// hero section (or, for zenith, any prompt content) to extract from.
+import curalinkHeroPrompt from './hero-prompts/curalink.md?raw';
+import figureworldHeroPrompt from './hero-prompts/figureworld.md?raw';
+import proximHeroPrompt from './hero-prompts/proxim.md?raw';
+import quorumHeroPrompt from './hero-prompts/quorum.md?raw';
+import stillwaveHeroPrompt from './hero-prompts/stillwave.md?raw';
+import thecityHeroPrompt from './hero-prompts/thecity.md?raw';
+
+// A few Hero thumbnails are animated covers hotlinked from an external CDN
+// instead of a local file under /assets/showcase/ — this lets every render
+// site (library grid, detail page, modal, related-prompts) resolve either
+// kind from the same `thumbnail` field without duplicating the branch.
+export const thumbUrl = (thumbnail: string) =>
+  thumbnail.startsWith('http') ? thumbnail : `/assets/showcase/${thumbnail}`;
+
+// .webm covers are real video files (not CSS-background-friendly GIFs) — every
+// render site branches on this to swap in a lazy-started <video> instead of a
+// background-image div.
+export const isVideoThumb = (thumbnail: string) => /\.webm$/i.test(thumbnail);
+
 export type Tier = 'Hero' | 'Section' | 'Full LP';
 
 export interface PromptItem {
@@ -83,6 +106,9 @@ export interface PromptItem {
   imagePrompt?: string; // Hero tier only: prompt to generate the hero image asset
   videoPrompt?: string; // Hero tier only: prompt to generate the hero video asset
   heroAssets?: { file: string; type: 'image' | 'video' }[]; // Hero tier only: real downloadable files under /assets/hero-downloads/<slug>/
+  free?: boolean; // one of the 6 curated no-paywall samples (figureworld-hero, quorum-ai,
+  // curalink-telehealth, thecity-residences, stillwave-meditation, pylon-ai) — everything
+  // else in the catalog reads as Premium. Shown on the Hero/Landing library grid cards.
 }
 
 export const prompts: PromptItem[] = [
@@ -97,13 +123,13 @@ export const prompts: PromptItem[] = [
   { slug: 'serenity-hero', title: 'Serenity', tier: 'Hero', category: 'Health', thumbnail: 'serenity.jpg',
     prompt: serenityHeroPrompt,
     heroAssets: [{ file: 'hero-bg.png', type: 'image' }] },
-  { slug: 'elan-hero', title: 'Élan', tier: 'Hero', category: 'Ecom', thumbnail: 'elan.png',
+  { slug: 'elan-hero', title: 'Élan', tier: 'Hero', category: 'Ecom', thumbnail: 'http://beige-lemur-872571.hostingersite.com/asset-esprompt/preview-asset/hero/elan.webm',
     prompt: elanHeroPrompt,
     heroAssets: [{ file: 'elan.mp4', type: 'video' }] },
   { slug: 'kilt-hero', title: 'KILT', tier: 'Hero', category: 'Ecom', thumbnail: 'kilt.png',
     prompt: kiltHeroPrompt,
     heroAssets: [{ file: 'kilt-hero-model.png', type: 'image' }] },
-  { slug: 'aura-hero', title: 'Aura', tier: 'Hero', category: 'Ecom', thumbnail: 'aura.png',
+  { slug: 'aura-hero', title: 'Aura', tier: 'Hero', category: 'Ecom', thumbnail: 'http://beige-lemur-872571.hostingersite.com/asset-esprompt/preview-asset/hero/aura.webm',
     prompt: auraHeroPrompt,
     heroAssets: [{ file: 'hero-bg.png', type: 'image' }] },
   { slug: 'arlo-hero', title: 'Arlo', tier: 'Hero', category: 'Ecom', thumbnail: 'arlo.png',
@@ -120,24 +146,41 @@ export const prompts: PromptItem[] = [
       { file: 'luma-hero-2.png', type: 'image' },
       { file: 'luma-hero-3.png', type: 'image' },
     ] },
-  { slug: 'recall-hero', title: 'Recall', tier: 'Hero', category: 'SaaS', thumbnail: 'recall.jpg',
+  { slug: 'recall-hero', title: 'Recall', tier: 'Hero', category: 'SaaS', thumbnail: 'http://beige-lemur-872571.hostingersite.com/asset-esprompt/preview-asset/hero/recall.webm',
     prompt: recallHeroPrompt,
     heroAssets: [{ file: 'hero-new.mp4', type: 'video' }] },
   { slug: 'modex-hero', title: 'Modex', tier: 'Hero', category: 'Dev', thumbnail: 'modex.png',
     prompt: modexHeroPrompt,
     heroAssets: [{ file: 'Hero.png', type: 'image' }] },
-  { slug: 'pylon-hero', title: 'Pylon', tier: 'Hero', category: 'Dev', thumbnail: 'pylon.png',
+  { slug: 'pylon-hero', title: 'Pylon', tier: 'Hero', category: 'Dev', thumbnail: 'http://beige-lemur-872571.hostingersite.com/asset-esprompt/preview-asset/hero/pylon.webm',
     prompt: pylonHeroPrompt,
     heroAssets: [{ file: 'hero.mp4', type: 'video' }] },
-  { slug: 'trainfold-hero', title: 'Trainfold', tier: 'Hero', category: 'Dev', thumbnail: 'trainfold.jpg',
+  { slug: 'trainfold-hero', title: 'Trainfold', tier: 'Hero', category: 'Dev', thumbnail: 'http://beige-lemur-872571.hostingersite.com/asset-esprompt/preview-asset/hero/trainfold.webm',
     prompt: trainfoldHeroPrompt,
     heroAssets: [{ file: 'hero.mp4', type: 'video' }] },
-  { slug: 'velo-hero', title: 'VELO', tier: 'Hero', category: 'Product', thumbnail: 'velo.jpg',
+  { slug: 'velo-hero', title: 'VELO', tier: 'Hero', category: 'Product', thumbnail: 'http://beige-lemur-872571.hostingersite.com/asset-esprompt/preview-asset/hero/velo.webm',
     prompt: veloHeroPrompt,
     heroAssets: [{ file: 'hero.mp4', type: 'video' }] },
-  { slug: 'beyond-horizon-hero', title: 'Beyond Horizon', tier: 'Hero', category: 'Travel', thumbnail: 'yacht.jpg',
+  { slug: 'beyond-horizon-hero', title: 'Beyond Horizon', tier: 'Hero', category: 'Travel', thumbnail: 'http://beige-lemur-872571.hostingersite.com/asset-esprompt/preview-asset/hero/beyond-horizon.webm',
     prompt: beyondHorizonHeroPrompt,
     heroAssets: [{ file: 'hero.mp4', type: 'video' }] },
+
+  // ---- Hero tier, batch 3: 6 entries reverse-engineered from the Full LP
+  // versions below (see the "Batch 5" import comment above for why altr and
+  // zenith aren't part of this set). No heroAssets — no downloadable file for
+  // these was ever captured, only the animated GIF used as the thumbnail.
+  { slug: 'curalink-hero', title: 'Curalink', tier: 'Hero', category: 'Health', thumbnail: 'http://beige-lemur-872571.hostingersite.com/asset-esprompt/preview-asset/hero/curalink.webm',
+    prompt: curalinkHeroPrompt },
+  { slug: 'figureworld-hero', title: 'FigureWorld', tier: 'Hero', category: 'Ecom', thumbnail: 'http://beige-lemur-872571.hostingersite.com/asset-esprompt/preview-asset/hero/figure-world.webm',
+    prompt: figureworldHeroPrompt, free: true },
+  { slug: 'proxim-hero', title: 'Proxim', tier: 'Hero', category: 'Dev', thumbnail: 'http://beige-lemur-872571.hostingersite.com/asset-esprompt/preview-asset/hero/proxim.webm',
+    prompt: proximHeroPrompt },
+  { slug: 'quorum-hero', title: 'Quorum', tier: 'Hero', category: 'SaaS', thumbnail: 'http://beige-lemur-872571.hostingersite.com/asset-esprompt/preview-asset/hero/quorum.webm',
+    prompt: quorumHeroPrompt },
+  { slug: 'stillwave-hero', title: 'Stillwave', tier: 'Hero', category: 'Wellness', thumbnail: 'http://beige-lemur-872571.hostingersite.com/asset-esprompt/preview-asset/hero/stillwave.webm',
+    prompt: stillwaveHeroPrompt },
+  { slug: 'thecity-hero', title: 'The City', tier: 'Hero', category: 'Property', thumbnail: 'http://beige-lemur-872571.hostingersite.com/asset-esprompt/preview-asset/hero/the-city.webm',
+    prompt: thecityHeroPrompt },
 
   // ---- Full LP tier: 35 entries, one per real Elux Space portfolio build
   // (https://elux-vibe-portfolio.ahrasya.workers.dev/), minus the 2 internal
@@ -146,73 +189,69 @@ export const prompts: PromptItem[] = [
   // real screenshot in /assets/showcase (the 20 that used to point at
   // placeholder-portfolio.png were backfilled from the portfolio site's own
   // /thumbs/*.jpg — see the download command in conversation).
-  { slug: 'quorum-ai', title: 'Quorum', tier: 'Full LP', category: 'SaaS', thumbnail: 'quorum.jpg',
-    prompt: quorumPrompt },
-  { slug: 'curalink-telehealth', title: 'Curalink', tier: 'Full LP', category: 'Health', thumbnail: 'curalink.jpg',
-    prompt: curalinkPrompt },
-  { slug: 'curalink-medic-ai', title: 'Curalink - Medic AI', tier: 'Full LP', category: 'Health', thumbnail: 'curalink-medic-ai.jpg',
+  { slug: 'quorum-ai', title: 'Quorum', tier: 'Full LP', category: 'SaaS', thumbnail: 'http://beige-lemur-872571.hostingersite.com/asset-esprompt/preview-asset/landing/quorum.webm',
+    prompt: quorumPrompt, free: true },
+  { slug: 'curalink-telehealth', title: 'Curalink', tier: 'Full LP', category: 'Health', thumbnail: 'http://beige-lemur-872571.hostingersite.com/asset-esprompt/preview-asset/landing/curalink.webm',
+    prompt: curalinkPrompt, free: true },
+  { slug: 'curalink-medic-ai', title: 'Curalink - Medic AI', tier: 'Full LP', category: 'Health', thumbnail: 'curalink-medic-ai.webp',
     prompt: curalinkMedicAiPrompt },
-  { slug: 'vellum-legal', title: 'Vellum', tier: 'Full LP', category: 'SaaS', thumbnail: 'vellum.jpg',
+  { slug: 'vellum-legal', title: 'Vellum', tier: 'Full LP', category: 'SaaS', thumbnail: 'http://beige-lemur-872571.hostingersite.com/asset-esprompt/preview-asset/full-landing/vellum.gif',
     prompt: vellumPrompt },
-  { slug: 'recall-edtech', title: 'Recall', tier: 'Full LP', category: 'SaaS', thumbnail: 'recall.jpg',
+  { slug: 'recall-edtech', title: 'Recall', tier: 'Full LP', category: 'SaaS', thumbnail: 'http://beige-lemur-872571.hostingersite.com/asset-esprompt/preview-asset/landing/recall.webm',
     prompt: recallPrompt },
-  { slug: 'wayfare-trip', title: 'Wayfare', tier: 'Full LP', category: 'Travel', thumbnail: 'wayfare.jpg',
+  { slug: 'wayfare-trip', title: 'Wayfare', tier: 'Full LP', category: 'Travel', thumbnail: 'http://beige-lemur-872571.hostingersite.com/asset-esprompt/preview-asset/landing/wayfare.webm',
     prompt: wayfarePrompt },
-  { slug: 'candor-hrtech', title: 'Candor', tier: 'Full LP', category: 'SaaS', thumbnail: 'candor.png',
+  { slug: 'candor-hrtech', title: 'Candor', tier: 'Full LP', category: 'SaaS', thumbnail: 'http://beige-lemur-872571.hostingersite.com/asset-esprompt/preview-asset/landing/candor.webm',
     prompt: candorPrompt },
-  { slug: 'stillwave-meditation', title: 'Stillwave', tier: 'Full LP', category: 'Wellness', thumbnail: 'stillwave.png',
-    prompt: stillwavePrompt },
-  { slug: 'aura-apparel', title: 'Aura', tier: 'Full LP', category: 'Ecom', thumbnail: 'aura.png',
+  { slug: 'stillwave-meditation', title: 'Stillwave', tier: 'Full LP', category: 'Wellness', thumbnail: 'http://beige-lemur-872571.hostingersite.com/asset-esprompt/preview-asset/landing/stillwave.webm',
+    prompt: stillwavePrompt, free: true },
+  { slug: 'aura-apparel', title: 'Aura', tier: 'Full LP', category: 'Ecom', thumbnail: 'http://beige-lemur-872571.hostingersite.com/asset-esprompt/preview-asset/landing/aura.webm',
     prompt: auraPrompt },
-  { slug: 'serenity-health-ed', title: 'Serenity', tier: 'Full LP', category: 'Health', thumbnail: 'serenity.jpg',
+  { slug: 'serenity-health-ed', title: 'Serenity', tier: 'Full LP', category: 'Health', thumbnail: 'serenity.webp',
     prompt: serenityPrompt },
-  { slug: 'apex-sportswear', title: 'Apex', tier: 'Full LP', category: 'Ecom', thumbnail: 'apex.png',
+  { slug: 'apex-sportswear', title: 'Apex', tier: 'Full LP', category: 'Ecom', thumbnail: 'apex.webp',
     prompt: apexPrompt },
-  { slug: 'aethera-studio', title: 'Aethera', tier: 'Full LP', category: 'Studio', thumbnail: 'aethera.png',
+  { slug: 'aethera-studio', title: 'Aethera', tier: 'Full LP', category: 'Studio', thumbnail: 'aethera.webp',
     prompt: aetheraPrompt },
-  { slug: 'altr-watches', title: 'ALTR', tier: 'Full LP', category: 'Ecom', thumbnail: 'altr.png',
+  { slug: 'altr-watches', title: 'ALTR', tier: 'Full LP', category: 'Ecom', thumbnail: 'http://beige-lemur-872571.hostingersite.com/asset-esprompt/preview-asset/landing/altr.webm',
     prompt: altrPrompt },
-  { slug: 'arlo-editorial', title: 'Arlo', tier: 'Full LP', category: 'Ecom', thumbnail: 'arlo.png',
+  { slug: 'arlo-editorial', title: 'Arlo', tier: 'Full LP', category: 'Ecom', thumbnail: 'http://beige-lemur-872571.hostingersite.com/asset-esprompt/preview-asset/landing/arlo.webm',
     prompt: arloPrompt },
-  { slug: 'vox-streetwear', title: 'VOX', tier: 'Full LP', category: 'Ecom', thumbnail: 'vox.png',
+  { slug: 'vox-streetwear', title: 'VOX', tier: 'Full LP', category: 'Ecom', thumbnail: 'vox.webp',
     prompt: vox2Prompt },
-  { slug: 'luma-lifestyle', title: 'LUMA', tier: 'Full LP', category: 'Ecom', thumbnail: 'luma.png',
+  { slug: 'luma-lifestyle', title: 'LUMA', tier: 'Full LP', category: 'Ecom', thumbnail: 'luma.webp',
     prompt: lumaPrompt },
-  { slug: 'kilt-techwear', title: 'KILT', tier: 'Full LP', category: 'Ecom', thumbnail: 'kilt.png',
+  { slug: 'kilt-techwear', title: 'KILT', tier: 'Full LP', category: 'Ecom', thumbnail: 'kilt-techwear.webp',
     prompt: kiltPrompt },
-  { slug: 'elan-football', title: 'Élan', tier: 'Full LP', category: 'Ecom', thumbnail: 'elan.png',
+  { slug: 'elan-football', title: 'Élan', tier: 'Full LP', category: 'Ecom', thumbnail: 'http://beige-lemur-872571.hostingersite.com/asset-esprompt/preview-asset/landing/elan.webm',
     prompt: elanPrompt },
-  { slug: 'modex-infra', title: 'Modex', tier: 'Full LP', category: 'Dev', thumbnail: 'modex.png',
+  { slug: 'modex-infra', title: 'Modex', tier: 'Full LP', category: 'Dev', thumbnail: 'modex.webp',
     prompt: modexPrompt },
-  { slug: 'pylon-ai', title: 'Pylon', tier: 'Full LP', category: 'Dev', thumbnail: 'pylon.png',
-    prompt: pylonPrompt },
-  { slug: 'proxim-router', title: 'Proxim', tier: 'Full LP', category: 'Dev', thumbnail: 'proxim.png',
+  { slug: 'pylon-ai', title: 'Pylon', tier: 'Full LP', category: 'Dev', thumbnail: 'http://beige-lemur-872571.hostingersite.com/asset-esprompt/preview-asset/landing/pylon.webm',
+    prompt: pylonPrompt, free: true },
+  { slug: 'proxim-router', title: 'Proxim', tier: 'Full LP', category: 'Dev', thumbnail: 'proxim.webp',
     prompt: proximPrompt },
-  { slug: 'trainfold-ml', title: 'Trainfold', tier: 'Full LP', category: 'Dev', thumbnail: 'trainfold.jpg',
+  { slug: 'trainfold-ml', title: 'Trainfold', tier: 'Full LP', category: 'Dev', thumbnail: 'trainfold.webp',
     prompt: trainfoldPrompt },
-  { slug: 'vris-suv', title: 'VRIS R1', tier: 'Full LP', category: 'Product', thumbnail: 'vris-r1.png',
-    prompt: vrisPrompt },
-  { slug: 'velo-moto', title: 'VELO', tier: 'Full LP', category: 'Product', thumbnail: 'velo.jpg',
+  { slug: 'velo-moto', title: 'VELO', tier: 'Full LP', category: 'Product', thumbnail: 'velo.webp',
     prompt: veloPrompt },
-  { slug: 'figureworld-collectibles', title: 'FigureWorld', tier: 'Full LP', category: 'Ecom', thumbnail: 'figureworld.jpg',
-    prompt: figureworldPrompt },
-  { slug: 'thecity-residences', title: 'The City', tier: 'Full LP', category: 'Property', thumbnail: 'thecity.jpg',
-    prompt: thecityPrompt },
-  { slug: 'beyond-horizon-yacht', title: 'Beyond Horizon', tier: 'Full LP', category: 'Travel', thumbnail: 'yacht.jpg',
+  { slug: 'thecity-residences', title: 'The City', tier: 'Full LP', category: 'Property', thumbnail: 'http://beige-lemur-872571.hostingersite.com/asset-esprompt/preview-asset/landing/the-city.webm',
+    prompt: thecityPrompt, free: true },
+  { slug: 'beyond-horizon-yacht', title: 'Beyond Horizon', tier: 'Full LP', category: 'Travel', thumbnail: 'http://beige-lemur-872571.hostingersite.com/asset-esprompt/preview-asset/landing/beyond-horizon.webm',
     prompt: beyondHorizonPrompt },
-  { slug: 'saha-medical-clinic', title: 'Saha Medical', tier: 'Full LP', category: 'Health', thumbnail: 'saha-medical.jpg',
+  { slug: 'saha-medical-clinic', title: 'Saha Medical', tier: 'Full LP', category: 'Health', thumbnail: 'http://beige-lemur-872571.hostingersite.com/asset-esprompt/preview-asset/landing/saha.webm',
     prompt: sahaMedicalPrompt },
   { slug: 'storefront-v1-skincare', title: 'StoreFront - V1', tier: 'Full LP', category: 'Ecom', thumbnail: 'storefront-v1.jpg',
     prompt: storefrontV1Prompt },
-  { slug: 'storefront-v2-wellness', title: 'StoreFront - V2', tier: 'Full LP', category: 'Ecom', thumbnail: 'storefront-v2.jpg',
+  { slug: 'storefront-v2-wellness', title: 'StoreFront - V2', tier: 'Full LP', category: 'Ecom', thumbnail: 'storefront-v2.webp',
     prompt: storefrontV2Prompt },
-  { slug: 'warebotics-robotics', title: 'Warebotics', tier: 'Full LP', category: 'Product', thumbnail: 'warebotics.jpg',
+  { slug: 'warebotics-robotics', title: 'Warebotics', tier: 'Full LP', category: 'Product', thumbnail: 'warebotics.webp',
     prompt: warebotics2Prompt },
-  { slug: 'relay-backend', title: 'Relay', tier: 'Full LP', category: 'Dev', thumbnail: 'relay.jpg',
+  { slug: 'relay-backend', title: 'Relay', tier: 'Full LP', category: 'Dev', thumbnail: 'relay.webp',
     prompt: relayPrompt },
   { slug: 'edgehaul-carry', title: 'Edgehaul', tier: 'Full LP', category: 'Ecom', thumbnail: 'edgehaul.jpg',
     prompt: edgehaulPrompt },
-  { slug: 'lunea-skincare', title: 'Lunéa', tier: 'Full LP', category: 'Ecom', thumbnail: 'lunea.jpg',
+  { slug: 'lunea-skincare', title: 'Lunéa', tier: 'Full LP', category: 'Ecom', thumbnail: 'lunea-full.webp',
     prompt: lunea2Prompt },
 ];
 

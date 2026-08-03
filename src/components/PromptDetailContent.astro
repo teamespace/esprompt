@@ -3,6 +3,7 @@
 // (src/pages/library/[slug].astro) and cloned into the modal overlay on
 // /library. Both read from the same markup so they can't drift apart.
 import type { PromptItem } from '../data/prompts';
+import { thumbUrl, isVideoThumb } from '../data/prompts';
 
 interface Props {
   item: PromptItem;
@@ -12,6 +13,33 @@ const { item, variant = 'page' } = Astro.props;
 const isHero = item.tier === 'Hero';
 const hasAssets = isHero && !!item.heroAssets?.length;
 const assetUrl = (file: string) => `/assets/hero-downloads/${item.slug}/${file}`;
+
+// Some prompt families open with one long unbroken paragraph before the first
+// blank line, so relying on the source's own blank lines for spacing reads as
+// a wall of text (a single blank line is barely a visible gap). Instead, split
+// on blank-line boundaries and give each chunk its own margin — a deliberate,
+// uniform rhythm regardless of how sparse the source's blank lines are. # / ##
+// headers and "=== SECTION ===" markers (the two prompt-file formats in use)
+// get bolded within their chunk so the structure stays scannable.
+// escapeHtml() first because the prompts themselves contain literal HTML/CSS
+// example markup that would otherwise get interpreted as real tags.
+// This only feeds the read-only display — espPromptText() in AppLayout.astro
+// still copies from the untouched hidden .pd-code node below, so restructuring
+// this into <div> chunks can't corrupt what gets pasted into an AI tool.
+const escapeHtml = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const HEADING_LINE = /^(#{1,6}\s.+|={3,}.+={3,})$/;
+const renderPromptHtml = (raw: string) =>
+  raw
+    .trim()
+    .split(/\n{2,}/)
+    .map((block) => {
+      const html = escapeHtml(block)
+        .split('\n')
+        .map((line) => (HEADING_LINE.test(line) ? `<span class="pd-code-h">${line}</span>` : line))
+        .join('\n');
+      return `<div class="pd-code-block">${html}</div>`;
+    })
+    .join('');
 ---
 <div class="prompt-detail" data-slug={item.slug}>
   <div class="pd-topbar">
@@ -36,11 +64,14 @@ const assetUrl = (file: string) => `/assets/hero-downloads/${item.slug}/${file}`
   <div class="pd-card">
     <div class="pd-card-body">
       <div class="pd-tabpanel" data-tabpanel="preview">
-        <div class="pd-preview-lg" style={`background-image:url('/assets/showcase/${item.thumbnail}')`}></div>
+        {isVideoThumb(item.thumbnail)
+          ? <video class="pd-preview-lg" src={thumbUrl(item.thumbnail)} muted loop playsinline autoplay></video>
+          : <div class="pd-preview-lg" style={`background-image:url('${thumbUrl(item.thumbnail)}')`}></div>}
       </div>
       <div class="pd-tabpanel" data-tabpanel="prompt" hidden>
         <div class="pd-prompt-panel">
-          <code class="hp-copy-code pd-code">{item.prompt}</code>
+          <code class="pd-code" hidden>{item.prompt}</code>
+          <div class="pd-code-display" set:html={renderPromptHtml(item.prompt)} />
         </div>
       </div>
       {hasAssets && (
@@ -87,7 +118,7 @@ const assetUrl = (file: string) => `/assets/hero-downloads/${item.slug}/${file}`
         <span class="hpc-tab" data-tab="prompt">The Prompt</span>
         {hasAssets && <span class="hpc-tab" data-tab="assets">Assets</span>}
       </div>
-      <button class="pd-copy-btn detail-copy-btn" data-prompt={item.prompt} data-slug={item.slug}>
+      <button class="pd-copy-btn detail-copy-btn" data-slug={item.slug}>
         <svg class="lucide" viewBox="0 0 24 24"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/></svg>
         <span>Copy Prompt</span>
       </button>
