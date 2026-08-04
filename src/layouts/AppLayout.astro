@@ -98,7 +98,10 @@ const { title, activeTier } = Astro.props;
   // Highlight Hero/Landing/Section based on the current ?tier=. Can't be
   // done server-side since this is a static build (no query string at
   // render time), so it's a client-side match against the live URL.
-  if (location.pathname === '/library') {
+  // Trailing-slash tolerant: the static host redirects /library to /library/
+  // (dev server doesn't), so a strict === '/library' match silently failed
+  // in production only.
+  if (location.pathname.replace(/\/+$/, '') === '/library') {
     const currentTier = new URLSearchParams(location.search).get('tier');
     document.querySelectorAll('#navTierLinks a').forEach(a => {
       a.classList.toggle('active', a.dataset.tier === currentTier);
