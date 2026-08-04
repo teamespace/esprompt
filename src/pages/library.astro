@@ -283,7 +283,13 @@ const sizeClass = (p, i) => (isGifCover(p) || FORCE_16_9.has(p.slug)) ? 'pv-16-9
     items.forEach(item => {
       const matchesTier = state.tier === 'all' || item.dataset.tier === state.tier;
       const matchesCategory = state.category === 'all' || item.dataset.category === state.category;
-      const matchesSearch = !state.q || item.dataset.title.includes(state.q);
+      // Search matches title, category, and tier (e.g. "studio" or "full lp"
+      // finds Aethera even though neither word is in its title) — not just
+      // the item name, since the search box promises full-library search.
+      const matchesSearch = !state.q
+        || item.dataset.title.includes(state.q)
+        || item.dataset.category.toLowerCase().includes(state.q)
+        || item.dataset.tier.toLowerCase().includes(state.q);
       const show = matchesTier && matchesCategory && matchesSearch;
       item.hidden = !show;
       if (show) visible++;
