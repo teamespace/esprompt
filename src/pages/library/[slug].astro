@@ -37,6 +37,18 @@ const related = prompts
     <PromptDetailContent item={item} variant="page" />
   </div>
 
+  <script is:inline>
+    // Same localStorage view counter used on /library. Increment once when the
+    // dedicated detail page is loaded.
+    const VIEWS_KEY = 'esprompt:views';
+    const slug = document.querySelector('.prompt-detail')?.dataset.slug;
+    if (slug) {
+      const map = JSON.parse(localStorage.getItem(VIEWS_KEY) || '{}');
+      map[slug] = (map[slug] || 0) + 1;
+      localStorage.setItem(VIEWS_KEY, JSON.stringify(map));
+    }
+  </script>
+
   {related.length > 0 && (
     <div class="pd-related reveal">
       <h3>Related prompts</h3>

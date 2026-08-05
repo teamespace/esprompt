@@ -47,7 +47,6 @@ const sizeClass = (p, i) => (isGifCover(p) || FORCE_16_9.has(p.slug)) ? 'pv-16-9
       <div class="sort-menu" id="sortMenu" hidden>
         <button type="button" class="active" data-sort="recent">Most Recent</button>
         <button type="button" data-sort="recommended">Recommended</button>
-        <button type="button" data-sort="liked">Most Liked</button>
         <button type="button" data-sort="viewed">Most Viewed</button>
       </div>
     </div>
@@ -55,7 +54,7 @@ const sizeClass = (p, i) => (isGifCover(p) || FORCE_16_9.has(p.slug)) ? 'pv-16-9
 
   <div class="showcase-grid" id="catalogGrid">
     {prompts.map((p, i) => (
-      <div class="citem scard" data-tier={p.tier} data-category={p.category} data-title={p.title.toLowerCase()} data-free={p.free ? 'true' : 'false'}>
+      <div class="citem scard" data-slug={p.slug} data-tier={p.tier} data-category={p.category} data-title={p.title.toLowerCase()} data-free={p.free ? 'true' : 'false'}>
         <div class="cc">
           {isVideoThumb(p.thumbnail) ? (
             <div class={`pv ${sizeClass(p, i)}`}>
@@ -91,6 +90,10 @@ const sizeClass = (p, i) => (isGifCover(p) || FORCE_16_9.has(p.slug)) ? 'pv-16-9
           <span class="ccap-meta">
             <span class={`plan-badge ${p.free ? 'free' : 'premium'}`}>{p.free ? 'Free' : 'Premium'}</span>
             <span class="count">{p.tier === p.category ? p.tier : `${p.tier} - ${p.category}`}</span>
+            <span class="view-count" data-slug={p.slug}>
+              <svg class="lucide" viewBox="0 0 24 24"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+              <span class="vc-num">0</span>
+            </span>
           </span>
         </div>
       </div>
@@ -156,6 +159,9 @@ const sizeClass = (p, i) => (isGifCover(p) || FORCE_16_9.has(p.slug)) ? 'pv-16-9
   .empty-state-progress a{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
   .empty-state-progress a:hover{color:var(--accent,#7c5cff)}
   .citem[hidden]{display:none}
+
+  .view-count{display:inline-flex;align-items:center;gap:4px;font-family:var(--mono);font-size:10.5px;color:var(--dim);white-space:nowrap}
+  .view-count .lucide{width:12px;height:12px}
 
   /* Masonry: CSS Grid with a 1px row unit + JS-computed `grid-row-end: span`
      per card (the standard no-library masonry technique), not CSS
@@ -225,7 +231,32 @@ const sizeClass = (p, i) => (isGifCover(p) || FORCE_16_9.has(p.slug)) ? 'pv-16-9
   }, { rootMargin: '200px 0px' });
   grid.querySelectorAll('.pv-video[data-src]').forEach(el => videoIO.observe(el));
   const empty = document.getElementById('catalogEmpty');
-  const state = { tier: 'all', category: 'all', q: '' };
+  const state = { tier: 'all', category: 'all', q: '', sort: 'recent' };
+
+  // View counts are stored per-browser in localStorage and updated every time
+  // a user opens a prompt detail (modal or dedicated page). This is real-time
+  // for the current user, but not a global backend counter.
+  const VIEWS_KEY = 'esprompt:views';
+  function getViewsMap(){
+    try { return JSON.parse(localStorage.getItem(VIEWS_KEY) || '{}'); }
+    catch(e) { return {}; }
+  }
+  function saveViewsMap(map){ localStorage.setItem(VIEWS_KEY, JSON.stringify(map)); }
+  function getViews(slug){ return getViewsMap()[slug] || 0; }
+  function incrementViews(slug){
+    const map = getViewsMap();
+    map[slug] = (map[slug] || 0) + 1;
+    saveViewsMap(map);
+    renderViewCount(slug);
+  }
+  function renderViewCount(slug){
+    const n = getViews(slug);
+    document.querySelectorAll(`.view-count[data-slug="${slug}"] .vc-num`).forEach(el => el.textContent = String(n));
+  }
+  function renderAllViewCounts(){
+    items.forEach(item => renderViewCount(item.dataset.slug));
+  }
+  renderAllViewCounts();
 
   // Copy button shows a lock while signed out (gated action) and a plain
   // clipboard once signed in, or for free items regardless of session
@@ -274,6 +305,29 @@ const sizeClass = (p, i) => (isGifCover(p) || FORCE_16_9.has(p.slug)) ? 'pv-16-9
   document.fonts?.ready.then(scheduleMasonryLayout);
   window.addEventListener('load', scheduleMasonryLayout);
 
+  function sortItems(){
+    const views = getViewsMap();
+    const getSortKey = (item) => {
+      const slug = item.dataset.slug;
+      const isFree = item.dataset.free === 'true';
+      const viewCount = views[slug] || 0;
+      const title = item.dataset.title;
+      if (state.sort === 'viewed') return [-viewCount, title];
+      if (state.sort === 'recommended') return [isFree ? 0 : 1, -viewCount, title];
+      // recent: preserve source order by using the item's original index
+      return [items.indexOf(item)];
+    };
+    const sorted = [...items].sort((a, b) => {
+      const ka = getSortKey(a), kb = getSortKey(b);
+      for (let i = 0; i < Math.max(ka.length, kb.length); i++) {
+        if (ka[i] < kb[i]) return -1;
+        if (ka[i] > kb[i]) return 1;
+      }
+      return 0;
+    });
+    sorted.forEach(item => grid.appendChild(item));
+  }
+
   function applyFilters(){
     let visible = 0;
     items.forEach(item => {
@@ -291,6 +345,7 @@ const sizeClass = (p, i) => (isGifCover(p) || FORCE_16_9.has(p.slug)) ? 'pv-16-9
       if (show) visible++;
     });
     empty.hidden = visible > 0;
+    sortItems();
     layoutMasonry();
   }
 
@@ -342,9 +397,9 @@ const sizeClass = (p, i) => (isGifCover(p) || FORCE_16_9.has(p.slug)) ? 'pv-16-9
     state.category = 'all';
   }
 
-  // Sort dropdown: UI only for now. We don't track created-date, likes, or
-  // views on mock data, so picking an option just relabels the button rather
-  // than pretending to reorder by numbers we don't have.
+  // Sort dropdown: recent keeps the curated source order; recommended surfaces
+  // free prompts first then orders by local view count; most viewed orders by
+  // local view count. All three fall back to title for ties.
   const sortBtn = document.getElementById('sortBtn');
   const sortMenu = document.getElementById('sortMenu');
   const sortLabel = document.getElementById('sortLabel');
@@ -361,6 +416,8 @@ const sizeClass = (p, i) => (isGifCover(p) || FORCE_16_9.has(p.slug)) ? 'pv-16-9
       sortLabel.textContent = btn.textContent;
       sortMenu.hidden = true;
       sortBtn.setAttribute('aria-expanded', 'false');
+      state.sort = btn.dataset.sort;
+      applyFilters();
     });
   });
   document.addEventListener('click', () => {
@@ -420,6 +477,7 @@ const sizeClass = (p, i) => (isGifCover(p) || FORCE_16_9.has(p.slug)) ? 'pv-16-9
     const tpl = document.getElementById(`tpl-${slug}`);
     if (!tpl) return;
     modalSlug = slug;
+    incrementViews(slug);
     detailBody.innerHTML = '';
     detailBody.appendChild(tpl.content.cloneNode(true));
     detailOverlay.classList.add('open');
