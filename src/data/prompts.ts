@@ -82,6 +82,32 @@ import quorumHeroPrompt from './hero-prompts/quorum.md?raw';
 import stillwaveHeroPrompt from './hero-prompts/stillwave.md?raw';
 import thecityHeroPrompt from './hero-prompts/thecity.md?raw';
 
+// Section-tier prompts — single-section rebuilds sourced from the Section
+// folder (About, CTA, Feature, Footer, Marque, Navbar, Pricing, Product,
+// Testimonials). Imported raw so the library grid can copy them verbatim.
+import sahaAboutPrompt from './section-prompts/saha-about-prompt.md?raw';
+import stillwaveAboutPrompt from './section-prompts/stillwave-meditation-proof-prompt.md?raw';
+import recallCtaPrompt from './section-prompts/recall-cta-magnetic-button-prompt.md?raw';
+import sahaCtaPrompt from './section-prompts/saha-cta-prompt.md?raw';
+import pylonFeaturePrompt from './section-prompts/pylon-ecosystem-grid-prompt.md?raw';
+import recallFeaturePrompt from './section-prompts/recall-feature-cards-spring-prompt.md?raw';
+import apexFooterPrompt from './section-prompts/apex-footer-prompt.md?raw';
+import auraFooterPrompt from './section-prompts/aura-ecommerce-footer-wipe-prompt.md?raw';
+import stillwaveFooterPrompt from './section-prompts/stillwave-meditation-footer-prompt.md?raw';
+import arloMarqueePrompt from './section-prompts/arlo-editorial-infinite-marquee-prompt.md?raw';
+import elanMarqueePrompt from './section-prompts/elan-model-marquee-prompt.md?raw';
+import quorumMarqueePrompt from './section-prompts/quorum-running-logo-prompt.md?raw';
+import apexNavbarPrompt from './section-prompts/apex-navbar-prompt.md?raw';
+import lumaNavbarPrompt from './section-prompts/luma-lifestyle-sticky-header-prompt.md?raw';
+import recallPricingPrompt from './section-prompts/recal-pricing-prompt.md?raw';
+import wayfarePricingPrompt from './section-prompts/wayfare-pricing-prompt.md?raw';
+import arloProductPrompt from './section-prompts/arlo-editorial-scroll-reveal-grid-prompt.md?raw';
+import auraProductPrompt from './section-prompts/aura-ecommerce-cursor-grid-prompt.md?raw';
+import beyondHorizonProductPrompt from './section-prompts/beyond-horizon-stacking-prompt.md?raw';
+import elanProductPrompt from './section-prompts/elan-moody-drag-carousel-prompt.md?raw';
+import sahaTestimonialsPrompt from './section-prompts/saha-testimonials-prompt.md?raw';
+import trainfoldTestimonialsPrompt from './section-prompts/trainfold-testimonials-prompt.md?raw';
+
 // A few Hero thumbnails are animated covers hotlinked from an external CDN
 // instead of a local file under /assets/showcase/ — this lets every render
 // site (library grid, detail page, modal, related-prompts) resolve either
@@ -112,7 +138,31 @@ export interface PromptItem {
 }
 
 export const prompts: PromptItem[] = [
-  // ---- Section tier: intentionally empty for now (real prompts pending).
+  // ---- Section tier: 22 single-section prompts sourced from the Section
+  // folder (About, CTA, Feature, Footer, Marque, Navbar, Pricing, Product,
+  // Testimonials). Thumbnails reuse the matching Full LP / Hero screenshot.
+  { slug: 'saha-about', title: 'Saha About', tier: 'Section', category: 'About', thumbnail: 'saha-medical.jpg', prompt: sahaAboutPrompt },
+  { slug: 'stillwave-about', title: 'Stillwave About', tier: 'Section', category: 'About', thumbnail: 'stillwave.png', prompt: stillwaveAboutPrompt },
+  { slug: 'recall-cta-magnetic', title: 'Recall CTA Magnetic', tier: 'Section', category: 'CTA', thumbnail: 'recall.jpg', prompt: recallCtaPrompt },
+  { slug: 'saha-cta', title: 'Saha CTA', tier: 'Section', category: 'CTA', thumbnail: 'saha-medical.jpg', prompt: sahaCtaPrompt },
+  { slug: 'pylon-ecosystem-grid', title: 'Pylon Ecosystem Grid', tier: 'Section', category: 'Feature', thumbnail: 'pylon.png', prompt: pylonFeaturePrompt },
+  { slug: 'recall-feature-cards', title: 'Recall Feature Cards', tier: 'Section', category: 'Feature', thumbnail: 'recall.jpg', prompt: recallFeaturePrompt },
+  { slug: 'apex-footer', title: 'Apex Footer', tier: 'Section', category: 'Footer', thumbnail: 'apex.png', prompt: apexFooterPrompt },
+  { slug: 'aura-footer-wipe', title: 'Aura Footer Wipe', tier: 'Section', category: 'Footer', thumbnail: 'aura.png', prompt: auraFooterPrompt },
+  { slug: 'stillwave-footer', title: 'Stillwave Footer', tier: 'Section', category: 'Footer', thumbnail: 'stillwave.png', prompt: stillwaveFooterPrompt },
+  { slug: 'arlo-infinite-marquee', title: 'Arlo Infinite Marquee', tier: 'Section', category: 'Marque', thumbnail: 'arlo.png', prompt: arloMarqueePrompt },
+  { slug: 'elan-model-marquee', title: 'Elan Model Marquee', tier: 'Section', category: 'Marque', thumbnail: 'elan.png', prompt: elanMarqueePrompt },
+  { slug: 'quorum-running-logo', title: 'Quorum Running Logo', tier: 'Section', category: 'Marque', thumbnail: 'quorum.jpg', prompt: quorumMarqueePrompt },
+  { slug: 'apex-navbar', title: 'Apex Navbar', tier: 'Section', category: 'Navbar', thumbnail: 'apex.png', prompt: apexNavbarPrompt },
+  { slug: 'luma-sticky-header', title: 'Luma Sticky Header', tier: 'Section', category: 'Navbar', thumbnail: 'luma.png', prompt: lumaNavbarPrompt },
+  { slug: 'recall-pricing', title: 'Recall Pricing', tier: 'Section', category: 'Pricing', thumbnail: 'recall.jpg', prompt: recallPricingPrompt },
+  { slug: 'wayfare-pricing', title: 'Wayfare Pricing', tier: 'Section', category: 'Pricing', thumbnail: 'wayfare.jpg', prompt: wayfarePricingPrompt },
+  { slug: 'arlo-scroll-reveal-grid', title: 'Arlo Scroll Reveal Grid', tier: 'Section', category: 'Product', thumbnail: 'arlo.png', prompt: arloProductPrompt },
+  { slug: 'aura-cursor-grid', title: 'Aura Cursor Grid', tier: 'Section', category: 'Product', thumbnail: 'aura.png', prompt: auraProductPrompt },
+  { slug: 'beyond-horizon-stacking', title: 'Beyond Horizon Stacking', tier: 'Section', category: 'Product', thumbnail: 'http://beige-lemur-872571.hostingersite.com/asset-esprompt/preview-asset/landing/beyond-horizon.webm', prompt: beyondHorizonProductPrompt },
+  { slug: 'elan-drag-carousel', title: 'Elan Drag Carousel', tier: 'Section', category: 'Product', thumbnail: 'elan.png', prompt: elanProductPrompt },
+  { slug: 'saha-testimonials', title: 'Saha Testimonials', tier: 'Section', category: 'Testimonials', thumbnail: 'saha-medical.jpg', prompt: sahaTestimonialsPrompt },
+  { slug: 'trainfold-testimonials', title: 'Trainfold Testimonials', tier: 'Section', category: 'Testimonials', thumbnail: 'trainfold.jpg', prompt: trainfoldTestimonialsPrompt },
 
   // ---- Hero tier, batch 2: 12 entries, one per file in
   // new-prompts/full-landing — just the hero-section excerpt of each real

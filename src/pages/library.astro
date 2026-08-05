@@ -98,10 +98,6 @@ const sizeClass = (p, i) => (isGifCover(p) || FORCE_16_9.has(p.slug)) ? 'pv-16-9
   </div>
 
   <p class="empty-state" id="catalogEmpty" hidden>No prompts match your search or filters.</p>
-  <div class="empty-state-progress" id="catalogInProgress" hidden>
-    <p>The Section tier is still in progress — check back soon.</p>
-    <p>In the meantime, browse <a href="/library?tier=Full%20LP">Full Landing Page</a> or <a href="/library?tier=Hero">Hero</a> prompts.</p>
-  </div>
 
   <!-- Pre-rendered detail content per item, kept inert inside <template> until
        cloned into the modal below. Avoids a client-side data fetch/JSON dupe. -->
@@ -294,9 +290,7 @@ const sizeClass = (p, i) => (isGifCover(p) || FORCE_16_9.has(p.slug)) ? 'pv-16-9
       item.hidden = !show;
       if (show) visible++;
     });
-    // Section's "no results" state is handled by applySectionInProgress
-    // instead (dedicated in-progress notice, not the generic empty-state).
-    if (state.tier !== 'Section') empty.hidden = visible > 0;
+    empty.hidden = visible > 0;
     layoutMasonry();
   }
 
@@ -320,13 +314,9 @@ const sizeClass = (p, i) => (isGifCover(p) || FORCE_16_9.has(p.slug)) ? 'pv-16-9
     'Full LP': { title: 'Full Landing Page Prompts', badge: n => `${n} Full Landing Pages →`,
       line1: n => `${n} full landing pages,`, line2: 'built at the speed of thought.',
       sub: n => `${n} complete landing page prompts that generate hero, features, and CTA together, ready for Cursor, v0, or Lovable.` },
-    // No real Section prompts yet — copy is static (no counts) since "0" reads
-    // as broken rather than "coming soon". Controls + empty-state get the
-    // same in-progress treatment below (see hideControlsIfSection / the
-    // Section branch in updateEmptyState).
-    Section: { title: 'Section Prompts', badge: () => 'Section Prompts · In Progress',
-      line1: () => 'Section prompts,', line2: 'still in the oven.',
-      sub: () => `We're still building out this tier — pricing tables, testimonials, CTAs. Browse Hero and Full Landing Page prompts in the meantime.` },
+    Section: { title: 'Section Prompts', badge: n => `${n} Section Prompts →`,
+      line1: n => `${n} section prompts,`, line2: 'built at the speed of thought.',
+      sub: n => `${n} single-section prompts — navbars, heroes, pricing, testimonials, CTAs, and more — ready for Cursor, v0, or Lovable.` },
   };
   function updateHeader(tier){
     const cfg = HEADER_CONTENT[tier] || HEADER_CONTENT.all;
@@ -336,18 +326,6 @@ const sizeClass = (p, i) => (isGifCover(p) || FORCE_16_9.has(p.slug)) ? 'pv-16-9
     document.getElementById('catHeadLine2').textContent = cfg.line2;
     document.getElementById('catSubhead').textContent = cfg.sub(n);
     document.title = `${cfg.title} · esprompt`;
-  }
-
-  // Section tier has no real prompts yet: hide the (pointless, empty)
-  // category/sort controls and grid, and show the "still in progress"
-  // notice instead of the generic empty-state so users bounce to a tier
-  // that actually has content rather than reading "no results".
-  function applySectionInProgress(tier){
-    const isSection = tier === 'Section';
-    document.getElementById('catalogControls').hidden = isSection;
-    grid.hidden = isSection;
-    document.getElementById('catalogInProgress').hidden = !isSection;
-    if (isSection) empty.hidden = true;
   }
 
   // Category pills are scoped to whatever tier is showing. Hero only
@@ -400,7 +378,6 @@ const sizeClass = (p, i) => (isGifCover(p) || FORCE_16_9.has(p.slug)) ? 'pv-16-9
   // the plain even-height grid.
   grid.classList.toggle('masonry', activeTier === 'Full LP');
   updateHeader(activeTier);
-  applySectionInProgress(activeTier);
   renderCategoryPills(activeTier);
   const qParam = params.get('q');
   if (qParam) state.q = qParam.trim().toLowerCase();
