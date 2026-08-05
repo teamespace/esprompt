@@ -100,12 +100,12 @@ section.sec{padding:80px 0}
 .citem{cursor:pointer}
 .showcase-grid .citem{width:auto}
 .cc{border-radius:12px;overflow:hidden;background:var(--panel);box-shadow:0 20px 50px -24px rgba(0,0,0,.6);position:relative}
-.showcase-grid .cc .pv{aspect-ratio:16/9;padding:14px;background-color:#0a0a0f;background-origin:content-box;background-clip:content-box;background-size:cover;background-position:center;position:relative}
+.showcase-grid .cc .pv{aspect-ratio:16/9;padding:14px;background-color:#0a0a0f;background-origin:content-box;background-clip:content-box;background-size:contain;background-repeat:no-repeat;background-position:top center;position:relative}
 .cc .pv::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent,rgba(0,0,0,.32))}
 /* .webm covers render as a real <video> instead of a background-image — inset:0
    resolves against .pv's padding box (padding:14px above), so this lines up
    flush with where background-clip:content-box crops the image/GIF covers. */
-.pv-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.pv-video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:top center;background:#0a0a0f;display:block}
 .ccap{display:flex;justify-content:space-between;align-items:center;padding:11px 3px 0;gap:10px}
 .ccap .name{display:flex;align-items:center;gap:8px;color:#fff;font-weight:600;font-size:13.5px;min-width:0}
 .ccap-meta{display:flex;align-items:center;gap:9px;flex:0 0 auto}
@@ -237,28 +237,36 @@ footer{border-top:1px solid var(--line);padding:64px 0 32px;margin-top:60px}
 .pd-icon-btn.copied::after{content:"Copied!";position:absolute;top:calc(100% + 8px);right:0;background:var(--panel);
   border:1px solid var(--line2);border-radius:6px;padding:3px 9px;font-size:10.5px;color:#fff;white-space:nowrap;z-index:5}
 
-.pd-card{position:relative;border:1px solid var(--line2);border-radius:20px;overflow:hidden;background:#0a0a0f}
-.pd-card-body{padding:8px}
-.pd-preview-lg{aspect-ratio:16/9;border-radius:14px;background-size:cover;background-position:center;background-color:#0a0a0f;width:100%;object-fit:cover;display:block}
+.pd-card{position:relative;border:1px solid var(--line2);border-radius:20px;overflow:hidden;background:#0a0a0f;display:flex;flex-direction:column;max-height:min(85vh,720px)}
+.pd-card-body{padding:8px;flex:1;min-height:0;display:flex;flex-direction:column}
+.pd-preview-lg{aspect-ratio:16/9;border-radius:14px;background-size:cover;background-repeat:no-repeat;background-position:top center;background-color:#0a0a0f;width:100%;object-fit:cover;object-position:top center;display:block}
 .pd-tabpanel[hidden]{display:none}
-.pd-prompt-panel{max-height:min(70vh,640px);min-height:360px;overflow-y:auto;padding:26px 28px;background:var(--panel);border:1px solid var(--line);border-radius:14px}
+.pd-tabpanel{flex:1;min-height:0;display:flex;flex-direction:column}
+.pd-prompt-panel{max-height:100%;min-height:360px;overflow-y:auto;padding:26px 28px;background:var(--panel);border:1px solid var(--line);border-radius:14px}
 .pd-code-display{display:block;font-family:var(--mono);font-size:13.5px;line-height:1.8;color:var(--mut);white-space:pre-wrap;word-break:break-word}
 .pd-code-block{margin-bottom:22px}
 .pd-code-block:last-child{margin-bottom:0}
 .pd-code-h{color:#fff;font-weight:600}
 
-/* Assets tab: stacked rows (not side-by-side columns) so a future item with
-   4-5 assets scrolls cleanly inside the fixed-height panel instead of
-   squeezing into ever-narrower columns. */
-.pd-assets-panel{aspect-ratio:16/9;overflow-y:auto;display:flex;flex-direction:column;gap:10px;padding-right:2px}
-.pd-asset-card{background:var(--panel);border:1px solid var(--line2);border-radius:12px;padding:12px 14px;flex:0 0 auto}
-.pd-asset-card-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.pd-asset-card-title{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;color:#fff;white-space:nowrap}
-.pd-asset-card-title .lucide{width:15px;height:15px;color:var(--dim)}
+/* ===== Assets tab: preview + detail split. ===== */
+.pd-assets-split{display:grid;grid-template-columns:1.2fr .8fr;gap:14px;height:min(62vh,560px);max-height:none;min-height:0;overflow:hidden;padding-right:2px}
+.pd-assets-preview{display:flex;flex-direction:column;gap:12px;height:100%;min-height:0;overflow:hidden}
+.pd-assets-preview-main{position:relative;display:flex;align-items:center;justify-content:center;background:#0a0a0f;border-radius:12px;overflow:hidden;flex:1;min-height:0;max-height:min(54vh,420px)}
+.pd-assets-preview-media{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block}
+.pd-assets-strip{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;flex:0 0 auto}
+.pd-assets-thumb{flex:0 0 auto;width:72px;height:72px;border-radius:8px;overflow:hidden;background:#0a0a0f;border:1px solid var(--line2);cursor:pointer;padding:0;position:relative;opacity:.7;transition:.15s}
+.pd-assets-thumb img,.pd-assets-thumb video{width:100%;height:100%;object-fit:cover}
+.pd-assets-thumb span{position:absolute;inset:0;display:grid;place-items:center;font-size:9px;font-weight:600;color:#fff;background:rgba(0,0,0,.5)}
+.pd-assets-thumb.active,.pd-assets-thumb:hover{opacity:1;border-color:var(--v)}
+.pd-assets-info{display:flex;flex-direction:column;gap:12px;padding:14px;min-height:0;overflow:hidden;background:var(--panel);border:1px solid var(--line2);border-radius:12px;height:100%}
+.pd-assets-info-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex:0 0 auto}
+.pd-assets-info-title{font-size:14px;font-weight:600;color:#fff;word-break:break-all}
+.pd-assets-info-badge{font-family:var(--mono);font-size:9px;letter-spacing:.04em;text-transform:uppercase;color:var(--dim);padding:2px 8px;border:1px solid var(--line2);border-radius:999px}
+.pd-assets-info-prompt{font-family:var(--mono);font-size:12px;line-height:1.7;color:var(--mut);white-space:pre-wrap;word-break:break-word;flex:1;min-height:120px;overflow-y:auto;background:rgba(255,255,255,.04);border:1px solid var(--line2);border-radius:10px;padding:12px;margin:0}
+.pd-assets-info-actions{display:flex;gap:8px;flex-wrap:wrap;flex:0 0 auto}
+
+/* Reusable small asset action buttons (also used by the old preview rows). */
 .pd-asset-card-actions{display:flex;align-items:center;gap:6px}
-.pd-asset-card-preview{font-family:var(--mono);font-size:11px;color:var(--dim);line-height:1.6;margin:8px 0 0;
-  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.pd-asset-card-thumb{width:100%;max-height:140px;object-fit:cover;border-radius:8px;margin-top:10px;display:block;background:var(--bg2)}
 
 .pd-card-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 16px;border-top:1px solid var(--line2)}
 .pd-card-tabs.hpc-tabs{display:flex;gap:4px;padding:3px;border-bottom:none;background:rgba(255,255,255,.05);border-radius:999px}
@@ -285,6 +293,11 @@ footer{border-top:1px solid var(--line);padding:64px 0 32px;margin-top:60px}
   .pd-card-bar{flex-wrap:wrap}
   .pd-asset-card-actions{width:100%}
   .pd-asset-card-actions button{flex:1}
+  .pd-assets-split{grid-template-columns:1fr;height:auto;max-height:min(80vh,680px)}
+  .pd-assets-preview-media{position:relative;max-height:46vh;width:100%;height:auto}
+}
+@media(max-width:480px){
+  .pd-assets-info-actions button{flex:1}
 }
 
 /* ===== pricing tier card, reused verbatim from homepage (CSS existed there

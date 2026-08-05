@@ -108,5 +108,3 @@ Hero: full-viewport, background photo crossfades in on load; a mouse-driven inte
 | `heroTxt1` | `https://aura-ecommerce-landing.vercel.app/assets/hero-txt1-Be79_yCj.png` | Square flat-lay tee on blue — default center tile (no hover) |
 | `heroTxt2` | `https://aura-ecommerce-landing.vercel.app/assets/hero-txt2-BbghUJQJ.png` | Square portrait, model in cap — center tile shown while hovering "AURA" |
 | `heroTxt3` | `https://aura-ecommerce-landing.vercel.app/assets/hero-txt3-Dn8T-mbk.png` | Square back-of-head portrait, model in beanie — center tile shown while hovering "LABS" |
-
-> Sandbox note: this session's network allowlist blocks direct fetches to `aura-ecommerce-landing.vercel.app`, so the 4 files above could not be downloaded and attached here. URLs are exact — drop the real files in this folder (or send them to me) and I'll wire them into the catalog's Assets tab.

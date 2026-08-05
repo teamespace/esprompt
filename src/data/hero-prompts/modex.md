@@ -69,5 +69,3 @@ document.querySelectorAll('.copy').forEach(btn => {
 | URL | Content |
 |---|---|
 | `https://beige-lemur-872571.hostingersite.com/asset-esprompt/Landing/Modex/Hero/Hero` | Hero background photo (~1,853,083 bytes), served extensionless with no Content-Type header — must be downloaded and referenced locally as `public/hero.png`, never linked remotely |
-
-> Sandbox note: this session's network allowlist blocks direct fetches to `beige-lemur-872571.hostingersite.com`, so the actual image file could not be downloaded and attached here. The URL above is exact — drop the real file in this folder (or send it to me) and I'll wire it into the catalog's Assets tab.

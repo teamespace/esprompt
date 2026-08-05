@@ -42,5 +42,3 @@ Colors: black `#000000` bg, off-white `#F2F2F2` text/lines, neon lime `#C8FF00` 
 | Filename | URL | Content |
 |---|---|---|
 | `kilt-hero-model.png` | `https://ecommerce-landing.pages.dev/generated-assets/kilt/kilt-hero-model.png` | Model in modular technical outerwear, center of the hero split |
-
-> Sandbox note: this session's network allowlist blocks direct fetches to `ecommerce-landing.pages.dev`, so the actual image file could not be downloaded and attached here. The URL above is exact — drop the real file in this folder (or send it to me) and I'll wire it into the catalog's Assets tab.

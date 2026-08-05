@@ -215,6 +215,65 @@ const { title } = Astro.props;
     a.remove();
   }
 
+  function triggerBlobDownload(blob, filename){
+    const url = URL.createObjectURL(blob);
+    triggerDownload(url, filename);
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+
+  // Build a dependency-free ZIP in the browser. Store-only entries keep the
+  // implementation small and preserve already-compressed PNG/MP4/WebM files.
+  function zipCrc32(bytes){
+    let crc = 0xffffffff;
+    for (const byte of bytes) {
+      crc ^= byte;
+      for (let bit = 0; bit < 8; bit++) crc = (crc >>> 1) ^ (0xedb88320 & -(crc & 1));
+    }
+    return (crc ^ 0xffffffff) >>> 0;
+  }
+  function zipU16(view, offset, value){ view.setUint16(offset, value, true); }
+  function zipU32(view, offset, value){ view.setUint32(offset, value >>> 0, true); }
+  async function createAssetZip(assets){
+    const encoder = new TextEncoder();
+    const files = await Promise.all(assets.map(async (asset) => {
+      const response = await fetch(asset.url);
+      if (!response.ok) throw new Error(`Could not fetch ${asset.url}`);
+      return { path: `${asset.type}/${asset.filename.replace(/[\\/]+/g, '-')}`, bytes: new Uint8Array(await response.arrayBuffer()) };
+    }));
+    const localParts = [], centralParts = [];
+    let offset = 0;
+    files.forEach((file) => {
+      const name = encoder.encode(file.path);
+      const crc = zipCrc32(file.bytes);
+      const local = new Uint8Array(30 + name.length + file.bytes.length);
+      const localView = new DataView(local.buffer);
+      zipU32(localView, 0, 0x04034b50); zipU16(localView, 4, 20); zipU16(localView, 6, 0);
+      zipU16(localView, 8, 0); zipU16(localView, 10, 0); zipU16(localView, 12, 0);
+      zipU32(localView, 14, crc); zipU32(localView, 18, file.bytes.length); zipU32(localView, 22, file.bytes.length);
+      zipU16(localView, 26, name.length); zipU16(localView, 28, 0);
+      local.set(name, 30); local.set(file.bytes, 30 + name.length);
+      localParts.push(local);
+
+      const central = new Uint8Array(46 + name.length);
+      const centralView = new DataView(central.buffer);
+      zipU32(centralView, 0, 0x02014b50); zipU16(centralView, 4, 20); zipU16(centralView, 6, 20);
+      zipU16(centralView, 8, 0); zipU16(centralView, 10, 0); zipU16(centralView, 12, 0); zipU16(centralView, 14, 0);
+      zipU32(centralView, 16, crc); zipU32(centralView, 20, file.bytes.length); zipU32(centralView, 24, file.bytes.length);
+      zipU16(centralView, 28, name.length); zipU16(centralView, 30, 0); zipU16(centralView, 32, 0);
+      zipU16(centralView, 34, 0); zipU16(centralView, 36, 0); zipU32(centralView, 38, 0); zipU32(centralView, 42, offset);
+      central.set(name, 46); centralParts.push(central);
+      offset += local.length;
+    });
+
+    const centralSize = centralParts.reduce((sum, part) => sum + part.length, 0);
+    const end = new Uint8Array(22);
+    const endView = new DataView(end.buffer);
+    zipU32(endView, 0, 0x06054b50); zipU16(endView, 4, 0); zipU16(endView, 6, 0);
+    zipU16(endView, 8, files.length); zipU16(endView, 10, files.length);
+    zipU32(endView, 12, centralSize); zipU32(endView, 16, offset); zipU16(endView, 20, 0);
+    return new Blob([...localParts, ...centralParts, end], { type: 'application/zip' });
+  }
+
   document.body.addEventListener('click', (e) => {
     const tab = e.target.closest('.hpc-tab');
     if (tab) {
@@ -262,15 +321,23 @@ const { title } = Astro.props;
 
     const dlAllBtn = e.target.closest('.detail-dlall-btn');
     if (dlAllBtn) {
-      const doDownloadAll = () => {
-        flashAction(dlAllBtn, 'Downloading…', 'Downloaded');
-        let urls = [];
-        try { urls = JSON.parse(dlAllBtn.dataset.urls || '[]'); } catch {}
-        // Stagger so the browser doesn't drop downloads fired in the same tick.
-        urls.forEach((url, i) => setTimeout(() => triggerDownload(url), i * 300));
+      const doDownloadAll = async () => {
+        if (dlAllBtn.dataset.busy) return;
+        dlAllBtn.dataset.busy = '1';
+        const original = dlAllBtn.innerHTML;
+        dlAllBtn.innerHTML = `${ESP_ICON_SPIN}<span>Preparing ZIP…</span>`;
+        try {
+          const assets = JSON.parse(dlAllBtn.dataset.assets || '[]');
+          const zip = await createAssetZip(assets);
+          triggerBlobDownload(zip, `${dlAllBtn.dataset.slug || 'hero'}-assets.zip`);
+          dlAllBtn.innerHTML = `${ESP_ICON_CHECK}<span>Downloaded ZIP</span>`;
+        } catch (error) {
+          console.error('Asset ZIP download failed', error);
+          dlAllBtn.innerHTML = '<span>Download failed</span>';
+        }
+        setTimeout(() => { dlAllBtn.innerHTML = original; delete dlAllBtn.dataset.busy; }, 1500);
       };
-      if (window.espHasSession && window.espHasSession()) doDownloadAll();
-      else window.openAuthModal('signup', doDownloadAll);
+      doDownloadAll();
       return;
     }
 
@@ -280,8 +347,59 @@ const { title } = Astro.props;
         flashAction(dlBtn, 'Downloading…', 'Downloaded');
         if (dlBtn.dataset.url) triggerDownload(dlBtn.dataset.url, dlBtn.dataset.filename);
       };
-      if (window.espHasSession && window.espHasSession()) doDownload();
-      else window.openAuthModal('signup', doDownload);
+      doDownload();
+    }
+
+    // Copy prompt button inside the Assets tab (Layout C).
+    const assetCopyBtn = e.target.closest('.pd-assets-split .ac-copy');
+    if (assetCopyBtn && assetCopyBtn.dataset.prompt) {
+      e.stopPropagation();
+      navigator.clipboard?.writeText(assetCopyBtn.dataset.prompt);
+      flashAction(assetCopyBtn, 'Copying…', 'Copied');
+      return;
+    }
+
+    // Layout C asset thumbnail strip — switch the selected preview, prompt,
+    // title, and download target. Works in the modal because the listener is
+    // delegated on the document.
+    const layoutCThumb = e.target.closest('.pd-assets-thumb[data-role="thumb"]');
+    if (layoutCThumb) {
+      const root = layoutCThumb.closest('.pd-assets-split');
+      if (!root) return;
+      let assets = [];
+      try { assets = JSON.parse(root.dataset.assets || '[]'); } catch { return; }
+      const idx = Number(layoutCThumb.dataset.index);
+      const asset = assets[idx];
+      if (!asset) return;
+
+      root.querySelectorAll('[data-role="media"]').forEach(el => {
+        const active = Number(el.dataset.index) === idx;
+        el.hidden = !active;
+        if (active && el.tagName === 'VIDEO') { el.currentTime = 0; el.play().catch(() => {}); }
+        else if (!active && el.tagName === 'VIDEO') { el.pause(); }
+      });
+      root.querySelectorAll('[data-role="thumb"]').forEach(btn => {
+        btn.classList.toggle('active', Number(btn.dataset.index) === idx);
+      });
+      const titleEl = root.querySelector('[data-role="title"]');
+      const badgeEl = root.querySelector('[data-role="badge"]');
+      const promptEl = root.querySelector('[data-role="prompt"]');
+      const copyBtn = root.querySelector('[data-role="copy"]');
+      const dlBtn = root.querySelector('[data-role="download"]');
+      const capitalize = (s) => s ? s[0].toUpperCase() + s.slice(1) : s;
+      if (titleEl) titleEl.textContent = asset.file || '';
+      if (badgeEl) badgeEl.textContent = capitalize(asset.type);
+      if (promptEl) {
+        promptEl.textContent = asset.prompt || '';
+        promptEl.hidden = !asset.prompt;
+      }
+      if (copyBtn) {
+        copyBtn.dataset.prompt = asset.prompt || '';
+        copyBtn.hidden = !asset.prompt;
+        copyBtn.querySelector('span').textContent = 'Copy prompt';
+      }
+      if (dlBtn) { dlBtn.dataset.url = asset.url || ''; dlBtn.dataset.filename = asset.filename || asset.file || ''; }
+      return;
     }
   });
 </script>

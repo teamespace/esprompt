@@ -57,5 +57,3 @@ Hero: full-viewport auto-advancing carousel (3 slides, 5s interval, fade transit
 | `luma-hero-1.png` | `https://ecommerce-landing.pages.dev/generated-assets/luma/luma-hero-1.png?v=3` | Couple in cream tennis sweaters beside a vintage convertible — Slide 1 |
 | `luma-hero-2.png` | `https://ecommerce-landing.pages.dev/generated-assets/luma/luma-hero-2.png?v=3` | Models in relaxed knit layers on a sun-bleached terrace — Slide 2 |
 | `luma-hero-3.png` | `https://ecommerce-landing.pages.dev/generated-assets/luma/luma-hero-3.png?v=3` | Couple walking in an Italian garden — Slide 3 (default active slide) |
-
-> Sandbox note: this session's network allowlist blocks direct fetches to `ecommerce-landing.pages.dev`, so the 3 files above could not be downloaded and attached here. URLs are exact — drop the real files in this folder (or send them to me) and I'll wire them into the catalog's Assets tab.

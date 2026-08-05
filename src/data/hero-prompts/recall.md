@@ -66,8 +66,6 @@ Hero: two-column layout. Left column is a staggered `motion` entrance (pill → 
 
 ## Assets used in this hero
 
-| URL | Content |
+| File | Content |
 |---|---|
-| `https://recall-alpha-one.vercel.app/hero-new.mp4` | Square 3D claymation loop (~5–8s, no audio) of the pink-brain mascot, cream studio backdrop — hero video, displayed mirrored via `-scale-x-100`, mouse-scrubbed on desktop |
-
-> Sandbox note: this session's network allowlist blocks direct fetches to `recall-alpha-one.vercel.app`, so the video file could not be downloaded and attached here. The URL above is exact — drop the real file in this folder (or send it to me) and I'll wire it into the catalog's Assets tab.
+| `hero-new.mp4` | Square 3D claymation loop (~5–8s, no audio) of the pink-brain mascot on a cream studio backdrop — mirrored and mouse-scrubbed on desktop |

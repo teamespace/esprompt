@@ -25,5 +25,3 @@ Hero (`Hero.tsx`): full-viewport section, content anchored bottom-left (`flex-co
 | File | URL | Content |
 |---|---|---|
 | `hero.mp4` | `https://velo-landing-e1d.pages.dev/assets/hero.mp4` | Hero background video, autoplay/muted/loop |
-
-> Sandbox note: this session's network allowlist blocks direct fetches to `velo-landing-e1d.pages.dev`, so the actual video file could not be downloaded and attached here. The URL above is exact — drop the real file in this folder (or send it to me) and I'll wire it into the catalog's Assets tab.

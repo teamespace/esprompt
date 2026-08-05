@@ -34,5 +34,3 @@ Hero: full-viewport section with an autoplay/muted/looping background `<video>`,
 | Filename | URL | Content |
 |---|---|---|
 | `elan-hero.mp4` | `https://ecommerce-landing.pages.dev/05-elan-moody/assets/elan-hero.mp4` | Looping retro football action video, autoplay/muted hero background |
-
-> Sandbox note: this session's network allowlist blocks direct fetches to `ecommerce-landing.pages.dev`, so the actual video file could not be downloaded and attached here. The URL above is exact — drop the real file in this folder (or send it to me) and I'll wire it into the catalog's Assets tab.

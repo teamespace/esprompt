@@ -58,5 +58,3 @@ if (slides.length && dots.length) {
 | `hero-new-1.png` | `https://ecommerce-landing.pages.dev/generated-assets/arlo/hero-new-1.png` | Model walking down editorial alleyway — Slide 1 background |
 | `hero-new-2.png` | `https://ecommerce-landing.pages.dev/generated-assets/arlo/hero-new-2.png` | Close-up of clean cotton shirting — Slide 2 background (default active slide) |
 | `hero-new-3.png` | `https://ecommerce-landing.pages.dev/generated-assets/arlo/hero-new-3.png` | Clean tailored gray wool blazer detail — Slide 3 background |
-
-> Sandbox note: this session's network allowlist blocks direct fetches to `ecommerce-landing.pages.dev`, so the 3 files above could not be downloaded and attached here. URLs are exact — drop the real files in this folder (or send them to me) and I'll wire them into the catalog's Assets tab.

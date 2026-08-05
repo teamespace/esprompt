@@ -1,0 +1,230 @@
+---
+// Preview + detail split layout (Option C) for the Assets tab.
+// Renders a two-column desktop split: large selected preview on the left,
+// asset metadata + prompt + actions on the right, with a thumbnail strip
+// below the preview for switching assets. Uses a tiny inline script so
+// switching works without Astro island rehydration.
+import type { PromptItem } from '../data/prompts';
+
+interface Props {
+  item: PromptItem;
+  assetUrl: (file: string) => string;
+}
+
+const { item, assetUrl } = Astro.props;
+const assets = item.heroAssets ?? [];
+
+const assetData = assets.map((asset) => ({
+  file: asset.name || asset.file,
+  filename: asset.file,
+  type: asset.type,
+  url: assetUrl(asset.file),
+  prompt: asset.prompt || '',
+}));
+---
+
+{
+  assets.length > 0 && (
+    <div class="pd-assets-split" data-assets={JSON.stringify(assetData)}>
+      <div class="pd-assets-preview">
+        <div class="pd-assets-preview-main">
+          {assets.map((asset, i) => {
+            const url = assetUrl(asset.file);
+            const isSelected = i === 0;
+            return asset.type === 'image' ? (
+              <img
+                class="pd-assets-preview-media"
+                data-role="media"
+                data-index={i}
+                src={url}
+                alt={`${item.title} — ${asset.file}`}
+                hidden={!isSelected}
+              />
+            ) : (
+            <video
+              class="pd-assets-preview-media"
+              data-role="media"
+              data-index={i}
+              src={url}
+              muted
+              loop
+              playsinline
+              autoplay={isSelected}
+              hidden={!isSelected}
+            />
+            );
+          })}
+        </div>
+
+        {assets.length > 1 && (
+          <div class="pd-assets-strip">
+            {assets.map((asset, i) => {
+              const url = assetUrl(asset.file);
+              return (
+                <button
+                  class={`pd-assets-thumb${i === 0 ? ' active' : ''}`}
+                  data-role="thumb"
+                  data-index={i}
+                  type="button"
+                  aria-label={`Show ${asset.file}`}
+                >
+                  {asset.type === 'image' ? (
+                    <img src={url} alt="" loading="lazy" />
+                  ) : (
+                    <>
+                      <video src={url} muted playsinline />
+                      <span>Video</span>
+                    </>
+                  )}
+                </button>
+              );
+            })}
+          </div>
+        )}
+      </div>
+
+      <div class="pd-assets-info pd-asset-card" aria-live="polite">
+        <div class="pd-assets-info-head">
+          <h3 class="pd-assets-info-title" data-role="title">
+            {assets[0].name || assets[0].file}
+          </h3>
+          <span class="pd-assets-info-badge" data-role="badge">
+            {assets[0].type}
+          </span>
+        </div>
+
+        {assetData[0].prompt && (
+          <pre class="pd-assets-info-prompt" data-role="prompt">{assetData[0].prompt}</pre>
+        )}
+
+        <div class="pd-assets-info-actions">
+          {assetData[0].prompt && (
+            <button
+              class="ac-copy"
+              data-role="copy"
+              type="button"
+              data-prompt={assetData[0].prompt}
+            >
+              <svg class="lucide" viewBox="0 0 24 24">
+                <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
+                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+              </svg>
+              <span>Copy prompt</span>
+            </button>
+          )}
+          <button
+            class="ac-dl"
+            data-role="download"
+            type="button"
+            data-url={assetData[0].url}
+            data-filename={assetData[0].filename}
+          >
+            <svg class="lucide" viewBox="0 0 24 24">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" x2="12" y1="15" y2="3" />
+            </svg>
+            <span>Download</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+<script is:inline>
+  (function () {
+    const root = document.currentScript?.previousElementSibling;
+    if (!root || !root.matches('.pd-assets-split')) return;
+
+    let assets = [];
+    try {
+      assets = JSON.parse(root.dataset.assets || '[]');
+    } catch {
+      return;
+    }
+    if (!assets.length) return;
+
+    const mediaEls = root.querySelectorAll('[data-role="media"]');
+    const thumbs = root.querySelectorAll('[data-role="thumb"]');
+    const titleEl = root.querySelector('[data-role="title"]');
+    const badgeEl = root.querySelector('[data-role="badge"]');
+    const promptEl = root.querySelector('[data-role="prompt"]');
+    const copyBtn = root.querySelector('[data-role="copy"]');
+    const dlBtn = root.querySelector('[data-role="download"]');
+
+    const capitalize = (s) => (s ? s[0].toUpperCase() + s.slice(1) : s);
+
+    const select = (idx) => {
+      const asset = assets[idx];
+
+      mediaEls.forEach((el) => {
+        const active = Number(el.dataset.index) === idx;
+        el.hidden = !active;
+        if (active && el.tagName === 'VIDEO') {
+          el.currentTime = 0;
+          el.play().catch(() => {});
+        } else if (!active && el.tagName === 'VIDEO') {
+          el.pause();
+        }
+      });
+
+      thumbs.forEach((btn) => {
+        btn.classList.toggle('active', Number(btn.dataset.index) === idx);
+      });
+
+      if (titleEl) titleEl.textContent = asset.file;
+      if (badgeEl) badgeEl.textContent = capitalize(asset.type);
+      if (promptEl) {
+        promptEl.textContent = asset.prompt || '';
+        promptEl.hidden = !asset.prompt;
+      }
+      if (copyBtn) {
+        copyBtn.dataset.prompt = asset.prompt || '';
+        copyBtn.hidden = !asset.prompt;
+        copyBtn.querySelector('span').textContent = 'Copy prompt';
+      }
+      if (dlBtn) {
+        dlBtn.dataset.url = asset.url;
+        dlBtn.dataset.filename = asset.filename;
+      }
+    };
+
+    root.addEventListener('click', (e) => {
+      const thumb = e.target.closest('[data-role="thumb"]');
+      if (thumb) {
+        select(Number(thumb.dataset.index));
+        return;
+      }
+
+      const btn = e.target.closest('[data-role="copy"], [data-role="download"]');
+      if (!btn) return;
+
+      if (btn.dataset.role === 'copy') {
+        const text = btn.dataset.prompt || '';
+        navigator.clipboard.writeText(text).then(() => {
+          const label = btn.querySelector('span');
+          if (!label) return;
+          const prev = label.textContent;
+          label.textContent = 'Copied!';
+          setTimeout(() => (label.textContent = prev), 1500);
+        }).catch(() => {});
+        return;
+      }
+
+      if (btn.dataset.role === 'download') {
+        const url = btn.dataset.url;
+        const filename = btn.dataset.filename;
+        if (!url) return;
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename || '';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      }
+    });
+
+    select(0);
+  })();
+</script>

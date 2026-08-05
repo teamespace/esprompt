@@ -31,5 +31,3 @@ Hero layer:
 | File | URL | Content |
 |---|---|---|
 | `hero.mp4` | `https://yacht-bgz.pages.dev/images/hero.mp4` | Hero background video, autoplay/muted/loop, later clip-path-shrunk on scroll |
-
-> Sandbox note: this session's network allowlist blocks direct fetches to `yacht-bgz.pages.dev`, so the actual video file could not be downloaded and attached here. The URL above is exact — drop the real file in this folder (or send it to me) and I'll wire it into the catalog's Assets tab.

@@ -61,5 +61,3 @@ Hero: full-viewport header with a dark-overlay `bg-cover` background image (`HER
 | Const | URL | Content |
 |---|---|---|
 | `HERO_BG` | `https://mental-health-two-psi.vercel.app/hero-bg.png` | Therapist counseling session photo, used as the full-bleed hero background (dark gradient overlay on top) |
-
-> Sandbox note: this session's network allowlist blocks direct fetches to `mental-health-two-psi.vercel.app`, so the actual image file could not be downloaded and attached here. The URL above is the exact asset reference from the source prompt — drop the real file in this folder (or send it to me) and I'll wire it into the catalog's Assets tab.

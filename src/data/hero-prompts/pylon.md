@@ -50,5 +50,3 @@ window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scr
 | Path | URL (live site) | Content |
 |---|---|---|
 | `video/heroo.mp4` | `https://pylon-ai.netlify.app/video/heroo.mp4` | Hero background video, autoplay/muted/loop |
-
-> Sandbox note: this session's network allowlist blocks direct fetches to `pylon-ai.netlify.app`, so the actual video file could not be downloaded and attached here. The URL above is exact — drop the real file in this folder (or send it to me) and I'll wire it into the catalog's Assets tab.

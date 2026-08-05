@@ -20,7 +20,11 @@ const isGifCover = (p) => thumbUrl(p.thumbnail).toLowerCase().endsWith('.gif') |
 const FORCE_16_9 = new Set([
   'velo-moto', 'storefront-v1-skincare', 'storefront-v2-wellness', 'warebotics-robotics', 'lunea-skincare',
 ]);
-const sizeClass = (p, i) => (isGifCover(p) || FORCE_16_9.has(p.slug)) ? 'pv-16-9' : SIZE_CLASSES[i % SIZE_CLASSES.length];
+const sizeClass = (p, i) => {
+  if (isGifCover(p) || FORCE_16_9.has(p.slug)) return 'pv-16-9';
+  if (p.tier === 'Full LP') return 'pv-auto';
+  return SIZE_CLASSES[i % SIZE_CLASSES.length];
+};
 ---
 <AppLayout title="Library">
   <div class="shead reveal">
@@ -181,7 +185,9 @@ const sizeClass = (p, i) => (isGifCover(p) || FORCE_16_9.has(p.slug)) ? 'pv-16-9
   .showcase-grid.masonry .cc .pv.pv-m{aspect-ratio:4/3}
   .showcase-grid.masonry .cc .pv.pv-l{aspect-ratio:3/4}
   /* Animated-GIF/video covers stay 16:9 — they're recordings, not crops. */
-  .showcase-grid.masonry .cc .pv.pv-16-9{aspect-ratio:16/9}
+   .showcase-grid.masonry .cc .pv.pv-16-9{aspect-ratio:16/9}
+   .showcase-grid.masonry .cc .pv.pv-auto{aspect-ratio:4/3}
+   .showcase-grid .cc .pv.pv-portrait{background-size:auto 100%;background-position:top center}
 </style>
 
 <script is:inline>
@@ -209,6 +215,15 @@ const sizeClass = (p, i) => (isGifCover(p) || FORCE_16_9.has(p.slug)) ? 'pv-16-9
       if (!entry.isIntersecting) return;
       const el = entry.target;
       el.style.backgroundImage = `url('${el.dataset.bg}')`;
+      const image = new Image();
+      image.onload = () => {
+        const sourceRatio = image.naturalWidth / image.naturalHeight;
+        if (el.classList.contains('pv-auto')) el.style.aspectRatio = `${image.naturalWidth} / ${image.naturalHeight}`;
+        const slotRatio = el.clientWidth / el.clientHeight;
+        el.classList.toggle('pv-portrait', sourceRatio < slotRatio);
+        scheduleMasonryLayout();
+      };
+      image.src = el.dataset.bg;
       bgIO.unobserve(el);
     });
   }, { rootMargin: '200px 0px' });

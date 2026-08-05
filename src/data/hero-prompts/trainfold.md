@@ -41,5 +41,3 @@ Colors: `--accent: #F97316` (warm orange), `--accent-2: #FACC15` (helper yellow)
 | URL | Content |
 |---|---|
 | `https://trainfold.netlify.app/assets/hero-bg.mp4` | Hero background video, autoplay/muted/loop |
-
-> Sandbox note: this session's network allowlist blocks direct fetches to `trainfold.netlify.app`, so the actual video file could not be downloaded and attached here. The URL above is exact — drop the real file in this folder (or send it to me) and I'll wire it into the catalog's Assets tab.
