@@ -106,7 +106,7 @@ const sizeClass = (p, i) => (isGifCover(p) || FORCE_16_9.has(p.slug)) ? 'pv-16-9
        cloned into the modal below. Avoids a client-side data fetch/JSON dupe. -->
   {prompts.map((p) => (
     <template id={`tpl-${p.slug}`}>
-      <PromptDetailContent item={p} variant="modal" />
+      <PromptDetailContent item={p} />
     </template>
   ))}
 
@@ -234,8 +234,8 @@ const sizeClass = (p, i) => (isGifCover(p) || FORCE_16_9.has(p.slug)) ? 'pv-16-9
   const state = { tier: 'all', category: 'all', q: '', sort: 'recent' };
 
   // View counts are stored per-browser in localStorage and updated every time
-  // a user opens a prompt detail (modal or dedicated page). This is real-time
-  // for the current user, but not a global backend counter.
+  // a user opens a prompt detail modal. This is real-time for the current user,
+  // but not a global backend counter.
   const VIEWS_KEY = 'esprompt:views';
   function getViewsMap(){
     try { return JSON.parse(localStorage.getItem(VIEWS_KEY) || '{}'); }
@@ -465,8 +465,8 @@ const sizeClass = (p, i) => (isGifCover(p) || FORCE_16_9.has(p.slug)) ? 'pv-16-9
     }
   });
 
-  // Quick preview modal: clones the matching hidden <template> so the
-  // modal and the full /library/[slug] page render from one source.
+  // Quick preview modal: clones the matching hidden <template> as the
+  // single source of detail markup.
   const detailOverlay = document.getElementById('detailOverlay');
   const detailBody = document.getElementById('detailModalBody');
   const detailPrev = document.getElementById('detailPrev');

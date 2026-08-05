@@ -1,15 +1,14 @@
 ---
-// Pure content — no page chrome. Rendered two ways: full page
-// (src/pages/library/[slug].astro) and cloned into the modal overlay on
-// /library. Both read from the same markup so they can't drift apart.
+// Pure content — no page chrome. Rendered only as a modal overlay cloned
+// from hidden <template> elements on /library and /index. Kept as a single
+// Astro component so the modal markup can't drift apart across pages.
 import type { PromptItem } from '../data/prompts';
 import { thumbUrl, isVideoThumb } from '../data/prompts';
 
 interface Props {
   item: PromptItem;
-  variant?: 'page' | 'modal';
 }
-const { item, variant = 'page' } = Astro.props;
+const { item } = Astro.props;
 const isHero = item.tier === 'Hero';
 const hasAssets = isHero && !!item.heroAssets?.length;
 const assetUrl = (file: string) => `/assets/hero-downloads/${item.slug}/${file}`;
@@ -44,20 +43,16 @@ const renderPromptHtml = (raw: string) =>
 <div class="prompt-detail" data-slug={item.slug}>
   <div class="pd-topbar">
     <div class="pd-topbar-info">
-      {variant === 'page'
-        ? <h1 class="pd-title">{item.title}</h1>
-        : <h2 class="pd-title">{item.title}</h2>}
+      <h2 class="pd-title">{item.title}</h2>
       <span class="pd-meta">{item.tier} &middot; {item.category}</span>
     </div>
     <div class="pd-topbar-actions">
       <button class="pd-icon-btn detail-share-btn" data-slug={item.slug} aria-label="Copy link" title="Copy link">
         <svg class="lucide" viewBox="0 0 24 24"><path d="M9 17H7A5 5 0 0 1 7 7h2"/><path d="M15 7h2a5 5 0 1 1 0 10h-2"/><line x1="8" x2="16" y1="12" y2="12"/></svg>
       </button>
-      {variant === 'modal' && (
-        <button class="pd-icon-btn" data-close-modal aria-label="Close" title="Close">
-          <svg class="lucide" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-        </button>
-      )}
+      <button class="pd-icon-btn" data-close-modal aria-label="Close" title="Close">
+        <svg class="lucide" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
     </div>
   </div>
 
@@ -135,6 +130,5 @@ const renderPromptHtml = (raw: string) =>
 
 <!-- Tab switching, copy, download, share, and close are handled by a single
      delegated listener in AppLayout.astro, not here. A <script> inside a
-     <template> (the modal case, see catalog.astro) never executes even
-     after cloning, so per-instance scripts would silently do nothing for
-     the modal and register duplicate listeners for the page. -->
+     <template> (used for the modal, see library.astro) never executes even
+     after cloning, so per-instance scripts would silently do nothing. -->

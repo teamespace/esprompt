@@ -842,7 +842,7 @@ const CHECK = 'M20 6 9 17l-5-5';
       same pattern as /library so the homepage opens an identical preview. */}
   {showcaseItems.map((item) => (
     <template id={`tpl-${item.slug}`}>
-      <PromptDetailContent item={item} variant="modal" />
+      <PromptDetailContent item={item} />
     </template>
   ))}
   <div class="detail-overlay" id="detailOverlay">
@@ -1408,7 +1408,7 @@ const CHECK = 'M20 6 9 17l-5-5';
     if(closeBtn){closeDetailModal();return;}
     const shareBtn=e.target.closest('.detail-share-btn');
     if(shareBtn){
-      navigator.clipboard?.writeText(`${location.origin}/library/${shareBtn.dataset.slug}`);
+      navigator.clipboard?.writeText(`${location.origin}/library`);
       shareBtn.classList.add('copied');
       setTimeout(()=>shareBtn.classList.remove('copied'),1500);
       return;

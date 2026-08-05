@@ -110,7 +110,7 @@ import trainfoldTestimonialsPrompt from './section-prompts/trainfold-testimonial
 
 // A few Hero thumbnails are animated covers hotlinked from an external CDN
 // instead of a local file under /assets/showcase/ — this lets every render
-// site (library grid, detail page, modal, related-prompts) resolve either
+// site (library grid, modal detail view, related-prompts) resolve either
 // kind from the same `thumbnail` field without duplicating the branch.
 export const thumbUrl = (thumbnail: string) =>
   thumbnail.startsWith('http') ? thumbnail : `/assets/showcase/${thumbnail}`;
@@ -217,20 +217,26 @@ export const prompts: PromptItem[] = [
 
   // ---- Hero tier, batch 3: 6 entries reverse-engineered from the Full LP
   // versions below (see the "Batch 5" import comment above for why altr and
-  // zenith aren't part of this set). No heroAssets — no downloadable file for
-  // these was ever captured, only the animated GIF used as the thumbnail.
+  // zenith aren't part of this set). Each uses the animated hero webm as its
+  // downloadable video asset so every Hero modal detail view has the Assets tab.
   { slug: 'curalink-hero', title: 'Curalink', tier: 'Hero', category: 'Health', thumbnail: 'http://beige-lemur-872571.hostingersite.com/asset-esprompt/preview-asset/hero/curalink.webm',
-    prompt: curalinkHeroPrompt },
+    prompt: curalinkHeroPrompt,
+    heroAssets: [{ file: 'hero.webm', type: 'video' }] },
   { slug: 'figureworld-hero', title: 'FigureWorld', tier: 'Hero', category: 'Ecom', thumbnail: 'http://beige-lemur-872571.hostingersite.com/asset-esprompt/preview-asset/hero/figure-world.webm',
-    prompt: figureworldHeroPrompt, free: true },
+    prompt: figureworldHeroPrompt, free: true,
+    heroAssets: [{ file: 'hero.webm', type: 'video' }] },
   { slug: 'proxim-hero', title: 'Proxim', tier: 'Hero', category: 'Dev', thumbnail: 'http://beige-lemur-872571.hostingersite.com/asset-esprompt/preview-asset/hero/proxim.webm',
-    prompt: proximHeroPrompt },
+    prompt: proximHeroPrompt,
+    heroAssets: [{ file: 'hero.webm', type: 'video' }] },
   { slug: 'quorum-hero', title: 'Quorum', tier: 'Hero', category: 'SaaS', thumbnail: 'http://beige-lemur-872571.hostingersite.com/asset-esprompt/preview-asset/hero/quorum.webm',
-    prompt: quorumHeroPrompt },
+    prompt: quorumHeroPrompt,
+    heroAssets: [{ file: 'hero.webm', type: 'video' }] },
   { slug: 'stillwave-hero', title: 'Stillwave', tier: 'Hero', category: 'Wellness', thumbnail: 'http://beige-lemur-872571.hostingersite.com/asset-esprompt/preview-asset/hero/stillwave.webm',
-    prompt: stillwaveHeroPrompt },
+    prompt: stillwaveHeroPrompt,
+    heroAssets: [{ file: 'hero.webm', type: 'video' }] },
   { slug: 'thecity-hero', title: 'The City', tier: 'Hero', category: 'Property', thumbnail: 'http://beige-lemur-872571.hostingersite.com/asset-esprompt/preview-asset/hero/the-city.webm',
-    prompt: thecityHeroPrompt },
+    prompt: thecityHeroPrompt,
+    heroAssets: [{ file: 'hero.webm', type: 'video' }] },
 
   // ---- Full LP tier: 35 entries, one per real Elux Space portfolio build
   // (https://elux-vibe-portfolio.ahrasya.workers.dev/), minus the 2 internal
