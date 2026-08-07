@@ -76,7 +76,7 @@ export default defineConfig({ server: { port: 3000 } });
   </header>
   <main id="main">
     <section class="hero" aria-label="Featured drop">
-      <div class="hero-media"><video src="https://ecommerce-landing.pages.dev/05-elan-moody/assets/elan-hero.mp4" autoplay muted loop playsinline></video></div>
+      <div class="hero-media"><video src="https://beige-lemur-872571.hostingersite.com/asset-esprompt/Landing/Elan/Hero/elan.mp4" autoplay muted loop playsinline></video></div>
       <div class="hero-overlay"></div>
       <div class="hero-content"><p class="hero-eyebrow">Online Exclusive</p><h1 class="hero-title">Élan x Legends<br>Collection</h1><a href="#shop" class="hero-cta">Shop</a></div>
     </section>

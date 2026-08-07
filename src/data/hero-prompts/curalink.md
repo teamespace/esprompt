@@ -18,16 +18,13 @@ Content (copy verbatim):
 - Buttons: "Start a visit now" · "See how it works"
 - Trust row: "HIPAA compliant" · "End-to-end encrypted" · "4,200+ doctors" · "94 sec median"
 - Chat-demo card "Curalink Care — AI intake · doctor on the way — Encrypted": MAYA 8:12 PM "I've had a throbbing headache behind my right eye since yesterday, and bright light makes it a lot worse." · CURALINK AI reply with symptom-check pills "Nausea / Fever / Light sensitivity / Neck stiffness" · flag "Likely migraine episode — MODERATE PRIORITY — Intake summarized for your doctor · matching you with neurology now" · "Dr. Amara Osei, MD — Neurology · joined in 1 min 42s" · DR. OSEI: "Hi Maya, I've read your intake — you've told me everything I need to start. Let's talk triggers, and I can send something for tonight to your pharmacy."
-Assets: ai_avatar.png (chat AI avatar)
+Assets: chat AI avatar — https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Curalink-2/Hero/ai_avatar.webp
 
 === INTERACTIONS ===
 - Chat-demo hero panel likely reveals messages sequentially on load; exact timing not captured.
 
 === ASSETS (confirmed URLs) ===
-Base: https://curalink-2.vercel.app/images/
-| File | URL | Used for |
-|---|---|---|
-| ai_avatar.png | .../images/ai_avatar.png | Hero chat demo — AI avatar |
+- Hero chat-demo card — AI avatar: https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Curalink-2/Hero/ai_avatar.webp
 
 === RULES ===
 - Use only the colors, fonts, and sizes specified above; do not invent new ones.

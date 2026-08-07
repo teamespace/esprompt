@@ -130,7 +130,7 @@ export default defineConfig({ server: { port: 3000 } });
           <p>We work with family-run mills in Portugal, Italy, and Japan to source natural fibers that age gracefully. Every seam is considered, every button is corozo, and every garment is finished by hand.</p>
           <ul class="craft__list"><li>100% natural fibers</li><li>Corozo buttons</li><li>Small-batch production</li><li>Plastic-free packaging</li></ul>
         </div>
-        <div class="craft__media"><img src="https://ecommerce-landing.pages.dev/generated-assets/arlo/arlo-craft.png" alt="Natural fabric texture detail"></div>
+        <div class="craft__media"><img src="https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Arlo/Material/material.webp" alt="Natural fabric texture detail"></div>
       </div>
     </section>
     <section class="marquee" aria-label="Scrolling tagline"><div class="marquee-track"><span>The Quiet Confidence</span><span>·</span><span>Season 26</span><span>·</span><span>Made to Last</span><span>·</span><span>The Quiet Confidence</span><span>·</span><span>Season 26</span><span>·</span><span>Made to Last</span><span>·</span></div></section>

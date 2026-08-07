@@ -36,6 +36,10 @@ Assets:
 === INTERACTIONS ===
 - Day/Night toggle swaps the hero background image/overlay tone (light warm vs. dark blue-hour lighting) — instant or crossfade, exact timing not captured.
 
+=== ASSETS (confirmed URLs) ===
+- Hero background video — "Day" state: https://beige-lemur-872571.hostingersite.com/asset-esprompt/Landing/The-city/Hero/hero-day.mp4
+- Hero "Night" state: NOT AVAILABLE YET — no night asset published. Until it exists, drive the Night toggle with a CSS overlay (blue-hour tint + darker scrim) over the same day video.
+
 === RULES ===
 - Use only the colors, fonts, and sizes specified above; do not invent new ones.
 - Keep all copy exactly as quoted.

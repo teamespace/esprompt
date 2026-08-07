@@ -9,7 +9,7 @@ Hero (`Hero.tsx`): full-viewport section, content anchored bottom-left (`flex-co
 ```
 ### `Hero.tsx`
 - Full-viewport section, `min-h-screen`, content anchored bottom-left (`flex-col justify-end`)
-- Background: `<video autoPlay muted loop playsInline>` source `/assets/hero.mp4`, `object-cover object-center`
+- Background: `<video autoPlay muted loop playsInline>` source `https://beige-lemur-872571.hostingersite.com/asset-esprompt/Landing/Velo/Hero/hero.mp4`, `object-cover object-center`
 - Overlay: `bg-gradient-to-t from-black/85 via-black/20 to-transparent`
 - Content: `px-8 md:px-14 pb-20 pt-40`
 - **Headline:** `BORN` / `ELECTRIC` — two words, each in `<span class="block overflow-hidden"><span class="block">` for slide-up reveal
@@ -24,4 +24,4 @@ Hero (`Hero.tsx`): full-viewport section, content anchored bottom-left (`flex-co
 
 | File | URL | Content |
 |---|---|---|
-| `hero.mp4` | `https://velo-landing-e1d.pages.dev/assets/hero.mp4` | Hero background video, autoplay/muted/loop |
+| `hero.mp4` | `https://beige-lemur-872571.hostingersite.com/asset-esprompt/Landing/Velo/Hero/hero.mp4` | Hero background video, autoplay/muted/loop |

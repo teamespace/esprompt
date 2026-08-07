@@ -43,7 +43,7 @@ const cards = [
     id: "chat",
     title: "Chat Interface",
     desc: "ChatGPT-grade UX for every model. Conversation history, multimodal input, voice, and custom system prompts — all offline-capable.",
-    img: "https://pylon-ai.netlify.app/image/heroo.png",
+    img: "https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Pylon-ai/About/about-1.webp",
     delay: 0.1,
     renderMockup: () => (
       <div className="bg-white/90 backdrop-blur-md rounded-[10px] w-full max-w-[380px] shadow-[0_8px_40px_rgba(0,0,0,0.18)] overflow-hidden">
@@ -77,7 +77,7 @@ const cards = [
     id: "hub",
     title: "Model Hub",
     desc: "Connect any model — local via Ollama, or cloud via OpenAI-compatible APIs. Switch, compare, and version-control your model stack.",
-    img: "https://pylon-ai.netlify.app/image/image.png",
+    img: "https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Pylon-ai/About/about-2.webp",
     delay: 0.2,
     renderMockup: () => (
       <div className="bg-white/90 backdrop-blur-md rounded-[10px] w-full max-w-[380px] shadow-[0_8px_40px_rgba(0,0,0,0.18)] overflow-hidden">
@@ -106,7 +106,7 @@ const cards = [
     id: "rag",
     title: "RAG Engine",
     desc: "Upload documents, codebases, and internal wikis. Answers from your own data — no cloud required, no data leaving your server.",
-    img: "https://pylon-ai.netlify.app/image/cta.png",
+    img: "https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Pylon-ai/About/about-3.webp",
     delay: 0.3,
     renderMockup: () => (
       <div className="bg-white/90 backdrop-blur-md rounded-[10px] w-full max-w-[380px] shadow-[0_8px_40px_rgba(0,0,0,0.18)] overflow-hidden">
@@ -137,7 +137,7 @@ const cards = [
     id: "api",
     title: "API & Pipelines",
     desc: "Extend with Python. Build custom tools, webhook integrations, multi-step workflows, and function calling — all within your infrastructure.",
-    img: "https://pylon-ai.netlify.app/image/image-2.png",
+    img: "https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Pylon-ai/About/about-4.webp",
     delay: 0.4,
     renderMockup: () => (
       <div className="bg-white/90 backdrop-blur-md rounded-[10px] w-full max-w-[380px] shadow-[0_8px_40px_rgba(0,0,0,0.18)] overflow-hidden">

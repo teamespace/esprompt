@@ -1,4 +1,4 @@
-Create a static HTML + CSS + Vanilla JavaScript website for "Trainfold — Train smarter, not longer", a real-time ML model training monitoring landing page. The page features a floating blur pill navigation header, a Hero Section with an autoplaying background video (`https://trainfold.netlify.app/assets/hero-bg.mp4`), a Product Features Grid (detailed into Live Loss Curves, Hardware Telemetry, and Gradient Heatmaps), a dense Dashboard Preview (surfacing live metrics, loss charts, GPU/VRAM dials, gradient heatmaps, and step logs), a Setup steps walk-through (timeline steps showing pip/python integration, a live-streaming log animation, and run iterations comparisons), a metrics strip detailing scale stats, a testimonials quote/logo/stat cards carousel track (with sliding controls), a bottom CTA banner, and a site footer. All SVG logo marks, dials, and curves are styled and animated.
+Create a static HTML + CSS + Vanilla JavaScript website for "Trainfold — Train smarter, not longer", a real-time ML model training monitoring landing page. The page features a floating blur pill navigation header, a Hero Section with an autoplaying background video (`https://beige-lemur-872571.hostingersite.com/asset-esprompt/Landing/Trainfold/Hero/hero.mp4`), a Product Features Grid (detailed into Live Loss Curves, Hardware Telemetry, and Gradient Heatmaps), a dense Dashboard Preview (surfacing live metrics, loss charts, GPU/VRAM dials, gradient heatmaps, and step logs), a Setup steps walk-through (timeline steps showing pip/python integration, a live-streaming log animation, and run iterations comparisons), a metrics strip detailing scale stats, a testimonials quote/logo/stat cards carousel track (with sliding controls), a bottom CTA banner, and a site footer. All SVG logo marks, dials, and curves are styled and animated.
 
 ---
 
@@ -7,7 +7,7 @@ Create a static HTML + CSS + Vanilla JavaScript website for "Trainfold — Train
 1. **FILE ARCHITECTURE — NO FRAMEWORKS:** Build the project as a static site: `index.html` (markup), `styles.css` (verbatim styles), and `trainfold-viz.js` (verbatim logic), dev-scaffolded with Vite. Do not use React or Tailwind.
 2. **VERBATIM COPYING:** Copy the stylesheet `styles.css` and logic `trainfold-viz.js` provided below exactly as written.
 3. **FONTS:** Load DM Sans (weights 400, 500, 600, 700) and JetBrains Mono (weights 400, 500, 600) via Google Fonts `<link>` in `index.html`.
-4. **ASSET ROBUSTNESS:** All media assets must reference the absolute Netlify paths: `https://trainfold.netlify.app/assets/`.
+4. **ASSET ROBUSTNESS:** The hero background video is hosted on Hostinger — use `https://beige-lemur-872571.hostingersite.com/asset-esprompt/Landing/Trainfold/Hero/hero.mp4` exactly. All other visuals (dials, curves, logo marks, charts) are inline SVG/CSS, no image files.
 5. **INTERACTIVE METRICS & SLIDERS:**
    - **Live Loss Curves & Dials**: SVGs must render dynamic paths and circular progress dashes driven by JS loops.
    - **Hardware Telemetry Bar Grids**: Periodic intervals update heights to simulate active hardware cycles.
@@ -75,7 +75,7 @@ export default defineConfig({ server: { port: 3000 } });
     </div>
   </nav>
   <header class="hero">
-    <video class="hero-video" autoplay muted loop playsinline><source src="https://trainfold.netlify.app/assets/hero-bg.mp4" type="video/mp4"></video>
+    <video class="hero-video" autoplay muted loop playsinline><source src="https://beige-lemur-872571.hostingersite.com/asset-esprompt/Landing/Trainfold/Hero/hero.mp4" type="video/mp4"></video>
     <div class="wrap" style="width: 717px;">
       <span class="eyebrow" style="color:#ffd9b8">Scale & Visibility</span>
       <h1>Every fine-tuning run,<br><span class="accent">fully visible</span></h1>

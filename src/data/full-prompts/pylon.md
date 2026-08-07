@@ -5,7 +5,7 @@ Create a static HTML+CSS+JS website for "PYLON AI — Every Model. Your Infrastr
 1. **NO FRAMEWORKS:** Static site: `index.html` (markup+inline `<style>`+inline `<script>`), scaffolded with Vite. No React/Tailwind.
 2. **VERBATIM:** Copy `<style>` and `<script>` below exactly.
 3. **FONTS:** Source Serif 4 (ital, 300–900) + DM Sans (300–700) via Google Fonts.
-4. **ASSETS:** Relative paths exactly as in the scaffold — `video/heroo.mp4`, `video/footer-fix.mp4`, `video/openart-…mp4`, `image/heroo.png`, `image/image.png`, `image/cta.png`, `image/image-2.png`. (The live site at `https://pylon-ai.netlify.app/` serves them from `/video/` and `/image/`.) Keep `data-speed` attributes on the six `.portrait` divs.
+4. **ASSETS:** Hotlink the absolute URLs exactly as written in the scaffold. Video → Hostinger, under `https://beige-lemur-872571.hostingersite.com/asset-esprompt/Landing/Pylon-ai/` : `Hero/hero.mp4`, `Mission/Mission.mp4`, `Footer/footer.mp4`. Images → Cloudflare R2, under `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Pylon-ai/About/` : `about-1.webp` … `about-4.webp`, used in ecosystem-card order 1→4 and reused by the six `.portrait` divs. Keep `data-speed` attributes on the six `.portrait` divs.
 5. **INTERACTIVITY:** Nav `.scrolled` toggle on scroll>20; IntersectionObserver `.visible` on `.fade-up`; stat counters animate 0→`data-target`; hero video parallax (scale 1.04+translateY); halftone canvas wave dots + hover ripple; collage scroll-driven typewriter (3 phases) + parallax portraits.
 
 ---
@@ -47,7 +47,7 @@ export default defineConfig({ root: '.', build: { outDir: 'dist' } });
 </nav>
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-bg"><video autoplay muted loop playsinline><source src="video/heroo.mp4" type="video/mp4"></video></div>
+  <div class="hero-bg"><video autoplay muted loop playsinline><source src="https://beige-lemur-872571.hostingersite.com/asset-esprompt/Landing/Pylon-ai/Hero/hero.mp4" type="video/mp4"></video></div>
   <div class="hero-left">
     <p class="hero-tag">Self-Hosted AI Platform</p>
     <h1 class="hero-h1">Every model.<br>Your infrastructure.</h1>
@@ -87,22 +87,22 @@ export default defineConfig({ root: '.', build: { outDir: 'dist' } });
   <p class="section-sub fade-up fade-up-delay-2">Four pillars of sovereign AI infrastructure — built for developers, trusted by enterprises.</p>
   <div class="ecosystem-grid">
     <!-- Card 1: Chat -->
-    <div class="eco-card fade-up fade-up-delay-1"><div class="eco-visual"><img class="eco-visual-bg" src="image/heroo.png" alt=""><div class="eco-mockup"><div class="eco-mockup-card">
+    <div class="eco-card fade-up fade-up-delay-1"><div class="eco-visual"><img class="eco-visual-bg" src="https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Pylon-ai/About/about-1.webp" alt=""><div class="eco-mockup"><div class="eco-mockup-card">
       <div class="eco-mockup-bar"><div class="eco-mockup-dot" style="background:#ff5f57"></div><div class="eco-mockup-dot" style="background:#febc2e"></div><div class="eco-mockup-dot" style="background:#28c840"></div><span class="eco-mockup-title">PYLON Chat</span><span style="margin-left:auto;font-size:10px;color:var(--teal-dark);font-weight:600;">● LIVE</span></div>
       <div class="eco-mockup-body"><div class="eco-mockup-row full teal"></div><div class="eco-mockup-row med" style="margin-top:6px"></div><div class="eco-mockup-row short"></div><div class="eco-mockup-line"></div><div class="eco-mockup-row full" style="margin-left:auto;width:65%"></div><div class="eco-mockup-row short" style="margin-left:auto;width:40%"></div><div class="eco-mockup-input" style="margin-top:14px"><span>Ask anything about your models…</span><div class="eco-mockup-send"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 6L2 2V5.5L7 6L2 6.5V10Z" fill="white"/></svg></div></div></div>
     </div></div></div><div class="eco-info"><h3>Chat Interface</h3><p>ChatGPT-grade UX for every model. Conversation history, multimodal input, voice, and custom system prompts — all offline-capable.</p><a class="eco-link" href="#">Read the docs</a></div></div>
     <!-- Card 2: Model Hub -->
-    <div class="eco-card fade-up fade-up-delay-2"><div class="eco-visual"><img class="eco-visual-bg" src="image/image.png" alt=""><div class="eco-mockup"><div class="eco-mockup-card">
+    <div class="eco-card fade-up fade-up-delay-2"><div class="eco-visual"><img class="eco-visual-bg" src="https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Pylon-ai/About/about-2.webp" alt=""><div class="eco-mockup"><div class="eco-mockup-card">
       <div class="eco-mockup-bar"><span class="eco-mockup-title">Model Hub</span><span style="margin-left:auto;font-size:10px;background:rgba(56,116,120,.15);color:var(--teal-dark);padding:2px 7px;border-radius:8px;font-weight:600;">4 connected</span></div>
       <div class="eco-mockup-body" style="padding:10px 14px"><div style="display:flex;flex-wrap:wrap"><span class="eco-mockup-tag">Llama 3.3</span><span class="eco-mockup-tag">Claude</span><span class="eco-mockup-tag">Gemini Pro</span><span class="eco-mockup-tag">Mistral</span><span class="eco-mockup-tag">DeepSeek</span><span class="eco-mockup-tag">GPT-4o</span></div><div class="eco-mockup-line"></div><div style="display:flex;gap:4px;flex-wrap:wrap"><div class="eco-mockup-node">LOCAL</div><div class="eco-mockup-node">API</div><div class="eco-mockup-node">OLLAMA</div></div><div class="eco-mockup-row full teal" style="margin-top:10px;height:6px;border-radius:3px"></div></div>
     </div></div></div><div class="eco-info"><h3>Model Hub</h3><p>Connect any model — local via Ollama, or cloud via OpenAI-compatible APIs. Switch, compare, and version-control your model stack.</p><a class="eco-link" href="#">Read the docs</a></div></div>
     <!-- Card 3: RAG -->
-    <div class="eco-card fade-up fade-up-delay-3"><div class="eco-visual"><img class="eco-visual-bg" src="image/cta.png" alt=""><div class="eco-mockup"><div class="eco-mockup-card">
+    <div class="eco-card fade-up fade-up-delay-3"><div class="eco-visual"><img class="eco-visual-bg" src="https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Pylon-ai/About/about-3.webp" alt=""><div class="eco-mockup"><div class="eco-mockup-card">
       <div class="eco-mockup-bar"><span class="eco-mockup-title">Knowledge Base</span><span style="margin-left:auto;font-size:10px;color:var(--text-sec)">3 sources</span></div>
       <div class="eco-mockup-body"><div style="display:flex;flex-direction:column;gap:6px"><div style="display:flex;align-items:center;gap:8px;padding:6px 8px;background:rgba(56,116,120,.07);border-radius:6px"><span style="font-size:11px">📄</span><div class="eco-mockup-row" style="flex:1;margin:0;height:7px"></div></div><div style="display:flex;align-items:center;gap:8px;padding:6px 8px;background:rgba(56,116,120,.07);border-radius:6px"><span style="font-size:11px">📁</span><div class="eco-mockup-row" style="flex:1;margin:0;height:7px;width:70%"></div></div><div style="display:flex;align-items:center;gap:8px;padding:6px 8px;background:rgba(56,116,120,.07);border-radius:6px"><span style="font-size:11px">🔗</span><div class="eco-mockup-row" style="flex:1;margin:0;height:7px;width:55%"></div></div></div><div class="eco-mockup-input" style="margin-top:10px"><span>Search your knowledge base…</span><div class="eco-mockup-send"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 6L2 2V5.5L7 6L2 6.5V10Z" fill="white"/></svg></div></div></div>
     </div></div></div><div class="eco-info"><h3>RAG Engine</h3><p>Upload documents, codebases, and internal wikis. Answers from your own data — no cloud required, no data leaving your server.</p><a class="eco-link" href="#">Read the docs</a></div></div>
     <!-- Card 4: Pipelines -->
-    <div class="eco-card fade-up fade-up-delay-4"><div class="eco-visual"><img class="eco-visual-bg" src="image/image-2.png" alt=""><div class="eco-mockup"><div class="eco-mockup-card">
+    <div class="eco-card fade-up fade-up-delay-4"><div class="eco-visual"><img class="eco-visual-bg" src="https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Pylon-ai/About/about-4.webp" alt=""><div class="eco-mockup"><div class="eco-mockup-card">
       <div class="eco-mockup-bar"><span class="eco-mockup-title">Pipeline Editor</span><span style="margin-left:auto;font-size:10px;color:var(--teal-dark);font-weight:600;">▶ Running</span></div>
       <div class="eco-mockup-body" style="padding:10px 14px"><div style="display:flex;align-items:center;gap:6px;margin-bottom:8px"><div class="eco-mockup-node" style="background:rgba(56,116,120,.15)">INPUT</div><div style="flex:1;height:1px;background:rgba(56,116,120,.3)"></div><div class="eco-mockup-node">FILTER</div><div style="flex:1;height:1px;background:rgba(56,116,120,.3)"></div><div class="eco-mockup-node" style="background:rgba(56,116,120,.15)">OUTPUT</div></div><div style="background:rgba(43,43,41,.04);border-radius:6px;padding:8px 10px"><div class="eco-mockup-row short teal" style="height:6px;margin-bottom:5px"></div><div class="eco-mockup-row med" style="height:6px;margin-bottom:5px"></div><div class="eco-mockup-row short" style="height:6px"></div></div><div class="eco-mockup-row full teal" style="margin-top:10px;height:6px;border-radius:3px;opacity:.6"></div></div>
     </div></div></div><div class="eco-info"><h3>API &amp; Pipelines</h3><p>Extend with Python. Build custom tools, webhook integrations, multi-step workflows, and function calling — all within your infrastructure.</p><a class="eco-link" href="#">Read the docs</a></div></div>
@@ -110,18 +110,18 @@ export default defineConfig({ root: '.', build: { outDir: 'dist' } });
 </section>
 <!-- RESEARCH -->
 <section class="research">
-  <div class="research-left fade-up"><video autoplay muted loop playsinline class="research-video"><source src="video/openart-02178046493256600000000000000000000ffffc0a8560bf8ed66_1780464996123_ff09f656.mp4" type="video/mp4"></video><div class="research-quote"><h3>"Your infrastructure is not a product. It's a principle."</h3></div></div>
+  <div class="research-left fade-up"><video autoplay muted loop playsinline class="research-video"><source src="https://beige-lemur-872571.hostingersite.com/asset-esprompt/Landing/Pylon-ai/Mission/Mission.mp4" type="video/mp4"></video><div class="research-quote"><h3>"Your infrastructure is not a product. It's a principle."</h3></div></div>
   <div class="research-right fade-up fade-up-delay-2"><h2>Open-source intelligence is the new competitive moat.</h2><p>While others lock you into their APIs, PYLON puts the model runtime, the data pipeline, and the access controls entirely in your hands. Open source, MIT licensed, deployable anywhere Docker runs.</p><a class="btn-dark" href="#docs" style="display:inline-block;width:auto;align-self:flex-start;">Read the Docs →</a></div>
 </section>
 <!-- COLLAGE -->
 <section class="collage-section" id="sovereign"><div class="collage-sticky">
   <div class="collage-heading"><p class="collage-phase-text" id="collageTyping"></p></div>
-  <div class="portrait p1" data-speed="-0.18"><img src="image/heroo.png" alt="Scholar"></div>
-  <div class="portrait p2" data-speed="0.28"><img src="image/image.png" alt="Infrastructure"></div>
-  <div class="portrait p3" data-speed="-0.12"><img src="image/cta.png" alt="Sovereignty"></div>
-  <div class="portrait p4" data-speed="0.22"><img src="image/image-2.png" alt="Network"></div>
-  <div class="portrait p5" data-speed="-0.20"><img src="image/heroo.png" alt="Scholar 2"></div>
-  <div class="portrait p6" data-speed="0.15"><img src="image/image.png" alt="Infrastructure 2"></div>
+  <div class="portrait p1" data-speed="-0.18"><img src="https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Pylon-ai/About/about-1.webp" alt="Scholar"></div>
+  <div class="portrait p2" data-speed="0.28"><img src="https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Pylon-ai/About/about-2.webp" alt="Infrastructure"></div>
+  <div class="portrait p3" data-speed="-0.12"><img src="https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Pylon-ai/About/about-3.webp" alt="Sovereignty"></div>
+  <div class="portrait p4" data-speed="0.22"><img src="https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Pylon-ai/About/about-4.webp" alt="Network"></div>
+  <div class="portrait p5" data-speed="-0.20"><img src="https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Pylon-ai/About/about-1.webp" alt="Scholar 2"></div>
+  <div class="portrait p6" data-speed="0.15"><img src="https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Pylon-ai/About/about-2.webp" alt="Infrastructure 2"></div>
 </div></section>
 <!-- STATS -->
 <section class="stats-section" id="community">
@@ -151,7 +151,7 @@ export default defineConfig({ root: '.', build: { outDir: 'dist' } });
     </div>
     <div class="footer-links"><a href="#">Documentation</a><a href="#">Community</a><a href="#">GitHub</a><a href="#">Enterprise</a></div>
   </div>
-  <div class="footer-bottom"><video autoplay muted loop playsinline><source src="video/footer-fix.mp4" type="video/mp4"></video></div>
+  <div class="footer-bottom"><video autoplay muted loop playsinline><source src="https://beige-lemur-872571.hostingersite.com/asset-esprompt/Landing/Pylon-ai/Footer/footer.mp4" type="video/mp4"></video></div>
   <div class="footer-copy">© 2025 PYLON AI · Open-source, MIT licensed · Built for sovereignty</div>
 </footer>
 

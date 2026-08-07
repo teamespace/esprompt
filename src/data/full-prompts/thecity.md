@@ -34,7 +34,8 @@ Content (copy verbatim):
 - "Scroll" label
 - Stat row (4 stats): "1.2M — Starting Price (AED)" · "3K+ — Residential Units" · "45+ — Amenities & Facilities" · "Q4 '27 — Handover Date"
 Assets:
-- Hero photographic background (city/tower render), swapped between a "Day" and "Night" version by the toggle
+- Hero background video — "Day" state: https://beige-lemur-872571.hostingersite.com/asset-esprompt/Landing/The-city/Hero/hero-day.mp4 (autoplay, muted, loop, playsinline)
+- "Night" state: NOT AVAILABLE YET — drive it with a CSS blue-hour tint + darker scrim over the same day video until a night asset is published
 
 === SECTION 3: About the development ===
 Layout & structure:
@@ -46,7 +47,7 @@ Content (copy verbatim):
 - Body 2: "Developed by an award-winning team of architects and interior designers, The City offers studios through to four-bedroom waterfront villas — all within one of the most connected addresses in the region."
 - Button: "Browse Properties"
 Assets:
-- image-2.png — "City Architecture" photo
+- "City Architecture" photo: https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/The-city/About/about.webp
 Quote band:
 - "\"A home is not four walls — it is everything that happens inside them.\"" — attribution: "The City — Design Philosophy"
 
@@ -58,20 +59,21 @@ Content (copy verbatim):
 - Card 1 — tag "Studio – 2 Bedroom", title "The Residences", copy "Thoughtfully designed apartments with floor-to-ceiling windows, premium finishes, and direct access to retail, dining, and landscaped courtyards."
 - Card 2 — tag "1 – 3 Bedroom", title "Marina Apartments", copy "Wake up to open water views. Generous balconies, a private marina promenade, and a curated selection of waterfront restaurants at your doorstep."
 - Card 3 — tag "3 – 4 Bedroom", title "Garden Villas", copy "Private gardens, double-height living rooms, and rooftop terraces set within a lush, tree-lined neighbourhood. The most exclusive address in the development."
-Assets: image-12.png (Residences), image-6.png (Marina Apartments), image-11.png (Garden Villas)
+Assets: https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/The-city/Properties/properties-1.webp (Residences) · https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/The-city/Properties/properties-2.webp (Marina Apartments) · https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/The-city/Properties/properties-3.webp (Garden Villas)
 
 === SECTION 5: Amenities (3 feature blocks with big stat) ===
 Content (copy verbatim):
 - "Pool & Wellness" — "An Olympic-length lap pool, rooftop infinity pool, full-service spa, and a 2,000 sqm fitness centre — all within the development." — stat "5 / Pools & Water Features"
 - "Retail & Dining" — "Over 80 curated retail and F&B outlets lining the ground-floor promenades — from specialty coffee to fine dining, steps from your front door." — stat "80+ / Shops & Restaurants"
 - "Green & Open Space" — "Parks, jogging trails, and landscaped gardens covering 80% of the development's ground plane — a neighbourhood built around outdoor living." — stat "80% / Green & Open Space"
-Assets: image-10.png (Green City Towers), image-3.png (City Boulevard), + City Waterfront image
+Assets: https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/The-city/Amenities/Amenities-1.webp (Green City Towers) · https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/The-city/Amenities/Amenities-2.webp (City Boulevard) · https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/The-city/Amenities/Amenities-3.webp (City Waterfront)
 
 === SECTION 6: Evening lifestyle band ===
 Content (copy verbatim):
 - Eyebrow: "Life at The City" · H2: "Every Evening is an Event"
 - Body: "The marina promenade, rooftop terraces, and waterfront restaurants come alive after sunset. This is the kind of address you come home to — not just to sleep."
 - Button: "Book a Viewing"
+Assets: background video — https://beige-lemur-872571.hostingersite.com/asset-esprompt/Landing/The-city/CTA/CTA.mp4 (autoplay, muted, loop)
 
 === SECTION 7: Interiors ===
 Content (copy verbatim):
@@ -79,7 +81,7 @@ Content (copy verbatim):
 - Body: "Every unit at The City is delivered fully fitted — Italian kitchen cabinetry, imported stone surfaces, smart home controls, and floor-to-ceiling glazing as standard."
 - Body 2: "No upgrades needed. No compromises made. Move in and live exactly as you imagined."
 - Button: "View Show Unit"
-Assets: "Smart City Technology" image
+Assets: "Smart City Technology" image: https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/The-city/Interiors/Interiors.webp
 
 === SECTION 8: Contact / booking form ===
 Content (copy verbatim):
@@ -101,17 +103,21 @@ Content (copy verbatim):
 - Scroll reveal on section entry (fade-up) is a reasonable default for this class of site; exact easing/offset not captured.
 
 === ASSETS (confirmed URLs) ===
-Base: https://the-city-website.netlify.app/assets/
-| File | URL | Used for |
-|---|---|---|
-| image-2.png | .../assets/image-2.png | About section — "City Architecture" |
-| image-12.png | .../assets/image-12.png | Properties card 1 — "Residences" |
-| image-6.png | .../assets/image-6.png | Properties card 2 — "Marina Apartments" |
-| image-11.png | .../assets/image-11.png | Properties card 3 — "Garden Villas" |
-| image-10.png | .../assets/image-10.png | Amenities — "Green City Towers" |
-| image-3.png | .../assets/image-3.png | Amenities — "City Boulevard" |
-Not captured (the DOM dump was cut off before these loaded) — re-fetch or regenerate: the Day/Night hero background pair, the "City Waterfront" amenities image, and the "Smart City Technology" interiors image. Filenames almost certainly follow the same `image-N.png` pattern on the same host — check the live site's asset folder for the missing numbers before hotlinking.
+Video → Hostinger · Image → Cloudflare R2
 
+| Section | Slot | URL |
+|---|---|---|
+| Sec 2 — Hero | Background video, "Day" state | `https://beige-lemur-872571.hostingersite.com/asset-esprompt/Landing/The-city/Hero/hero-day.mp4` |
+| Sec 2 — Hero | "Night" state | ❌ belum ada — pakai CSS blue-hour tint di atas video day |
+| Sec 3 — About | "City Architecture" | `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/The-city/About/about.webp` |
+| Sec 4 — Properties | Residences | `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/The-city/Properties/properties-1.webp` |
+| Sec 4 — Properties | Marina Apartments | `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/The-city/Properties/properties-2.webp` |
+| Sec 4 — Properties | Garden Villas | `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/The-city/Properties/properties-3.webp` |
+| Sec 5 — Amenities | Green City Towers | `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/The-city/Amenities/Amenities-1.webp` |
+| Sec 5 — Amenities | City Boulevard | `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/The-city/Amenities/Amenities-2.webp` |
+| Sec 5 — Amenities | City Waterfront | `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/The-city/Amenities/Amenities-3.webp` |
+| Sec 6 — Evening lifestyle band | Background video | `https://beige-lemur-872571.hostingersite.com/asset-esprompt/Landing/The-city/CTA/CTA.mp4` |
+| Sec 7 — Interiors | "Smart City Technology" | `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/The-city/Interiors/Interiors.webp` |
 === RULES ===
 - Use only the colors, fonts, and sizes specified above; do not invent new ones.
 - Keep all copy exactly as quoted.

@@ -26,6 +26,10 @@ Content (copy verbatim):
 === INTERACTIONS ===
 - Live-call transcript panel likely reveals lines sequentially on load/scroll; exact timing not captured.
 
+=== ASSETS (confirmed URLs) ===
+- Hero (The Desk) background video: https://beige-lemur-872571.hostingersite.com/asset-esprompt/Landing/Quorum/Hero/hero-vd.mp4
+- The live-call demo panel, transcript lines and "Extracted by Quorum" cards are built in code (typography + CSS), not images.
+
 === RULES ===
 - Use only the colors, fonts, and sizes specified above; do not invent new ones.
 - Keep all copy exactly as quoted.

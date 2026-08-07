@@ -10,7 +10,7 @@ Create a React + Vite + TypeScript + Tailwind CSS 4 single-page storefront for a
 4. **Fonts load in `index.html` via two Google Fonts `<link>` tags** (Inter Tight full axis range + Syne 400–800) — NOT via CSS `@import`. Title is `AURA - Apparel`.
 5. **`mix-blend-multiply` and `mix-blend-difference` are load-bearing, not decorative.** Product images sit on `#D8D6D0` and blend with `mix-blend-multiply` (their white studio backgrounds disappear into the grey). The hero "AURA"/"LABS" and the preloader "AU"/"RA" are `text-white mix-blend-difference` so they invert over photography. Do not remove these classes.
 6. **Lenis must start ONLY after the preloader completes.** The `useEffect` that creates `new Lenis({...})` is gated on `isLoading` and the root div gets `h-screen overflow-hidden` while loading, so the page cannot scroll during the intro.
-7. **All 30 images are hosted at `https://aura-ecommerce-landing.vercel.app/assets/`** (13 product pairs + `hero-bg` + 3 `hero-txt` variants). They are declared as URL `const`s at the top of `App.tsx` — reference them directly, do NOT download, re-host, or rewrite them as local `import ... from './Image/...'` statements.
+7. **All 30 images are hosted on Cloudflare R2 under `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Aura/`** — products at `Aura/Product/` (13 pairs, `<name>.webp` + `<name>-hover.webp`), hero at `Aura/hero/` (`hero-bg.webp` + `hero-txt1…3.webp`). They are declared as URL `const`s at the top of `App.tsx` — reference them directly, do NOT download, re-host, or rewrite them as local `import ... from './Image/...'` statements.
 8. **Motion values drive several inline styles** (`x`, `y`, `scaleX`, `translateX/-50%`, `mixBlendMode`, `perspective`). Those must stay as `style={{ ... }}` props on `motion.*` elements — do not convert them to classes.
 9. Keep every animation parameter exactly as written: spring `{ damping: 25, stiffness: 300, mass: 0.5 }` for the cursor, `{ damping: 30, stiffness: 200, mass: 0.5 }` for the hero, easings `[0.76, 0, 0.24, 1]`, `[0.16, 1, 0.3, 1]`, `[0.65, 0, 0.35, 1]`, `[0.33, 1, 0.68, 1]`. These ARE the feel of the site.
 10. `lucide-react`, `@google/genai`, `express`, `dotenv` may exist in package.json from scaffolding — **the page imports none of them**. Only `react`, `react-dom`, `motion/react`, and `lenis` are used.
@@ -825,7 +825,7 @@ Note the `●` character is part of the category string.
 
 All 30 images are hosted on Vercel — reference them directly by URL. **No local files, no downloads, no regeneration needed.** The exact `const` mapping at the top of `App.tsx` (see the verbatim file above) is canonical; this table documents what each asset is. Art direction, for context only: washed/faded black grunge streetwear with a gothic lowercase "aura" logotype and cut-out panel construction; two photo styles — **(A) model studio shots on a pure WHITE background** (card bases, so `mix-blend-multiply` melts them into the grey well) and **(B) flat-lay / detail shots on a deep royal BLUE background** (hover reveals and hero center tiles).
 
-Base URL: `https://aura-ecommerce-landing.vercel.app/assets/`
+Base URL: `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Aura/` (products in `Product/`, hero in `hero/`)
 
 | Const | URL (append to base URL) | Content |
 |---|---|---|

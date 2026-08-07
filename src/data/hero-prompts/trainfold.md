@@ -8,7 +8,7 @@ Hero: fullscreen, bottom-anchored content (`align-items: flex-end`) over an auto
 
 ```html
   <header class="hero">
-    <video class="hero-video" autoplay muted loop playsinline><source src="https://trainfold.netlify.app/assets/hero-bg.mp4" type="video/mp4"></video>
+    <video class="hero-video" autoplay muted loop playsinline><source src="https://beige-lemur-872571.hostingersite.com/asset-esprompt/Landing/Trainfold/Hero/hero.mp4" type="video/mp4"></video>
     <div class="wrap" style="width: 717px;">
       <span class="eyebrow" style="color:#ffd9b8">Scale & Visibility</span>
       <h1>Every fine-tuning run,<br><span class="accent">fully visible</span></h1>
@@ -40,4 +40,4 @@ Colors: `--accent: #F97316` (warm orange), `--accent-2: #FACC15` (helper yellow)
 
 | URL | Content |
 |---|---|
-| `https://trainfold.netlify.app/assets/hero-bg.mp4` | Hero background video, autoplay/muted/loop |
+| `https://beige-lemur-872571.hostingersite.com/asset-esprompt/Landing/Trainfold/Hero/hero.mp4` | Hero background video, autoplay/muted/loop |

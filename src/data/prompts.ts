@@ -37,6 +37,8 @@ import storefrontV2Prompt from './full-prompts/storefront-v2.md?raw';
 import warebotics2Prompt from './full-prompts/warebotics.md?raw';
 import lunea2Prompt from './full-prompts/lunea.md?raw';
 import vox2Prompt from './full-prompts/vox.md?raw';
+import voltraPrompt from './full-prompts/voltra.md?raw';
+import zenithPrompt from './full-prompts/zenith.md?raw';
 import altrPrompt from './full-prompts/altr.md?raw';
 import aetheraPrompt from './full-prompts/aethera.md?raw';
 import apexPrompt from './full-prompts/apex.md?raw';
@@ -327,6 +329,10 @@ export const prompts: PromptItem[] = [
     prompt: warebotics2Prompt },
   { slug: 'relay-backend', title: 'Relay', tier: 'Full LP', category: 'Dev', thumbnail: 'relay.webp',
     prompt: relayPrompt },
+  { slug: 'voltra-fitness', title: 'Voltra', tier: 'Full LP', category: 'Product', thumbnail: 'voltra.webp',
+    prompt: voltraPrompt },
+  { slug: 'zenith-ai', title: 'Zenith', tier: 'Full LP', category: 'Product', thumbnail: 'zenith.webp',
+    prompt: zenithPrompt },
   { slug: 'edgehaul-carry', title: 'Edgehaul', tier: 'Full LP', category: 'Ecom', thumbnail: 'edgehaul.jpg',
     prompt: edgehaulPrompt },
   { slug: 'lunea-skincare', title: 'Lunéa', tier: 'Full LP', category: 'Ecom', thumbnail: 'lunea-full.webp',

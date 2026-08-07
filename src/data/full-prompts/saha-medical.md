@@ -111,7 +111,7 @@ Section 6 — Our Experts carousel (Dr. Tariq / Dr. Yasmin / Dr. Kareem / Dr. La
 - https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Saha-medical/Doctor/doctor-3.webp
 - https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Saha-medical/Doctor/doctor-4.webp
 
-Section 8 — Closing CTA gallery (6 images):
+Section 7 — Testimonials (6 avatars) & Section 8 — Closing CTA gallery — live site reuses the same 6 images for both:
 - https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Saha-medical/Doctor/doctor-4.webp
 - https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Saha-medical/Doctor/doctor-1.webp
 - https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Saha-medical/Doctor/doctor-2.webp

@@ -22,6 +22,10 @@ Content (copy verbatim):
 - Breathing-ring hero visual animates a continuous inhale/exhale loop synced to the "breathe in · breathe out" label.
 - Session pacing readout ("4:36 / −7:24") counts down live, matching a meditation timer.
 
+=== ASSETS (confirmed URLs) ===
+- Hero background video: https://beige-lemur-872571.hostingersite.com/asset-esprompt/Landing/Stillwave/Hero/hero.mp4
+- The breathing rings and session preview card are animated in code (CSS/SVG), not images.
+
 === RULES ===
 - Use only the colors, fonts, and sizes specified above; do not invent new ones.
 - Keep all copy exactly as quoted.

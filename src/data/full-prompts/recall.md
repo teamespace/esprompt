@@ -273,7 +273,7 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
 5. delay 0.4 — small print `text-[0.88rem] font-bold text-[#6B6B6B]`: "No signup for your first 3 decks · Works with 27 languages"
 
 **Right column** (`flex-1 w-full max-w-[500px] lg:max-w-none flex justify-center lg:justify-end relative z-10`): `<motion.figure>` delay 0.5, `relative w-full aspect-square -rotate-[2deg] brutal-border rounded-[22px] brutal-shadow-lg flex items-center justify-center bg-white`:
-- `<video src="https://recall-alpha-one.vercel.app/hero-new.mp4" loop muted playsInline preload="auto" className="w-full h-full object-cover rounded-[22px] -scale-x-100" />` (note: mirrored!)
+- `<video src="https://beige-lemur-872571.hostingersite.com/asset-esprompt/Landing/Recall/Hero/hero-new.mp4" loop muted playsInline preload="auto" className="w-full h-full object-cover rounded-[22px] -scale-x-100" />` (note: mirrored!)
 - `<figcaption className="absolute -bottom-[16px] left-1/2 -translate-x-1/2 rotate-[2deg] bg-white brutal-border rounded-full brutal-shadow-sm font-display font-extrabold text-[0.88rem] px-[1rem] py-[0.28rem] whitespace-nowrap">Fresh out of the AI oven</figcaption>`
 
 **Video mouse-scrub logic** (useEffect on mount, `videoRef`):
@@ -446,7 +446,7 @@ All artwork shares one mascot and one style. **Base prompt for every image:** *"
 | `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Recall/How-it-works/Get.webp` | Mascot holding a mint stopwatch; arrows linking a quiz sheet, a match-game board and a stack of flashcards |
 | `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Recall/How-it-works/Study.webp` | Winking mascot holding a phone; desk calendar with checkmarks, mint alarm clock, confetti cannon, three colored card stacks |
 | `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Recall/CTA/CTA.webp` | Mascot holding a big yellow pencil on a **bright yellow (#FFD53D) background** |
-| `https://recall-alpha-one.vercel.app/hero-new.mp4` | Square 3D claymation loop (~5–8s) of the mascot on the same cream studio backdrop with a soft contact shadow — e.g. the brain scribbling and flashcards popping out. Seamless loop, no audio. (Displayed mirrored via CSS `-scale-x-100`.) |
+| `https://beige-lemur-872571.hostingersite.com/asset-esprompt/Landing/Recall/Hero/hero-new.mp4` | Square 3D claymation loop (~5–8s) of the mascot on the same cream studio backdrop with a soft contact shadow — e.g. the brain scribbling and flashcards popping out. Seamless loop, no audio. (Displayed mirrored via CSS `-scale-x-100`.) |
 
 ---
 

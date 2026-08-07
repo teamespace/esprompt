@@ -8,7 +8,7 @@ Hero: fullscreen section with an autoplaying muted/looping background video, a l
 
 ```html
 <section class="hero">
-  <div class="hero-bg"><video autoplay muted loop playsinline><source src="video/heroo.mp4" type="video/mp4"></video></div>
+  <div class="hero-bg"><video autoplay muted loop playsinline><source src="https://beige-lemur-872571.hostingersite.com/asset-esprompt/Landing/Pylon-ai/Hero/hero.mp4" type="video/mp4"></video></div>
   <div class="hero-left">
     <p class="hero-tag">Self-Hosted AI Platform</p>
     <h1 class="hero-h1">Every model.<br>Your infrastructure.</h1>
@@ -49,4 +49,4 @@ window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scr
 
 | Path | URL (live site) | Content |
 |---|---|---|
-| `video/heroo.mp4` | `https://pylon-ai.netlify.app/video/heroo.mp4` | Hero background video, autoplay/muted/loop |
+| `https://beige-lemur-872571.hostingersite.com/asset-esprompt/Landing/Pylon-ai/Hero/hero.mp4` | `https://beige-lemur-872571.hostingersite.com/asset-esprompt/Landing/Pylon-ai/Hero/hero.mp4` | Hero background video, autoplay/muted/loop |

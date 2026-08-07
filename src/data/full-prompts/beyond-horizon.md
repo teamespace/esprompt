@@ -69,7 +69,7 @@ All assets are hosted at `https://yacht-bgz.pages.dev/`. Download each and place
 
 | File | URL | Used In |
 |---|---|---|
-| `hero.mp4` | `https://yacht-bgz.pages.dev/images/hero.mp4` | Hero background video |
+| `hero.mp4` | `https://beige-lemur-872571.hostingersite.com/asset-esprompt/Landing/Beyond-horizon/Hero/hero.mp4` | Hero background video |
 | `image-1.png` | `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Beyond-horizon/About/image-1.webp` | Floating image (Our Story) |
 | `image-2.png` | `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Beyond-horizon/About/image-2.webp` | Floating image (Our Story) |
 | `image-3.png` | `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Beyond-horizon/About/image-3.webp` | Floating image (Our Story) |

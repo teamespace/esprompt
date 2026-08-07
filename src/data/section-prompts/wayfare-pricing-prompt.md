@@ -310,7 +310,7 @@ Inner: `max-w-7xl mx-auto px-6` with a stacked layout — headline block on top,
 - **Primary button**: `inline-flex items-center gap-2 bg-accent hover:bg-accent-deep text-white font-bold rounded-full px-8 py-4 text-lg hover:-translate-y-1 active:scale-[0.96] transition-all` → **`Start planning — it's free`** (em-dash U+2014).
 
 **Map panel** (`gsap-hero-map`, `relative rounded-[40px] overflow-hidden bg-sand shadow-soft`):
-- `<video src="https://wayfare-iota-pink.vercel.app/hero.mp4" autoPlay muted loop playsInline className="w-full h-full object-cover object-[center_38%] scale-[1.2]" />` wrapped in a div `.gsap-parallax-hero` (height ~`400px`+).
+- `<video src="https://beige-lemur-872571.hostingersite.com/asset-esprompt/Landing/Wayfare/Hero/Video/hero.mp4" autoPlay muted loop playsInline className="w-full h-full object-cover object-[center_38%] scale-[1.2]" />` wrapped in a div `.gsap-parallax-hero` (height ~`400px`+).
 - Gradient overlay: `absolute inset-0 bg-gradient-to-b from-sky/40 via-sky/5 to-ocean-deep/30 pointer-events-none`.
 - **Status pill** (top-left): `absolute top-6 left-6 bg-white/90 backdrop-blur-md rounded-full px-4 py-2 shadow-soft flex items-center gap-2 text-sm font-medium` → pulse dot (`w-2 h-2 rounded-full bg-sunset animate-pulse`) + **`Kyoto, 3 days, food + temples`** + **`✦ AI routing`** (star U+2726; right side, `text-ink/50`).
 - **Route paths** (bottom layer): `<svg>` with

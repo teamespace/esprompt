@@ -66,15 +66,15 @@ Applied to `<html>` as CSS variables.
 
 | File | Public URL |
 |---|---|
-| `hero.mp4` | `https://velo-landing-e1d.pages.dev/assets/hero.mp4` |
+| `hero.mp4` | `https://beige-lemur-872571.hostingersite.com/asset-esprompt/Landing/Velo/Hero/hero.mp4` |
 | `image-4.png` | `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Velo/Gallery/image-4.webp` |
 | `image-5.png` | `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Velo/Gallery/image-5.webp` |
 | `image-6.png` | `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Velo/Gallery/image-6.webp` |
 | `image-7.png` | `https://velo-landing-e1d.pages.dev/assets/image-7.png` |
 | `image-8.png` | `https://velo-landing-e1d.pages.dev/assets/image-8.png` |
 | `image-9.png` | `https://velo-landing-e1d.pages.dev/assets/image-9.png` |
-| `model-1.glb` | `https://3d-assets-nu.vercel.app/model-1.glb` |
-| `model-2.glb` | `https://3d-assets-nu.vercel.app/model-2.glb` |
+| `model-1.glb` | `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Velo/3D-model/model-1.glb` |
+| `model-2.glb` | `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Velo/3D-model/model-2.glb` |
 
 ---
 

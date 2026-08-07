@@ -30,4 +30,4 @@ Hero layer:
 
 | File | URL | Content |
 |---|---|---|
-| `hero.mp4` | `https://yacht-bgz.pages.dev/images/hero.mp4` | Hero background video, autoplay/muted/loop, later clip-path-shrunk on scroll |
+| `hero.mp4` | `https://beige-lemur-872571.hostingersite.com/asset-esprompt/Landing/Beyond-horizon/Hero/hero.mp4` | Hero background video, autoplay/muted/loop, later clip-path-shrunk on scroll |
