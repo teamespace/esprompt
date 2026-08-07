@@ -11,7 +11,7 @@ Create a React + Vite + TypeScript + Tailwind CSS 4 landing page for an AI study
 5. **Every border is `3px solid #191919`** via the `.brutal-border` utility (except 2.5px inner borders, noted inline). Never `border-gray-*`.
 6. **Rotations are part of the design system.** Cards sit at `-rotate-[0.8deg]`…`-rotate-[1.4deg]` (or positive) and **straighten to `rotate-0` on hover** (feature cards use `hover:!rotate-0` with `!` because the base rotate is a utility too). Do not remove them.
 7. **Interactive physics ease is `[0.3, 1.35, 0.45, 1]` (bouncy) for hero entrances and `[0.3, 1.2, 0.45, 1]` for scroll reveals.** Cards/steps use `type:'spring', damping:14, stiffness:100`. Keep them exact.
-8. All mascot imagery and video use remote URLs (see ASSETS section). Reference as `https://recall-alpha-one.vercel.app/Flashcards.png` etc.
+8. All mascot imagery and video use remote URLs (see ASSETS section). Reference as `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Recall/Toolbox/Flashcards.webp` etc.
 
 ---
 
@@ -329,12 +329,12 @@ The 6 cards (img / emojiBg / title / desc / rotate / pill):
 
 | # | img | emojiBg | title | desc | rotate | pill |
 |---|---|---|---|---|---|---|
-| 1 | https://recall-alpha-one.vercel.app/Flashcards.png | bg-yellow-soft | Flashcards, auto-written | The AI pulls out every testable fact and writes clean question–answer pairs — including the ones hiding in your margin scribbles. | -rotate-[1.3deg] | — |
-| 2 | https://recall-alpha-one.vercel.app/Quizzes.png | bg-pink-soft | Quizzes that feel like the real test | Multiple choice, fill-in-the-blank, and short answer — weighted toward whatever your professor said is 'definitely on the exam.' | rotate-[1.1deg] | Exam mode |
-| 3 | https://recall-alpha-one.vercel.app/Spaced.png | bg-[#E9E6FF] | Spaced repetition, zero setup | Recall schedules each card for the moment you're about to forget it. Five minutes a day beats five hours the night before. | -rotate-[0.8deg] | — |
-| 4 | https://recall-alpha-one.vercel.app/Photos.png | bg-[#E4F7EF] | Photos & PDFs welcome | Snap the whiteboard before it's erased. Upload the 60-slide deck. Handwriting, diagrams, tables — it reads them all. | rotate-[1.4deg] | — |
-| 5 | https://recall-alpha-one.vercel.app/Battle.png | bg-yellow-soft | Battle your study group | Turn any deck into a live quiz battle. Winner picks the pizza toppings; everyone's grades win either way. | -rotate-[1deg] | — |
-| 6 | https://recall-alpha-one.vercel.app/radar.png | bg-pink-soft | Weak-spot radar | See exactly which topics keep tripping you up, and get a fresh mini-quiz targeting just those before the exam. | rotate-[0.9deg] | New |
+| 1 | https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Recall/Toolbox/Flashcards.webp | bg-yellow-soft | Flashcards, auto-written | The AI pulls out every testable fact and writes clean question–answer pairs — including the ones hiding in your margin scribbles. | -rotate-[1.3deg] | — |
+| 2 | https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Recall/Toolbox/Quizzes.webp | bg-pink-soft | Quizzes that feel like the real test | Multiple choice, fill-in-the-blank, and short answer — weighted toward whatever your professor said is 'definitely on the exam.' | rotate-[1.1deg] | Exam mode |
+| 3 | https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Recall/Toolbox/Spaced.webp | bg-[#E9E6FF] | Spaced repetition, zero setup | Recall schedules each card for the moment you're about to forget it. Five minutes a day beats five hours the night before. | -rotate-[0.8deg] | — |
+| 4 | https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Recall/Toolbox/Photos.webp | bg-[#E4F7EF] | Photos & PDFs welcome | Snap the whiteboard before it's erased. Upload the 60-slide deck. Handwriting, diagrams, tables — it reads them all. | rotate-[1.4deg] | — |
+| 5 | https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Recall/Toolbox/Battle.webp | bg-yellow-soft | Battle your study group | Turn any deck into a live quiz battle. Winner picks the pizza toppings; everyone's grades win either way. | -rotate-[1deg] | — |
+| 6 | https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Recall/Toolbox/radar.webp | bg-pink-soft | Weak-spot radar | See exactly which topics keep tripping you up, and get a fresh mini-quiz targeting just those before the exam. | rotate-[0.9deg] | New |
 
 ## HOW IT WORKS (`home/Features.tsx`)
 
@@ -354,9 +354,9 @@ The 3 steps:
 
 | num | color | title | desc | rotate | img / alt | imgBg |
 |---|---|---|---|---|---|---|
-| 1 | bg-pink text-white | Dump everything in | Paste text, drop a PDF, snap your notebook, or even forward a voice memo of the lecture. Recall sorts the signal from the doodles. | -rotate-[0.9deg] | https://recall-alpha-one.vercel.app/Dump.png — "Messy notebook and sticky notes" | bg-pink |
-| 2 | bg-mint text-black | Get your study set | In ~20 seconds you have flashcards, a practice quiz, and a match game — organized by topic and tagged by how likely each fact is to be tested. | rotate-[0.9deg] | https://recall-alpha-one.vercel.app/Get.png — "Digital flashcards on a screen" | bg-mint |
-| 3 | bg-violet text-white | Study 5 minutes a day | Recall pings you with exactly the cards you're about to forget. Streaks, battles, and a very smug confetti cannon keep you coming back. | -rotate-[0.9deg] | https://recall-alpha-one.vercel.app/Study.png — "Calendar or time tracking" | bg-violet |
+| 1 | bg-pink text-white | Dump everything in | Paste text, drop a PDF, snap your notebook, or even forward a voice memo of the lecture. Recall sorts the signal from the doodles. | -rotate-[0.9deg] | https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Recall/How-it-works/Dump.webp — "Messy notebook and sticky notes" | bg-pink |
+| 2 | bg-mint text-black | Get your study set | In ~20 seconds you have flashcards, a practice quiz, and a match game — organized by topic and tagged by how likely each fact is to be tested. | rotate-[0.9deg] | https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Recall/How-it-works/Get.webp — "Digital flashcards on a screen" | bg-mint |
+| 3 | bg-violet text-white | Study 5 minutes a day | Recall pings you with exactly the cards you're about to forget. Streaks, battles, and a very smug confetti cannon keep you coming back. | -rotate-[0.9deg] | https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Recall/How-it-works/Study.webp — "Calendar or time tracking" | bg-violet |
 
 ## STATS (`home/Features.tsx`)
 
@@ -393,7 +393,7 @@ The 3 tiers:
 `<section id="cta" className="pt-[1rem] pb-[6rem]" aria-labelledby="cta-h">` → `motion.div` (whileInView y:30→0) with `relative bg-yellow brutal-border rounded-[28px] brutal-shadow-lg p-[4rem] px-[clamp(1.5rem,6vw,4.5rem)] text-center overflow-hidden`:
 
 - 4 confetti spans: pink 14px circle (top 18% left 8%) · violet 16px `rounded-[4px] rotate-[18deg]` (top 26% right 10%) · white 10px circle (bottom 20% left 16%) · mint 12px `rounded-[4px] rotate-[18deg]` (bottom 26% right 18%)
-- Mascot circle: `relative z-10 w-[124px] h-[124px] mx-auto mb-[1.1rem] brutal-border rounded-full brutal-shadow-sm bg-pink-soft -rotate-[4deg] overflow-hidden flex items-center justify-center` → `<img src="https://recall-alpha-one.vercel.app/CTA.webp" alt="Call to action" className="w-full h-full object-cover" />`
+- Mascot circle: `relative z-10 w-[124px] h-[124px] mx-auto mb-[1.1rem] brutal-border rounded-full brutal-shadow-sm bg-pink-soft -rotate-[4deg] overflow-hidden flex items-center justify-center` → `<img src="https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Recall/CTA/CTA.webp" alt="Call to action" className="w-full h-full object-cover" />`
 - Pill (`rotate-[1.5deg]`, `bg-pink text-white`, `text-[0.78rem] tracking-[0.06em]`): "Your study buddy" — wrapped in `<p className="mb-0 relative z-10">`
 - `<h2 id="cta-h" className="text-[clamp(2.2rem,5.4vw,3.8rem)] max-w-[20ch] mx-auto mb-[1rem] relative z-10">Your notes are sitting right there. Quiz them.</h2>`
 - `<p className="max-w-[32rem] mx-auto mb-[2rem] text-[1.12rem] relative z-10">Paste one lecture's worth of notes and see your first deck in 20 seconds. Free, no signup, no card — just fewer all-nighters.</p>`
@@ -436,16 +436,16 @@ All artwork shares one mascot and one style. **Base prompt for every image:** *"
 
 | URL | Subject |
 |---|---|
-| `https://recall-alpha-one.vercel.app/Flashcards.png` | Mascot holding a yellow pencil and a white flashcard with a blue "?" badge; stack of pastel flashcards + spiral notebook in front |
-| `https://recall-alpha-one.vercel.app/Quizzes.png` | Mascot holding a pencil and a blue clipboard with a checklist (one mint checkmark); small blue hourglass beside |
-| `https://recall-alpha-one.vercel.app/Spaced.png` | Mascot holding a stack of flashcards, pointing up at three calendar cards connected by mint cycle arrows; mint clock beside |
-| `https://recall-alpha-one.vercel.app/Photos.png` | Mascot holding a mint smartphone and a document with a photo + table; open illustrated notebook in front |
-| `https://recall-alpha-one.vercel.app/Battle.png` | Three brain characters: winner on a blue podium holding a gold trophy, two others holding blue/yellow tablets, pizza in front |
-| `https://recall-alpha-one.vercel.app/radar.png` | Mascot inspecting a round mint radar screen (yellow/red blips) through a yellow magnifying glass |
-| `https://recall-alpha-one.vercel.app/Dump.png` | Mascot dropping notebook pages into a big blue funnel; floating PDF file, notebook, photo, voice-memo phone, purple chat bubble with mint arrows |
-| `https://recall-alpha-one.vercel.app/Get.png` | Mascot holding a mint stopwatch; arrows linking a quiz sheet, a match-game board and a stack of flashcards |
-| `https://recall-alpha-one.vercel.app/Study.png` | Winking mascot holding a phone; desk calendar with checkmarks, mint alarm clock, confetti cannon, three colored card stacks |
-| `https://recall-alpha-one.vercel.app/CTA.webp` | Mascot holding a big yellow pencil on a **bright yellow (#FFD53D) background** |
+| `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Recall/Toolbox/Flashcards.webp` | Mascot holding a yellow pencil and a white flashcard with a blue "?" badge; stack of pastel flashcards + spiral notebook in front |
+| `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Recall/Toolbox/Quizzes.webp` | Mascot holding a pencil and a blue clipboard with a checklist (one mint checkmark); small blue hourglass beside |
+| `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Recall/Toolbox/Spaced.webp` | Mascot holding a stack of flashcards, pointing up at three calendar cards connected by mint cycle arrows; mint clock beside |
+| `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Recall/Toolbox/Photos.webp` | Mascot holding a mint smartphone and a document with a photo + table; open illustrated notebook in front |
+| `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Recall/Toolbox/Battle.webp` | Three brain characters: winner on a blue podium holding a gold trophy, two others holding blue/yellow tablets, pizza in front |
+| `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Recall/Toolbox/radar.webp` | Mascot inspecting a round mint radar screen (yellow/red blips) through a yellow magnifying glass |
+| `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Recall/How-it-works/Dump.webp` | Mascot dropping notebook pages into a big blue funnel; floating PDF file, notebook, photo, voice-memo phone, purple chat bubble with mint arrows |
+| `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Recall/How-it-works/Get.webp` | Mascot holding a mint stopwatch; arrows linking a quiz sheet, a match-game board and a stack of flashcards |
+| `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Recall/How-it-works/Study.webp` | Winking mascot holding a phone; desk calendar with checkmarks, mint alarm clock, confetti cannon, three colored card stacks |
+| `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Recall/CTA/CTA.webp` | Mascot holding a big yellow pencil on a **bright yellow (#FFD53D) background** |
 | `https://recall-alpha-one.vercel.app/hero-new.mp4` | Square 3D claymation loop (~5–8s) of the mascot on the same cream studio backdrop with a soft contact shadow — e.g. the brain scribbling and flashcards popping out. Seamless loop, no audio. (Displayed mirrored via CSS `-scale-x-100`.) |
 
 ---

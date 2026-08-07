@@ -68,4 +68,4 @@ document.querySelectorAll('.copy').forEach(btn => {
 
 | URL | Content |
 |---|---|
-| `https://beige-lemur-872571.hostingersite.com/asset-esprompt/Landing/Modex/Hero/Hero` | Hero background photo (~1,853,083 bytes), served extensionless with no Content-Type header — must be downloaded and referenced locally as `public/hero.png`, never linked remotely |
+| `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Modex/Hero/Hero.webp` | Hero background photo (~1,853,083 bytes), served extensionless with no Content-Type header — must be downloaded and referenced locally as `public/hero.png`, never linked remotely |

@@ -70,17 +70,52 @@ Content (copy verbatim):
 - "Designed in Stockholm © 2026 ALTR"
 
 === ASSETS (confirmed URLs) ===
-Base: https://altr-byes.pages.dev/assets/
-| File | URL | Used for |
-|---|---|---|
-| menu/shop.png | .../assets/menu/shop.png | Off-canvas menu preview image |
-| section-4-promo-split/promo-left.png | .../section-4-promo-split/promo-left.png | Promo card — "The Final Edition" |
-| section-4-promo-split/promo-right.png | .../section-4-promo-split/promo-right.png | Promo card — "ALTR Chrono" |
-| section-5-flagship-showcase/jam-1.png | .../section-5-flagship-showcase/jam-1.png | "The Twelve" flagship shot |
-| section-7-feature-showcase/image-1.png | .../section-7-feature-showcase/image-1.png | "Everything's Changed" feature shot |
-| section-9-new-arrivals/image-1.png | .../section-9-new-arrivals/image-1.png | "Arktis Watch" (new-arrivals card 1) |
-Not confirmed: the Sundial/Vind/Sten watch images and the bestsellers-grid images. The folder-per-section naming pattern (e.g. `section-9-new-arrivals/image-2.png`, `image-3.png`...) is a strong hint but wasn't directly observed for cards 2–4 — verify against the live page before hotlinking.
+Reference build: https://altr-byes.pages.dev/
 
+Section 1–2 — Hero video + category quick filters:
+- Hero background video: https://beige-lemur-872571.hostingersite.com/asset-esprompt/Landing/altr/Hero/Video/hero.mp4
+- "ALTR Chrono" pill: https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/altr/Hero/altr-chrono.webp
+- "ALTR Petite" pill: https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/altr/Hero/altr-petite.webp
+- "ALTR Sport" pill: https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/altr/Hero/sports.webp
+
+Section 3 — Promo split banner (2 cards):
+- Card 1 (Sea Shepherd): https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/altr/Promo/promo-left.webp
+- Card 2 (ALTR Chrono): https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/altr/Promo/promo-right.webp
+
+Section 4 — Flagship showcase "The Twelve":
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/altr/Featured/Featured.webp
+
+Section 5 — Collection scroller (6, in order Daylight / Traveler / Coastal / Summer / Nightfall / Heritage):
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/altr/Collection/collection-1.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/altr/Collection/collection-2.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/altr/Collection/collection-3.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/altr/Collection/collection-4.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/altr/Collection/collection-5.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/altr/Collection/collection-6.webp
+
+Section 6 — Feature showcase (new generation):
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/altr/New/new.webp
+
+Section 7 — Fresh From The Studio (4 cards: Arktis / Sundial / Vind / Sten):
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/altr/Product/image-8.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/altr/Product/image-9.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/altr/Product/image-10.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/altr/Product/image-11.webp
+
+Section 8 — About / Bestsellers promo tiles:
+- "About Us" tile: https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/altr/About-bestseller/about.webp
+- "Bestsellers" tile: https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/altr/About-bestseller/bestseller.webp
+
+Section 9 — Bestsellers grid (4 cards: Arktis / Sundial / Transit / Harbor):
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/altr/Favorites/Favorites-1.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/altr/Favorites/Favorites-2.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/altr/Favorites/Favorites-3.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/altr/Favorites/Favorites-4.webp
+
+Section 10 — Notes From The Workshop (3 posts: Design / Guides / Materials):
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/altr/Blog/blog-1.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/altr/Blog/blog-2.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/altr/Blog/blog-3.webp
 === INTERACTIONS (global) ===
 - Collection scroller (Section 5) has explicit scroll-left/scroll-right button controls.
 - "0+ sold" counter in Section 6 is styled as a live/animated count — implement as a count-up-on-scroll-into-view if a real total is supplied.

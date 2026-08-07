@@ -73,7 +73,7 @@ export default function AboutUs() {
             <img 
               alt="World-class medical team in a luxury clinical setting" 
               className="w-full h-full object-cover" 
-              src="https://elux-medical-clinic.vercel.app/assets/about-BWgOQkP5.jpg" 
+              src="https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Saha-medical/About/about.webp" 
             />
           </div>
         </div>

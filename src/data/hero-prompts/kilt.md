@@ -9,7 +9,7 @@ Hero: split layout — giant "KI" typography on the left, a center product-model
 ```html
     <section class="hero-split" aria-label="Campaign hero">
       <div class="hero-text-left">KI</div>
-      <div class="hero-model"><img src="https://ecommerce-landing.pages.dev/generated-assets/kilt/kilt-hero-model.png" alt="Model in technical outerwear with modular layers" loading="eager"></div>
+      <div class="hero-model"><img src="https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Kilt/Hero/kilt-hero-model.webp" alt="Model in technical outerwear with modular layers" loading="eager"></div>
       <div class="hero-text-right">LT</div>
       <div class="hero-tagline"><p>FUNCTIONAL. MODULAR. WEATHERPROOF.</p><a href="#shop" class="hero-cta">SHOP NOW</a></div>
       <button class="play-btn" id="play-btn" aria-label="Play campaign video"><span class="play-triangle" aria-hidden="true"></span></button>
@@ -41,4 +41,4 @@ Colors: black `#000000` bg, off-white `#F2F2F2` text/lines, neon lime `#C8FF00` 
 
 | Filename | URL | Content |
 |---|---|---|
-| `kilt-hero-model.png` | `https://ecommerce-landing.pages.dev/generated-assets/kilt/kilt-hero-model.png` | Model in modular technical outerwear, center of the hero split |
+| `kilt-hero-model.png` | `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Kilt/Hero/kilt-hero-model.webp` | Model in modular technical outerwear, center of the hero split |

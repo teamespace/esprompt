@@ -9,7 +9,7 @@ Create a static HTML + CSS + Vanilla JavaScript website for "Modex — Power to 
 3. **FONTS:** Load Geist (weights 400, 500, 600, 700) and Geist Mono (weights 400, 500) via Google Fonts `<link>` in `index.html`.
 4. **SELF-CONTAINED VISUALS — HERO IMAGE MUST BE LOCAL:** Download the hero background PNG once into `public/hero.png` before running the site:
    ```
-   curl.exe -L -o public/hero.png "https://beige-lemur-872571.hostingersite.com/asset-esprompt/Landing/Modex/Hero/Hero"
+   curl.exe -L -o public/hero.png "https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Modex/Hero/Hero.webp"
    ```
    Verify the file exists and is ~1,853,083 bytes. The source server serves this PNG at an extensionless URL **without a Content-Type header**, so most browsers (strict MIME sniffing) refuse to paint it as a background — never reference the remote URL directly in CSS. The stylesheet must reference the local copy: `url("hero.png")` (Vite serves `public/` at the site root, in both dev and build). Other visuals use inline SVGs.
 5. **INTERACTIVE FEATURES & TRANSITIONS:**

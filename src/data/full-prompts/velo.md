@@ -67,9 +67,9 @@ Applied to `<html>` as CSS variables.
 | File | Public URL |
 |---|---|
 | `hero.mp4` | `https://velo-landing-e1d.pages.dev/assets/hero.mp4` |
-| `image-4.png` | `https://velo-landing-e1d.pages.dev/assets/image-4.png` |
-| `image-5.png` | `https://velo-landing-e1d.pages.dev/assets/image-5.png` |
-| `image-6.png` | `https://velo-landing-e1d.pages.dev/assets/image-6.png` |
+| `image-4.png` | `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Velo/Gallery/image-4.webp` |
+| `image-5.png` | `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Velo/Gallery/image-5.webp` |
+| `image-6.png` | `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Velo/Gallery/image-6.webp` |
 | `image-7.png` | `https://velo-landing-e1d.pages.dev/assets/image-7.png` |
 | `image-8.png` | `https://velo-landing-e1d.pages.dev/assets/image-8.png` |
 | `image-9.png` | `https://velo-landing-e1d.pages.dev/assets/image-9.png` |

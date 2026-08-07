@@ -78,7 +78,7 @@ export default defineConfig({ server: { port: 3000 } });
   <main>
     <section class="hero-split" aria-label="Campaign hero">
       <div class="hero-text-left">KI</div>
-      <div class="hero-model"><img src="https://ecommerce-landing.pages.dev/generated-assets/kilt/kilt-hero-model.png" alt="Model in technical outerwear with modular layers" loading="eager"></div>
+      <div class="hero-model"><img src="https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Kilt/Hero/kilt-hero-model.webp" alt="Model in technical outerwear with modular layers" loading="eager"></div>
       <div class="hero-text-right">LT</div>
       <div class="hero-tagline"><p>FUNCTIONAL. MODULAR. WEATHERPROOF.</p><a href="#shop" class="hero-cta">SHOP NOW</a></div>
       <button class="play-btn" id="play-btn" aria-label="Play campaign video"><span class="play-triangle" aria-hidden="true"></span></button>
@@ -92,16 +92,16 @@ export default defineConfig({ server: { port: 3000 } });
     </section>
     <section class="gallery reveal" aria-label="Gallery">
       <div class="gallery-grid">
-        <figure class="gallery-item"><img src="https://ecommerce-landing.pages.dev/generated-assets/kilt/kilt-gallery-1.png" alt="Technical outerwear editorial with utility details" loading="lazy"></figure>
-        <figure class="gallery-item"><img src="https://ecommerce-landing.pages.dev/generated-assets/kilt/kilt-gallery-2.png" alt="Urban techwear layer system monochrome" loading="lazy"></figure>
-        <figure class="gallery-item"><img src="https://ecommerce-landing.pages.dev/generated-assets/kilt/kilt-gallery-3.png" alt="Technical shell coat editorial monochrome" loading="lazy"></figure>
+        <figure class="gallery-item"><img src="https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Kilt/Gallery/kilt-gallery-1.webp" alt="Technical outerwear editorial with utility details" loading="lazy"></figure>
+        <figure class="gallery-item"><img src="https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Kilt/Gallery/kilt-gallery-2.webp" alt="Urban techwear layer system monochrome" loading="lazy"></figure>
+        <figure class="gallery-item"><img src="https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Kilt/Gallery/kilt-gallery-3.webp" alt="Technical shell coat editorial monochrome" loading="lazy"></figure>
       </div>
     </section>
     <section class="lookbook reveal" id="lookbook" aria-labelledby="lookbook-heading">
       <h2 id="lookbook-heading" class="section-title">LOOKBOOK</h2>
       <div class="lookbook-grid">
-        <figure class="lookbook-item"><img src="https://ecommerce-landing.pages.dev/generated-assets/kilt/kilt-look-1.png" alt="Techwear lookbook full kit system" loading="lazy"></figure>
-        <figure class="lookbook-item"><img src="https://ecommerce-landing.pages.dev/generated-assets/kilt/kilt-look-2.png" alt="Technical layers in motion lookbook" loading="lazy"></figure>
+        <figure class="lookbook-item"><img src="https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Kilt/Gallery/kilt-look-1.webp" alt="Techwear lookbook full kit system" loading="lazy"></figure>
+        <figure class="lookbook-item"><img src="https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Kilt/Gallery/kilt-look-2.webp" alt="Technical layers in motion lookbook" loading="lazy"></figure>
       </div>
     </section>
     <section class="newsletter reveal" id="newsletter" aria-labelledby="newsletter-heading">
@@ -237,14 +237,14 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
 ## `script.js`
 ```js
 const products = [
-  { id: 'p1', name: 'Shell Bomber', price: 245, image: 'https://ecommerce-landing.pages.dev/generated-assets/kilt/kilt-product-1.png', alt: 'Technical shell bomber jacket with water-resistant membrane' },
-  { id: 'p2', name: 'Hard Shell Parka', price: 320, image: 'https://ecommerce-landing.pages.dev/generated-assets/kilt/kilt-product-2.png', alt: 'Full-length hard shell parka with sealed seams' },
-  { id: 'p3', name: 'Modular Vest', price: 185, image: 'https://ecommerce-landing.pages.dev/generated-assets/kilt/kilt-product-3.png', alt: 'Utility modular vest with MOLLE-compatible panels' },
-  { id: 'p4', name: 'Tech Hoodie', price: 160, image: 'https://ecommerce-landing.pages.dev/generated-assets/kilt/kilt-product-4.png', alt: 'Mid-layer tech hoodie with articulated sleeves' },
-  { id: 'p5', name: 'Base Layer Tee', price: 95, image: 'https://ecommerce-landing.pages.dev/generated-assets/kilt/kilt-product-5.png', alt: 'Merino-blend base layer tee for moisture management' },
-  { id: 'p6', name: 'Cargo Pant', price: 210, image: 'https://ecommerce-landing.pages.dev/generated-assets/kilt/kilt-product-6.png', alt: 'Technical cargo pant with articulated knees and taped pockets' },
-  { id: 'p7', name: 'Tactical Balaclava', price: 65, image: 'https://ecommerce-landing.pages.dev/generated-assets/kilt/kilt-product-7.png', alt: 'Technical balaclava face mask with breathable mesh panel' },
-  { id: 'p8', name: 'Crossbody Sling', price: 175, image: 'https://ecommerce-landing.pages.dev/generated-assets/kilt/kilt-product-8.png', alt: 'Tactical crossbody sling bag with multiple compartments' }
+  { id: 'p1', name: 'Shell Bomber', price: 245, image: 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Kilt/Product/kilt-product-1.webp', alt: 'Technical shell bomber jacket with water-resistant membrane' },
+  { id: 'p2', name: 'Hard Shell Parka', price: 320, image: 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Kilt/Product/kilt-product-2..webp', alt: 'Full-length hard shell parka with sealed seams' },
+  { id: 'p3', name: 'Modular Vest', price: 185, image: 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Kilt/Product/kilt-product-3.webp', alt: 'Utility modular vest with MOLLE-compatible panels' },
+  { id: 'p4', name: 'Tech Hoodie', price: 160, image: 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Kilt/Product/kilt-product-4.webp', alt: 'Mid-layer tech hoodie with articulated sleeves' },
+  { id: 'p5', name: 'Base Layer Tee', price: 95, image: 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Kilt/Product/kilt-product-5.webp', alt: 'Merino-blend base layer tee for moisture management' },
+  { id: 'p6', name: 'Cargo Pant', price: 210, image: 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Kilt/Product/kilt-product-6.webp', alt: 'Technical cargo pant with articulated knees and taped pockets' },
+  { id: 'p7', name: 'Tactical Balaclava', price: 65, image: 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Kilt/Product/kilt-product-7.webp', alt: 'Technical balaclava face mask with breathable mesh panel' },
+  { id: 'p8', name: 'Crossbody Sling', price: 175, image: 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Kilt/Product/kilt-product-8.webp', alt: 'Tactical crossbody sling bag with multiple compartments' }
 ];
 const sizes = ['S', 'M', 'L', 'XL'];
 let cart = [];

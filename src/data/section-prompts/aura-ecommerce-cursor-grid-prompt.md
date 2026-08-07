@@ -26,10 +26,10 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useMotionValue, useSpring } from 'framer-motion';
 
 const products = [
-  { id: 1, title: 'Aura Shirt', price: '$35.00', category: '● APPAREL', image: 'https://aura-ecommerce-landing.vercel.app/assets/sh-D0FCgtva.png', hoverImage: 'https://aura-ecommerce-landing.vercel.app/assets/sh-hover-CAWUcjTm.png', colSpan: 1 },
-  { id: 6, title: 'Aura Cap', price: '$25.00', category: '● ACCESSORIES', image: 'https://aura-ecommerce-landing.vercel.app/assets/cp-B_Ka_2N5.png', hoverImage: 'https://aura-ecommerce-landing.vercel.app/assets/cp-hover-WdG_u0e_.png', colSpan: 1 },
-  { id: 7, title: 'Aura Backpack', price: '$85.00', category: '● BAGS', image: 'https://aura-ecommerce-landing.vercel.app/assets/bp-CPsZAUoT.png', hoverImage: 'https://aura-ecommerce-landing.vercel.app/assets/bp-hover-uzbpAEzW.png', colSpan: 2 },
-  { id: 4, title: 'Aura Hoodie', price: '$65.00', category: '● APPAREL', image: 'https://aura-ecommerce-landing.vercel.app/assets/hd-MEY3UWgC.png', hoverImage: 'https://aura-ecommerce-landing.vercel.app/assets/hd-hover-BSILjcBO.png', colSpan: 1 },
+  { id: 1, title: 'Aura Shirt', price: '$35.00', category: '● APPAREL', image: 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Aura/Product/shirt.webp', hoverImage: 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Aura/Product/shirt-hover.webp', colSpan: 1 },
+  { id: 6, title: 'Aura Cap', price: '$25.00', category: '● ACCESSORIES', image: 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Aura/Product/cap.webp', hoverImage: 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Aura/Product/cap-hover.webp', colSpan: 1 },
+  { id: 7, title: 'Aura Backpack', price: '$85.00', category: '● BAGS', image: 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Aura/Product/backpack.webp', hoverImage: 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Aura/Product/backpack-hover.webp', colSpan: 2 },
+  { id: 4, title: 'Aura Hoodie', price: '$65.00', category: '● APPAREL', image: 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Aura/Product/hoodie.webp', hoverImage: 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Aura/Product/hoodie-hover.webp', colSpan: 1 },
 ];
 
 function CustomCursor({ isHovering }: { isHovering: boolean }) {

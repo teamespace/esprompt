@@ -64,16 +64,29 @@ Content (copy verbatim): H2 "Let's build the eternal." — "We are currently acc
 Content (copy verbatim): "Aethera®" · "Inquiries: studio@aethera.com" · "Follow: Instagram, LinkedIn" · "Presence: London / Tokyo" · "© 2026 Aethera Studio. All rights reserved." · "Privacy / Terms"
 
 === ASSETS (confirmed URLs) ===
-Base: https://athera-h3jx.vercel.app/assets/ — filenames contain literal spaces, URL-encode as %20
-| File | URL | Used for |
-|---|---|---|
-| image (24).png | .../assets/image%20(24).png | Craft grid / hero imagery |
-| Retro Console in Nature.png | .../assets/Retro%20Console%20in%20Nature.png | Selected Renders — "Retro Horizon" |
-| Meditative Knight in Field.png | .../assets/Meditative%20Knight%20in%20Field.png | Selected Renders — "Silent Knight" |
-| image (25).png | .../assets/image%20(25).png | Selected Renders — "Nature Console" or "Echoes of Play" |
-| Floral Fusion Figure.png | .../assets/Floral%20Fusion%20Figure.png | Selected Renders — "Aura Figure" |
-Not confirmed: the "Vintage Signal" render image and the testimonial headshot — re-fetch the live page or generate equivalent CGI-render imagery matching the category tags already quoted above.
+Reference build: https://athera-h3jx.vercel.app/
 
+Section 2 — Hero:
+- Hero background video: https://beige-lemur-872571.hostingersite.com/asset-esprompt/Landing/Athera/Hero/Hero.mp4
+
+Section 3 — Our Craft (4-item numbered grid):
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Athera/Service/service-1.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Athera/Service/service-2.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Athera/Service/service-3.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Athera/Service/service-4.webp
+
+Section 5 — Selected Renders (portfolio grid, 6 items):
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Athera/Works/work-1.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Athera/Works/work-2.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Athera/Works/work-3.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Athera/Works/work-4.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Athera/Works/work-5.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Athera/Works/work-6.webp
+
+Section 7 — Journal (3 posts):
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Athera/Journal/Journal%201.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Athera/Journal/Journal%202.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Athera/Journal/Journal%203.webp
 === INTERACTIONS (global) ===
 - No keyframes/marquees detected — likely a straightforward scroll-reveal (fade-up) on section/grid-item entry, consistent with the "Cinematic Hero" framing; exact timing not captured.
 

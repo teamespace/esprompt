@@ -10,15 +10,15 @@ Hero: full-viewport auto-advancing carousel (3 slides, 5s interval, fade transit
     <section class="hero" id="hero" aria-label="Featured collections">
       <div class="hero__slider" id="hero-slider">
         <article class="hero__slide" data-index="0">
-          <div class="hero__media"><img src="https://ecommerce-landing.pages.dev/generated-assets/luma/luma-hero-1.png?v=3" alt="Man and woman in cream tennis sweaters beside a vintage convertible" loading="eager"></div>
+          <div class="hero__media"><img src="https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Luma/Hero/luma-hero-1.webp" alt="Man and woman in cream tennis sweaters beside a vintage convertible" loading="eager"></div>
           <div class="hero__content"><p class="hero__kicker">New Arrivals</p><h1 class="hero__title">The Country Club Edit</h1><p class="hero__sub">Timeless pieces for tennis mornings and garden evenings.</p><a href="#women" class="hero__cta">Explore Now</a></div>
         </article>
         <article class="hero__slide" data-index="1">
-          <div class="hero__media"><img src="https://ecommerce-landing.pages.dev/generated-assets/luma/luma-hero-2.png?v=3" alt="Models in relaxed knit layers on a sun-bleached terrace" loading="lazy"></div>
+          <div class="hero__media"><img src="https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Luma/Hero/luma-hero-2.webp" alt="Models in relaxed knit layers on a sun-bleached terrace" loading="lazy"></div>
           <div class="hero__content"><p class="hero__kicker">Seasonal</p><h1 class="hero__title">The Knit Edit</h1><p class="hero__sub">Soft layers in warm ivory, sage and clay.</p><a href="#men" class="hero__cta">Explore Now</a></div>
         </article>
         <article class="hero__slide is-active" data-index="2">
-          <div class="hero__media"><img src="https://ecommerce-landing.pages.dev/generated-assets/luma/luma-hero-3.png?v=3" alt="A couple in tailored sportswear walking through an Italian garden" loading="lazy"></div>
+          <div class="hero__media"><img src="https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Luma/Hero/luma-hero-3.webp" alt="A couple in tailored sportswear walking through an Italian garden" loading="lazy"></div>
           <div class="hero__content"><p class="hero__kicker">Lifestyle</p><h1 class="hero__title">Made to Live In</h1><p class="hero__sub">From the court to the clubhouse and everywhere between.</p><a href="#featured" class="hero__cta">Explore Now</a></div>
         </article>
       </div>
@@ -54,6 +54,6 @@ Hero: full-viewport auto-advancing carousel (3 slides, 5s interval, fade transit
 
 | Filename | URL | Content |
 |---|---|---|
-| `luma-hero-1.png` | `https://ecommerce-landing.pages.dev/generated-assets/luma/luma-hero-1.png?v=3` | Couple in cream tennis sweaters beside a vintage convertible — Slide 1 |
-| `luma-hero-2.png` | `https://ecommerce-landing.pages.dev/generated-assets/luma/luma-hero-2.png?v=3` | Models in relaxed knit layers on a sun-bleached terrace — Slide 2 |
-| `luma-hero-3.png` | `https://ecommerce-landing.pages.dev/generated-assets/luma/luma-hero-3.png?v=3` | Couple walking in an Italian garden — Slide 3 (default active slide) |
+| `luma-hero-1.png` | `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Luma/Hero/luma-hero-1.webp` | Couple in cream tennis sweaters beside a vintage convertible — Slide 1 |
+| `luma-hero-2.png` | `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Luma/Hero/luma-hero-2.webp` | Models in relaxed knit layers on a sun-bleached terrace — Slide 2 |
+| `luma-hero-3.png` | `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Luma/Hero/luma-hero-3.webp` | Couple walking in an Italian garden — Slide 3 (default active slide) |

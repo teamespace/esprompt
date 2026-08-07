@@ -60,4 +60,4 @@ Hero: full-viewport header with a dark-overlay `bg-cover` background image (`HER
 
 | Const | URL | Content |
 |---|---|---|
-| `HERO_BG` | `https://mental-health-two-psi.vercel.app/hero-bg.png` | Therapist counseling session photo, used as the full-bleed hero background (dark gradient overlay on top) |
+| `HERO_BG` | `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Serenity/Hero/hero-bg.webp` | Therapist counseling session photo, used as the full-bleed hero background (dark gradient overlay on top) |

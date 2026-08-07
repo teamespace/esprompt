@@ -69,17 +69,30 @@ Content (copy verbatim): "Wayfare" wordmark — "The AI trip planner with a map-
 - Chat demo (Section 5) reveals messages sequentially with timestamps.
 
 === ASSETS (confirmed URLs) ===
-Base: https://wayfare-iota-pink.vercel.app/
-| File | URL | Used for |
-|---|---|---|
-| Postcards 1.png | .../Postcards%201.png | Day-card thumbnail / postcard gallery item 1 |
-| Postcards 2.png | .../Postcards%202.png | Day-card thumbnail / postcard gallery item 2 |
-| Postcards 3.png | .../Postcards%203.png | Day-card thumbnail / postcard gallery item 3 |
-| map.png | .../map.png | "Shape the draft" map-route mockup background |
-| phone-img.avif | .../phone-img.avif | "Travel with it" phone-app mockup |
-| bg-footer.png | .../bg-footer.png | Closing CTA background |
-Note: filenames contain spaces — URL-encode as `%20` when hotlinking. The QR code image is a generic Wikimedia sample graphic, not brand-specific — substitute your own QR code.
+Reference build: https://wayfare-iota-pink.vercel.app/
 
+Section 2 — Hero:
+- Hero background video: https://beige-lemur-872571.hostingersite.com/asset-esprompt/Landing/Wayfare/Hero/Video/hero.mp4
+- Day-card thumbnail 1: https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Wayfare/Hero/Image/Postcards%201.webp
+- Day-card thumbnail 2: https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Wayfare/Hero/Image/Postcards%202.webp
+- Day-card thumbnail 3: https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Wayfare/Hero/Image/Postcards%203.webp
+
+Section 4 — Why travelers switch (section background):
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Wayfare/Feature/bg-feature.webp
+
+Section 5 — How it works (builder demo):
+- Map-route mockup: https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Wayfare/Feature/map.webp
+- Phone-app mockup: https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Wayfare/Feature/phone-img.webp
+
+Section 6 — Postcards from real trips (3 images: temple gold / ramen / bamboo grove):
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Wayfare/Hero/Image/Postcards%201.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Wayfare/Hero/Image/Postcards%202.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Wayfare/Hero/Image/Postcards%203.webp
+
+Section 8–9 — Closing CTA / footer:
+- Background: https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Wayfare/Footer/bg-footer.webp
+- Phone mockup: https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Wayfare/Feature/phone-img.webp
+- QR code: generate in code (no source file); render as an SVG QR pointing at the download URL.
 === RULES ===
 - Use only the colors, fonts, and sizes specified above; do not invent new ones.
 - Keep all copy exactly as quoted.

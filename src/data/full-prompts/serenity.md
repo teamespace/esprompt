@@ -29,7 +29,7 @@ Create a React + Vite + TypeScript + Tailwind CSS 4 single-page website for "Ser
    - **Education Grid images** must contain a grey-tinted overlay `<div className="w-full h-full bg-white/20 group-hover:bg-transparent transition-colors text-white"></div>` that fades out on hover.
    - **Differentiators cards** must add `hover:shadow-md transition-shadow`.
    - **Faculty cards** must zoom the profile photo: `group-hover:scale-105 transition-transform duration-500` with `overflow-hidden` on the wrapper, and add `hover:shadow-md transition-shadow`.
-7. **Asset Reference Policies:** Images must be fetched from the remote host using their absolute URL paths pointing to `https://mental-health-two-psi.vercel.app/` (e.g. `https://mental-health-two-psi.vercel.app/hero-bg.png`). Do not reference them locally.
+7. **Asset Reference Policies:** Images must be fetched from the remote host using their absolute URL paths pointing to `https://mental-health-two-psi.vercel.app/` (e.g. `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Serenity/Hero/hero-bg.webp`). Do not reference them locally.
 
 ---
 
@@ -163,34 +163,34 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 
 // Absolute assets hosted on Vercel
-const HERO_BG = 'https://mental-health-two-psi.vercel.app/hero-bg.png';
-const CERT_IMG = 'https://mental-health-two-psi.vercel.app/cert.png';
-const APPROACH_BG = 'https://mental-health-two-psi.vercel.app/approach-bg.png';
-const CTA_BG = 'https://mental-health-two-psi.vercel.app/cta-bg.png';
+const HERO_BG = 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Serenity/Hero/hero-bg.webp';
+const CERT_IMG = 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Serenity/Certificate/cert.webp';
+const APPROACH_BG = 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Serenity/approach/approach-bg.webp';
+const CTA_BG = 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Serenity/CTA/cta-bg.webp';
 
 const EDU_IMAGES = [
-  'https://mental-health-two-psi.vercel.app/edu-1.png',
-  'https://mental-health-two-psi.vercel.app/edu-2.png',
-  'https://mental-health-two-psi.vercel.app/edu-3.png',
-  'https://mental-health-two-psi.vercel.app/edu-4.png',
-  'https://mental-health-two-psi.vercel.app/edu-5.png'
+  'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Serenity/Edu/edu-1.webp',
+  'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Serenity/Edu/edu-2.webp',
+  'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Serenity/Edu/edu-3.webp',
+  'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Serenity/Edu/edu-4.webp',
+  'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Serenity/Edu/edu-5.webp'
 ];
 
 const FACULTY_MEMBERS = [
   {
     name: 'Dr. Sarah Chen',
     title: 'Functional Medicine Physician',
-    image: 'https://mental-health-two-psi.vercel.app/faculty-1.png'
+    image: 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Serenity/Faculty/faculty-1.webp'
   },
   {
     name: 'Dr. Michael Torres',
     title: 'Clinical Nutritionist',
-    image: 'https://mental-health-two-psi.vercel.app/faculty-2.png'
+    image: 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Serenity/Faculty/faculty-2.webp'
   },
   {
     name: 'Dr. Emily Watson',
     title: 'Integrative Health Researcher',
-    image: 'https://mental-health-two-psi.vercel.app/faculty-3.png'
+    image: 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Serenity/Faculty/faculty-3.webp'
   }
 ];
 

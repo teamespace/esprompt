@@ -26,7 +26,7 @@ Content (copy verbatim):
 - "Scroll Down" indicator
 - Social links: X (Twitter), Instagram, Facebook
 - Slide counter: "01 / 03"
-Assets: hero-1.jpg, hero-2.jpg, hero-3.jpg (https://elux-medical-clinic.vercel.app/assets/hero-1-Bgg9DUCT.jpg etc.) — rotating/carousel background, 3 slides matching the "01/03" counter
+Assets: hero-1.jpg, hero-2.jpg, hero-3.jpg (https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Saha-medical/Hero/hero-1.webp etc.) — rotating/carousel background, 3 slides matching the "01/03" counter
 
 === SECTION 3: About us ===
 Content (copy verbatim):
@@ -85,16 +85,39 @@ Content (copy verbatim):
 - Testimonials render as a doubled list in the DOM, implying an infinite horizontal marquee/scroll loop.
 
 === ASSETS (confirmed URLs) ===
-Base: https://elux-medical-clinic.vercel.app/assets/
-| File | URL | Used for |
-|---|---|---|
-| hero-1-Bgg9DUCT.jpg | .../assets/hero-1-Bgg9DUCT.jpg | Hero carousel slide 1 |
-| hero-2-CNLKAuq1.jpg | .../assets/hero-2-CNLKAuq1.jpg | Hero carousel slide 2 |
-| hero-3-DYzbU4Gv.jpg | .../assets/hero-3-DYzbU4Gv.jpg | Hero carousel slide 3 |
-| about-C38T-j9-.jpg | .../assets/about-C38T-j9-.jpg | About Us section photo |
-| doctor-2-t5tm7Y5g.jpg | .../assets/doctor-2-t5tm7Y5g.jpg | Experts carousel — one doctor portrait |
-Not captured: the other 3 doctor portraits (Tariq Al-Fayed, Yasmin Mansour, Layla Rahman), the 5 specialty-tile images, and the 6 closing-CTA gallery images — these load further down the page than the capture reached. Re-fetch the live site's asset list to get exact filenames, or commission equivalent luxury-clinic stock photography.
+Reference build: https://elux-medical-clinic.vercel.app/
 
+Section 2 — Hero (3 slides):
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Saha-medical/Hero/hero-1.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Saha-medical/Hero/hero-2.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Saha-medical/Hero/hero-3.webp
+
+Section 3 — About us:
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Saha-medical/About/about.webp
+
+Section 4 — Specialties (5 tiles, in order Longevity / Aesthetics / Concierge / Diagnostics / Preventative Care):
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Saha-medical/About/about.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Saha-medical/Doctor/doctor-2.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Saha-medical/Why/why.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Saha-medical/Doctor/doctor-4.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Saha-medical/Doctor/doctor-3.webp
+
+Section 5 — Concierge doctors (feature grid visual):
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Saha-medical/Doctor/doctor-1.webp
+
+Section 6 — Our Experts carousel (Dr. Tariq / Dr. Yasmin / Dr. Kareem / Dr. Layla):
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Saha-medical/Doctor/doctor-1.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Saha-medical/Doctor/doctor-2.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Saha-medical/Doctor/doctor-3.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Saha-medical/Doctor/doctor-4.webp
+
+Section 8 — Closing CTA gallery (6 images):
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Saha-medical/Doctor/doctor-4.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Saha-medical/Doctor/doctor-1.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Saha-medical/Doctor/doctor-2.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Saha-medical/Community/community-1.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Saha-medical/Community/community-2.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Saha-medical/Community/community-3.webp
 === RULES ===
 - Use only the colors, fonts, and sizes specified above; do not invent new ones.
 - Keep all copy exactly as quoted.

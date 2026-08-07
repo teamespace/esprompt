@@ -104,7 +104,7 @@ Hero: full-viewport, background photo crossfades in on load; a mouse-driven inte
 
 | Const | URL | Content |
 |---|---|---|
-| `heroBg` | `https://aura-ecommerce-landing.vercel.app/assets/hero-bg-P2mzmULA.png` | 16:9 fisheye street photograph, three models in oversized faded-black streetwear — hero background |
-| `heroTxt1` | `https://aura-ecommerce-landing.vercel.app/assets/hero-txt1-Be79_yCj.png` | Square flat-lay tee on blue — default center tile (no hover) |
-| `heroTxt2` | `https://aura-ecommerce-landing.vercel.app/assets/hero-txt2-BbghUJQJ.png` | Square portrait, model in cap — center tile shown while hovering "AURA" |
-| `heroTxt3` | `https://aura-ecommerce-landing.vercel.app/assets/hero-txt3-Dn8T-mbk.png` | Square back-of-head portrait, model in beanie — center tile shown while hovering "LABS" |
+| `heroBg` | `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Aura/hero/hero-bg.webp` | 16:9 fisheye street photograph, three models in oversized faded-black streetwear — hero background |
+| `heroTxt1` | `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Aura/hero/hero-txt1.webp` | Square flat-lay tee on blue — default center tile (no hover) |
+| `heroTxt2` | `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Aura/hero/hero-txt2.webp` | Square portrait, model in cap — center tile shown while hovering "AURA" |
+| `heroTxt3` | `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Aura/hero/hero-txt3.webp` | Square back-of-head portrait, model in beanie — center tile shown while hovering "LABS" |

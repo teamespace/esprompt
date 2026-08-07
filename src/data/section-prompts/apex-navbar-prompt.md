@@ -289,7 +289,7 @@ export default function App() {
       <section className="relative h-[95vh] w-full bg-lab-black overflow-hidden flex items-center">
         <div className="absolute inset-0 z-0">
           <img
-            src="https://apex-sport-ecommerce-landing.vercel.app/assets/Hero-D-FQbbO9.png"
+            src="https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Apex/Hero/Hero.webp"
             alt="Elite running athlete"
             className="w-full h-full object-cover opacity-80"
           />
@@ -383,7 +383,7 @@ export default function App() {
 The hero section placeholder references a high-quality remote athlete photography background to test the navbar visibility over dark imagery:
 
 - **Base URL:** `https://apex-sport-ecommerce-landing.vercel.app/`
-- **Asset URL:** `https://apex-sport-ecommerce-landing.vercel.app/assets/Hero-D-FQbbO9.png`
+- **Asset URL:** `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Apex/Hero/Hero.webp`
 - **Content:** Cinematic side-profile of a female East-Asian athlete running in a high-contrast urban environment at sunset, dark modern high-rises and blurred cityscape trees in the background, sharp evening backlighting casting warm edge glow.
 
 ---

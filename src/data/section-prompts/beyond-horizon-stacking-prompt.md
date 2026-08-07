@@ -13,10 +13,10 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 const destinations = [
-  { id: 1, title: "Komodo Islands", subtitle: "Indonesia", image: "https://yacht-bgz.pages.dev/images/image-6.png", badge: "Adventure" },
-  { id: 2, title: "Raja Ampat", subtitle: "West Papua", image: "https://yacht-bgz.pages.dev/images/image-7.png", badge: "Diving" },
-  { id: 3, title: "Phuket", subtitle: "Thailand", image: "https://yacht-bgz.pages.dev/images/image-8.png", badge: "Lifestyle" },
-  { id: 4, title: "Maldives", subtitle: "Indian Ocean", image: "https://yacht-bgz.pages.dev/images/image-9.png", badge: "Romance" },
+  { id: 1, title: "Komodo Islands", subtitle: "Indonesia", image: "https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Beyond-horizon/Destinations/komodo.webp", badge: "Adventure" },
+  { id: 2, title: "Raja Ampat", subtitle: "West Papua", image: "https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Beyond-horizon/Destinations/raja-ampat.webp", badge: "Diving" },
+  { id: 3, title: "Phuket", subtitle: "Thailand", image: "https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Beyond-horizon/Destinations/phuket.webp", badge: "Lifestyle" },
+  { id: 4, title: "Maldives", subtitle: "Indian Ocean", image: "https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Beyond-horizon/Destinations/maldives.webp", badge: "Romance" },
 ];
 
 export function StackingCards() {

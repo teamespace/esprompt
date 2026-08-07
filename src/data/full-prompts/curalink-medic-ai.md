@@ -72,12 +72,17 @@ Content (copy verbatim): "Curalink" wordmark — "AI-guided telehealth with real
 - Testimonial carousel (Section 7) has prev/next controls — build as a single-card slider, not a static block.
 
 === ASSETS (confirmed URLs) ===
-Base: https://curalink-medic-ai.vercel.app/
-| File | URL | Used for |
-|---|---|---|
-| hero-img.png | .../hero-img.png | Hero photographic banner |
-Not confirmed: physician headshot and testimonial avatar — both are served from URLs carrying signed/query-string tokens that could not be captured; source your own or request the live URLs directly.
+Reference build: https://curalink-medic-ai.vercel.app/
 
+Section 2 — Hero:
+- Hero video (left panel): https://beige-lemur-872571.hostingersite.com/asset-esprompt/Landing/Curalink/Hero/hero-left.mp4
+- Hero photographic banner: https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Curalink/Hero/hero-img.webp
+
+Section 6 — Real doctors, not bots (Dr. Amara Osei portrait):
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Curalink/Doctor/doctor.webp
+
+Section 7 — Patient stories (testimonial carousel):
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Curalink/Testimonial/Testimonial.webp
 === RULES ===
 - Use only the colors, fonts, and sizes specified above; do not invent new ones.
 - Keep all copy exactly as quoted.

@@ -63,8 +63,15 @@ Content (copy verbatim): "Candor" wordmark — "The intelligent hiring platform 
 - Radar chart (Section 2) and stat counters ("500+", "70%", "98%" in Section 7) are placeholders — animate count-up where numeric.
 
 === ASSETS (confirmed URLs) ===
-No image assets were found on this page — the entire design is built from typography, color, and CSS/SVG UI mockups (scorecards, funnels, tables, charts), with no `<img>` elements present. Generate the dashboard/mockup UI directly in code rather than sourcing photography.
+Reference build: https://candor-dun.vercel.app/
 
+Section 2 — Hero:
+- Hero background video: https://beige-lemur-872571.hostingersite.com/asset-esprompt/Landing/Candor/Hero/hero.mp4
+
+Section 4 — Every stage of the funnel (background):
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Candor/Feature/fitur.webp
+
+All other visuals (scorecards, funnels, tables, charts, dashboard mockups) are built from typography, color, and CSS/SVG in code — no image files.
 === RULES ===
 - Use only the colors, fonts, and sizes specified above; do not invent new ones.
 - Keep all copy exactly as quoted; the truncated line in Section 7 should be verified/completed against the live page before finalizing.

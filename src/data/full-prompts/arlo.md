@@ -69,9 +69,9 @@ export default defineConfig({ server: { port: 3000 } });
   <main id="main-content">
     <section class="hero-carousel" aria-label="Hero" aria-roledescription="carousel" aria-live="polite">
       <div class="hero-carousel__track">
-        <div class="hero-slide"><img class="hero-slide__media" src="https://ecommerce-landing.pages.dev/generated-assets/arlo/hero-new-1.png" alt="Shop Collection"><div class="hero-slide__content"><h2 class="hero-slide__title">The Season Ahead</h2><p class="hero-slide__subtitle">Quiet essentials built to last</p><a href="#collection" class="hero-slide__cta">Shop All</a></div></div>
-        <div class="hero-slide is-active"><img class="hero-slide__media" src="https://ecommerce-landing.pages.dev/generated-assets/arlo/hero-new-2.png" alt="Shop Shirting"><div class="hero-slide__content"><h2 class="hero-slide__title">The Perfect Shirt</h2><p class="hero-slide__subtitle">Structure, ease, and natural fiber</p><a href="#shirting" class="hero-slide__cta">Shop Shirting</a></div></div>
-        <div class="hero-slide"><img class="hero-slide__media" src="https://ecommerce-landing.pages.dev/generated-assets/arlo/hero-new-3.png" alt="Shop Tailoring"><div class="hero-slide__content"><h2 class="hero-slide__title">Modern Tailoring</h2><p class="hero-slide__subtitle">Limited run, made to measure</p><a href="#tailoring" class="hero-slide__cta">Shop Tailoring</a></div></div>
+        <div class="hero-slide"><img class="hero-slide__media" src="https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Arlo/Hero/hero-new-1.webp" alt="Shop Collection"><div class="hero-slide__content"><h2 class="hero-slide__title">The Season Ahead</h2><p class="hero-slide__subtitle">Quiet essentials built to last</p><a href="#collection" class="hero-slide__cta">Shop All</a></div></div>
+        <div class="hero-slide is-active"><img class="hero-slide__media" src="https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Arlo/Hero/hero-new-2.webp" alt="Shop Shirting"><div class="hero-slide__content"><h2 class="hero-slide__title">The Perfect Shirt</h2><p class="hero-slide__subtitle">Structure, ease, and natural fiber</p><a href="#shirting" class="hero-slide__cta">Shop Shirting</a></div></div>
+        <div class="hero-slide"><img class="hero-slide__media" src="https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Arlo/Hero/hero-new-3.webp" alt="Shop Tailoring"><div class="hero-slide__content"><h2 class="hero-slide__title">Modern Tailoring</h2><p class="hero-slide__subtitle">Limited run, made to measure</p><a href="#tailoring" class="hero-slide__cta">Shop Tailoring</a></div></div>
       </div>
       <div class="hero-dots" role="tablist" aria-label="Slide navigation"><button class="hero-dot" aria-label="Go to slide 1" aria-selected="false" role="tab"></button><button class="hero-dot is-active" aria-label="Go to slide 2" aria-selected="true" role="tab"></button><button class="hero-dot" aria-label="Go to slide 3" aria-selected="false" role="tab"></button></div>
     </section>
@@ -79,26 +79,26 @@ export default defineConfig({ server: { port: 3000 } });
     <section class="categories" id="collection" aria-labelledby="categories-heading">
       <div class="section-header"><p class="eyebrow">The Collection</p><h2 id="categories-heading" class="section-title">Shop by Edit</h2></div>
       <div class="categories__grid">
-        <a href="#shirting" class="category-card" id="shirting-card"><img src="https://ecommerce-landing.pages.dev/generated-assets/arlo/arlo-cat-shirting.png" alt="Male model in cream overshirt"><div class="category-card__overlay"><span class="category-card__title">Shirting</span><span class="category-card__cta">Explore →</span></div></a>
-        <a href="#tailoring" class="category-card" id="tailoring-card"><img src="https://ecommerce-landing.pages.dev/generated-assets/arlo/arlo-cat-tailoring.png" alt="Male model in black blazer"><div class="category-card__overlay"><span class="category-card__title">Tailoring</span><span class="category-card__cta">Explore →</span></div></a>
-        <a href="#" class="category-card"><img src="https://ecommerce-landing.pages.dev/generated-assets/arlo/arlo-cat-accessories.png" alt="Minimalist accessories still life"><div class="category-card__overlay"><span class="category-card__title">Accessories</span><span class="category-card__cta">Explore →</span></div></a>
+        <a href="#shirting" class="category-card" id="shirting-card"><img src="https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Arlo/Collection/arlo-cat-shirting.webp" alt="Male model in cream overshirt"><div class="category-card__overlay"><span class="category-card__title">Shirting</span><span class="category-card__cta">Explore →</span></div></a>
+        <a href="#tailoring" class="category-card" id="tailoring-card"><img src="https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Arlo/Collection/arlo-cat-tailoring.webp" alt="Male model in black blazer"><div class="category-card__overlay"><span class="category-card__title">Tailoring</span><span class="category-card__cta">Explore →</span></div></a>
+        <a href="#" class="category-card"><img src="https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Arlo/Collection/arlo-cat-accessories.webp" alt="Minimalist accessories still life"><div class="category-card__overlay"><span class="category-card__title">Accessories</span><span class="category-card__cta">Explore →</span></div></a>
       </div>
     </section>
     <section class="feature-products" aria-labelledby="feature-products-heading">
       <div class="feature-products__header"><div><p class="eyebrow">Essentials</p><h2 id="feature-products-heading" class="section-title">The Quiet Edit</h2></div><button class="btn btn--ghost" id="open-drawer">Shop All Essentials</button></div>
       <div class="feature-products__scroll" id="feature-scroll">
-        <article class="feature-product"><div class="feature-product__media"><img src="https://ecommerce-landing.pages.dev/generated-assets/arlo/arlo-product-1.png" alt="Linen trench coat"></div><h3>Linen Trench</h3><p class="feature-product__price">$340</p></article>
-        <article class="feature-product"><div class="feature-product__media"><img src="https://ecommerce-landing.pages.dev/generated-assets/arlo/arlo-product-2.png" alt="Cashmere knit"></div><h3>Cashmere Knit</h3><p class="feature-product__price">$260</p></article>
-        <article class="feature-product"><div class="feature-product__media"><img src="https://ecommerce-landing.pages.dev/generated-assets/arlo/arlo-product-3.png" alt="Wide-leg trousers"></div><h3>Wide-Leg Trousers</h3><p class="feature-product__price">$195</p></article>
-        <article class="feature-product"><div class="feature-product__media"><img src="https://ecommerce-landing.pages.dev/generated-assets/arlo/arlo-product-4.png" alt="Silk shirt"></div><h3>Silk Shirt</h3><p class="feature-product__price">$225</p></article>
-        <article class="feature-product"><div class="feature-product__media"><img src="https://ecommerce-landing.pages.dev/generated-assets/arlo/arlo-product-5.png" alt="Merino scarf"></div><h3>Merino Scarf</h3><p class="feature-product__price">$95</p></article>
-        <article class="feature-product"><div class="feature-product__media"><img src="https://ecommerce-landing.pages.dev/generated-assets/arlo/arlo-product-6.png" alt="Tailored blazer"></div><h3>Tailored Blazer</h3><p class="feature-product__price">$420</p></article>
+        <article class="feature-product"><div class="feature-product__media"><img src="https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Arlo/Product/arlo-product-1.webp" alt="Linen trench coat"></div><h3>Linen Trench</h3><p class="feature-product__price">$340</p></article>
+        <article class="feature-product"><div class="feature-product__media"><img src="https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Arlo/Product/arlo-product-2.webp" alt="Cashmere knit"></div><h3>Cashmere Knit</h3><p class="feature-product__price">$260</p></article>
+        <article class="feature-product"><div class="feature-product__media"><img src="https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Arlo/Product/arlo-product-3.webp" alt="Wide-leg trousers"></div><h3>Wide-Leg Trousers</h3><p class="feature-product__price">$195</p></article>
+        <article class="feature-product"><div class="feature-product__media"><img src="https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Arlo/Product/arlo-product-4.webp" alt="Silk shirt"></div><h3>Silk Shirt</h3><p class="feature-product__price">$225</p></article>
+        <article class="feature-product"><div class="feature-product__media"><img src="https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Arlo/Product/arlo-product-5.webp" alt="Merino scarf"></div><h3>Merino Scarf</h3><p class="feature-product__price">$95</p></article>
+        <article class="feature-product"><div class="feature-product__media"><img src="https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Arlo/Product/arlo-product-6.webp" alt="Tailored blazer"></div><h3>Tailored Blazer</h3><p class="feature-product__price">$420</p></article>
       </div>
     </section>
     <section class="collection-showcase" aria-labelledby="collection-showcase-heading">
       <div class="collection-showcase__product">
         <div class="collection-showcase__text"><h2 id="collection-showcase-heading" class="collection-showcase__title">Spring Summer 2026 Collection</h2><p class="collection-showcase__desc">Where performance meets personality, SS26 delivers effortless elegance with a playful edge.</p></div>
-        <div class="collection-showcase__stage"><img id="showcase-img" src="https://ecommerce-landing.pages.dev/generated-assets/arlo/arlo-product-3.png" alt="Wide-leg trousers"></div>
+        <div class="collection-showcase__stage"><img id="showcase-img" src="https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Arlo/Product/arlo-product-3.webp" alt="Wide-leg trousers"></div>
         <div class="collection-showcase__meta"><span class="collection-showcase__name">Wide-Leg Trousers</span><span class="collection-showcase__price">$195</span></div>
         <a href="#" class="collection-showcase__link">View Product</a>
         <div class="collection-showcase__dots" role="tablist" aria-label="Product carousel">
@@ -110,17 +110,17 @@ export default defineConfig({ server: { port: 3000 } });
           <button class="showcase-dot" aria-label="Product 6" aria-selected="false" role="tab" data-index="5"></button>
         </div>
       </div>
-      <div class="collection-showcase__model"><img src="https://ecommerce-landing.pages.dev/generated-assets/arlo/arlo-hero.png" alt="Model wearing ARLO SS26 collection"></div>
+      <div class="collection-showcase__model"><img src="https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Arlo/SS26/arlo-hero.webp" alt="Model wearing ARLO SS26 collection"></div>
     </section>
     <section class="lookbook" aria-labelledby="lookbook-heading">
       <div class="lookbook__header"><p class="eyebrow">Lookbook</p><h2 id="lookbook-heading" class="section-title">Season 26</h2></div>
       <div class="lookbook__grid">
-        <figure class="lookbook__item"><img src="https://ecommerce-landing.pages.dev/generated-assets/arlo/arlo-look-1.png" alt="Look 1"><figcaption>Look 01</figcaption></figure>
-        <figure class="lookbook__item"><img src="https://ecommerce-landing.pages.dev/generated-assets/arlo/arlo-look-2.png" alt="Look 2"><figcaption>Look 02</figcaption></figure>
-        <figure class="lookbook__item"><img src="https://ecommerce-landing.pages.dev/generated-assets/arlo/arlo-look-3.png" alt="Look 3"><figcaption>Look 03</figcaption></figure>
-        <figure class="lookbook__item"><img src="https://ecommerce-landing.pages.dev/generated-assets/arlo/arlo-look-4.png" alt="Look 4"><figcaption>Look 04</figcaption></figure>
-        <figure class="lookbook__item"><img src="https://ecommerce-landing.pages.dev/generated-assets/arlo/arlo-look-5.png" alt="Look 5"><figcaption>Look 05</figcaption></figure>
-        <figure class="lookbook__item"><img src="https://ecommerce-landing.pages.dev/generated-assets/arlo/arlo-look-6.png" alt="Look 6"><figcaption>Look 06</figcaption></figure>
+        <figure class="lookbook__item"><img src="https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Arlo/Look/arlo-look-1.webp" alt="Look 1"><figcaption>Look 01</figcaption></figure>
+        <figure class="lookbook__item"><img src="https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Arlo/Look/arlo-look-2.webp" alt="Look 2"><figcaption>Look 02</figcaption></figure>
+        <figure class="lookbook__item"><img src="https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Arlo/Look/arlo-look-3.webp" alt="Look 3"><figcaption>Look 03</figcaption></figure>
+        <figure class="lookbook__item"><img src="https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Arlo/Look/arlo-look-4.webp" alt="Look 4"><figcaption>Look 04</figcaption></figure>
+        <figure class="lookbook__item"><img src="https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Arlo/Look/arlo-look-5.webp" alt="Look 5"><figcaption>Look 05</figcaption></figure>
+        <figure class="lookbook__item"><img src="https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Arlo/Look/arlo-look-6.webp" alt="Look 6"><figcaption>Look 06</figcaption></figure>
       </div>
     </section>
     <section class="craft" aria-labelledby="craft-heading">
@@ -139,12 +139,12 @@ export default defineConfig({ server: { port: 3000 } });
       <div class="journal__slider">
         <button class="journal__arrow journal__arrow--left" aria-label="Previous journal entries"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
         <div class="journal__scroll" tabindex="0" role="list" aria-label="Journal entries">
-          <article class="journal-card journal-card--wide" role="listitem"><img src="https://ecommerce-landing.pages.dev/generated-assets/arlo/arlo-journal-1.png" alt="On the Art of Restraint"><div class="journal-card__overlay"><p class="journal-card__date">June 2026</p><h3>On the Art of Restraint</h3></div></article>
-          <article class="journal-card journal-card--narrow" role="listitem"><img src="https://ecommerce-landing.pages.dev/generated-assets/arlo/arlo-journal-2.png" alt="A Guide to Linen"></article>
-          <article class="journal-card journal-card--wide" role="listitem"><img src="https://ecommerce-landing.pages.dev/generated-assets/arlo/arlo-journal-3.png" alt="The Perfect White Shirt"><div class="journal-card__overlay"><p class="journal-card__date">April 2026</p><h3>The Perfect White Shirt</h3></div></article>
-          <article class="journal-card journal-card--narrow" role="listitem"><img src="https://ecommerce-landing.pages.dev/generated-assets/arlo/arlo-look-1.png" alt="Look 01"></article>
-          <article class="journal-card journal-card--wide" role="listitem"><img src="https://ecommerce-landing.pages.dev/generated-assets/arlo/arlo-look-2.png" alt="Look 02"><div class="journal-card__overlay"><p class="journal-card__date">Season 26</p><h3>Quiet Confidence</h3></div></article>
-          <article class="journal-card journal-card--narrow" role="listitem"><img src="https://ecommerce-landing.pages.dev/generated-assets/arlo/arlo-look-3.png" alt="Look 03"></article>
+          <article class="journal-card journal-card--wide" role="listitem"><img src="https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Arlo/Journal/arlo-journal-1.webp" alt="On the Art of Restraint"><div class="journal-card__overlay"><p class="journal-card__date">June 2026</p><h3>On the Art of Restraint</h3></div></article>
+          <article class="journal-card journal-card--narrow" role="listitem"><img src="https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Arlo/Journal/arlo-journal-2.webp" alt="A Guide to Linen"></article>
+          <article class="journal-card journal-card--wide" role="listitem"><img src="https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Arlo/Journal/arlo-journal-3.webp" alt="The Perfect White Shirt"><div class="journal-card__overlay"><p class="journal-card__date">April 2026</p><h3>The Perfect White Shirt</h3></div></article>
+          <article class="journal-card journal-card--narrow" role="listitem"><img src="https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Arlo/Look/arlo-look-1.webp" alt="Look 01"></article>
+          <article class="journal-card journal-card--wide" role="listitem"><img src="https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Arlo/Look/arlo-look-2.webp" alt="Look 02"><div class="journal-card__overlay"><p class="journal-card__date">Season 26</p><h3>Quiet Confidence</h3></div></article>
+          <article class="journal-card journal-card--narrow" role="listitem"><img src="https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Arlo/Look/arlo-look-3.webp" alt="Look 03"></article>
         </div>
         <button class="journal__arrow journal__arrow--right" aria-label="Next journal entries"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
       </div>
@@ -330,12 +330,12 @@ a { color: inherit; text-decoration: none; }
 (function () {
   'use strict';
   const products = [
-    { id: 1, name: 'Linen Trench', price: 340, image: 'https://ecommerce-landing.pages.dev/generated-assets/arlo/arlo-product-1.png', sizes: ['XS', 'S', 'M', 'L'], selected: 'S' },
-    { id: 2, name: 'Cashmere Knit', price: 260, image: 'https://ecommerce-landing.pages.dev/generated-assets/arlo/arlo-product-2.png', sizes: ['XS', 'S', 'M', 'L'], selected: 'S' },
-    { id: 3, name: 'Wide-Leg Trousers', price: 195, image: 'https://ecommerce-landing.pages.dev/generated-assets/arlo/arlo-product-3.png', sizes: ['XS', 'S', 'M', 'L'], selected: 'M' },
-    { id: 4, name: 'Silk Shirt', price: 225, image: 'https://ecommerce-landing.pages.dev/generated-assets/arlo/arlo-product-4.png', sizes: ['XS', 'S', 'M', 'L'], selected: 'S' },
-    { id: 5, name: 'Merino Scarf', price: 95, image: 'https://ecommerce-landing.pages.dev/generated-assets/arlo/arlo-product-5.png', sizes: ['One Size'], selected: 'One Size' },
-    { id: 6, name: 'Tailored Blazer', price: 420, image: 'https://ecommerce-landing.pages.dev/generated-assets/arlo/arlo-product-6.png', sizes: ['XS', 'S', 'M', 'L'], selected: 'S' }
+    { id: 1, name: 'Linen Trench', price: 340, image: 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Arlo/Product/arlo-product-1.webp', sizes: ['XS', 'S', 'M', 'L'], selected: 'S' },
+    { id: 2, name: 'Cashmere Knit', price: 260, image: 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Arlo/Product/arlo-product-2.webp', sizes: ['XS', 'S', 'M', 'L'], selected: 'S' },
+    { id: 3, name: 'Wide-Leg Trousers', price: 195, image: 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Arlo/Product/arlo-product-3.webp', sizes: ['XS', 'S', 'M', 'L'], selected: 'M' },
+    { id: 4, name: 'Silk Shirt', price: 225, image: 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Arlo/Product/arlo-product-4.webp', sizes: ['XS', 'S', 'M', 'L'], selected: 'S' },
+    { id: 5, name: 'Merino Scarf', price: 95, image: 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Arlo/Product/arlo-product-5.webp', sizes: ['One Size'], selected: 'One Size' },
+    { id: 6, name: 'Tailored Blazer', price: 420, image: 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Arlo/Product/arlo-product-6.webp', sizes: ['XS', 'S', 'M', 'L'], selected: 'S' }
   ];
   let bagCount = 0;
   const utilityBar = document.getElementById('utility-bar'), utilityClose = document.getElementById('utility-close');
@@ -398,12 +398,12 @@ a { color: inherit; text-decoration: none; }
   }
   const showcaseImg = document.getElementById('showcase-img'), showcaseDots = document.querySelectorAll('.showcase-dot');
   const showcaseProducts = [
-    { image: 'https://ecommerce-landing.pages.dev/generated-assets/arlo/arlo-product-3.png', alt: 'Wide-leg trousers', name: 'Wide-Leg Trousers', price: '$195' },
-    { image: 'https://ecommerce-landing.pages.dev/generated-assets/arlo/arlo-product-1.png', alt: 'Linen trench coat', name: 'Linen Trench', price: '$340' },
-    { image: 'https://ecommerce-landing.pages.dev/generated-assets/arlo/arlo-product-2.png', alt: 'Cashmere knit', name: 'Cashmere Knit', price: '$260' },
-    { image: 'https://ecommerce-landing.pages.dev/generated-assets/arlo/arlo-product-4.png', alt: 'Silk shirt', name: 'Silk Shirt', price: '$225' },
-    { image: 'https://ecommerce-landing.pages.dev/generated-assets/arlo/arlo-product-5.png', alt: 'Merino scarf', name: 'Merino Scarf', price: '$95' },
-    { image: 'https://ecommerce-landing.pages.dev/generated-assets/arlo/arlo-product-6.png', alt: 'Tailored blazer', name: 'Tailored Blazer', price: '$420' }
+    { image: 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Arlo/Product/arlo-product-3.webp', alt: 'Wide-leg trousers', name: 'Wide-Leg Trousers', price: '$195' },
+    { image: 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Arlo/Product/arlo-product-1.webp', alt: 'Linen trench coat', name: 'Linen Trench', price: '$340' },
+    { image: 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Arlo/Product/arlo-product-2.webp', alt: 'Cashmere knit', name: 'Cashmere Knit', price: '$260' },
+    { image: 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Arlo/Product/arlo-product-4.webp', alt: 'Silk shirt', name: 'Silk Shirt', price: '$225' },
+    { image: 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Arlo/Product/arlo-product-5.webp', alt: 'Merino scarf', name: 'Merino Scarf', price: '$95' },
+    { image: 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Arlo/Product/arlo-product-6.webp', alt: 'Tailored blazer', name: 'Tailored Blazer', price: '$420' }
   ];
   if (showcaseImg && showcaseDots.length) {
     showcaseDots.forEach((dot, i) => {

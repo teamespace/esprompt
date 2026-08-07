@@ -63,17 +63,22 @@ Links: "PRACTICE", "PHILOSOPHY", "VOICES", "PRICING", "JOURNAL", "THE SCIENCE", 
 - FAQ items (Section 7) are collapsed/expandable accordions (truncated body copy suggests "read more" or accordion reveal).
 
 === ASSETS (confirmed URLs) ===
-Base: https://stillwave-meditation.vercel.app/
-| File | URL | Used for |
-|---|---|---|
-| cta (1).png | .../cta%20(1).png | Closing CTA — "Meditation" |
-| cta (2).png | .../cta%20(2).png | Closing CTA — "Rest" |
-| cta (3).png | .../cta%20(3).png | Closing CTA — "Nature" |
-| cta (4).png | .../cta%20(4).png | Closing CTA — "Stretch" |
-| cta (5).png | .../cta%20(5).png | Closing CTA — "Water" |
-| cta (6).png | .../cta%20(6).png | Closing CTA — "Balance" |
-Note: filenames contain spaces — URL-encode as `%20` when hotlinking.
+Reference build: https://stillwave-meditation.vercel.app/
 
+Section 2 — Hero:
+- Hero background video: https://beige-lemur-872571.hostingersite.com/asset-esprompt/Landing/Stillwave/Hero/hero.mp4
+
+Section 4 — The practice (feature card background):
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Stillwave/Feature/bg-card.webp
+
+Section 8–9 — Closing CTA / footer:
+- Overlay video: https://beige-lemur-872571.hostingersite.com/asset-esprompt/Landing/Stillwave/Overlay/overlay.mp4
+- "Meditation": https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Stillwave/CTA/cta%20(1).webp
+- "Rest": https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Stillwave/CTA/cta%20(2).webp
+- "Nature": https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Stillwave/CTA/cta%20(3).webp
+- "Stretch": https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Stillwave/CTA/cta%20(4).webp
+- "Water": https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Stillwave/CTA/cta%20(5).webp
+- "Balance": https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Stillwave/CTA/cta%20(6).webp
 === RULES ===
 - Use only the colors, fonts, and sizes specified above; do not invent new ones.
 - Keep all copy exactly as quoted; truncated lines in Sections 4, 5, and 7 should be verified/completed against the live page before finalizing.

@@ -397,7 +397,7 @@ Inner: `max-w-7xl mx-auto px-6` with a stacked layout — headline block on top,
 **Step 2 — Shape the draft** (`map` icon chip):
 - Title → **`Shape the draft`**; body → **`A live map with your days already routed — reorder, drop, or add before you lock it in.`**
 - **Map mockup** (`rounded-3xl bg-white border border-ocean/10 shadow-card overflow-hidden`): header bar `px-4 py-3 border-b border-ocean/10` → **`Day 1 / Southern Kyoto`** (`font-semibold text-sm`); body `relative`:
-  - `<img src="https://wayfare-iota-pink.vercel.app/map.png" alt="Map backdrop for the route" className="w-full object-cover" />`
+  - `<img src="https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Wayfare/Feature/map.webp" alt="Map backdrop for the route" className="w-full object-cover" />`
   - route svg (verbatim):
     ```tsx
     <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 300" fill="none">
@@ -412,7 +412,7 @@ Inner: `max-w-7xl mx-auto px-6` with a stacked layout — headline block on top,
 **Step 3 — Travel with it** (`navigation` icon chip):
 - Title → **`Travel with it`**; body → **`Open navigation with one tap. Your route, your reservations, and your detours on the road.`**
 - **Phone mockup** (`.gsap-3d-mockup`, `relative mx-auto` — 3D tilt via mousemove): `w-[260px] h-[480px] bg-ink-dark rounded-[40px] p-3 shadow-2xl` with front screen:
-  - `<img src="https://wayfare-iota-pink.vercel.app/phone-img.avif" alt="Trip itinerary on a phone" className="w-full h-[220px] object-cover rounded-3xl" />` + gradient overlay `absolute inset-0 bg-gradient-to-b from-transparent to-ink/90 mix-blend-multiply rounded-3xl` 
+  - `<img src="https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Wayfare/Feature/phone-img.webp" alt="Trip itinerary on a phone" className="w-full h-[220px] object-cover rounded-3xl" />` + gradient overlay `absolute inset-0 bg-gradient-to-b from-transparent to-ink/90 mix-blend-multiply rounded-3xl` 
   - overlay label `absolute bottom-3 left-3` → **`Day 1 • 14:00`** `font-semibold text-white text-sm` + **`Kyoto`** `text-white/80 text-xs`.
   - **Route sheet** (`.gsap-mobile-sheet`, `bg-white rounded-3xl -mt-10 relative z-10 p-4 shadow-float`): map button `w-10 h-10 rounded-full bg-accent/10 text-accent flex items-center justify-center mb-3` (`map` icon); handle `w-10 h-2 bg-gray-300 rounded-full mx-auto mb-4`; **`Up Next`** card `bg-gradient-to-b from-[#3A7E9F] to-[#255C7A] text-white rounded-2xl p-4` → small `text-[0.7rem] uppercase tracking-widest text-white/70` **`Up Next`**; `text-xl font-bold` **`14:30`**; `text-white/90` **`Tea Ceremony`**; `text-white/70 text-xs` **`12 min walk • Gion`**; **`Navigate`** button `bg-accent text-white text-sm font-semibold rounded-full px-6 py-2.5 mt-3` + `...` circle `w-10 h-10 rounded-full border border-ocean/10 flex items-center justify-center`; home indicator `w-20 h-1 bg-gray-300 rounded-full mx-auto mt-3`.
 
@@ -506,7 +506,7 @@ Buttons (each `<a className="block w-full text-center …" href="#cta">`):
 ## 8. FINAL CTA (`home/CTA.tsx`, bundle `Q2`) — `#cta`
 
 `<section id="cta" className="bg-ocean-deep text-white pt-24 pb-0 relative overflow-hidden">`:
-- **BG image overlay**: `<img src="https://wayfare-iota-pink.vercel.app/bg-footer.png" alt="" className="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-overlay" />`
+- **BG image overlay**: `<img src="https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Wayfare/Footer/bg-footer.webp" alt="" className="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-overlay" />`
 - **Gradient veil**: `absolute inset-0 bg-gradient-to-b from-ocean-deep via-ocean-deep/80 to-transparent pointer-events-none`
 - Inner: `max-w-7xl mx-auto px-6 py-16 flex flex-col lg:flex-row items-center gap-12 relative z-10`.
 - **Left**:

@@ -157,7 +157,7 @@ h1,h2,h3,h4,h5,h6,.font-serif{font-family:var(--font-serif);--tw-font-weight:var
 
 | Token | Exact value | Usage in footer |
 |---|---|---|
-| Left-panel bg | URL `https://apex-sport-ecommerce-landing.vercel.app/assets/Footer-58vO3ieT.png` (dark athletic photo) | absolute `inset-0` layer, `bg-center bg-cover bg-no-repeat` |
+| Left-panel bg | URL `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Apex/Footer/Footer.webp` (dark athletic photo) | absolute `inset-0` layer, `bg-center bg-cover bg-no-repeat` |
 | Right-panel bg | `#0a0a0a` (`bg-[#0a0a0a]`) | full-text column |
 | AI card bg | `#111111` (`bg-[#111111]`) → hover `#1a1a1a` (`hover:bg-[#1a1a1a]`) | "Get Ready Drops" card |
 | Base text | `#ffffff` (`text-white`) | footer root, 7 links, "Contact Us" |
@@ -440,8 +440,8 @@ Base URL: `https://apex-sport-ecommerce-landing.vercel.app/`. The FULL original 
 
 | Const | URL | Content | Where used |
 |---|---|---|---|
-| `FOOTER_BG` | `https://apex-sport-ecommerce-landing.vercel.app/assets/Footer-58vO3ieT.png` | Dark, moody athletic performance photo (runner/dynamic training scene, low-key lighting) | Left panel, `background-image`, `bg-center bg-cover bg-no-repeat`, full-bleed under `z-10` content |
-| `STORE_IMG` | `https://apex-sport-ecommerce-landing.vercel.app/assets/Store-D-f8cpxa.png` | Product/apparel still on dark background, displayed square-cropped | AI-card thumb, `w-20 h-24 object-cover`, `alt="Gear"` |
+| `FOOTER_BG` | `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Apex/Footer/Footer.webp` | Dark, moody athletic performance photo (runner/dynamic training scene, low-key lighting) | Left panel, `background-image`, `bg-center bg-cover bg-no-repeat`, full-bleed under `z-10` content |
+| `STORE_IMG` | `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Apex/Store/Store.webp` | Product/apparel still on dark background, displayed square-cropped | AI-card thumb, `w-20 h-24 object-cover`, `alt="Gear"` |
 
 Formats: PNG, referenced as hosted URLs (relative `/assets/...` in code resolves to the same files). No CSS blend modes, no mirroring, no rotation applied to either image.
 

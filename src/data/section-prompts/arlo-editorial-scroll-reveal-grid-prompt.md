@@ -17,12 +17,12 @@ Create a React + Vite + TypeScript + Tailwind CSS 4 component for a Scroll Revea
 import { motion } from "framer-motion";
 
 const looks = [
-  { id: 1, title: "LOOK 01", image: "https://ecommerce-landing.pages.dev/generated-assets/arlo/arlo-look-1.png" },
-  { id: 2, title: "LOOK 02", image: "https://ecommerce-landing.pages.dev/generated-assets/arlo/arlo-look-2.png" },
-  { id: 3, title: "LOOK 03", image: "https://ecommerce-landing.pages.dev/generated-assets/arlo/arlo-look-3.png" },
-  { id: 4, title: "LOOK 04", image: "https://ecommerce-landing.pages.dev/generated-assets/arlo/arlo-look-4.png" },
-  { id: 5, title: "LOOK 05", image: "https://ecommerce-landing.pages.dev/generated-assets/arlo/arlo-look-5.png" },
-  { id: 6, title: "LOOK 06", image: "https://ecommerce-landing.pages.dev/generated-assets/arlo/arlo-look-6.png" },
+  { id: 1, title: "LOOK 01", image: "https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Arlo/Look/arlo-look-1.webp" },
+  { id: 2, title: "LOOK 02", image: "https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Arlo/Look/arlo-look-2.webp" },
+  { id: 3, title: "LOOK 03", image: "https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Arlo/Look/arlo-look-3.webp" },
+  { id: 4, title: "LOOK 04", image: "https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Arlo/Look/arlo-look-4.webp" },
+  { id: 5, title: "LOOK 05", image: "https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Arlo/Look/arlo-look-5.webp" },
+  { id: 6, title: "LOOK 06", image: "https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Arlo/Look/arlo-look-6.webp" },
 ];
 
 const containerVariants = {

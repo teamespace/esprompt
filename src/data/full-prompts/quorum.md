@@ -65,15 +65,20 @@ Assets: footer.png
 - Live-call transcript panel likely reveals lines sequentially on load/scroll; exact timing not captured.
 
 === ASSETS (confirmed URLs) ===
-Base: https://quorum-2.vercel.app/
-| File | URL | Used for |
-|---|---|---|
-| DISPATCHES (1).png | .../DISPATCHES%20(1).png | Summaries capability card (Section 4) |
-| DISPATCHES (2).png | .../DISPATCHES%20(2).png | Action items capability card (Section 4) |
-| WORKFLOW.png | .../WORKFLOW.png | Workflow/integration illustration (Section 5) |
-| footer.png | .../footer.png | Footer graphic (Section 8) |
-Note: filenames contain spaces — URL-encode as `%20` when hotlinking.
+Reference build: https://quorum-pi-five.vercel.app/
 
+Section 2 — Hero (The Desk):
+- Hero background video: https://beige-lemur-872571.hostingersite.com/asset-esprompt/Landing/Quorum/Hero/hero-vd.mp4
+
+Section 4 — Dispatches (core capabilities):
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Quorum/Features/feature-1.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Quorum/Features/feature-2.webp
+
+Section 5 — Workflow:
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Quorum/Workflow/WORKFLOW.webp
+
+Section 8 — Footer:
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Quorum/Footer/footer.webp
 === RULES ===
 - Use only the colors, fonts, and sizes specified above; do not invent new ones.
 - Keep all copy exactly as quoted.

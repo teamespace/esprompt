@@ -73,13 +73,16 @@ Content (copy verbatim): "Curalink" wordmark — "AI-guided telehealth with real
 - Chat-demo hero panel likely reveals messages sequentially on load; exact timing not captured.
 
 === ASSETS (confirmed URLs) ===
-Base: https://curalink-2.vercel.app/images/
-| File | URL | Used for |
-|---|---|---|
-| ai_avatar.png | .../images/ai_avatar.png | Hero chat demo — AI avatar |
-| dr_amara.png | .../images/dr_amara.png | Physician spotlight — Dr. Amara Osei |
-| telehealth_visit.png | .../images/telehealth_visit.png | Testimonial — "visit from the couch" photo |
+Reference build: https://curalink-2.vercel.app/
 
+Section 2 — Hero (chat-demo card avatar):
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Curalink-2/Hero/ai_avatar.webp
+
+Section 6 — Real doctors, not bots (Dr. Amara Osei portrait):
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Curalink-2/Doctor/dr_amara.webp
+
+Section 7 — Testimonial:
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Curalink-2/Testimonial/telehealth_visit.webp
 === RULES ===
 - Use only the colors, fonts, and sizes specified above; do not invent new ones.
 - Keep all copy exactly as quoted.

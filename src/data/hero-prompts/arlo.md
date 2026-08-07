@@ -9,9 +9,9 @@ Hero: full-viewport auto-advancing carousel (3 slides, 5s interval, fade transit
 ```html
     <section class="hero-carousel" aria-label="Hero" aria-roledescription="carousel" aria-live="polite">
       <div class="hero-carousel__track">
-        <div class="hero-slide"><img class="hero-slide__media" src="https://ecommerce-landing.pages.dev/generated-assets/arlo/hero-new-1.png" alt="Shop Collection"><div class="hero-slide__content"><h2 class="hero-slide__title">The Season Ahead</h2><p class="hero-slide__subtitle">Quiet essentials built to last</p><a href="#collection" class="hero-slide__cta">Shop All</a></div></div>
-        <div class="hero-slide is-active"><img class="hero-slide__media" src="https://ecommerce-landing.pages.dev/generated-assets/arlo/hero-new-2.png" alt="Shop Shirting"><div class="hero-slide__content"><h2 class="hero-slide__title">The Perfect Shirt</h2><p class="hero-slide__subtitle">Structure, ease, and natural fiber</p><a href="#shirting" class="hero-slide__cta">Shop Shirting</a></div></div>
-        <div class="hero-slide"><img class="hero-slide__media" src="https://ecommerce-landing.pages.dev/generated-assets/arlo/hero-new-3.png" alt="Shop Tailoring"><div class="hero-slide__content"><h2 class="hero-slide__title">Modern Tailoring</h2><p class="hero-slide__subtitle">Limited run, made to measure</p><a href="#tailoring" class="hero-slide__cta">Shop Tailoring</a></div></div>
+        <div class="hero-slide"><img class="hero-slide__media" src="https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Arlo/Hero/hero-new-1.webp" alt="Shop Collection"><div class="hero-slide__content"><h2 class="hero-slide__title">The Season Ahead</h2><p class="hero-slide__subtitle">Quiet essentials built to last</p><a href="#collection" class="hero-slide__cta">Shop All</a></div></div>
+        <div class="hero-slide is-active"><img class="hero-slide__media" src="https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Arlo/Hero/hero-new-2.webp" alt="Shop Shirting"><div class="hero-slide__content"><h2 class="hero-slide__title">The Perfect Shirt</h2><p class="hero-slide__subtitle">Structure, ease, and natural fiber</p><a href="#shirting" class="hero-slide__cta">Shop Shirting</a></div></div>
+        <div class="hero-slide"><img class="hero-slide__media" src="https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Arlo/Hero/hero-new-3.webp" alt="Shop Tailoring"><div class="hero-slide__content"><h2 class="hero-slide__title">Modern Tailoring</h2><p class="hero-slide__subtitle">Limited run, made to measure</p><a href="#tailoring" class="hero-slide__cta">Shop Tailoring</a></div></div>
       </div>
       <div class="hero-dots" role="tablist" aria-label="Slide navigation"><button class="hero-dot" aria-label="Go to slide 1" aria-selected="false" role="tab"></button><button class="hero-dot is-active" aria-label="Go to slide 2" aria-selected="true" role="tab"></button><button class="hero-dot" aria-label="Go to slide 3" aria-selected="false" role="tab"></button></div>
     </section>
@@ -55,6 +55,6 @@ if (slides.length && dots.length) {
 
 | Filename | URL | Content |
 |---|---|---|
-| `hero-new-1.png` | `https://ecommerce-landing.pages.dev/generated-assets/arlo/hero-new-1.png` | Model walking down editorial alleyway — Slide 1 background |
-| `hero-new-2.png` | `https://ecommerce-landing.pages.dev/generated-assets/arlo/hero-new-2.png` | Close-up of clean cotton shirting — Slide 2 background (default active slide) |
-| `hero-new-3.png` | `https://ecommerce-landing.pages.dev/generated-assets/arlo/hero-new-3.png` | Clean tailored gray wool blazer detail — Slide 3 background |
+| `hero-new-1.png` | `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Arlo/Hero/hero-new-1.webp` | Model walking down editorial alleyway — Slide 1 background |
+| `hero-new-2.png` | `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Arlo/Hero/hero-new-2.webp` | Close-up of clean cotton shirting — Slide 2 background (default active slide) |
+| `hero-new-3.png` | `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Arlo/Hero/hero-new-3.webp` | Clean tailored gray wool blazer detail — Slide 3 background |

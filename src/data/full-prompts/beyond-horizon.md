@@ -70,25 +70,25 @@ All assets are hosted at `https://yacht-bgz.pages.dev/`. Download each and place
 | File | URL | Used In |
 |---|---|---|
 | `hero.mp4` | `https://yacht-bgz.pages.dev/images/hero.mp4` | Hero background video |
-| `image-1.png` | `https://yacht-bgz.pages.dev/images/image-1.png` | Floating image (Our Story) |
-| `image-2.png` | `https://yacht-bgz.pages.dev/images/image-2.png` | Floating image (Our Story) |
-| `image-3.png` | `https://yacht-bgz.pages.dev/images/image-3.png` | Floating image (Our Story) |
-| `image-4.png` | `https://yacht-bgz.pages.dev/images/image-4.png` | Floating image (Our Story) |
-| `image-6.png` | `https://yacht-bgz.pages.dev/images/image-6.png` | Destination: Komodo Islands |
-| `image-7.png` | `https://yacht-bgz.pages.dev/images/image-7.png` | Destination: Raja Ampat |
-| `image-8.png` | `https://yacht-bgz.pages.dev/images/image-8.png` | Destination: Phuket |
-| `image-9.png` | `https://yacht-bgz.pages.dev/images/image-9.png` | Destination: Maldives |
-| `image-10.png` | `https://yacht-bgz.pages.dev/images/image-10.png` | Journey: Romantic Escape |
-| `image-11.png` | `https://yacht-bgz.pages.dev/images/image-11.png` | Journey: Family Adventure |
-| `image-12.png` | `https://yacht-bgz.pages.dev/images/image-12.png` | Journey: Celebration Charter |
-| `image-13.png` | `https://yacht-bgz.pages.dev/images/image-13.png` | Journey: Wellness Retreat |
-| `image-14.png` | `https://yacht-bgz.pages.dev/images/image-14.png` | Journey: Corporate Escape |
-| `image-15.png` | `https://yacht-bgz.pages.dev/images/image-15.png` | Fleet: Serenity |
-| `image-16.png` | `https://yacht-bgz.pages.dev/images/image-16.png` | Fleet: Odyssey |
-| `image-17.png` | `https://yacht-bgz.pages.dev/images/image-17.png` | Fleet: Voyager |
-| `image-18.png` | `https://yacht-bgz.pages.dev/images/image-18.png` | Final CTA carousel |
-| `image-19.png` | `https://yacht-bgz.pages.dev/images/image-19.png` | Final CTA carousel |
-| `image-20.png` | `https://yacht-bgz.pages.dev/images/image-20.png` | Final CTA carousel |
+| `image-1.png` | `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Beyond-horizon/About/image-1.webp` | Floating image (Our Story) |
+| `image-2.png` | `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Beyond-horizon/About/image-2.webp` | Floating image (Our Story) |
+| `image-3.png` | `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Beyond-horizon/About/image-3.webp` | Floating image (Our Story) |
+| `image-4.png` | `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Beyond-horizon/About/image-4.webp` | Floating image (Our Story) |
+| `image-6.png` | `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Beyond-horizon/Destinations/komodo.webp` | Destination: Komodo Islands |
+| `image-7.png` | `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Beyond-horizon/Destinations/raja-ampat.webp` | Destination: Raja Ampat |
+| `image-8.png` | `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Beyond-horizon/Destinations/phuket.webp` | Destination: Phuket |
+| `image-9.png` | `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Beyond-horizon/Destinations/maldives.webp` | Destination: Maldives |
+| `image-10.png` | `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Beyond-horizon/Package/romantic.webp` | Journey: Romantic Escape |
+| `image-11.png` | `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Beyond-horizon/Package/family.webp` | Journey: Family Adventure |
+| `image-12.png` | `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Beyond-horizon/Package/celebration.webp` | Journey: Celebration Charter |
+| `image-13.png` | `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Beyond-horizon/Package/wellness.webp` | Journey: Wellness Retreat |
+| `image-14.png` | `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Beyond-horizon/Package/corporate.webp` | Journey: Corporate Escape |
+| `image-15.png` | `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Beyond-horizon/Fleet/fleet-1.webp` | Fleet: Serenity |
+| `image-16.png` | `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Beyond-horizon/Fleet/fleet-2.webp` | Fleet: Odyssey |
+| `image-17.png` | `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Beyond-horizon/Fleet/fleet-3.webp` | Fleet: Voyager |
+| `image-18.png` | `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Beyond-horizon/Footer/image-18.webp` | Final CTA carousel |
+| `image-19.png` | `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Beyond-horizon/Footer/image-19.webp` | Final CTA carousel |
+| `image-20.png` | `https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Beyond-horizon/Footer/image-20.webp` | Final CTA carousel |
 
 ---
 

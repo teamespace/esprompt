@@ -42,43 +42,43 @@ Create a React + Vite + TypeScript + Tailwind CSS 4 component for the "Model Mar
 const models = [
   {
     id: 1,
-    front: "https://ecommerce-landing.pages.dev/05-elan-moody/assets/elan-model-01.png",
-    back: "https://ecommerce-landing.pages.dev/05-elan-moody/assets/elan-model-01-back.png"
+    front: "https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Elan/Product-running/elan-model-01.webp",
+    back: "https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Elan/Product-running/elan-model-01-back.webp"
   },
   {
     id: 2,
-    front: "https://ecommerce-landing.pages.dev/05-elan-moody/assets/elan-model-02.png",
-    back: "https://ecommerce-landing.pages.dev/05-elan-moody/assets/elan-model-02-back.png"
+    front: "https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Elan/Product-running/elan-model-02.webp",
+    back: "https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Elan/Product-running/elan-model-02-back.webp"
   },
   {
     id: 3,
-    front: "https://ecommerce-landing.pages.dev/05-elan-moody/assets/elan-model-03.png",
-    back: "https://ecommerce-landing.pages.dev/05-elan-moody/assets/elan-model-03-back.png"
+    front: "https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Elan/Product-running/elan-model-03.webp",
+    back: "https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Elan/Product-running/elan-model-03-back.webp"
   },
   {
     id: 4,
-    front: "https://ecommerce-landing.pages.dev/05-elan-moody/assets/elan-model-04.png",
-    back: "https://ecommerce-landing.pages.dev/05-elan-moody/assets/elan-model-04-back.png"
+    front: "https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Elan/Product-running/elan-model-04.webp",
+    back: "https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Elan/Product-running/elan-model-04-back.webp"
   },
   {
     id: 5,
-    front: "https://ecommerce-landing.pages.dev/05-elan-moody/assets/elan-model-05.png",
-    back: "https://ecommerce-landing.pages.dev/05-elan-moody/assets/elan-model-05-back.png"
+    front: "https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Elan/Product-running/elan-model-05.webp",
+    back: "https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Elan/Product-running/elan-model-05-back.webp"
   },
   {
     id: 6,
-    front: "https://ecommerce-landing.pages.dev/05-elan-moody/assets/elan-model-06.png",
-    back: "https://ecommerce-landing.pages.dev/05-elan-moody/assets/elan-model-06-back.png"
+    front: "https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Elan/Product-running/elan-model-06.webp",
+    back: "https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Elan/Product-running/elan-model-06-back.webp"
   },
   {
     id: 7,
-    front: "https://ecommerce-landing.pages.dev/05-elan-moody/assets/elan-model-07.png",
-    back: "https://ecommerce-landing.pages.dev/05-elan-moody/assets/elan-model-07-back.png"
+    front: "https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Elan/Product-running/elan-model-07.webp",
+    back: "https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Elan/Product-running/elan-model-07-back.webp"
   },
   {
     id: 8,
-    front: "https://ecommerce-landing.pages.dev/05-elan-moody/assets/elan-model-08.png",
-    back: "https://ecommerce-landing.pages.dev/05-elan-moody/assets/elan-model-08-back.png"
+    front: "https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Elan/Product-running/elan-model-08.webp",
+    back: "https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Elan/Product-running/elan-model-08-back.webp"
   }
 ];
 

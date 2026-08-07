@@ -20,12 +20,12 @@ import { useRef, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 const newArrivals = [
-  { id: 1, title: "Vinta Home", price: "€89,00", image: "https://ecommerce-landing.pages.dev/05-elan-moody/assets/elan-new-01.jpg" },
-  { id: 2, title: "Marino Home", price: "€95,00", image: "https://ecommerce-landing.pages.dev/05-elan-moody/assets/elan-new-02.jpg" },
-  { id: 3, title: "Fjord Home", price: "€102,00", image: "https://ecommerce-landing.pages.dev/05-elan-moody/assets/elan-new-03.jpg" },
-  { id: 4, title: "Sovrano Home", price: "€89,00", image: "https://ecommerce-landing.pages.dev/05-elan-moody/assets/elan-new-04.jpg" },
-  { id: 5, title: "Nordic Home", price: "€99,00", image: "https://ecommerce-landing.pages.dev/05-elan-moody/assets/elan-new-05.jpg" },
-  { id: 6, title: "Aurelia Home", price: "€95,00", image: "https://ecommerce-landing.pages.dev/05-elan-moody/assets/elan-new-06.jpg" },
+  { id: 1, title: "Vinta Home", price: "€89,00", image: "https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Elan/New/elan-new-01.webp" },
+  { id: 2, title: "Marino Home", price: "€95,00", image: "https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Elan/New/elan-new-02.webp" },
+  { id: 3, title: "Fjord Home", price: "€102,00", image: "https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Elan/New/elan-new-03.webp" },
+  { id: 4, title: "Sovrano Home", price: "€89,00", image: "https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Elan/New/elan-new-04.webp" },
+  { id: 5, title: "Nordic Home", price: "€99,00", image: "https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Elan/New/elan-new-05.webp" },
+  { id: 6, title: "Aurelia Home", price: "€95,00", image: "https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Elan/New/elan-new-06.webp" },
 ];
 
 export function DragCarousel() {

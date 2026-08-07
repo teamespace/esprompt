@@ -120,36 +120,36 @@ import Lenis from 'lenis';
 
 // All 30 images are hosted on Vercel — reference them directly by URL.
 // Do NOT download, re-host, or rewrite these as local imports.
-const sh = 'https://aura-ecommerce-landing.vercel.app/assets/sh-D0FCgtva.png';
-const shHover = 'https://aura-ecommerce-landing.vercel.app/assets/sh-hover-CAWUcjTm.png';
-const sh2 = 'https://aura-ecommerce-landing.vercel.app/assets/sh2-CrDT5Rh_.png';
-const sh2Hover = 'https://aura-ecommerce-landing.vercel.app/assets/sh2-hover-DHiGFNHz.png';
-const sh3 = 'https://aura-ecommerce-landing.vercel.app/assets/sh3-C3IVrhnj.png';
-const sh3Hover = 'https://aura-ecommerce-landing.vercel.app/assets/sh3-hover-DH9JpIOp.png';
-const hd = 'https://aura-ecommerce-landing.vercel.app/assets/hd-MEY3UWgC.png';
-const hdHover = 'https://aura-ecommerce-landing.vercel.app/assets/hd-hover-BSILjcBO.png';
-const hd2 = 'https://aura-ecommerce-landing.vercel.app/assets/hd2-DIyPjyXt.png';
-const hd2Hover = 'https://aura-ecommerce-landing.vercel.app/assets/hd2-hover-CllXoBTl.png';
-const cp = 'https://aura-ecommerce-landing.vercel.app/assets/cp-B_Ka_2N5.png';
-const cpHover = 'https://aura-ecommerce-landing.vercel.app/assets/cp-hover-WdG_u0e_.png';
-const cp2 = 'https://aura-ecommerce-landing.vercel.app/assets/cp2-CEn-CmuU.png';
-const cp2Hover = 'https://aura-ecommerce-landing.vercel.app/assets/cp2-hover-C0Gvhfbw.png';
-const bp = 'https://aura-ecommerce-landing.vercel.app/assets/bp-CPsZAUoT.png';
-const bpHover = 'https://aura-ecommerce-landing.vercel.app/assets/bp-hover-uzbpAEzW.png';
-const bn = 'https://aura-ecommerce-landing.vercel.app/assets/bn-DsXSaRqF.png';
-const bnHover = 'https://aura-ecommerce-landing.vercel.app/assets/bn-hover-DN163fkN.png';
-const bg = 'https://aura-ecommerce-landing.vercel.app/assets/bg-KkjR9Z0O.png';
-const bgHover = 'https://aura-ecommerce-landing.vercel.app/assets/bg-hover-DOJED06E.png';
-const tb = 'https://aura-ecommerce-landing.vercel.app/assets/tb-uboJw3tx.png';
-const tbHover = 'https://aura-ecommerce-landing.vercel.app/assets/tb-hover-Dqis1yPr.png';
-const tb2 = 'https://aura-ecommerce-landing.vercel.app/assets/tb2-BshQFmiO.png';
-const tb2Hover = 'https://aura-ecommerce-landing.vercel.app/assets/tb2-hover-BnQ1tk7d.png';
-const eye = 'https://aura-ecommerce-landing.vercel.app/assets/eye-BaXdsfwW.png';
-const eyeHover = 'https://aura-ecommerce-landing.vercel.app/assets/eye-hover-B7LchLz6.png';
-const heroBg = 'https://aura-ecommerce-landing.vercel.app/assets/hero-bg-P2mzmULA.png';
-const heroTxt1 = 'https://aura-ecommerce-landing.vercel.app/assets/hero-txt1-Be79_yCj.png';
-const heroTxt2 = 'https://aura-ecommerce-landing.vercel.app/assets/hero-txt2-BbghUJQJ.png';
-const heroTxt3 = 'https://aura-ecommerce-landing.vercel.app/assets/hero-txt3-Dn8T-mbk.png';
+const sh = 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Aura/Product/shirt.webp';
+const shHover = 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Aura/Product/shirt-hover.webp';
+const sh2 = 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Aura/Product/shirt2.webp';
+const sh2Hover = 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Aura/Product/shirt2-hover.webp';
+const sh3 = 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Aura/Product/shirt3.webp';
+const sh3Hover = 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Aura/Product/shirt3-hover.webp';
+const hd = 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Aura/Product/hoodie.webp';
+const hdHover = 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Aura/Product/hoodie-hover.webp';
+const hd2 = 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Aura/Product/hoodie2.webp';
+const hd2Hover = 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Aura/Product/hoodie2-hover.webp';
+const cp = 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Aura/Product/cap.webp';
+const cpHover = 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Aura/Product/cap-hover.webp';
+const cp2 = 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Aura/Product/cap2.webp';
+const cp2Hover = 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Aura/Product/cap2-hover.webp';
+const bp = 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Aura/Product/backpack.webp';
+const bpHover = 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Aura/Product/backpack-hover.webp';
+const bn = 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Aura/Product/bennie.webp';
+const bnHover = 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Aura/Product/bennie-hover.webp';
+const bg = 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Aura/Product/bag.webp';
+const bgHover = 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Aura/Product/bag-hover.webp';
+const tb = 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Aura/Product/totebag.webp';
+const tbHover = 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Aura/Product/totebag-hover.webp';
+const tb2 = 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Aura/Product/totebag2.webp';
+const tb2Hover = 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Aura/Product/totebag2-hover.webp';
+const eye = 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Aura/Product/eye.webp';
+const eyeHover = 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Aura/Product/eye-hover.webp';
+const heroBg = 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Aura/hero/hero-bg.webp';
+const heroTxt1 = 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Aura/hero/hero-txt1.webp';
+const heroTxt2 = 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Aura/hero/hero-txt2.webp';
+const heroTxt3 = 'https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Aura/hero/hero-txt3.webp';
 
 const PRELOADER_IMAGES = [
   sh,

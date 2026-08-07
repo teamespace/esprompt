@@ -52,20 +52,39 @@ Content: "Editorial shot of a model in an urban stairwell" · "Editorial portrai
 Content (copy verbatim): "JADE — Skater / photographer. Shoots every VOX lookbook on 35mm film and still owes us a roll." (a "Friends" contributor bio card, matches nav link "Friends")
 
 === ASSETS (confirmed URLs) ===
-Base: https://ecommerce-landing.pages.dev/generated-assets/vox/
-| File | URL | Used for |
-|---|---|---|
-| hero-fox.png | .../hero-fox.png | Hero — "Northshore Mutants" street photo |
-| vox-cat-menswear.png | .../vox-cat-menswear.png | Shop category — Menswear |
-| vox-cat-womenswear.png | .../vox-cat-womenswear.png | Shop category — Womenswear |
-| vox-cat-accessories.png | .../vox-cat-accessories.png | Shop category — Accessories |
-| vox-product-1.png | .../vox-product-1.png | "VOX Bomber — Black" |
-| vox-product-2.png | .../vox-product-2.png | "Stencil Hoodie" |
-| vox-product-3.png | .../vox-product-3.png | "Tag Utility Pant" |
-| vox-product-4.png | .../vox-product-4.png | "Drop Tee / 07" |
-| vox-product-5.png | .../vox-product-5.png | "VOX Beanie" |
-Not confirmed: images for "Cargo Short", "Mutant Crossbody Bag", "Tactical Vest / 07", and the 5 Lookbook editorial photos. Given the sibling ARLO prompt's naming convention on this same host, `vox-product-6.png`/`7`/`8` and `vox-look-N.png` are likely, but were not directly observed — verify against the live page before hotlinking.
+Reference build: https://ecommerce-landing.pages.dev/02-vox-streetwear/
 
+Section 3 — Hero:
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/vox/Hero/hero-fox.webp
+
+Section 6 — Shop categories (3 cards):
+- "Menswear": https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/vox/Category/vox-cat-menswear.webp
+- "Womenswear": https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/vox/Category/vox-cat-womenswear.webp
+- "Accessories": https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/vox/Category/vox-cat-accessories.webp
+
+Section 7 — Featured products (8 cards, in the order listed above):
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/vox/Product/vox-product-1.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/vox/Product/vox-product-2.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/vox/Product/vox-product-3.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/vox/Product/vox-product-4.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/vox/Product/vox-product-5.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/vox/Product/vox-product-6.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/vox/Product/vox-product-7.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/vox/Product/vox-product-8.webp
+
+Section 8 — Lookbook (6 editorial photos available, page shows 5):
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/vox/Look/vox-look-1.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/vox/Look/vox-look-2.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/vox/Look/vox-look-3.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/vox/Look/vox-look-4.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/vox/Look/vox-look-5.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/vox/Look/vox-look-6.webp
+
+Section 9 — Friends:
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/vox/Friends/vox-friend-1.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/vox/Friends/vox-friend-2.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/vox/Friends/vox-friend-3.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/vox/Friends/vox-friend-4.webp
 === INTERACTIONS (global) ===
 - Drop ticker is a continuous marquee, 3x repeated in DOM — build as seamless infinite loop, linear.
 - Countdown timer updates live (Days/Hrs/Mins/Secs) — standard JS `setInterval` countdown to a fixed drop-close date.

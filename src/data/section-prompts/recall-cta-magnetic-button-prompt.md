@@ -90,7 +90,7 @@ export function MagneticButtonCTA() {
 
         {/* Mascot */}
         <div className="relative z-10 w-[124px] h-[124px] mx-auto mb-[1.1rem] brutal-border rounded-full brutal-shadow-sm bg-pink-soft -rotate-[4deg] overflow-hidden flex items-center justify-center">
-          <img src="https://recall-alpha-one.vercel.app/CTA.webp" alt="Call to action mascot" className="w-full h-full object-cover" />
+          <img src="https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Recall/CTA/CTA.webp" alt="Call to action mascot" className="w-full h-full object-cover" />
         </div>
         
         {/* Kicker Pill */}

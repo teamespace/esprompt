@@ -61,16 +61,48 @@ Content (copy verbatim): H2 "Bold perspectives. From elite athletes." — link "
 Content (copy verbatim): "The Formula For Your Mailbox" — email input + "Subscribe" — "AP / EX" mark — links "All Phases", "Discover APEX", "Follow Us", "Imprint", "Legal Matters", "Cancellation Policy", "Cancel Purchase" — "Your perfect Get Ready Drops routine? — Run AI Analysis Now" — Contact: "+49 (0)30 814 50 2390" (Mon–Fri 10:00–17:00), "support@apex.de", live chat (24/7) — "©APEX 2026"
 
 === ASSETS (confirmed URLs) ===
-Base: https://apex-sport-ecommerce-landing.vercel.app/assets/ — some filenames contain spaces, URL-encode as %20
-| File | URL | Used for |
-|---|---|---|
-| Hero-D-FQbbO9.png | .../assets/Hero-D-FQbbO9.png | Hero — "Performance Apparel" photo |
-| p%20(6)-DvqkS8x5.png | .../assets/p%20(6)-DvqkS8x5.png | Floating hero product card — "Apex Aero Runner" |
-| section2-BI9i90NM.png | .../assets/section2-BI9i90NM.png | Value-proposition band background |
-| p%20(1)-Bi42GLMQ.png | .../assets/p%20(1)-Bi42GLMQ.png | Product grid card |
-| p%20(2)-COvT3wNX.png | .../assets/p%20(2)-COvT3wNX.png | Product grid card |
-Not confirmed: which exact product each remaining `p (N)` file maps to, the "As Seen In" press logos, the 5 team-member headshots, and the 2 blog thumbnails — re-fetch the fully-scrolled live page to map the rest before hotlinking.
+Reference build: https://apex-sport-ecommerce-landing.vercel.app/
 
+Section 3 — Hero:
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Apex/Hero/Hero.webp
+
+Section 4 — Value proposition band:
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Apex/About/about.webp
+
+Section 6 — Product grid (5 cards, in order Aero Runner / Pro Training Jersey / Endurance Sneakers / Apex Pro Duffel / Apex Pro Shades):
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Apex/Product/Product-1.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Apex/Product/Product-2.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Apex/Product/Product-6.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Apex/Product/Product-7.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Apex/Product/Product-3.webp
+
+Section 7 — Community band:
+- Left "Rated 4.8" panel: https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Apex/Testimonial/Rated-left.webp
+- "Momentum" spotlight (Marcus T.): https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Apex/Testimonial/person%206.webp
+
+Section 8 — Athletic Science manifesto:
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Apex/Science/athlete.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Apex/Science/elitegear.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Apex/Science/innovation.webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Apex/Science/peak.webp
+
+Section 9 — Team grid (Elena / Sarah / Marcus / David / James — 6 portraits available, use the first 5):
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Apex/Team/person%20(1).webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Apex/Team/person%20(2).webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Apex/Team/person%20(3).webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Apex/Team/person%20(4).webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Apex/Team/person%20(5).webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Apex/Team/person%20(6).webp
+
+Section 10 — Store Finder:
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Apex/Store/Store.webp
+
+Section 12 — Blog (2 posts):
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Apex/Blog/blog%20(1).webp
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Apex/Blog/blog%20(2).webp
+
+Section 13 — Footer:
+- https://pub-feae39876d254fb88aeeecd320e67d2c.r2.dev/Landing/Apex/Footer/Footer.webp
 === INTERACTIONS (global) ===
 - Trust ticker (Section 11) repeats 5x in DOM — build as seamless infinite horizontal marquee, linear.
 - Product grid and "As Seen In" logos likely scroll/carousel on smaller viewports; exact breakpoint behavior not captured.
